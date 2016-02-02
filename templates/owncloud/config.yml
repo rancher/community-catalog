@@ -1,0 +1,5 @@
+name: Owncloud
+description: |
+  Library service powered by Owncloud
+version: v0.1-educaas
+category: Repository

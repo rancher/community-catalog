@@ -1,0 +1,5 @@
+name: Wekan
+description: |
+  The open-source Trello-like kanban (build with Meteor)
+version: v0.1-educaas
+category: Kanban

@@ -1,0 +1,18 @@
+wekandb:
+  image: mongo
+#  volumes:
+#    - ./data/runtime/db:/data/db
+#    - ./data/dump:/dump
+  command: mongod --smallfiles --oplogSize 128
+  ports:
+    - 27017
+
+wekan:
+  image: mquandalle/wekan
+  links:
+    - wekandb
+  environment:
+    - MONGO_URL=mongodb://wekandb/wekan
+    - ROOT_URL=http://localhost:80
+  ports:
+    - 80:80

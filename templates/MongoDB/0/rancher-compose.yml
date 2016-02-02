@@ -1,0 +1,19 @@
+.catalog:
+  name: "MongoDB"
+  version: "3.0.0-rancher1"
+  description: "MongoDB Replica Set"
+  uuid: mongodb-0
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: replset_name
+      description: "Name of the MongoDB replicaSet"
+      label: "ReplicaSet Name"
+      type: "string"
+      required: true
+      default: "rs0"
+mongo-cluster:
+  scale: 3
+  metadata:
+    mongo:
+      yml:
+        replset.name: "${replset_name}"

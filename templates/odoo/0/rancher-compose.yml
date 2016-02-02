@@ -1,0 +1,8 @@
+.catalog:
+  name: "Odoo"
+  version: "0.1-educaas"
+  description: "ERP management powered by Odoo"
+  uuid: odoo-0
+  questions:
+
+odoo:
