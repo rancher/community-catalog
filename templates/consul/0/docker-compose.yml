@@ -1,0 +1,15 @@
+consul-conf:
+  image: husseingalal/consul-config
+  labels:
+    io.rancher.container.hostname_override: container_name
+  volumes_from:
+    - consul
+  net: "container:consul"
+consul:
+  image: husseingalal/consul
+  labels:
+    io.rancher.sidekicks: consul-conf
+  volumes:
+    - /opt/rancher/ssl
+    - /opt/rancher/config
+    - /var/consul
