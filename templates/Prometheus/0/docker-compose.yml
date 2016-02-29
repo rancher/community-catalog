@@ -1,0 +1,86 @@
+ranch-eye:
+  ports:
+  - 9104:9104/tcp
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  image: rucknar/ranch-eye:01
+  stdin_open: true
+  net: "host"
+
+node-exporter:
+  ports:
+    - 9100:9100
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  image: prom/node-exporter:latest
+  stdin_open: true
+  net: "host"
+
+prom-conf:
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+    image: rucknar/prom-conf:02
+    command: /bin/sh -c "/usr//bin/confd -onetime -backend rancher -prefix /2015-12-19 && cat"
+    volumes:
+      - /etc/prom-conf/
+
+prometheus:
+    tty: true
+    image: prom/prometheus:latest
+    command: -alertmanager.url=http://alertmanager:9093 -config.file=/etc/prom-conf/prometheus.yml -storage.local.path=/prometheus -web.console.libraries=/etc/prometheus/console_libraries -web.console.templates=/etc/prometheus/consoles
+    ports:
+      - 9090:9090
+    labels:
+      io.rancher.sidekicks: prom-conf
+    volumes_from:
+       - prom-conf
+    links:
+      - ranch-eye:ranch-eye
+      - node-exporter:node-exporter
+      - rancher-api-integration:rancher-api-integration
+
+graf-db:
+    tty: true
+    image: rucknar/graf-db:01
+    labels:
+      io.rancher.container.pull_image: always
+    command: cat
+    volumes:
+      - /var/lib/grafana/
+
+influxdb:
+  image: tutum/influxdb:0.10
+  ports:
+    - 8083:8083
+    - 8086:8086
+    - 8090:8090
+    - 2003:2003
+  environment:
+    - PRE_CREATE_DB=grafana;prometheus;rancher
+    - GRAPHITE_DB=rancher
+    - GRAPHITE_BINDING=:2003
+
+grafana:
+    tty: true
+    image: grafana/grafana:2.6.0
+    ports:
+      - 3000:3000
+    labels:
+      io.rancher.sidekicks: graf-db
+    volumes_from:
+       - graf-db
+    links:
+      - prometheus:prometheus
+      - rancher-api-integration:rancher-api-integration
+
+rancher-api-integration:
+    tty: true
+    labels:
+      io.rancher.container.create_agent: true
+      io.rancher.container.agent.role: environment
+    expose:
+      - 9010:9010
+    image: rucknar/prometheus-rancher-exporter:01
