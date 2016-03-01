@@ -1,6 +1,6 @@
 .catalog:
   name: "MongoDB"
-  version: "3.0.1-rancher1"
+  version: "3.2-rancher1"
   description: "MongoDB Replica Set"
   uuid: mongodb-1
   minimum_rancher_version: v0.46.0
