@@ -28,6 +28,6 @@
         - "rfc5424"
         - "rfc3164"
       required: true
-      default: ""
+      default: "rfc5424"
       description: |
         The Syslog format to use.  If not certain, use rfc5424
