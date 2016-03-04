@@ -1,0 +1,7 @@
+name: Janitor
+description: |
+  Automatic cleanup of unused images on hosts, in order to save disk space.
+version: v1.4.0
+category: monitoring
+maintainer: Steve Shipway <s.shipway@auckland.ac.nz>
+
