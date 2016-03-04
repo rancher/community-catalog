@@ -1,0 +1,33 @@
+.catalog:
+  name: Logspout
+  version: 0.2.0-1
+  description: |
+    Logspout is a log router for Docker containers.  This community template 
+    allows you to log against the Rancher Environment rather than the hostname for 
+    easier analysis.
+  questions:
+    - variable: "route_uri"
+      label: "Logspout route for logs"
+      type: "string"
+      required: true
+      default: "syslog://syslog.example.com:514"
+      description: |
+        This will be the target where all logs are sent. 
+    - variable: "envname"
+      label: "Environment"
+      type: "string"
+      required: true
+      default: "Rancher:"
+      description: |
+        This is the environment name, which will be used as the Hostname
+        label in Syslog instead of the Host or Container name.
+    - variable: "format"
+      label: "Format"
+      type: "enum"
+      options:
+        - "rfc5424"
+        - "rfc3164"
+      required: true
+      default: ""
+      description: |
+        The Syslog format to use.  If not certain, use rfc5424
