@@ -6,8 +6,9 @@ This will start up several Minecraft servers of the specified type.  If no
 world seed is specified, then a random one will be used.  A Load Balancer
 will be created over the top so that they can be accessed.
 
-The load balancers will run on every host with the label **LB=1**.  If
-no hosts match this, then you will get no load balancers!
+The servers use ephemeral disk and so will not be persistent.  You can also 
+specify a URL from which to download an ZIP archive of a world save, which
+will be used in all containers.
 
 ### Options
 
