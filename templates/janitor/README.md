@@ -9,7 +9,8 @@ scheduling rule (default is `janitor.exclude=true`).
 
 This will run a task daily (by default) that will delete any unused
 image, and any orphaned volume.  The rancher container images are excluded
-from the list of images to clean up.
+from the list of images to clean up, and you can add your own containers to
+the exclude list if you wish.
 
 This will halp to prevent the /var/lib/docker filesystem from filling up
 with old and unused container images.
