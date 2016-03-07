@@ -1,0 +1,14 @@
+datadog-agent:
+  image: janeczku/dd-agent-rancher:11.0.563
+  restart: always
+  environment:
+    API_KEY: ${api_key}
+    DOGSTATSD_ONLY: ${statsd_standalone}
+    STATSD_METRIC_NAMESPACE: ${statsd_namespace}
+    HOST_LABELS: ${host_labels}
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+  labels:
+    io.rancher.scheduler.global: ${global_service}
