@@ -3,6 +3,7 @@ ranch-eye:
   - 9104:9104/tcp
   labels:
     io.rancher.scheduler.global: 'true'
+    io.rancher.container.dns: true
   tty: true
   image: rucknar/ranch-eye:01
   stdin_open: true
@@ -13,6 +14,7 @@ node-exporter:
     - 9100:9100
   labels:
     io.rancher.scheduler.global: 'true'
+    io.rancher.container.dns: true
   tty: true
   image: prom/node-exporter:latest
   stdin_open: true
@@ -20,16 +22,13 @@ node-exporter:
 
 prom-conf:
     tty: true
-    labels:
-      io.rancher.container.pull_image: always
-    image: rucknar/prom-conf:02
-    command: /bin/sh -c "/usr//bin/confd -onetime -backend rancher -prefix /2015-12-19 && cat"
+    image: rucknar/prom-conf:08
     volumes:
       - /etc/prom-conf/
 
 prometheus:
     tty: true
-    image: prom/prometheus:latest
+    image: prom/prometheus:0.17.0
     command: -alertmanager.url=http://alertmanager:9093 -config.file=/etc/prom-conf/prometheus.yml -storage.local.path=/prometheus -web.console.libraries=/etc/prometheus/console_libraries -web.console.templates=/etc/prometheus/consoles
     ports:
       - 9090:9090
@@ -42,15 +41,6 @@ prometheus:
       - node-exporter:node-exporter
       - rancher-api-integration:rancher-api-integration
 
-graf-db:
-    tty: true
-    image: rucknar/graf-db:01
-    labels:
-      io.rancher.container.pull_image: always
-    command: cat
-    volumes:
-      - /var/lib/grafana/
-
 influxdb:
   image: tutum/influxdb:0.10
   ports:
@@ -62,6 +52,13 @@ influxdb:
     - PRE_CREATE_DB=grafana;prometheus;rancher
     - GRAPHITE_DB=rancher
     - GRAPHITE_BINDING=:2003
+
+graf-db:
+    tty: true
+    image: rucknar/graf-db:02
+    command: cat
+    volumes:
+      - /var/lib/grafana/
 
 grafana:
     tty: true
