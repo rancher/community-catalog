@@ -1,0 +1,26 @@
+.catalog:
+  name: Drone Rancher Node Manager
+  version: 0.1.0-cloundautique1
+  description: |
+    (Experimental) Poll Rancher Metadata for Drone Agents
+    and add/remove nodes accordingly.
+  minimum_rancher_version: v0.56.0
+  maintainer: cloudnautique
+  questions:
+    - variable: DRONE_TOKEN
+      type: password
+      required: true
+      label: Drone API token
+      description: "API Token for Drone. (must have admin rights)"
+    - variable: DRONE_SERVICE
+      type: service
+      label: Drone Server
+      description: "Link to Drone server.(Not the load balancer)"
+      required: true
+    - variable: STACK_NAME
+      type: string
+      label: Stack name (should be same as above)
+      description: "Name of this stack, sorry for the duplication."
+      required: true
+dynamic-drones-mgr-0:
+  scale: 1

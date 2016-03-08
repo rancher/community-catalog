@@ -1,0 +1,24 @@
+drone-agent:
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  image: rancher/socat-docker
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+  - /var/lib/docker:/var/lib/docker
+  stdin_open: true
+dynamic-drones-mgr-0:
+  environment:
+    DRONE_TOKEN: ${DRONE_TOKEN}
+    DRONE_URL: http://droneserver:8000
+  external_links:
+  - ${DRONE_SERVICE}:droneserver
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:container_labe_soft_ne: io.rancher.stack_service.name=$${stack_name}/drone-agent
+  tty: true
+  entrypoint:
+  - /dynamic-drone-nodes
+  - /stacks/${STACK_NAME}/services/drone-agent
+  image: rancher/drone-config:v0.1.0
+  stdin_open: true
