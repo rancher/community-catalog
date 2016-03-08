@@ -1,0 +1,6 @@
+name: OpenVPN LDAP
+description: |
+  OpenVPN for Rancher with LDAP authentication
+version: 1.0-0
+category: Networking
+maintainer: Alexis Ducastel <alexis@ducastel.net>
