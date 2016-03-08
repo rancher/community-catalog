@@ -1,0 +1,7 @@
+name: Registry
+description: |
+  Secure Docker registry.  Web based administration.  Optional LDAP authentication.
+version: v2.1.0-2.0
+category: Applications
+maintainer: Steve Shipway <s.shipway@auckland.ac.nz>
+
