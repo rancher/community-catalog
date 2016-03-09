@@ -1,0 +1,6 @@
+name: OpenVPN HTTP Digest
+description: |
+  OpenVPN for Rancher with HTTP Digest authentication
+version: 1.0-0
+category: Networking
+maintainer: Alexis Ducastel <alexis@ducastel.net>

@@ -1,0 +1,6 @@
+name: OpenVPN HTTP Basic
+description: |
+  OpenVPN for Rancher with HTTP Basic authentication
+version: 1.0-0
+category: Networking
+maintainer: Alexis Ducastel <alexis@ducastel.net>
