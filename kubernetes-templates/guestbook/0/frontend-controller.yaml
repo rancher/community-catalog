@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: ${FRONTEND_NAME}
+  labels:
+    name: ${FRONTEND_NAME}
+spec:
+  replicas: ${FRONTEND_REPLICAS}
+  selector:
+    name: ${FRONTEND_NAME}
+  template:
+    metadata:
+      labels:
+        name: ${FRONTEND_NAME}
+    spec:
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+          # If your cluster config does not include a dns service, then to
+          # instead access environment variables to find service host
+          # info, comment out the 'value: dns' line above, and uncomment the
+          # line below.
+          # value: env
+        ports:
+        - containerPort: 80
