@@ -1,8 +1,7 @@
 name: Datadog
 description: |
-  Datadog Agent and DogStatsD
-version: 11.0.563-rancher1
+  Real-time performance tracking and visualization of your container-based application deployment
+version: 11.0.570-rancher1
 category: Monitoring
 maintainer: "Jan Broer <jan@festplatte.eu.org>"
 license: The MIT License
-projectURL: http://www.github.com/janeczku/dd-agent-rancher
