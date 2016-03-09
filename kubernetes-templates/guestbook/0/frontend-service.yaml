@@ -10,6 +10,6 @@ spec:
   type: LoadBalancer
   ports:
     # the port that this service should serve on
-    - port: "${SERVICE_PORT}"
+    - port: ${SERVICE_PORT}
   selector:
     name: ${FRONTEND_NAME}

@@ -1,14 +1,14 @@
 .catalog:
-  name: "K8s Example Guestbook"
+  name: "K8s Guestbook"
   version: "1.0.0"
-  description: "It's a guestbook"
+  description: "It's a guestbook, I guess"
   questions:
     - variable: "SERVICE_NAME"
       label: "Service Name"
       required: true
       default: "frontend"
       type: "string"
-    - variable: "Service Port"
+    - variable: "SERVICE_PORT"
       label: "What port to listen on"
       required: true
       type: "int"
@@ -18,7 +18,7 @@
       required: true
       default: "frontend"
       type: "string"
-    - variable: "Frontend Scale"
+    - variable: "FRONTEND_REPLICAS"
       label: "Replicas for the frontend RC"
       required: true
       type: "int"
