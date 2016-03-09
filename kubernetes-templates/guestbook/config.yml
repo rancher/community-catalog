@@ -1,0 +1,4 @@
+name: "K8s Example Guestbook"
+description: "It's a guestbook"
+version: 1.0.0
+category: Test
