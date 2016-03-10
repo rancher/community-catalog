@@ -23,3 +23,13 @@
       required: true
       type: "int"
       default: 3
+    - variable: "REDIS_MASTER_NAME"
+      label: "Redis Master Name"
+      required: true
+      default: "redis-master"
+      type: "string"
+    - variable: "REDIS_SLAVE_NAME"
+      label: "Redis Slave Name"
+      required: true
+      default: "redis-slave"
+      type: "string"
