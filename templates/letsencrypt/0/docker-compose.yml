@@ -1,0 +1,19 @@
+letsencrypt:
+  image: janeczku/rancher-letsencrypt:v0.2.5
+  environment:
+    EULA: ${EULA}
+    API_VERSION: ${API_VERSION}
+    EMAIL: ${EMAIL}
+    DOMAINS: ${DOMAINS}
+    PUBLIC_KEY_TYPE: ${PUBLIC_KEY_TYPE}
+    RENEWAL_TIME: ${RENEWAL_TIME}
+    PROVIDER: ${PROVIDER}
+    CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
+    CLOUDFLARE_KEY: ${CLOUDFLARE_KEY}
+    DO_ACCESS_TOKEN: ${DO_ACCESS_TOKEN}
+    AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+    AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+    DEBUG: false
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: 'environment'
