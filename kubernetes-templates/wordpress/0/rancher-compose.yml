@@ -1,0 +1,4 @@
+.catalog:
+  name: "K8s Example Wordpress"
+  version: "1.0.0"
+  description: ""
