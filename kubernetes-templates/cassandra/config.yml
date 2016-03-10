@@ -1,0 +1,4 @@
+name: "K8s Example Cassandra"
+description: "Distributed Database"
+version: 1.0.0
+category: Databases
