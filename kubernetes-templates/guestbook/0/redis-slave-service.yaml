@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-slave
+  name: ${REDIS_SLAVE_NAME}
   labels:
-    name: redis-slave
+    name: ${REDIS_SLAVE_NAME}
 spec:
   ports:
     # the port that this service should serve on
   - port: 6379
   selector:
-    name: redis-slave
+    name: ${REDIS_SLAVE_NAME}
