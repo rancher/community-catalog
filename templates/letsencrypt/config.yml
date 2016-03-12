@@ -1,0 +1,8 @@
+name: "Let's Encrypt"
+description: |
+  Trusted SSL certificates at zero cost
+version: 0.2.5
+category: Security
+maintainer: "Jan Broer <jan@festplatte.eu.org>"
+license: The MIT License
+projectURL: http://www.github.com/janeczku/rancher-letsencrypt
