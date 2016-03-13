@@ -1,0 +1,16 @@
+cleanup:
+  image: sshipway/docker-cleanup:1.5.2
+  environment:
+    CLEAN_PERIOD: ${FREQUENCY}
+    DELAY_TIME: "900"
+    KEEP_IMAGES: "${KEEP}"
+    KEEP_CONTAINERS: "${KEEPC}"
+  labels:
+     io.rancher.scheduler.global: "true"
+     io.rancher.scheduler.affinity:host_label_ne: "${EXCLUDE_LABEL}"
+  privileged: true
+  tty: false
+  stdin_open: false
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/lib/docker:/var/lib/docker
