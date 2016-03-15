@@ -1,0 +1,94 @@
+postgres-datavolume:
+  labels:
+    io.rancher.container.start_once: 'true'
+    io.rancher.container.hostname_override: container_name
+  image: nuxeo/postgres
+  entrypoint: chown -R postgres:postgres /var/lib/postgresql/data
+  volume_driver: ${volumedriver}
+  volumes:
+    - nuxeo-postgres:/var/lib/postgresql/data
+
+postgres:
+  image: nuxeo/postgres
+  environment:
+    - POSTGRES_USER=nuxeo
+    - POSTGRES_PASSWORD=nuxeo    
+  labels:
+    io.rancher.sidekicks: postgres-datavolume
+    io.rancher.container.hostname_override: container_name
+  volumes_from:
+  - postgres-datavolume
+
+# Copied from default Rancher ES Stack : don't modifiy service names
+elasticsearch-masters:
+  image: rancher/elasticsearch-conf:v0.4.0
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: elasticsearch-base-master,elasticsearch-datavolume-masters
+elasticsearch-datavolume-masters:
+  labels:
+    elasticsearch.datanode.config.version: '0'
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  entrypoint: /bin/true
+  image: elasticsearch:1.7.3
+  volume_driver: ${volumedriver}
+elasticsearch-base-master:
+  labels:
+    elasticsearch.master.config.version: '0'
+    io.rancher.container.hostname_override: container_name
+  image: elasticsearch:1.7.3
+  net: "container:elasticsearch-masters"
+  volumes_from:
+    - elasticsearch-masters
+    - elasticsearch-datavolume-masters
+  entrypoint:
+    - /opt/rancher/bin/run.sh
+
+
+redis:
+  labels:    
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: redis:3.0.3
+  stdin_open: true
+
+nuxeo-datavolume:
+  labels:
+    io.rancher.container.start_once: 'true'
+    io.rancher.container.hostname_override: container_name
+  image: nuxeo
+  entrypoint: /bin/true
+  volume_driver: ${volumedriver}
+  volumes:
+    - /var/lib/nuxeo/data
+    - /var/log/nuxeo
+
+nuxeo:
+  environment:
+    NUXEO_CLID: ${clid}
+    NUXEO_PACKAGES: ${packages}
+    NUXEO_DB_HOST: postgres
+    NUXEO_DB_TYPE: postgresql
+    NUXEO_ES_HOSTS: elasticsearch:9300
+    NUXEO_DATA: /data/nuxeo/data/
+    NUXEO_LOG: /data/nuxeo/log/
+  labels:
+    io.rancher.sidekicks: nuxeo-datavolume    
+    io.rancher.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+  image: nuxeo:FT
+  links:
+  - redis:redis
+  - postgres:postgres
+  - elasticsearch-masters:elasticsearch
+  volumes_from:
+  - nuxeo-datavolume
+
+lb:
+  expose:
+  - 80:8080
+  image: rancher/load-balancer-service
+  links:
+  - nuxeo:nuxeo
+
