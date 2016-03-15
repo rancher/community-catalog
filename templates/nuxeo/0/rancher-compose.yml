@@ -1,0 +1,63 @@
+.catalog:
+  name: "Nuxeo Platform"
+  version: "rancher-1.0"
+  description: |
+    Enterprise Content Management 
+    Platform for Business Applications
+  uuid: nuxeo-1
+  questions:
+    - variable: clid
+      description: "A valid CLID to be able to download packages from Nuxeo Online Services. in the form part1\npart2"
+      label: "CLID"
+      type: "string"
+      required: false
+      default: ""
+    - variable: "packages"
+      type: "string"
+      label: "List of Nuxeo packages"
+      description: |
+        List of Nuxeo packages 
+      default: nuxeo-web-mobile nuxeo-drive nuxeo-diff nuxeo-spreadsheet nuxeo-dam nuxeo-template-rendering nuxeo-template-rendering-samples nuxeo-showcase-content
+    - variable: "volumedriver"
+      type: "string"
+      label: "Volume driver"
+      description: |
+        Specifiy docker volume driver  to use
+      default: local
+
+nuxeo:
+  scale: 1
+  health_check:
+    port: 8080
+    # Interval is measured in milliseconds
+    interval: 5000
+    unhealthy_threshold: 5
+    # For TCP, request_line needs to be ''
+    # TCP Example: 
+    # request_line: ''
+    request_line: GET /nuxeo/login.jsp 
+    healthy_threshold: 2
+    # Response timeout is measured in milliseconds
+    response_timeout: 2000
+
+elasticsearch:
+  metadata:
+    elasticsearch:
+      yml:
+        cluster.name: "${cluster_name}"
+        node.name: "$${HOSTNAME}"
+        node.data: "true"
+        node.master: "true"
+
+lb:
+  scale: 1
+  load_balancer_config:
+    lb_cookie_stickiness_policy:
+      cookie: lbsticky
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
