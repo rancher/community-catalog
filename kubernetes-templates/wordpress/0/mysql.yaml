@@ -1,4 +1,16 @@
 apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    name: mysql
+  name: mysql
+spec: 
+  ports:
+    - port: 3306
+  selector: 
+    name: mysql
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: mysql
@@ -13,19 +25,24 @@ spec:
       name: mysql
       env:
         - name: MYSQL_ROOT_PASSWORD
-          # change this
-          value: yourpassword
+          value: ${WP_PASSWORD}
       ports: 
         - containerPort: 3306
           name: mysql
       volumeMounts:
-          # name must match the volume name below
-        - name: mysql-persistent-storage
-          # mount path within the container
+        - name: mysql-ephemeral-storage
           mountPath: /var/lib/mysql
+      # we're alive when the socket opens
+      livenessProbe:
+        tcpSocket:
+          port: "mysql"
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+      # this may leak the password to logs
+      readinessProbe:
+        exec:
+          command: ["mysqladmin", "status", "-p${WP_PASSWORD}"]
   volumes:
-    - name: mysql-persistent-storage
-      gcePersistentDisk:
-        # This GCE PD must already exist.
-        pdName: mysql-disk
-        fsType: ext4
+    # move a pod, lose your data
+    - name: mysql-ephemeral-storage
+      emptyDir: {}
