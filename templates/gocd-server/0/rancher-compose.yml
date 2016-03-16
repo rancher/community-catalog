@@ -1,0 +1,47 @@
+.catalog:
+  name: gocd-server
+  version: 16.2.1-rancher1
+  description: |
+    (Experimental) Gocd server.
+  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  minimum_rancher_version: v0.59.0
+  uuid: goserver-0
+  questions:
+    - variable: "mem_initial"
+      description: "Initial java memory in Mb"
+      label: "Initial memory:"
+      required: true
+      default: 512
+      type: "int"
+    - variable: "mem_max"
+      description: "Max java memory in Mb"
+      label: "Max memory:"
+      required: true
+      default: 1024
+      type: "int"
+    - variable: "volume_work"
+      description: "Work volume to save goserver data"
+      label: "Work volume:"
+      required: true
+      default: "/var/lib/docker/go-server-work"
+      type: "string"
+    - variable: "volume_driver" 
+      label: "Driver volume:"
+      description: |
+        Choose the volume driver to use.
+      default: local
+      required: true
+      type: enum
+      options:
+        - local
+        - convoy-gluster
+gocd-server:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 8153
+    interval: 5000
+    unhealthy_threshold: 5
+    request_line: GET /go/agents HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 5000
