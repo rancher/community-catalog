@@ -2,3 +2,9 @@
   name: "K8s Example Cassandra"
   version: "1.0.0"
   description: ""
+  questions:
+    - variable: "NODE_COUNT"
+      label: "Initial number of Cassandra nodes"
+      required: true
+      default: 3
+      type: "int"
