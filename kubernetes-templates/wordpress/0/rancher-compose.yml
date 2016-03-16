@@ -2,3 +2,14 @@
   name: "K8s Example Wordpress"
   version: "1.0.0"
   description: ""
+  questions:
+    - variable: "WP_PASSWORD"
+      label: "Mysql database password"
+      required: true
+      default: "wordpress"
+      type: "string"
+    - variable: "SERVICE_PORT"
+      label: "Service port"
+      required: true
+      default: 80
+      type: "int"
