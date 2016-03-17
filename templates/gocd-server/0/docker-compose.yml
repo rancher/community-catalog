@@ -1,0 +1,23 @@
+gocd-server:
+  labels:
+    gocd.role: server
+  tty: true
+  image: rawmind/rancher-goserver:16.2.1-3
+  volumes_from:
+  - gocd-volume
+  environment:
+  - SERVER_MEM=${mem_initial}m
+  - SERVER_MAX_MEM=${mem_max}m
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: gocd-volume
+gocd-volume:
+  net: none
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  volumes:
+  - ${volume_work}:/opt/go-server/work
+  volume_driver: ${volume_driver}
+  entrypoint: /bin/true
+  image: busybox

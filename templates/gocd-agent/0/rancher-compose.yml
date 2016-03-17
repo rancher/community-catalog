@@ -1,0 +1,43 @@
+.catalog:
+  name: gocd-agent
+  version: 16.2.1-rancher1
+  description: |
+    (Experimental) Gocd agent.
+  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  minimum_rancher_version: v0.59.0
+  uuid: goagent-0
+  questions:
+    - variable: "mem_initial"
+      description: "Initial java memory in Mb"
+      label: "Initial memory:"
+      required: true
+      default: 512
+      type: "int"
+    - variable: "mem_max"
+      description: "Max java memory in Mb"
+      label: "Max memory:"
+      required: true
+      default: 1024
+      type: "int"
+    - variable: "goserver_ip"
+      description: |
+        Choose the gocd service to connect. 
+      label: "Gocd server stack/service"
+      default: "gocd-sever/gocd-server"
+      required: true
+      type: "service"
+    - variable: "goserver_port"
+      description: "Gocd server port"
+      label: "Goserver port:"
+      required: true
+      default: 8153
+      type: "int"
+    - variable: "scale"
+      description: "Gocd agent instances"
+      label: "Instances:"
+      required: true
+      default: 1
+      type: "int"
+gocd-agent:
+  scale: ${scale}
+  retain_ip: true

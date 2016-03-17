@@ -1,0 +1,16 @@
+gocd-agent:
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+    gocd.role: agent
+  tty: true
+  image: rawmind/rancher-goagent:16.2.1-1
+  external_links:
+  - ${goserver_ip}:gocd-server.rancher.internal
+  environment:
+  - AGENT_MEM=${mem_initial}m
+  - AGENT_MAX_MEM=${mem_max}m
+  - GO_SERVER=gocd-server.rancher.internal
+  - GO_SERVER_PORT=${goserver_port}
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
