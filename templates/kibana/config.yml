@@ -1,0 +1,4 @@
+name: "Kibana 4"
+description: "Visualization dashboard"
+version: "4.1.1-rancher1"
+category: ELK
