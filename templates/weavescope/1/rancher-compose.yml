@@ -1,0 +1,4 @@
+.catalog:
+  name: weavescope
+  version: 0.12.0
+  description: "Monitoring, visualisation and management for Docker"
