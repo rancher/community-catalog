@@ -1,0 +1,100 @@
+.catalog:
+  name: "Hadoop + Yarn"
+  version: "2.7.1-rancher1"
+  description: "Hadoop + Yarn"
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: "cluster"
+      label: "Cluster Name"
+      description: "Name for the stack volumes"
+      required: true
+      default: "hadoop"
+      type: "string"
+    - variable: "dfs_replication"
+      description: "Default number of HDFS replicas"
+      label: "Default DFS Replica Count"
+      required: true
+      type: "int"
+      default: "3"
+    - variable: "yarn_node_manager_cpu_vcores"
+      description: "yarn.nodemanager.resource.cpu-vcores value"
+      label: "Yarn Nodemanager CPU vcores"
+      default: "8"
+      type: "int"
+      required: true
+    - variable: "yarn_node_manager_resource_memory"
+      description: "yarn.nodemanager.resource.memory-mb value"
+      label: "Yarn Nodemanager Memory Value"
+      default: "8192"
+      type: "int"
+      required: true
+    - variable: "yarn_minimum_allocation"
+      description: "yarn.scheduler.minimum-allocation-mb value"
+      label: "Yarn Minimum Memory allocation"
+      default: "1024"
+      type: "int"
+      required: true
+    - variable: "mapreduce_map_memory"
+      description: "mapreduce.map.memory.mb"
+      label: "Mapreduce Map Memory"
+      default: "1024"
+      type: "int"
+      required: true
+    - variable: "mapreduce_reduce_memory"
+      description: "mapreduce.reduce.memory.mb"
+      label: "Mapreduce Reduce Memory"
+      default: "2048"
+      type: "int"
+      required: true
+    - variable: "mapreduce_map_java_opts"
+      description: "mapreduce.map.java.opts"
+      label: "Mapreduce Map Java Opts"
+      default: "-Xmx768m"
+      type: "string"
+      required: true
+    - variable: "mapreduce_reduce_java_opts"
+      description: "mapreduce.reduce.java.opts"
+      label: "Mapreduce Reduce Java Opts"
+      default: "-Xmx1536m"
+      type: "string"
+      required: true
+namenode-primary:
+  scale: 1
+  metadata: &hdfs_metadata
+    core-site:
+      hadoop.proxyuser.hue.hosts: "*"
+      hadoop.proxyuser.hue.groups: "*"
+    hdfs-site:
+      dfs.replication: "${dfs_replication}"
+      dfs.webhdfs.enabled: "true"
+datanode:
+  scale: 1
+  metadata: *hdfs_metadata
+yarn-resourcemanager:
+  scale: 1
+  metadata: &yarn_metadata
+    core-site:
+      hadoop.proxyuser.hue.hosts: "*"
+      hadoop.proxyuser.hue.groups: "*"
+    hdfs-site:
+      dfs-replication: "${dfs_replication}"
+      dfs.webhdfs.enabled: "true"
+    yarn-site:
+      yarn.nodemanager.resource.cpu-vcores: "${yarn_node_manager_cpu_vcores}"
+      yarn.nodemanager.resource.memory-mb: "${yarn_node_manager_resource_memory}"
+      yarn.scheduler.minimum-allocation-mb: "${yarn_minimum_allocation}"
+      yarn.nodemanager.aux-services: "mapreduce_shuffle"
+      yarn.log-aggregation-enable: "true"
+      yarn.log-aggregation.retain-seconds: 10800
+      yarn.log-aggregation.retain-check-interval-seconds: 3600
+    mapred-site:
+      mapreduce.map.memory.mb: "${mapreduce_map_memory}"
+      mapreduce.reduce.memory.mb: "${mapreduce_reduce_memory}"
+      mapreduce.map.java.opts: "${mapreduce_map_java_opts}"
+      mapreduce.reduce.java.opts: "${mapreduce_reduce_java_opts}"
+jobhistory-server:
+  scale: 1
+  metadata: *yarn_metadata
+yarn-nodemanager:
+  scale: 1
+  metadata: *yarn_metadata
