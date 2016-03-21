@@ -1,0 +1,17 @@
+.catalog:
+  name: "Sysdig"
+  version: "v0"
+  description: "Container-Native System Visibility and Troubleshooting"
+  questions:
+    - variable: "VERSION"
+      label: "Sysdig version"
+      description: "Specify a version of the sysdig container to pull (default will pull latest stable version)."
+      type: "string"
+      default: "latest" 
+      required: true
+    - variable: "HOST_EXCLUDE_LABEL"
+      label: "Host exclude label"
+      description: "Specify a host label here that can be used to exclude deployment of the sysdig container on any given host. Eg: sysdig.exclude_sysdig=true (you could then add the label 'sysdig.exclude_sysdig=true' to any host to exclude sysdig from that host)."
+      type: "string"
+      default: "sysdig.exclude_sysdig=true" 
+      required: true
