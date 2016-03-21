@@ -1,0 +1,5 @@
+name: Gluster FS
+description: |
+  Replicated Gluster Volume
+version: 3.7.9-rancher1
+category: Storage
