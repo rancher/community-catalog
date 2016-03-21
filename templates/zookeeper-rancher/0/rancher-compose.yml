@@ -1,0 +1,18 @@
+.catalog:
+  name: Zookeeper
+  version: 3.4.6-rancher1
+  projectURL: https://github.com/rancher/compose-templates
+  maintainer: Rancher Labs
+  description: |
+    (Experimental) Apache Zookeeper cluster.
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: "scale"
+      description: "Number of Zookeeper nodes. Note: it should be an odd number"
+      label: "Number of Nodes:"
+      required: true
+      default: 3
+      type: "int"
+zookeeper:
+  scale: ${scale}
+  retain_ip: true
