@@ -1,0 +1,12 @@
+ecr-updater:
+  environment:
+    AWS_ACCESS_KEY_ID: ${aws_access_key_id}
+    AWS_SECRET_ACCESS_KEY: ${aws_secret_access_key}
+    AWS_REGION: ${aws_region}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+  tty: true
+  image: objectpartners/rancher-ecr-credentials:1.0.0
+  stdin_open: true
