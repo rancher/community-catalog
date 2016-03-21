@@ -1,0 +1,11 @@
+zookeeper-conf:
+  image: rancher/zookeeper-config:v0.2.0
+  volumes_from:
+    - zookeeper
+  net: "container:zookeeper"
+zookeeper:
+  image: rancher/zookeeper:3.4.6-2
+  labels:
+    io.rancher.sidekicks: zookeeper-conf
+  volumes:
+    - /opt/rancher
