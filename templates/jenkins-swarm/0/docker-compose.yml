@@ -1,0 +1,15 @@
+swarm-clients:
+  image: "rancher/jenkins-swarm:v0.1.0"
+  user: "${user}"
+  labels:
+    io.rancher.scheduler.affinity:host_label_soft: ci=worker
+    io.rancher.container.hostname_override: container_name
+  external_links:
+    - "${jenkins_service}:jenkins-primary"
+  environment:
+    JENKINS_PASS: "${jenkins_pass}"
+    JENKINS_USER: "${jenkins_user}"
+    SWARM_EXECUTORS: "${swarm_executors}"
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+    - '/usr/bin/docker:/usr/bin/docker'

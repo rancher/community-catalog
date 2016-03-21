@@ -1,0 +1,5 @@
+name: Jenkins Swarm Plugin
+description: |
+  Swarm plugin to create dynamic builders
+version: "2.0-rancher2"
+category: Continuous Integration
