@@ -1,0 +1,16 @@
+sysdig:
+  container_name: sysdig
+  privileged: true
+  stdin_open: true
+  tty: true
+  image: sysdig/sysdig:${VERSION}
+  volumes:
+    - /var/run/docker.sock:/host/var/run/docker.sock
+    - /dev:/host/dev
+    - /proc:/host/proc:ro
+    - /boot:/host/boot:ro
+    - /lib/modules:/host/lib/modules:ro
+    - /usr:/host/usr:ro
+  labels:
+     io.rancher.scheduler.global: true
+     io.rancher.scheduler.affinity:host_label_ne: ${HOST_EXCLUDE_LABEL}
