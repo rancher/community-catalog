@@ -1,4 +1,4 @@
 ghost:
   image: ghost
   ports:
-    - "80:2368"
+    - ${public_port}:2368
