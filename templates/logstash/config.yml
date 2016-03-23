@@ -1,0 +1,5 @@
+name: Logstash
+description: |
+  Centralize data processing of all types
+version: 1.5.3-1-rancher1
+category: ELK
