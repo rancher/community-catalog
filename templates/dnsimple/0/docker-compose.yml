@@ -1,0 +1,13 @@
+dnsimple:
+  image: rancher/external-dns:v0.1.9
+  command: --provider dnsimple
+  expose: 
+   - 1000
+  environment:
+    DNSIMPLE_TOKEN: ${DNSIMPLE_TOKEN}
+    DNSIMPLE_EMAIL: ${DNSIMPLE_EMAIL}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"
