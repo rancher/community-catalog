@@ -1,5 +1,0 @@
-name: Apache Zookeeper
-description: |
-  (Experimental) Zookeeper cluster
-version: 3.4.6-rancher1
-category: Clustering
