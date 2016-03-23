@@ -1,0 +1,5 @@
+name: PointHQ DNS
+description: |
+  Rancher External DNS service powered by PointHQ
+version: v0.2.1-rancher1
+category: Rancher Services
