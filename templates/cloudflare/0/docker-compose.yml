@@ -1,0 +1,13 @@
+cloudflare:
+  image: rancher/external-dns:v0.1.9
+  command: -provider=cloudflare
+  expose: 
+   - 1000
+  environment:
+    CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
+    CLOUDFLARE_KEY: ${CLOUDFLARE_KEY}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"
