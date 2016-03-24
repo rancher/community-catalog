@@ -1,0 +1,18 @@
+.catalog:
+  name: "Wordpress"
+  version: latest-rancher1
+  description: "Blog tool, publishing platform and CMS"
+  minimum_rancher_version: v1.0.0-rc2
+  questions:
+    - variable: client_port
+      description: "Port to access Wordpress"
+      label: "Client Port"
+      required: true
+      default: "80"
+      type: "int"
+    - variable: db_password
+      description: "Password for database"
+      label: "Password (default: wordpress)"
+      required: true
+      default: "wordpress"
+      type: "password"

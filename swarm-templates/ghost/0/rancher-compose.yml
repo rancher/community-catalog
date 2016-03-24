@@ -1,0 +1,12 @@
+.catalog:
+  name: "Ghost"
+  version: 0.7.8-rancher1
+  description: "Blog powered by Ghost"
+  minimum_rancher_version: v1.0.0-rc2
+  questions:
+    - variable: client_port
+      description: "Port to access the blog"
+      label: "Client Port"
+      required: true
+      default: "80"
+      type: "int"
