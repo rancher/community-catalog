@@ -1,0 +1,5 @@
+.catalog:
+  name: "Cassandra"
+  version: 3.3-rancher1
+  description: "Deploy a Cassandra node"
+  minimum_rancher_version: v1.0.0-rc2

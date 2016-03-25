@@ -3,9 +3,8 @@ wordpress:
   links:
     - db:mysql
   ports:
-    - 80:80
-
+    - ${client_port}:80
 db:
   image: mariadb
   environment:
-    MYSQL_ROOT_PASSWORD: example
+    MYSQL_ROOT_PASSWORD: ${db_password}
