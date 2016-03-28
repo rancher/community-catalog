@@ -17,4 +17,4 @@ jenkins-datavolume:
     - /var/jenkins_home
   labels:
     io.rancher.container.start_once: true
-  entrypoint: /bin/true
+  entrypoint: ["chown", "-R", "1000:1000", "/var/jenkins_home"]
