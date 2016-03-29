@@ -1,0 +1,23 @@
+.catalog:
+  name: Minecraft
+  version: 1.0.0-rancher1
+  description: |
+    Minecraft is a moderately popular game involving the collection, moving and
+    re-assembling of raw materials. It may be an elaborate parody of the
+    Australian economy.
+  maintainer: "Rancher"
+  questions:
+    - variable: REPLICAS
+      default: 1
+      min: 1
+      max: 1
+      label: Server Replicas
+      description: Initial number of server replicas
+      required: true
+      type: int
+    - variable: LB_PORT
+      default: 25565
+      label: Server Port
+      description: Port to expose the load balancer on
+      required: true
+      type: int

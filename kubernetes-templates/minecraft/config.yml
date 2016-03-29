@@ -1,0 +1,5 @@
+name: Minecraft
+version: 1.0.0-rancher1
+description: A Minecraft server
+maintainer: Ben Barclay <benbarclay@gmail.com>
+category: Entertainment
