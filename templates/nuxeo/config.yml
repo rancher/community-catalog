@@ -2,5 +2,5 @@ name: Nuxeo Platform
 description: |
   Enterprise Content Management 
   Platform for Business Applications
-version: 8.1
+version: 8.1-rancher1
 category: ECM

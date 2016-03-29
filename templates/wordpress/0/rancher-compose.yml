@@ -1,6 +1,6 @@
 .catalog:
   name: "Wordpress"
-  version: "v0.1-educaas"
+  version: "v0.1-educaas1"
   description: "Blog tool, publishing platform and CMS"
   uuid: Wordpress-0
   minimum_rancher_version: v0.51.0

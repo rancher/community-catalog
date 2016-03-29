@@ -1,8 +1,8 @@
 name: Apache Kafka
 description: |
   (Experimental) Kafka cluster
-version: 0.8.2-rancher1
-category: clustering
+version: 0.9.0-rancher1
+category: Clustering
 maintainer: "Raul Sanchez <rawmind@gmail.com>"
 minimum_rancher_version: v0.56.0
 license: 

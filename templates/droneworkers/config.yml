@@ -2,5 +2,5 @@ name: Drone Rancher Node Manager
 description: |
   (Experimental) Dynamically add remove Drone worker nodes
 version: 0.1.0-cloudnautique1
-category: "Continuous Integration"
+category: Continuous Integration
 minimum_rancher_version: v0.56.0
