@@ -1,5 +1,0 @@
-name: Etcd
-description: |
-  (Experimental) A highly-available key value store
-version: 2.2.1-rancher1
-category: Clustering
