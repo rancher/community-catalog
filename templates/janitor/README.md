@@ -11,10 +11,13 @@ This will run a task daily (by default) that will delete any unused
 image, and any orphaned volume.  The rancher container images are excluded
 from the list of images to clean up, and you can add your own containers to
 the exclude list if you wish.  It will also remove any stopped containers
-that are taking up space.
+that are taking up space; note that this may not be what you want if you
+are using stopped containers to hold volumes!  If this is the case, use the
+Keep List below.
 
-This will halp to prevent the /var/lib/docker filesystem from filling up
-with old and unused container images.
+This cleanup will help to prevent the /var/lib/docker filesystem from filling 
+up with old and unused container images, which is an issue on lighter-weight
+Docker hosts.
 
 ### Keep list
 
@@ -31,7 +34,7 @@ patterns.  For example, an image called **foo/bar:latest** will match:
 * \*:\*
 * fo
 
-However it will notmatch
+However it will not match
 
 * foo/baz
 * bar:latest
