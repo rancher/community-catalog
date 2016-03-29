@@ -22,4 +22,4 @@ I expect most people who find this useful will make use of this as a starting po
 
 ## Usage
 * Grafana will now be available on, running on port 3000. I've added a number of dashboards to help get you started. Authentication is with the default `admin/admin`.
-* Prometheus will now be avaialble, running on port 9090. Have a play around with some of the data. For more information on Prometheus - https://prometheus.io/docs/introduction/overview/
+* Prometheus will now be available, running on port 9090. Have a play around with some of the data. For more information on Prometheus - https://prometheus.io/docs/introduction/overview/
