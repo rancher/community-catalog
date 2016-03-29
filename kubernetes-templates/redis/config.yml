@@ -1,0 +1,4 @@
+name: Redis
+description: A highly-available in-memory data structure store
+version: 2.8.23-rancher1
+category: Databases
