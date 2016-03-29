@@ -10,6 +10,7 @@ elasticsearch-datavolume-masters:
     io.rancher.container.start_once: true
   volumes:
     - /usr/share/elasticsearch/data
+    - /usr/share/elasticsearch/config
   entrypoint: /bin/true
   image: elasticsearch:2.2.1
 elasticsearch-base-master:
@@ -40,6 +41,7 @@ elasticsearch-datavolume-datanode:
     io.rancher.container.start_once: true
   volumes:
     - /usr/share/elasticsearch/data
+    - /usr/share/elasticsearch/config
   entrypoint: /bin/true
   image: elasticsearch:2.2.1
 elasticsearch-base-datanode:
@@ -71,6 +73,7 @@ elasticsearch-datavolume-clients:
     io.rancher.container.start_once: true
   volumes:
     - /usr/share/elasticsearch/data
+    - /usr/share/elasticsearch/config
   entrypoint: /bin/true
   image: elasticsearch:2.2.1
 elasticsearch-base-clients:
