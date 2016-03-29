@@ -1,0 +1,6 @@
+name: spark
+version: 0.1.0-rancher1
+description: |
+  Apache Spark is a fast and general-purpose cluster computing system 
+  ported from Helm.
+category: Big Data

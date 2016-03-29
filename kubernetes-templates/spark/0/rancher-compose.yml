@@ -1,0 +1,12 @@
+.catalog:
+    name: Spark
+    version: 0.1.0-rancher1
+    description: "Spark cluster"
+    maintainer: "Rancher"
+    questions:
+        - variable: "SPARK_WORKER_REPLICAS"
+          type: "string"
+          default: "1"
+          label: "Worker Replica Count"
+          description: "number of Spark workers"
+          required: true
