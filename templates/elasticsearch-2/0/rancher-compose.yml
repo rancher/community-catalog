@@ -1,6 +1,6 @@
 .catalog:
   name: "Elasticsearch"
-  version: "2.2.1-rancher1"
+  version: "2.2.2-rancher1"
   description: "Elasticsearch. You know, for search"
   questions:
     - variable: cluster_name

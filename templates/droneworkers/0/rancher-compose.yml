@@ -1,6 +1,6 @@
 .catalog:
   name: Drone Rancher Node Manager
-  version: 0.1.0-cloundautique1
+  version: 0.1.0-cloudnautique1
   description: |
     (Experimental) Poll Rancher Metadata for Drone Agents
     and add/remove nodes accordingly.
