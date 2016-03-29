@@ -1,0 +1,5 @@
+name: RabbitMQ
+version: 3.6.0-rancher1
+maintainer: Matt Fisher <mfisher@deis.com>
+category: Messaging
+description: A reliable, distributed messaging broker
