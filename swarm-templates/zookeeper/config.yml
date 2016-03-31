@@ -1,0 +1,7 @@
+name: Zookeeper
+description: |
+  Reliable distributed coordination (standalone only)
+version: 3.4.8-rancher1
+category: Clustering
+maintainer: James Oliver <joliver@rancher.com>
+minimum_rancher_version: v1.0.0-rc7

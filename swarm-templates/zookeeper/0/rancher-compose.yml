@@ -1,0 +1,21 @@
+.catalog:
+  name: Zookeeper
+  version: 3.4.8-rancher1
+  description: |
+    ZooKeeper is a centralized service for maintaining configuration information, 
+    naming, providing distributed synchronization, and providing group services.
+  questions:
+    - variable: HEAP_SIZE
+      label: JVM Heap Size
+      description: Amount of memory allocated to the java heap
+      required: true
+      type: string
+      default: 512m
+zookeeper:
+  health_check:
+    port: 2181
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
