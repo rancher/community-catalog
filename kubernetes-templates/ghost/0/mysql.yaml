@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels: 
+    name: mysql
+spec: 
+  containers: 
+    - image: mysql
+      name: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: ${mysql_root_pass}
+        - name: MYSQL_DATABASE
+          value: ${ghost_db}
+        - name: MYSQL_USER
+          value: ${ghost_db_user}
+        - name: MYSQL_PASSWORD
+          value: ${ghost_db_pass}
+      ports:
+        - containerPort: 3306
+          name: mysql
+      volumeMounts:
+        - name: mysql-vol
+          mountPath: /var/lib/mysql
+      livenessProbe:
+        tcpSocket:
+          port: "mysql"
+        initialDelaySeconds: 5
+        timeoutSeconds: 1
+      readinessProbe:
+        exec:
+          command: ["mysqladmin", "status", "-p${mysql_root_pass}"]
+  volumes:
+    - name: mysql-vol
+      emptyDir: {}

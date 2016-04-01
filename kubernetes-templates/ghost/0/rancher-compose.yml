@@ -1,0 +1,30 @@
+.catalog:
+  name: Ghost
+  version: 0.7.8-rancher1
+  description: Open source publishing platform
+  questions:
+    - variable: "mysql_root_pass"
+      label: "MySQL root password"
+      required: true
+      type: "password"
+    - variable: "ghost_db"
+      label: "Ghost database name on mysql"
+      required: true
+      type: "string"
+      default: "ghost"
+    - variable: "ghost_db_user"
+      label: "Ghost database username"
+      required: true
+      type: "string"
+      default: "ghostuser"
+    - variable: "ghost_db_pass"
+      label: "Ghost database password"
+      required: true
+      type: "password"
+      default: "ghostpass"
+      description: "default password is ghostpass"
+    - variable: "ghost_url"
+      label: "Ghost url"
+      required: true
+      type: "string"
+      default: "http://example-ghost.com"
