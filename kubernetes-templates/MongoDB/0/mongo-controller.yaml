@@ -1,0 +1,32 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: mongo-rc
+spec:
+  replicas: ${sec_no}
+  selector:
+    name: mongo-sec
+  template:
+    spec:
+      containers:
+      - name: mongo-sec
+        image: husseingalal/mongo-k8s
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+          - name: mongo-ephermal-storage
+            mountPath: /data/db
+        command:
+          - /run.sh
+          - mongod
+          - "--replSet"
+          - rs0
+          - "--smallfiles"
+          - "--noprealloc"
+      volumes:
+        - name: mongo-ephermal-storage
+          emptyDir: {}
+    metadata:
+      labels:
+        secondary: "true"
+        name: mongo-sec
