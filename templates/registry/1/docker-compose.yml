@@ -59,7 +59,7 @@ lb:
   - registry:registry
   - sslproxy:sslproxy
 portus:
-  image: sshipway/portus:v2.0.4
+  image: sshipway/portus:2.0.4
   environment: 
     PORTUS_MACHINE_FQDN: ${DOMAIN}
     PORTUS_PRODUCTION_HOST: db
