@@ -6,7 +6,7 @@ logstash-indexer-config:
 redis:
   restart: always
   tty: true
-  image: redis:3
+  image: redis:3.0.7
   stdin_open: true
   labels:
     io.rancher.container.hostname_override: container_name
