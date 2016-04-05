@@ -41,7 +41,7 @@ registry:
   links:
   - portus:portus
   volumes:
-  - ${DIR}/certs:/certs:ro
+  - ${DIR}/certs:/certs
   - ${DIR}/data:/var/lib/registry
 lb:
   image: rancher/load-balancer-service
