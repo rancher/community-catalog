@@ -17,6 +17,7 @@ elasticsearch-masters:
         node.name: "$${HOSTNAME}"
         node.data: "false"
         node.master: "true"
+        network.host: "_site_"
 elasticsearch-datanodes:
   metadata:
     elasticsearch:
@@ -26,6 +27,7 @@ elasticsearch-datanodes:
         node.data: "true"
         node.master: "false"
         http.enabled: "false"
+        network.host: "_site_"
 elasticsearch-clients:
   metadata:
     elasticsearch:
@@ -34,3 +36,4 @@ elasticsearch-clients:
        node.name: "$${HOSTNAME}"
        node.data: "false"
        node.master: "false"
+       network.host: "_site_"
