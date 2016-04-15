@@ -1,0 +1,5 @@
+name: Scylla
+description: |
+  A NoSQL column store database compatible with Cassandra
+version: 1.0-rc2-rancher1
+category: Databases

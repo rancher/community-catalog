@@ -1,0 +1,14 @@
+.catalog:
+  name: Scylla
+  version: 1.0-rc2-rancher1
+  description: |
+    A NoSQL column store database compatible with Cassandra
+  questions:
+scylla:
+  health_check:
+    port: 9042
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
