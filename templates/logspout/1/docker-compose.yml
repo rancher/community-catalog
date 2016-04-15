@@ -3,10 +3,9 @@ logspout:
   environment:
     ROUTE_URIS: "${route_uri}"
     LOGSPOUT: 'ignore'
+    SYSLOG_HOSTNAME: "${envname}"
   volumes:
   - '/var/run/docker.sock:/var/run/docker.sock'
-  external_links:
-  - ${target_link}:${target_link_name}
   labels:
     io.rancher.scheduler.global: 'true'
     io.rancher.container.hostname_override: container_name
