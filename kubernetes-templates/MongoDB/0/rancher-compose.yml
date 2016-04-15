@@ -1,0 +1,11 @@
+.catalog:
+  name: MongoDB
+  version: 3.2-rancher1
+  description: MongoDB Replica Set
+  questions:
+    - variable: "sec_no"
+      label: "Number of Secondary nodes"
+      required: true
+      type: int
+      default: 2
+      description: "should be even number"

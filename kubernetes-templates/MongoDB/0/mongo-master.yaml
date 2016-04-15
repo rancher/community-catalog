@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: mongo-primary
+  name: mongo-primary
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    name: mongo-master
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+          name: mongo-master
+  name: mongo-master
+spec:
+  containers:
+    - name: mongo-master
+      image: "husseingalal/mongo-k8s"
+      env:
+        - name: PRIMARY
+          value: "true"
+      ports:
+        - containerPort: 27017
+      command:
+        - /run.sh
+        - mongod
+        - "--replSet"
+        - rs0
+        - "--smallfiles"
+        - "--noprealloc"
+      volumeMounts:
+        - mountPath: /data/db
+          name: mongo-primary-ephermal-storage
+  volumes:
+    - name: mongo-primary-ephermal-storage
+      emptyDir: {}
