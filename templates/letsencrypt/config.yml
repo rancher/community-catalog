@@ -1,7 +1,7 @@
 name: "Let's Encrypt"
 description: |
   Trusted SSL certificates at zero cost
-version: 0.2.5
+version: 0.2.7
 category: Security
 maintainer: "Jan Broer <jan@festplatte.eu.org>"
 license: The MIT License
