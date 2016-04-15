@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ghost
+  labels: 
+    name: ghost
+    app: ghost
+spec:
+  restartPolicy: Always
+  containers: 
+    - image: "husseingalal/ghost"
+      name: "ghost"
+      ports:
+      - containerPort: 2368
+        name: ghost
+      env:
+      - name: GHOST_USER
+        value: ${ghost_db_user}
+      - name: GHOST_PASSWORD
+        value: ${ghost_db_pass}
+      - name: GHOST_DB
+        value: ${ghost_db}
+      - name: GHOST_URL
+        value: ${ghost_url}
+      volumeMounts:
+        - name: "ghost-ephemeral-storage"
+          mountPath: /var/lib/ghost
+  volumes:
+    - name: "ghost-ephemeral-storage"
+      emptyDir: {}
