@@ -1,0 +1,4 @@
+zookeeper:
+  image: rancher/zookeeper:3.4.8-swarm
+  environment:
+    JVM_FLAGS: "-Xms${HEAP_SIZE} -Xmx${HEAP_SIZE}"
