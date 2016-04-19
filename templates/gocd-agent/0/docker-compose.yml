@@ -6,7 +6,7 @@ gocd-agent:
   tty: true
   image: rawmind/rancher-goagent:16.2.1-1
   external_links:
-  - ${goserver_ip}:gocd-server.rancher.internal
+  - ${goserver_ip}:gocd-server
   environment:
   - AGENT_MEM=${mem_initial}m
   - AGENT_MAX_MEM=${mem_max}m
