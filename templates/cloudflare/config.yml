@@ -1,5 +1,5 @@
 name: CloudFlare DNS
 description: |
   Rancher External DNS service powered by CloudFlare
-version: v0.2.1-rancher1
+version: v0.4.0-rancher1
 category: Rancher Services
