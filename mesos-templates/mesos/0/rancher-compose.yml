@@ -1,0 +1,69 @@
+.catalog:
+  name: Mesos
+  version: v1
+  questions:
+  - variable: ZK_SERVICE
+    description: Choose the Zookeeper service to use.
+    label: Zookeeper Service
+    required: true
+    type: service
+  - variable: ZK_SESSION_TIMEOUT
+    description: You may need to increase this in virtualized environments or else zk requests will fail.
+    label: Zookeeper Session Timeout
+    required: true
+    type: string
+    default: 10secs
+  - variable: MESOS_CLUSTER
+    description: Mesos cluster name to appear in the Master UI.
+    label: Cluster Name
+    required: true
+    type: string
+    default: rancher
+  - variable: MESOS_QUORUM
+    description: Mesos Master quorum count is computed as floor( MESOS_MASTERS / 2 ) 
+    label: Mesos Master Quorum
+    required: true
+    type: int
+    default: 2
+  - variable: MESOS_MASTERS
+    description: Number of Mesos Master nodes to run.
+    label: Mesos Masters
+    required: true
+    type: int
+    default: 3
+  - variable: MASTER_PORT
+    description: Port to expose Mesos masters on.
+    label: Master Port
+    required: true
+    type: int
+    default: 5050
+  - variable: MESOS_SLAVES
+    description: Number of Mesos Slaves to run.
+    label: Mesos Slaves
+    required: true
+    type: int
+    default: 3
+  - variable: SLAVE_PORT
+    description: Port to expose Mesos slaves on.
+    label: Slave Port
+    required: true
+    type: int
+    default: 5051
+master:
+  scale: ${MESOS_MASTERS}
+  health_check:
+    port: ${MASTER_PORT}
+    interval: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: '/metrics/snapshot'
+    response_timeout: 2000
+slave:
+  scale: ${MESOS_SLAVES}
+  health_check:
+    port: ${SLAVE_PORT}
+    interval: 5000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: ''
+    response_timeout: 3000

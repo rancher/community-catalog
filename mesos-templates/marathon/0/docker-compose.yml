@@ -1,0 +1,8 @@
+marathon:
+  image: rancher/marathon:latest
+  environment:
+    MESOS_SERVICE: ${MESOS_SERVICE}
+    ZK_SERVICE: ${ZK_SERVICE}
+    MARATHON_HTTP_PORT: ${MARATHON_HTTP_PORT}
+  ports:
+  - "${MARATHON_HTTP_PORT}:${MARATHON_HTTP_PORT}"

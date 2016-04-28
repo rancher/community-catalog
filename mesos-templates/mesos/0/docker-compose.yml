@@ -1,0 +1,31 @@
+master:
+  image: rancher/mesos-master:latest
+  environment:
+    MESOS_CLUSTER: ${MESOS_CLUSTER}
+    MESOS_QUORUM: ${MESOS_QUORUM}
+    MASTER_PORT: ${MASTER_PORT}
+    ZK_SERVICE: ${ZK_SERVICE}
+    ZK_SESSION_TIMEOUT: ${ZK_SESSION_TIMEOUT}
+  ports:
+  - "${MASTER_PORT}:${MASTER_PORT}"
+  labels:
+    mesos: master
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: mesos=slave
+  volumes:
+  - /data
+slave:
+  image: rancher/mesos-slave:latest
+  environment:
+    SLAVE_PORT: ${SLAVE_PORT}
+    ZK_SERVICE: ${ZK_SERVICE}
+  ports:
+  - "${SLAVE_PORT}:${SLAVE_PORT}"
+  labels:
+    mesos: slave
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: mesos=master
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+  - /data
+  privileged: true

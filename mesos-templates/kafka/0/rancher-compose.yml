@@ -1,0 +1,30 @@
+.catalog:
+  name: Kafka
+  version: v1
+  description: |
+    A high-throughput distributed messaging system
+  questions:
+  - variable: ZK_SERVICE
+    description: Choose the Zookeeper service to use.
+    label: Zookeeper Service
+    required: true
+    type: service
+  - variable: MESOS_SERVICE
+    description: Choose the Mesos stack to use.
+    label: Mesos Stack
+    required: true
+    type: service
+  - variable: SCHEDULER_PORT
+    description: Port to expose Kafka Scheduler on.
+    label: Scheduler Port
+    required: true
+    type: int
+    default: 7000
+scheduler:
+  health_check:
+    port: ${SCHEDULER_PORT}
+    interval: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: '/health'
+    response_timeout: 2000

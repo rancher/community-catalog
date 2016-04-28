@@ -1,0 +1,8 @@
+scheduler:
+  image: rancher/kafka:latest
+  environment:
+    MESOS_SERVICE: ${MESOS_SERVICE}
+    ZK_SERVICE: ${ZK_SERVICE}
+    SCHEDULER_PORT: ${SCHEDULER_PORT}
+  ports:
+  - "${SCHEDULER_PORT}:${SCHEDULER_PORT}"

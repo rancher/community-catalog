@@ -1,0 +1,8 @@
+name: Mesos
+description: |
+  Abstract resources away from machines, enabling
+  fault-tolerant and elastic distributed systems
+version: v1
+category: System
+maintainer: James Oliver <joliver@rancher.com>
+minimum_rancher_version: v1.0.0
