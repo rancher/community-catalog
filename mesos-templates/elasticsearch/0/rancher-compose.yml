@@ -1,0 +1,37 @@
+.catalog:
+  name: Elasticsearch
+  version: v1
+  description: |
+    You know, for search
+  questions:
+  - variable: ZK_SERVICE
+    description: Choose the Zookeeper service to use.
+    label: Zookeeper Service
+    required: true
+    type: service
+  - variable: MESOS_SERVICE
+    description: Choose the Mesos stack to use.
+    label: Mesos Stack
+    required: true
+    type: service
+  - variable: SCHEDULER_PORT
+    description: Port to expose scheduler on.
+    label: Scheduler Port
+    required: true
+    type: int
+    default: 31100
+  - variable: NODE_COUNT
+    description: Number of Elasticsearch instances to run.
+    label: Node Count
+    required: true
+    type: int
+    default: 3
+scheduler:
+  scale: 1
+  health_check:
+    port: ${SCHEDULER_PORT}
+    interval: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: '/'
+    response_timeout: 2000

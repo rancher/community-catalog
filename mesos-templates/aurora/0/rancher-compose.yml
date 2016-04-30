@@ -1,0 +1,31 @@
+.catalog:
+  name: Aurora
+  version: v1
+  description: |
+    Orchestrate long-running services and cron jobs
+  questions:
+  - variable: ZK_SERVICE
+    description: Choose the Zookeeper service to use.
+    label: Zookeeper Service
+    required: true
+    type: service
+  - variable: MESOS_SERVICE
+    description: Choose the Mesos stack to use.
+    label: Mesos Stack
+    required: true
+    type: service
+  - variable: AURORA_HTTP_PORT
+    description: Port to expose Aurora scheduler on.
+    label: Aurora Port
+    required: true
+    type: int
+    default: 8080
+aurora:
+  scale: 1
+  health_check:
+    port: ${AURORA_HTTP_PORT}
+    interval: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: '/'
+    response_timeout: 2000
