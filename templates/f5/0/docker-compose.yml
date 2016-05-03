@@ -1,0 +1,10 @@
+external-lb:
+  image: rancher/external-lb:v0.1.1
+  command: -provider=f5_BigIP
+  expose: 
+   - 1000
+  environment:
+    F5_BIGIP_HOST: ${F5_BIGIP_HOST}
+    F5_BIGIP_USER: ${F5_BIGIP_USER}
+    F5_BIGIP_PWD: ${F5_BIGIP_PWD}
+    LB_TARGET_RANCHER_SUFFIX: ${LB_TARGET_RANCHER_SUFFIX}
