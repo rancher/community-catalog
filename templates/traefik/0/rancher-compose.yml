@@ -1,0 +1,36 @@
+.catalog:
+  name: Traefik
+  version: v1.0.0-beta.555-rancher1
+  description: |
+    (Experimental) Traefik active load balancer.
+  minimum_rancher_version: v0.59.0
+  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  uuid: traefik-0
+  questions:
+    - variable: "http_port"
+      description: "Traefik http public port to listen."
+      label: "Http port:"
+      required: true
+      default: 8080
+      type: "int"
+    - variable: "admin_port"
+      description: "Traefik admin public port to listen."
+      label: "Admin port:"
+      required: true
+      default: 8000 
+      type: "string"
+    - variable: "refresh_interval"
+      description: "Interval to poll/apply configuration changes." 
+      label: "Refresh Interval (s):"
+      required: true
+      default: 60 
+      type: "int"
+traefik:
+  retain_ip: true
+  health_check:
+    port: ${admin_port}
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET /dashboard/# HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 5000
