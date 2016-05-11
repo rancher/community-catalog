@@ -1,0 +1,16 @@
+.catalog:
+  name: "Etcd"
+  version: "2.3.3-rancher1"
+  description: |
+    Distributed highly-available key-value store
+  minimum_rancher_version: "v0.46.0"
+  questions:
+    - variable: "REPLICAS"
+      description: "Number of Etcd nodes. 3, 5, or 7 are good choices"
+      label: "Number of Nodes:"
+      required: true
+      default: 3
+      type: "int"
+etcd:
+  retain_ip: true
+  scale: ${REPLICAS}
