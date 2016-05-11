@@ -1,5 +1,6 @@
 etcd:
-  image: rancher/etcd:v2.3.0
+  image: rancher/etcd:v2.3.3
+  command: node ${REPLICAS}
   labels:
     io.rancher.sidekicks: data
     # try not to schedule etcd nodes on the same host
@@ -25,13 +26,13 @@ data:
 # Discovery containers are used for bootstrapping a cluster.
 # They will shutdown once this process is completed.
 etcd-discovery:
-  image: rancher/etcd:v2.3.0
+  image: rancher/etcd:v2.3.3
   command: discovery_node
   labels:
     io.rancher.container.start_once: 'true'
     io.rancher.sidekicks: bootstrap
 bootstrap:
-  image: rancher/etcd:v2.3.0
+  image: rancher/etcd:v2.3.3
   command: bootstrap ${REPLICAS}
   links:
     - etcd-discovery
