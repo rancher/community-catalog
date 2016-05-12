@@ -1,4 +1,4 @@
-# Galera Cluser (Experimental)
+# Galera Cluster (Experimental)
 
 ### Info:
 
