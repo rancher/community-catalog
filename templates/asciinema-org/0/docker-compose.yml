@@ -1,0 +1,39 @@
+asciinema-org:  
+  image: 'asciinema/asciinema.org:latest'
+  links:
+    - postgres
+    - redis
+  restart: always
+  ports:
+    - ${port}:3000
+  environment:
+    HOST: ${host}:${port}
+    DATABASE_URL: postgresql://postgres:${postgres_password}@postgres/asciinema
+    REDIS_URL: redis://redis:6379
+    RAILS_ENV: development
+
+postgres:
+  image: 'postgres:latest'
+  ports:
+    - 5432:5432
+  environment:
+    POSTGRES_PASSWORD: ${postgres_password}
+  container_name: postgres
+
+redis:
+  image: 'redis:latest'
+  ports:
+    - 6379:6379
+  container_name: redis
+
+sidekiq:
+  image: 'asciinema/asciinema.org:latest'
+  links:
+    - postgres
+    - redis
+  command: 'ruby start_sidekiq.rb'
+  environment:
+    HOST: ${host}:${port}
+    DATABASE_URL: postgresql://postgres:${postgres_password}@postgres/asciinema
+    REDIS_URL: redis://redis:6379
+    RAILS_ENV: development

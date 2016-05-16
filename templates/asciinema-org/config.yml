@@ -1,0 +1,6 @@
+name: asciinema-org
+description: |
+  Asciinema is a free and open source solution for recording terminal sessions and sharing them on the web.
+version: 0.1-rancher1
+category: Applications
+license: AGPL v3
