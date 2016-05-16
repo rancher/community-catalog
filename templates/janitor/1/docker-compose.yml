@@ -8,7 +8,7 @@ cleanup:
   labels:
      io.rancher.scheduler.global: "true"
      io.rancher.scheduler.affinity:host_label_ne: "${EXCLUDE_LABEL}"
-  privileged: true
+  net: none
   tty: false
   stdin_open: false
   volumes:
