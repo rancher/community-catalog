@@ -1,0 +1,7 @@
+name: Sematext Docker Agent
+description: |
+  Sematext Docker Agent collects Metrics, Events and Logs from the Docker API
+version: 1.29.43
+category: Monitoring
+maintainer: "Stefan Thies <stefan.thies@sematext.com>"
+license: APACHE 2.0

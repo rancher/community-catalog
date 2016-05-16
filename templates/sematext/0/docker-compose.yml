@@ -1,0 +1,10 @@
+sematext-agent:  
+  image: 'sematext/sematext-agent-docker:latest'
+  environment:
+    - LOGSENE_TOKEN=${logsene_token}
+    - SPM_TOKEN=${spm_token}
+  restart: always
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  labels:
+    io.rancher.scheduler.global: ${global_service}

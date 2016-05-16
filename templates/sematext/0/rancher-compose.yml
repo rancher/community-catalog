@@ -1,0 +1,16 @@
+.catalog:
+  name: "Sematext Docker Agent"
+  version: "1.29.43"
+  description: "Sematext Docker Agent"
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: "spm_token"
+      label: "SPM Token"
+      description: "Your SPM Application Token"
+      required: true
+      type: "string"
+    - variable: "logsene_token"
+      label: "Logsene Token"
+      description: "Your Logsene Application Token"
+      required: true
+      type: "string"
