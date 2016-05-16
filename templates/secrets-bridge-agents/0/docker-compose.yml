@@ -1,0 +1,10 @@
+secrets-bridge:
+    image: rancher/secrets-bridge:v0.0.2
+    command: agent --bridge-url ${BRIDGE_URL}
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    labels:
+        io.rancher.container.create_agent: true
+        io.rancher.container.agent.role: agent
+        io.rancher.scheduler.global: true

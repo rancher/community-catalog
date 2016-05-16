@@ -1,0 +1,18 @@
+secrets-bridge:
+    image: rancher/secrets-bridge:v0.0.2
+    environment:
+        CATTLE_ACCESS_KEY: ${CATTLE_ACCESS_KEY}
+        CATTLE_SECRET_KEY: ${CATTLE_SECRET_KEY}
+        CATTLE_URL: ${CATTLE_URL}
+        VAULT_TOKEN: ${VAULT_TOKEN}
+        VAULT_CUBBYPATH: ${VAULT_CUBBYPATH}
+    command: 
+        - server
+        - --vault-url
+        - ${VAULT_URL}
+        - --rancher-url
+        - $CATTLE_URL
+        - --rancher-secret
+        - ${CATTLE_SECRET_KEY}
+        - --rancher-access
+        - ${CATTLE_ACCESS_KEY}

@@ -1,0 +1,4 @@
+name: "Secrets Bridge"
+description: "Server side of bridge between Vault and Rancher"
+version: "0.0.1-rancher1"
+category: Security
