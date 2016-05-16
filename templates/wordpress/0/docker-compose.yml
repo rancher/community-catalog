@@ -3,7 +3,7 @@ wordpress:
   links:
     - db:mysql
   ports:
-    - 80:80
+    - ${public_port}:80
 
 db:
   image: mariadb
