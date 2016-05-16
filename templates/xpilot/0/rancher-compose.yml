@@ -1,0 +1,29 @@
+.catalog:
+  name: "XPilot"
+  version: "v0.1"
+  description: "Multiplayer shooting game"
+  uuid: xpilot-0
+  questions: 
+    - variable: "PASSWORD"
+      label: "Password"
+      description: "Administration password for the server"
+      default: password
+      required: true
+      type: "password"
+    - variable: "DISPLAY"
+      label: "Display"
+      description: "Enter the identifier for your XWindows display.  This will usually be your workstation name or IP address, followed by :0"
+      default: 1.2.3.4:0
+      required: true
+      type: "string"
+    - variable: "NAME"
+      label: "Player Name"
+      description: "Name for the player's ship.  This must be unique."
+      default: player
+      required: true
+      type: "string"
+server:
+  scale: 1
+client:
+  scale: 1
+

@@ -49,8 +49,8 @@ as defined in the template options.
 ## Access
 
 The template will create a Load Balancer for access to the Registry and
-to the Web Admin interface.  This will run on all Hosts with the label 
-LB=1, listening on the defined ports.
+to the Web Admin interface.  This will run on all Hosts without the label 
+LB=0, listening on the defined ports.
 
 To access the web UI, use https on the hostname and port you configured.
 

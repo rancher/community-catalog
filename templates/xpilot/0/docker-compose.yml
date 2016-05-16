@@ -1,0 +1,29 @@
+server:
+  environment:
+    PASSWORD: ${PASSWORD}
+  log_driver: ''
+  command:
+  - -server
+  log_opt: {}
+  tty: false
+  stdin_open: false
+  image: sshipway/xpilot:latest
+  labels:
+    xpilot: server
+client:
+  environment:
+    DISPLAY: ${DISPLAY}
+    NAME: ${NAME}
+    SERVER: xpilot
+  log_driver: ''
+  command:
+  - xpilot
+  log_opt: {}
+  image: sshipway/xpilot:latest
+  links:
+  - server:xpilot
+  tty: false
+  stdin_open: false
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft: xpilot=server
+    io.rancher.container.start_once: 'true'
