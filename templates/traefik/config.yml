@@ -1,0 +1,8 @@
+name: Traefik
+description: |
+  (Experimental) Traefik active load balancer
+version: v1.0.0-beta.555-rancher1
+category: Load Balancing
+maintainer: "Raul Sanchez <rawmind@gmail.com>"
+minimum_rancher_version: v0.59.0
+license: 
