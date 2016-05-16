@@ -1,0 +1,56 @@
+.catalog:
+  name: "Liferay"
+  version: "6.2.5-1"
+  description: "Liferay Portal Community Edition"
+  uuid: liferay-6.2.5-1
+  minimum_rancher_version: v1.0.0
+  questions:
+    - variable: SETUP_WIZARD_ENABLED
+      label: "Enable setup wizard"
+      description: "Enable this option if the Setup Wizard should be displayed the first time the portal is started."
+      required: true
+      type: "boolean"
+      default: false
+    - variable: MYSQL_DATABASE
+      description: "Name of the database"
+      label: "Database name"
+      type: "string"
+      required: true
+      default: "lportal"
+    - variable: MYSQL_USER
+      description: "Login name for the database user"
+      label: "Database login name"
+      type: "string"
+      required: true
+      default: "liferay"
+    - variable: MYSQL_PASSWORD
+      description: "Password for the database user"
+      label: "Database password"
+      type: "string"
+      required: true
+      default: "secret"
+    - variable: MYSQL_ROOT_PASSWORD
+      description: "Password for the database root user"
+      label: "Database root password"
+      type: "string"
+      required: true
+      default: "secret"
+
+liferay:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000
+
+mysql:
+  scale: 1
+  health_check:
+    port: 3306
+    interval: 2000
+    unhealthy_threshold: 3
+    response_timeout: 2000
+    healthy_threshold: 2

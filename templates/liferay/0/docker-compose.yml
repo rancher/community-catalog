@@ -1,0 +1,34 @@
+liferay:
+  ports:
+  - 8080:8080/tcp
+  environment:
+    SETUP_WIZARD_ENABLED: ${SETUP_WIZARD_ENABLED}
+    DB_KIND: mysql
+    DB_HOST: liferaydb
+    DB_USERNAME: ${MYSQL_USER}
+    DB_PASSWORD: ${MYSQL_PASSWORD}
+  log_driver: ''
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  log_opt: {}
+  image: rsippl/liferay:6.2.5-1
+  links:
+  - mysql:liferaydb
+  stdin_open: true
+mysql:
+  environment:
+    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    MYSQL_DATABASE: ${MYSQL_DATABASE}
+    MYSQL_USER: ${MYSQL_USER}
+    MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  log_driver: ''
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  command:
+  - --character-set-server=utf8
+  - --collation-server=utf8_general_ci
+  log_opt: {}
+  image: mysql:5.6.30
+  stdin_open: true
