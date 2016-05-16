@@ -1,0 +1,41 @@
+pxc-clustercheck:
+  image: flowman/percona-xtradb-cluster-clustercheck:v2.0
+  net: "container:pxc"
+  labels:
+    io.rancher.container.hostname_override: container_name
+  volumes_from:
+    - 'pxc-data'    
+pxc-server:
+  image: flowman/percona-xtradb-cluster:5.6.28-1
+  net: "container:pxc"
+  environment:
+    MYSQL_ROOT_PASSWORD: "${mysql_root_password}"
+    PXC_SST_PASSWORD: "${pxc_sst_password}"
+    MYSQL_DATABASE: "${mysql_database}"
+    MYSQL_USER: "${mysql_user}"
+    MYSQL_PASSWORD: "${mysql_password}"    
+  labels:
+    io.rancher.container.hostname_override: container_name
+  volumes_from:
+    - 'pxc-data'
+  entrypoint: bash -x /opt/rancher/start_pxc
+pxc-data:
+  image: flowman/percona-xtradb-cluster:5.6.28-1
+  net: none
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  volumes:
+    - /var/lib/mysql
+    - /etc/mysql/conf.d
+    - /docker-entrypoint-initdb.d
+  command: /bin/true
+  labels:
+    io.rancher.container.start_once: true    
+pxc:
+  image: flowman/percona-xtradb-cluster-confd:v0.2.0
+  labels:
+    io.rancher.sidekicks: pxc-clustercheck,pxc-server,pxc-data
+    io.rancher.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+  volumes_from:
+    - 'pxc-data'

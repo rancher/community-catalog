@@ -1,0 +1,57 @@
+.catalog:
+  name: "Percona XtraDB Cluster"
+  version: 5.6.28-rancher1
+  description: |
+    Percona XtraDB Cluster 5.6.28
+  questions:
+    - variable: "mysql_root_password"
+      type: string
+      required: true
+      label: "MySQL Root Password"
+      description: "Password given to the root mysql user"
+      default: "password"
+    - variable: "pxc_sst_password"
+      type: string
+      required: true
+      label: "PXC SST Password"
+      description: "Password given to the sst mysql user"   
+      default: "password"   
+    - variable: "mysql_database"
+      type: string
+      required: false
+      label: "MySQL Database Name"
+      description: "MySQL database to create"
+    - variable: "mysql_user"
+      type: string
+      required: false
+      description: "MySQL user for the created database"
+      label: "MySQL DB User"
+    - variable: "mysql_password"
+      type: string
+      required: false
+      label: "MySQL DB Password"
+      description: "Password for the MySQL user of the created database"
+pxc:
+  scale: 3
+  health_check:
+    port: 8000
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: none
+    request_line: GET / HTTP/1.1
+    healthy_threshold: 2
+    response_timeout: 2000  
+  metadata:
+    mysqld: |
+      innodb_buffer_pool_size=512M
+      innodb_doublewrite=0
+      innodb_flush_log_at_trx_commit=0
+      innodb_file_per_table=1
+      innodb_log_file_size=128M
+      innodb_log_buffer_size=64M
+      innodb_support_xa=0
+      query_cache_size=0
+      query_cache_type=0
+      sync_binlog=0
+      max_connections=1000
+      wsrep_sst_auth=sstuser:${pxc_sst_password}
