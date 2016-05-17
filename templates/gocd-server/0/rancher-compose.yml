@@ -7,6 +7,12 @@
   minimum_rancher_version: v0.59.0
   uuid: goserver-0
   questions:
+    - variable: public_port
+      description: "public port to access the gocd server"
+      label: "Public Port"
+      required: true
+      default: "8153"
+      type: "int"
     - variable: "mem_initial"
       description: "Initial java memory in Mb"
       label: "Initial memory:"
@@ -25,7 +31,7 @@
       required: true
       default: "/var/lib/docker/go-server-work"
       type: "string"
-    - variable: "volume_driver" 
+    - variable: "volume_driver"
       label: "Driver volume:"
       description: |
         Choose the volume driver to use.
