@@ -4,16 +4,6 @@
   description: |
     A high-throughput distributed messaging system
   questions:
-  - variable: ZK_SERVICE
-    description: Choose the Zookeeper service to use.
-    label: Zookeeper Service
-    required: true
-    type: service
-  - variable: MESOS_SERVICE
-    description: Choose the Mesos stack to use.
-    label: Mesos Stack
-    required: true
-    type: service
   - variable: SCHEDULER_PORT
     description: Port to expose Kafka Scheduler on.
     label: Scheduler Port

@@ -4,17 +4,6 @@
   description: |
     Container orchestration platform for Mesos and DCOS
   questions:
-  - variable: ZK_SERVICE
-    description: Choose the Zookeeper service to use.
-    label: Zookeeper Service
-    required: true
-    type: service
-  # a stack type would be nice
-  - variable: MESOS_SERVICE
-    description: Choose the Mesos stack to use.
-    label: Mesos Stack
-    required: true
-    type: service
   - variable: MARATHON_HTTP_PORT
     description: Port to expose Marathon on.
     label: Marathon Port
