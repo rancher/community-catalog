@@ -6,5 +6,4 @@ marathon:
     MARATHON_HTTP_PORT: ${MARATHON_HTTP_PORT}
   ports:
   - "${MARATHON_HTTP_PORT}:${MARATHON_HTTP_PORT}"
-  cap_add:
-  - NET_ADMIN
+  privileged: true
