@@ -6,3 +6,4 @@ scheduler:
     SCHEDULER_PORT: ${SCHEDULER_PORT}
   ports:
   - "${SCHEDULER_PORT}:${SCHEDULER_PORT}"
+  privileged: true

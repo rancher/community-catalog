@@ -8,3 +8,4 @@ scheduler:
   - "/var/run/docker.sock:/var/run/docker.sock"
   ports:
   - "${AURORA_HTTP_PORT}:${AURORA_HTTP_PORT}"
+  privileged: true
