@@ -1,8 +1,8 @@
 scheduler:
   image: rancher/aurora:latest
   environment:
-    ZK_SERVICE: ${ZK_SERVICE}
-    MESOS_SERVICE: ${MESOS_SERVICE}
+    ZK_SERVICE: Mesos/zookeeper
+    MESOS_SERVICE: Mesos/mesos-master
     AURORA_HTTP_PORT: ${AURORA_HTTP_PORT}
   volumes:
   - "/var/run/docker.sock:/var/run/docker.sock"

@@ -1,8 +1,8 @@
 scheduler:
   image: rancher/elasticsearch:latest
   environment:
-    MESOS_SERVICE: ${MESOS_SERVICE}
-    ZK_SERVICE: ${ZK_SERVICE}
+    ZK_SERVICE: Mesos/zookeeper
+    MESOS_SERVICE: Mesos/mesos-master
     SCHEDULER_PORT: ${SCHEDULER_PORT}
     JAVA_OPTS: -Xms256M -Xmx256M
     NODE_COUNT: ${NODE_COUNT}

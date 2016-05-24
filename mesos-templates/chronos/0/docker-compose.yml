@@ -1,8 +1,8 @@
 chronos:
   image: rancher/chronos:latest
   environment:
-    MESOS_SERVICE: ${MESOS_SERVICE}
-    ZK_SERVICE: ${ZK_SERVICE}
+    ZK_SERVICE: Mesos/zookeeper
+    MESOS_SERVICE: Mesos/mesos-master
     CHRONOS_HTTP_PORT: ${CHRONOS_HTTP_PORT}
   ports:
   - "${CHRONOS_HTTP_PORT}:${CHRONOS_HTTP_PORT}"
