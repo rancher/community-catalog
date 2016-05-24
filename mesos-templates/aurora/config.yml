@@ -1,7 +1,0 @@
-name: Aurora
-description: |
-  Orchestrate long-running services and cron jobs
-version: v1
-category: Frameworks
-maintainer: James Oliver <joliver@rancher.com>
-minimum_rancher_version: v1.0.0
