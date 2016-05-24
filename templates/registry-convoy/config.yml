@@ -1,0 +1,7 @@
+name: Registry-Convoy
+description: |
+  Secure Docker registry using Convoy.  Web based administration.  Optional LDAP authentication.
+version: v2.3.1-3.1
+category: Applications
+maintainer: Steve Shipway <s.shipway@auckland.ac.nz>
+
