@@ -7,4 +7,4 @@ sematext-agent:
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
   labels:
-    io.rancher.scheduler.global: ${global_service}
+    io.rancher.scheduler.global: 'true'

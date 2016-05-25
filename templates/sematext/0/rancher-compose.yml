@@ -1,6 +1,6 @@
 .catalog:
   name: "Sematext Docker Agent"
-  version: "1.29.43"
+  version: "1.29.44"
   description: "Sematext Docker Agent"
   minimum_rancher_version: v0.46.0
   questions:
