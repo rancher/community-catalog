@@ -28,9 +28,4 @@
       default: "*:*"
       required: false
       type: "string"
-    - variable: "PRIVILEGED_MODE"
-      label: "Run janitor in privileged mode"
-      description: "In hardened environments containers must be privileged to access the bind-mounted unix:///var/run/docker.sock. This is not the default case."
-      default: false
-      required: true
-      type: "boolean"
+
