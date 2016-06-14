@@ -9,6 +9,12 @@
       type: "string"
       required: true
       default: "es"
+    - variable: "kopf_port"
+      label: "Public Port"
+      description: "Unique public port for kopf"
+      type: "int"
+      default: 80
+      required: true
 elasticsearch-masters:
   metadata:
     elasticsearch:

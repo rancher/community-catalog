@@ -98,7 +98,7 @@ elasticsearch-base-clients:
 kopf:
   image: rancher/kopf:v0.4.0
   ports:
-    - "80:80"
+    - "${kopf_port}:80"
   environment:
     KOPF_SERVER_NAME: 'es.dev'
     KOPF_ES_SERVERS: 'es-clients:9200'

@@ -1,6 +1,6 @@
 kibana-vip:
   ports:
-  - 80:80
+  - "${public_port}:80"
   restart: always
   tty: true
   image: rancher/load-balancer-service
