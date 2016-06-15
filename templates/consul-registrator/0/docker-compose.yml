@@ -46,7 +46,7 @@ consul:
   environment:
     CONSUL_LOCAL_CONFIG: "{\"leave_on_terminate\": true}"
     CONSUL_BIND_INTERFACE: eth0
-  volumes_form:
+  volumes_from:
     - consul-data
   log_opt: {}
   image: consul:v0.6.4
