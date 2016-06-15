@@ -3,6 +3,8 @@ etcd:
   labels:
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.sidekicks: data
+    io.rancher.service.allocate.skip.serialize: 'true'
+    io.rancher.container.start_once: 'true'
   environment:
     ETCD_DATA_DIR: /data
     ETCDCTL_ENDPOINT: http://etcd:2379

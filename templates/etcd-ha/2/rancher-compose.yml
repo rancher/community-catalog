@@ -12,7 +12,6 @@
       default: 3
       type: "int"
 etcd:
-  retain_ip: true
   scale: ${REPLICAS}
   health_check:
     port: 2379
