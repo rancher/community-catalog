@@ -1,0 +1,31 @@
+fbctf:  
+  image: 'qazbnm456/dockerized_fbctf:multi_containers'
+  links:
+    - mysql
+    - memcached
+  restart: always
+  ports:
+    - ${http_port}:80
+    - ${https_port}:443
+  environment:
+    MYSQL_HOST: mysql
+    MYSQL_PORT: 3306
+    MYSQL_DATABASE: ${mysql_database}
+    MYSQL_USER: ${mysql_user}
+    MYSQL_PASSWORD: ${mysql_password}
+    MEMCACHED_PORT: 11211
+    SSL_SELF_SIGNED: ${ssl}
+
+mysql:
+  image: 'mysql:5.5'
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: ${mysql_user}
+    MYSQL_PASSWORD: ${mysql_password}
+  container_name: mysql
+
+memcached:
+  image: 'memcached:latest'
+  restart: always
+  container_name: memcached

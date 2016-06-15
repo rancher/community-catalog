@@ -1,0 +1,39 @@
+.catalog:
+  name: "fbctf"
+  version: "0.1-beta-rancher1"
+  description: "(Experimental) The Facebook CTF is a platform to host Jeopardy and “King of the Hill” style Capture the Flag competitions."
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: "http_port"
+      label: "HTTP PORT"
+      description: "Your HTTP Listen Port"
+      required: true
+      type: "string"
+      default: 80
+    - variable: "https_port"
+      label: "HTTPS PORT"
+      description: "Your HTTPS Listen Port"
+      required: false
+      type: "string"
+    - variable: "ssl"
+      label: "SSL"
+      description: "SSL Termination Option"
+      required: true
+      type: "string"
+      default: true
+    - variable: "mysql_database"
+      label: "MYSQL DATABASE"
+      description: "Your Mysql DATABASE"
+      required: true
+      type: "string"
+      default: fbctf
+    - variable: "mysql_user"
+      label: "MYSQL USER"
+      description: "Your Mysql User"
+      required: true
+      type: "string"
+    - variable: "mysql_password"
+      label: "MYSQL PASSWORD"
+      description: "Your Mysql Password"
+      required: true
+      type: "string"

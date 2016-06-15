@@ -1,0 +1,7 @@
+name: fbctf
+description: |
+  (Experimental) The Facebook CTF is a platform to host Jeopardy and “King of the Hill” style Capture the Flag competitions.
+version: 0.1-beta-rancher1
+category: Applications
+maintainer: "Lobsiinvok Su <lobsiinvok@tdohacker.org>"
+license: CC BY-NC 4.0
