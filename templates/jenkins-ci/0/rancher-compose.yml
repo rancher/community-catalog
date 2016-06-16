@@ -4,26 +4,32 @@
   description: |
     Jenkins CI management server.
   questions:
-    - variable: "plugins"
-      type: "multiline"
-      label: "List of Plugins"
-      description: |
-        List of plugins in the format <plugin_name>[:<version>]
-        one entry per line.
-      default: |
-        credentials
-        greenballs
-        git
-        junit
-        git-client
-        github-api
-        github-oauth
-        github
-        plain-credentials
-        scm-api
-        ssh-credentials
-        ssh-slaves
-        swarm
+  - variable: "PORT"
+    type: "int"
+    label: "Port Number"
+    description: "Which port should Jenkins listen on?"
+    default: 8080
+    required: true
+  - variable: "plugins"
+    type: "multiline"
+    label: "List of Plugins"
+    description: |
+      List of plugins in the format <plugin_name>[:<version>]
+      one entry per line.
+    default: |
+      credentials
+      greenballs
+      git
+      junit
+      git-client
+      github-api
+      github-oauth
+      github
+      plain-credentials
+      scm-api
+      ssh-credentials
+      ssh-slaves
+      swarm
 jenkins-primary:
   metadata:
     plugins: |
