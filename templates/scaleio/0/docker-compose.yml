@@ -1,0 +1,42 @@
+tb:
+  privileged: true
+  volumes:
+   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  image: wlan0/tb
+  labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+
+sds:
+  privileged: true
+  volumes:
+   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  image: wlan0/sds
+  labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.container.pull_image: always
+
+mdm:
+  privileged: true
+  volumes:
+   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+   - /dev/shm:/dev/shm
+  image: wlan0/mdm
+  labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/primary_mdm
+      io.rancher.container.pull_image: always
+
+primary-mdm:
+  privileged: true
+  volumes:
+   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+   - /dev/shm:/dev/shm
+  image: wlan0/mdm
+  command: /usr/sbin/init
+  entrypoint: /run_mdm_and_configure.sh
+  labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/mdm
+      io.rancher.container.pull_image: always

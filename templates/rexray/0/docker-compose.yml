@@ -1,0 +1,16 @@
+rexray:
+    image: wlan0/sdc2
+    stdin_open: true
+    tty: true
+    privileged: true
+    net: host
+    environment:
+        STACK_NAME: ${SCALEIO_STACK_NAME}
+        SYSTEM_ID: ${SCALEIO_SYSTEM_ID}
+        MDM_IP:    ${SCALEIO_MDM_IP}
+    volumes:
+        - /proc:/host/proc
+    labels:
+        io.rancher.container.pull_image: always
+        io.rancher.container.dns: true
+        io.rancher.scheduler.affinity:host_label: rexray.scaleio=true
