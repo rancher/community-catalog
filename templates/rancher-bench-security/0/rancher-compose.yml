@@ -1,0 +1,27 @@
+.catalog:
+  name: "rancher-bench-security"
+  version: "1.11.0"
+  minimum_rancher_version: "v0.46.0"
+  questions:
+    # Traefik parameters
+    - variable: "TRAEFIK_DOMAIN"
+      description: "Domain name to route rule. Ignore if you do not use traefik proxy"
+      label: "Traefik domain:"
+      required: true
+      default: "ml.innotechapp.com"
+      type: string
+    #  Service parameters
+    - variable: "INTERVAL"
+      description: "Interval to repeat all the tests"
+      label: "Refresh Interval:"
+      required: true
+      default: 600
+      type: int
+
+web-server:
+  health_check:
+    port: 80
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 1
+    response_timeout: 2000

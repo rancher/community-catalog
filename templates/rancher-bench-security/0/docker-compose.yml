@@ -1,0 +1,34 @@
+rancher-bench-security:
+  image: germanramos/rancher-bench-security:1.11.0
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  net: host
+  pid: host
+  stdin_open: true
+  tty: true
+  volumes:
+    - /var/lib:/var/lib
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/lib/systemd:/usr/lib/systemd
+    - /etc:/etc
+    - /tmp:/tmp
+  environment:
+    - INTERVAL=${INTERVAL}
+
+web-server:
+  image: germanramos/nginx-php-fpm:v5.6.21
+  stdin_open: true
+  tty: true
+  labels:
+    traefik.enable: stack
+    traefik.domain: ${TRAEFIK_DOMAIN}
+    traefik.port: 80
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  volumes:
+    - /tmp/cis:/var/www/html
