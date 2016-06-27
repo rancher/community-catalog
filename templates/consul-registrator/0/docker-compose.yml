@@ -8,7 +8,7 @@ consul-registrator:
   tty: true
   restart: always
   command:
-    - consul://localhost:8500
+    - consul://consul:8500
   log_opt: {}
   image: gliderlabs/registrator:v7
   links:
@@ -16,7 +16,6 @@ consul-registrator:
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
   stdin_open: true
-  net: host
 consul:
   ports:
     - 8300:8300/tcp
