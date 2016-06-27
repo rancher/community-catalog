@@ -1,0 +1,8 @@
+name: Puppet Server 4.x (standalone)
+description: >
+  A very basic Open Source-only Puppet 4.x master for development and testing.
+version: 1.0.0-rancher1
+category: Configuration Management
+maintainer: Nathan Valentine <nathan@rancher.com>
+license: Apache 2
+projectURL: https://github.com/rancher/community-catalog/templates/puppet-standalone

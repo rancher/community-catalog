@@ -1,0 +1,32 @@
+puppet-lb:
+  ports:
+  - ${PUPPET_PORT}:8140/tcp
+  labels:
+    io.rancher.loadbalancer.target.puppet: 8140=${PUPPET_PORT}
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - puppet:puppet
+  stdin_open: true
+
+puppet:
+  hostname: puppet
+  domainname: puppet.rancher.internal
+  labels:
+    io.rancher.sidekicks: puppet-config-volumes
+  image: nrvale0/puppetserver-standalone
+  environment:
+    - CONTROL_REPO_GIT_URI=${CONTROL_REPO_GIT_URI}
+  volumes_from:
+    - puppet-config-volumes
+
+puppet-config-volumes:
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: "true"
+  volumes:
+   - /etc/puppetlabs/ssl
+   - /opt/puppetlabs/r10k/cache
+   - /etc/puppetlabs/code
+  entrypoint: /bin/true
+  image: alpine

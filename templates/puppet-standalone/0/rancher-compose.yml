@@ -1,0 +1,40 @@
+.catalog:
+  name: Puppet Server 4.x (standalone)
+  version: 1.0.0-rancher1
+  description: >
+    A very basic Open Source-only Puppet 4.x master for development and testing.
+  questions:
+
+    - variable: "CONTROL_REPO_GIT_URI"
+      type: "string"
+      description: "The git URI for the Puppet control repo."
+      label: "Puppet control repo URI"
+      required: false
+
+    - variable: "PUPPET_PORT"
+      type: "int"
+      description: "TCP port for Puppet agent's to connect to Puppet master. Default(tcp/8140)"
+      label: "Puppet agent port"
+      required: false
+      default: 8140
+
+puppet-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+puppet:
+  scale: 1
+  health_check:
+    port: 8140
+    interval: 3000
+    unhealthy_threshold: 2
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
