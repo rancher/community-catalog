@@ -67,7 +67,7 @@ grafana:
        - graf-db
     links:
       - prometheus:prometheus
-      - rancher-api-integration:rancher-api-integration
+      - prometheus-rancher-exporter:prometheus-rancher-exporter
 
 prometheus-rancher-exporter:
     tty: true
