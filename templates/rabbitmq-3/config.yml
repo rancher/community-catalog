@@ -1,0 +1,5 @@
+name: RabbitMQ 3.6.1
+description: |
+  Robust messaging for applications 
+version: 0.1.0
+category: Message queues

@@ -1,0 +1,10 @@
+.catalog:
+  name: "Rabbit MQ"
+  version: "0.1.0"
+  decription: A reliable, distributed messaging broker
+rabbitmq:
+  metadata:
+    rabbitmq:
+      config:
+       node.name: "$${HOSTNAME}"
+

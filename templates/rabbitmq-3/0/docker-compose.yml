@@ -1,0 +1,27 @@
+rabbitmq:
+  image: rancher/rabbitmq-conf:v0.1.0
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: rabbitmq-base,rabbitmq-datavolume
+  volumes_from:
+    - rabbitmq-datavolume
+rabbitmq-datavolume:
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  volumes:
+    - /etc/rabbitmq
+    - /opt/rancher/bin
+  entrypoint: /bin/true
+  image: rabbitmq:3.6.1-management
+rabbitmq-base:
+  labels:
+    io.rancher.container.hostname_override: container_name
+  image: rabbitmq:3.6.1-management
+  volumes_from:
+    - rabbitmq-datavolume
+  net: "container:rabbitmq"
+  entrypoint:
+    - /opt/rancher/bin/run.sh
+  environment:
+    - RABBITMQ_ERLANG_COOKIE=secretcookie
