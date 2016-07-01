@@ -1,5 +1,5 @@
 rabbitmq:
-  image: rancher/rabbitmq-conf:v0.1.0
+  image: rdaneel/rabbitmq-conf:0.1.0
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: rabbitmq-base,rabbitmq-datavolume
