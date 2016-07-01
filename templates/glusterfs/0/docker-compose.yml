@@ -40,6 +40,7 @@ glusterfs-data:
   volumes:
     - /var/run
     - /var/lib/glusterd
+    - /data/glusterfs/brick1
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
