@@ -4,6 +4,12 @@
   description: "Sematext Docker Agent"
   minimum_rancher_version: v0.46.0
   questions:
+    - variable: "image_version"
+      label: "Image version tag"
+      description: "default 'latest'"
+      default: "latest"
+      required: true
+      type: "string"
     - variable: "spm_token"
       label: "SPM Token"
       description: "Your SPM Application Token"
@@ -14,3 +20,59 @@
       description: "Your Logsene Application Token"
       required: true
       type: "string"
+    - variable: "geoip_enabled"
+      label: "Enable Geo IP"
+      description: "Enable Geo IP lookups and updaes for maxmind geoip-lite database"
+      required: false
+      default: "false"
+      type: "enum"
+      options:
+        - "false"
+        - "true"
+    - variable: "match_by_name"
+      label: "Collect logs only from containers matching the container name."
+      description: "Regular expression, e.g. nginx|mongo"
+      required: false
+      type: "string"
+    - variable: "match_by_image"
+      label: "Collect logs only from containers matching the image name"
+      description: "Regular expression, e.g. nginx|mongo"
+      required: false
+      type: "string"
+    - variable: "skip_by_name"
+      label: "Exclude logs from containers matching the container name"
+      description: "Regular expression, e.g. nginx|mongo"
+      required: false
+      type: "string"
+    - variable: "skip_by_image"
+      label: "Exclude logs from containers matching the image name"
+      description: "Regular expression, e.g. nginx|mongo"
+      required: false
+      type: "string"
+    - variable: "http_proxy"
+      label: "HTTP Proxy"
+      description: "Proxy url, when the agent runs behind a firewall e.g. http://myproxy:9090"
+      required: false
+      type: "string"
+    - variable: "https_proxy"
+      label: "HTTPS Proxy"
+      description: "Secure Proxy url, when the agent runs behind a firewall e.g. https://myproxy:9090"
+      required: false
+      type: "string"
+    - variable: "kubernetes"
+      label: "Tag logs with Kuberntes metadata"
+      description: "Enable/disable tagging of logs with namespace, pod, UID, container name, ..."
+      required: false
+      default: "0"
+      type: "enum"
+      options:
+        - 0
+        - 1
+    - variable: "logagent_patterns"
+      label: "Custom pattern definitions for log parsing."
+      type: "multiline"
+      required: false
+    
+
+
+        

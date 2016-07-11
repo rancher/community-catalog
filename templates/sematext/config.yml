@@ -1,6 +1,6 @@
 name: Sematext Docker Agent
 description: |
-  Sematext Docker Agent - Performance Monitoring. Collection of Metrics, Events and Logs. 
+  Performance Monitoring and Log Management. Collection of Metrics, Events and Logs. 
 version: 1.29.44
 category: Monitoring
 maintainer: "Stefan Thies <stefan.thies@sematext.com>"
