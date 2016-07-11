@@ -35,7 +35,7 @@ prometheus:
     links:
       - ranch-eye:ranch-eye
       - node-exporter:node-exporter
-      - rancher-api-integration:rancher-api-integration
+      - prometheus-rancher-exporter:prometheus-rancher-exporter
 
 influxdb:
   image: tutum/influxdb:0.10
