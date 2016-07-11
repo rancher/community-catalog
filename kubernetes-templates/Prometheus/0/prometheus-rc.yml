@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: prometheus-rc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+  template:
+    metadata:
+      labels: 
+        name: prometheus
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: infracloud/prometheus
+        command: 
+          - /bin/prometheus
+          - -alertmanager.url=http://alertmanager:9093 
+          - -config.file=/etc/prometheus/prometheus.yml 
+          - -storage.local.path=/prometheus -web.console.libraries=/etc/prometheus/console_libraries 
+          - -web.console.templates=/etc/prometheus/consoles
+        imagePullPolicy: Always
+        name: prometheus
+        ports:
+        - containerPort: 9090

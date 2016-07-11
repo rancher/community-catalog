@@ -1,0 +1,77 @@
+.catalog:
+  name: "Prometheus"
+  version: "1.1.0"
+  description: "Prometheus Monitoring Solution"
+  uuid: prometheus-1
+  minimum_rancher_version: v0.56.0
+  questions:
+    - variable: "cattle_config_url"
+      label: "Rancher Server URL"
+      required: true
+      default: "http://127.0.0.1:8080/v1"
+      type: "string"
+    - variable: "cattle_access_key"
+      label: "Rancher Environement Access Key"
+      required: true
+      default: "349CE0C4418D09F1D4AC"
+      type: "string"
+    - variable: "cattle_secret_key"
+      label: "Rancher Environement Secret Key"
+      required: true
+      default: "HdhPUKDhUCzGVyrFHW1UJ1thc5LFtfkYVH4Ge8QL"
+      type: "string"
+    - variable: "host_ip"
+      label: "Host IP for Rancher Agent"
+      required: true
+      default: "127.0.0.1"
+      type: "string"
+
+ranch-eye:
+  upgrade_strategy:
+    start_first: true
+
+node-exporter:
+  upgrade_strategy:
+    start_first: true
+
+prometheus:
+  scale: 1
+  health_check:
+    port: 9090
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+influxdb:
+  scale: 1
+  health_check:
+    port: 8086
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+grafana:
+  scale: 1
+  health_check:
+    port: 3000
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+prometheus-rancher-exporter:
+  scale: 1
+  upgrade_strategy:
+    start_first: true
+  health_check:
+    port: 9010
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000

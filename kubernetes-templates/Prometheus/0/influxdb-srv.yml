@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+  namespace: "default"
+spec:
+  type: NodePort
+  ports:
+  - port: 8083
+    protocol: TCP
+    name: idb-1
+  - port: 8086
+    protocol: TCP
+    name: idb-2
+  - port: 8090
+    protocol: TCP
+    name: idb-3
+  - port: 2003
+    protocol: TCP
+    name: idb-4
+  selector:
+    name: influxdb

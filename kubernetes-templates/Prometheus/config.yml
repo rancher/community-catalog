@@ -1,0 +1,4 @@
+name: "Prometheus"
+description: "Prometheus and friends, auto-discovering monitoring solution for Rancher deployments"
+version: "1.1.0"
+category: "Monitoring"

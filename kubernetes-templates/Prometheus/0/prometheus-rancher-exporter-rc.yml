@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: prometheus-rancher-exporter-rc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+  template:
+    metadata:
+      labels: 
+        name: prometheus-rancher-exporter
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: infinityworks/prometheus-rancher-exporter:04
+        imagePullPolicy: Always
+        name: prometheus-rancher-exporter
+        ports:
+        - containerPort: 9010
+        env:
+        - name: CATTLE_ACCESS_KEY
+          value: "${cattle_access_key}"
+        - name: CATTLE_SECRET_KEY
+          value: "${cattle_secret_key}"
+        - name: CATTLE_CONFIG_URL
+          value: "${cattle_config_url}"

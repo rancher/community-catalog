@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+  name: node-exporter-rc
+  namespace: default
+spec:
+  replicas: 1
+  
+  template:
+    metadata:
+      labels: 
+        name: node-exporter
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: prom/node-exporter:latest
+        imagePullPolicy: Always
+        name: node-exporter
+
+

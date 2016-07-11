@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+  name: influxdb-rc
+  namespace: default
+spec:
+  replicas: 1
+  
+  template:
+    metadata:
+      labels: 
+        name: influxdb
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: tutum/influxdb:0.10
+        imagePullPolicy: Always
+        name: influxdb
+        env:
+          - name: PRE_CREATE_DB
+            value: grafana;prometheus;rancher
+          - name: GRAPHITE_DB
+            value: rancher
+          - name: GRAPHITE_BINDING
+            value: :2003

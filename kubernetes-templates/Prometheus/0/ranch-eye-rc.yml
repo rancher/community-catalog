@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    io.rancher.scheduler.global: "true"
+    io.rancher.container.dns: "true"
+  name: ranch-eye-rc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+  template:
+    metadata:
+      labels: 
+        name: ranch-eye
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: infracloud/ranch-eye
+        imagePullPolicy: Always
+        name: ranch-eye
+        env:
+        - name: CADVISOR_HOST_IP
+          value: "${host_ip}"
+
+

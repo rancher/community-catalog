@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: grafana-rc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+  template:
+    metadata:
+      labels: 
+        name: grafana
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: infracloud/grafana
+        imagePullPolicy: Always
+        name: grafana

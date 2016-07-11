@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-exporter
+  namespace: "default"
+spec:
+
+  ports:
+  - name: "node-exporter"
+    port: 9100
+    protocol: TCP
+  selector:
+    name: node-exporter
