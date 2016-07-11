@@ -5,7 +5,6 @@ sentry-postgres:
     PGDATA: /data/postgres/data
   log_driver: ''
   labels:
-    io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: always
   tty: true
   log_opt: {}
@@ -21,7 +20,6 @@ sentry-cron:
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
   log_driver: ''
   labels:
-    io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: always
   tty: true
   command:
@@ -36,7 +34,6 @@ sentry-cron:
 sentry-redis:
   log_driver: ''
   labels:
-    io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: always
   tty: true
   log_opt: {}
@@ -54,7 +51,6 @@ sentry:
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
   log_driver: ''
   labels:
-    io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: always
   tty: true
   command:
