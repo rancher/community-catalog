@@ -1,0 +1,49 @@
+.catalog:
+  name: Datadog
+  version: 11.0.580-rancher1
+  description: Real-time performance tracking and visualization of your container-based application deployment
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: api_key
+      label: Datadog Api Key
+      description: Your Datadog API key
+      required: true
+      type: string
+    - variable: global_service
+      label: Global Service
+      description: |
+        Enable this option to capture system and Docker metrics environment-wide.
+        One instance of the Datadog Agent container will be started on every host.
+      required: true
+      type: boolean
+      default: true
+    - variable: host_labels
+      label: Map Host Labels to Datadog Tags
+      description: |
+        Comma delimited list of host labels to map to Datadog key:value tags.
+        Example: 'region, instancetype'
+      required: false
+      type: string
+    - variable: container_labels
+      label: Map Container Labels to Datadog Tags
+      description: |
+        Comma delimited list of service labels to map to Datadog key:value tags.
+        'io.rancher.stack.name' and 'io.rancher.stack_service.name' are enabled by default.
+        Example: 'app, tier'
+      required: false
+      type: string
+    - variable: statsd_standalone
+      label: Standalone StatsD
+      description: |
+        Enable this option to run just the DogStatsD daemon without the full agent.
+        The daemon aggregates and forwards StatsD metrics received on port 8125/udp.
+        You probably want to disable the Global Service option with this.
+      required: true
+      type: boolean
+      default: false
+    - variable: statsd_namespace
+      label: StatsD Metric Namespace
+      description: |
+        Optional namespace for aggregated StatsD metrics.
+      required: false
+      type: string
