@@ -1,8 +1,10 @@
-# Datadog Agent & DogStatsD
+# DataDog Agent
 
-This template deploys a Datadog Agent stack consisting of the official [docker-dd-agent image](https://www.github.com/Datadog/docker-dd-agent) and a sidekick config volume with a custom entrypoint script for improved integration with the Rancher Cattle environment:
+This template deploys a [DataDog](https://www.datadoghq.com/) agent stack consisting of the official [docker-dd-agent](https://www.github.com/Datadog/docker-dd-agent) image and a configuration sidekick that provides closer integration with Rancher:
 
-* Reports the actual name of the host instead of the container's hostname
-* Let's you specify `host` and `service` labels to be mapped to Datadog tags
-* Starts as global service by default so that system and Docker metrics from every host are captured
-* Allows deployment as a standalone `DogStatsD` service that aggregates StatsD metrics sent from applications
+* Hosts in Datadog are named correctly
+* Host labels can be exported as DataDog host tags
+* Service labels can be exported as DataDog metric tags
+
+## Service Discovery
+Please refer to the Datadog documentation [here](http://docs.datadoghq.com/guides/servicediscovery/) to learn how to provide configuration templates for Service Discovery in etcd or Consul.
