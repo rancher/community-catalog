@@ -132,7 +132,7 @@
       type: "string"
       
     - variable: "OPENVPN_EXTRACONF"
-      description: "Optionnal custom OpenVPN config line, for example to push your own custom route"
+      description: "Optional custom OpenVPN config line, for example to push your own custom route"
       label: "OpenVPN custom config:"
       required: false
       default: ""
