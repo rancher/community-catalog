@@ -3,5 +3,5 @@ description: |
   Performance Monitoring and Log Management. Collection of Metrics, Events and Logs. 
 version: 1.29.44
 category: Monitoring
-maintainer: "Stefan Thies <stefan.thies@sematext.com>"
+maintainer: "Sematext Group Inc. <docker@sematext.com>"
 license: APACHE 2.0

@@ -4,20 +4,20 @@
   description: "Sematext Docker Agent"
   minimum_rancher_version: v0.46.0
   questions:
-    - variable: "image_version"
-      label: "Image version tag"
-      description: "default 'latest'"
-      default: "latest"
-      required: true
+    - variable: "logsene_token"
+      label: "Logsene Token"
+      description: "Your Logsene Application Token"
+      required: false
       type: "string"
     - variable: "spm_token"
       label: "SPM Token"
       description: "Your SPM Application Token"
-      required: true
+      required: false
       type: "string"
-    - variable: "logsene_token"
-      label: "Logsene Token"
-      description: "Your Logsene Application Token"
+    - variable: "image_version"
+      label: "Image version tag"
+      description: "default 'latest'"
+      default: "latest"
       required: true
       type: "string"
     - variable: "geoip_enabled"
@@ -60,7 +60,7 @@
       required: false
       type: "string"
     - variable: "kubernetes"
-      label: "Tag logs with Kuberntes metadata"
+      label: "Tag logs with Kubernetes metadata"
       description: "Enable/disable tagging of logs with namespace, pod, UID, container name, ..."
       required: false
       default: "0"
