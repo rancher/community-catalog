@@ -15,7 +15,6 @@ glusterfs-daemon:
     - glusterfs-data
   labels:
     io.rancher.container.dns: 'true'
-    io.rancher.container.network: 'true'
     io.rancher.container.hostname_override: container_name
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/glusterfs-server
   command: glusterd -p /var/run/gluster.pid --no-daemon --log-file=-
