@@ -1,0 +1,15 @@
+.catalog:
+  name: "PHP Adminer"
+  version: "v1"
+  description: "Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer je k dispozici pro MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Firebird, SimpleDB, Elasticsearch a MongoDB."
+  uuid: php-adminer-1
+
+adminer:
+  scale: 1
+  health_check:
+    port: 80
+    interval: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    response_timeout: 2000
+    request_line: 'GET "/" "HTTP/1.0"'
