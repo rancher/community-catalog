@@ -18,12 +18,19 @@
       description: |
         List of Nuxeo packages 
       default: nuxeo-web-mobile nuxeo-drive nuxeo-diff nuxeo-spreadsheet nuxeo-dam nuxeo-template-rendering nuxeo-template-rendering-samples nuxeo-showcase-content
-    - variable: "volumedriver"
+    - variable: url
+      description: "The URL that this nuxeo instance should serve"
+      label: "Nuxeo URL"
+      type: "string"
+      required: true
+      default: "http://localhost:8080/"    
+    - variable: volumedriver
       type: "string"
       label: "Volume driver"
       description: |
-        Specifiy docker volume driver  to use
+        Specifiy docker volume driver to use
       default: local
+
 
 nuxeo:
   scale: 1
