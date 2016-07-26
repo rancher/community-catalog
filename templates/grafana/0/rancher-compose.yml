@@ -1,0 +1,32 @@
+.catalog:
+  name: "Grafana"
+  version: "3.0.2-rancher1"
+  description: |
+      (Experimental) Grafana: Beautiful metric & analytic dashboards
+  questions:
+    - variable: http_port
+      description: "http port to access Grafana"
+      label: "Http Port"
+      required: true
+      default: "3000"
+      type: "int"
+    - variable: admin_username
+      description: "Grafana admin username"
+      label: "Admin Username"
+      required: true
+      default: "admin"
+      type: "string"
+    - variable: admin_password
+      description: "Grafana admin password"
+      label: "Admin Password"
+      required: true
+      default: "password"
+      type: "string"
+    - variable: secret_key
+      description: "Signing secret key"
+      label: "Secret Key"
+      required: true
+      default: "su2Tong2zoocie"
+      type: "string"
+
+grafana:

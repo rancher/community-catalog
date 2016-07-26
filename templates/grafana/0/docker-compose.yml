@@ -1,0 +1,8 @@
+grafana:
+    image: grafana/grafana:latest
+    ports:
+        - ${http_port}:3000
+    environment:
+        GF_SECURITY_ADMIN_USER: ${admin_username}
+        GF_SECURITY_ADMIN_PASSWORD: ${admin_password}
+        GF_SECURITY_SECRET_KEY: ${secret_key}
