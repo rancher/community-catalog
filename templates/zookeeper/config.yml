@@ -1,8 +1,8 @@
 name: Apache Zookeeper
 description: |
   (Experimental) Zookeeper cluster
-version: 3.4.6-rancher1
+version: 3.4.8-rancher1
 category: Clustering
 maintainer: "Raul Sanchez <rawmind@gmail.com>"
-minimum_rancher_version: v0.56.0
+minimum_rancher_version: v0.59.0
 license: 
