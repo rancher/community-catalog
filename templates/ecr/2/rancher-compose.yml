@@ -1,0 +1,24 @@
+.catalog:
+  name: "ECR Credential Updater"
+  version: "v1.1.0"
+  description: "Updates credentials for ECR in Rancher"
+  uuid: ecr-3
+  questions:
+    - variable: "aws_access_key_id"
+      label: "AWS Access Key ID"
+      description: "AWS API Access Key to use for obtaining ECR credentials. Not required if using IAM roles."
+      required: false
+      type: "string"
+    - variable: "aws_secret_access_key"
+      label: "AWS Secret Access Key"
+      description: "AWS API Secret Key to use for obtaining ECR credentials. Not required if using IAM roles."
+      required: false
+      type: "string"
+    - variable: "aws_region"
+      label: "AWS Region"
+      description: "AWS Region that hosts the ECR"
+      default: us-east-1
+      required: true
+      type: "string"
+ecr-updater:
+  scale: 1
