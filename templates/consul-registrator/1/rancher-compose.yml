@@ -1,0 +1,15 @@
+.catalog:
+  name: "Consul-Registrator"
+  description: "Consul Agent with Registrator Auto Configuration"
+  version: "0.6-rancher2"
+  uuid: consul-registrator-1
+  questions:
+    - variable: consul_server
+      label: "Consul Server Hostname/IP"
+      type: "string"
+      required: true
+    - variable: consul_datacenter
+      label: "Consul Server Datacenter"
+      type: "string"
+      required: true
+      default: "dc1"
