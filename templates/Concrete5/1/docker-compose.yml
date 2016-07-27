@@ -1,0 +1,43 @@
+CMSMysql:
+    environment:
+        MYSQL_ROOT_PASSWORD: ${root_password}
+        MYSQL_DATABASE: ${db_name}
+        MYSQL_USER: ${db_username}
+        MYSQL_PASSWORD: ${db_password}
+    labels:
+        io.rancher.container.pull_image: always
+    tty: true
+    image: mysql
+    volumes:
+    - ${db_data_location}:/var/lib/mysql
+    stdin_open: true
+    volume_driver: ${volume_driver}
+
+CMSConfig:
+    image: opensaas/concrete5
+    tty: true
+    stdin_open: true
+    links:
+    - CMSMysql:mysql
+    volumes:
+    - ${cms_application_data}:/var/www/html/application
+    - ${cms_packages_data}:/var/www/html/packages
+    labels:
+        io.rancher.container.hostname_override: container_name
+        io.rancher.container.start_once: true
+    volume_driver: ${volume_driver}
+    command: bash -c "chown -R www-data. application; chown -R www-data. packages; sleep 2m; php -f concrete/bin/concrete5.php c5:install --db-server=mysql --db-username=${db_username} --db-password=${db_password} --db-database=${db_name} --site=${cms_sitename} --admin-email=${cms_admin_email} --admin-password=${cms_admin_password} -n -vvv"
+
+Concrete5App:
+    labels:
+        io.rancher.container.pull_image: always
+        io.rancher.sidekicks: CMSConfig
+    tty: true
+    links:
+    - CMSMysql:mysql
+    image: opensaas/concrete5
+    volumes:
+    - ${cms_application_data}:/var/www/html/application
+    - ${cms_packages_data}:/var/www/html/packages
+    volume_driver: ${volume_driver}
+    stdin_open: true

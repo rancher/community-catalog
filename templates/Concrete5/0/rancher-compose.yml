@@ -1,0 +1,57 @@
+.catalog:
+    name: "Concrete5"
+    version: "v0.1"
+    description: "Concrete5 CMS"
+    uuid: Concrete5-0
+    minimum_rancher_version: v0.51.0
+    questions:
+        - variable: root_password
+          description: "MySQL root password - keep this password complex and secure"
+          label: "MySQL Root Password"
+          required: true
+          default: "password"
+          type: "string"
+        - variable: db_name
+          description: "MySQL Database Name - to use in the Concrete5 setup"
+          label: "MySQL Database Name"
+          required: true
+          default: "CMS_DB"
+          type: "string"
+        - variable: db_username
+          description: "MySQL Username - to use in the Concrete5 setup"
+          label: "MySQL Username"
+          required: true
+          default: "CMS_USER"
+          type: "string"
+        - variable: db_password
+          description: "MySQL password for the above user - to use in the Concrete5 setup"
+          label: "MySQL Password"
+          required: true
+          default: "password"
+          type: "string"
+        - variable: db_data_location
+          description: "Location on the host for the database files"
+          label: "DB Data Location"
+          required: true
+          default: "CMS_DB_DATA"
+          type: "string"
+        - variable: volume_driver
+          description: "Volume Driver for the persistant data locations requires docker 1.7"
+          label: "Volume Driver"
+          type: "string"
+        - variable: cms_application_data
+          description: "Concrcte5 application folder for persistant data storage"
+          label: "Application Folder"
+          required: true
+          default: "CMS_APP_DATA"
+          type: "string"
+        - variable: cms_packages_data
+          description: "Concrcte5 packages folder for persistant data storage"
+          label: "Packages Folder"
+          required: true
+          default: "CMS_PACK_DATA"
+          type: "string"
+CMSMysql:
+    scale: 1
+Concrete5App:
+    scale: 1

@@ -1,0 +1,27 @@
+CMSMysql:
+    environment:
+        MYSQL_ROOT_PASSWORD: ${root_password}
+        MYSQL_DATABASE: ${db_name}
+        MYSQL_USER: ${db_userame}
+        MYSQL_PASSWORD: ${db_password}
+    labels:
+        io.rancher.container.pull_image: always
+    tty: true
+    image: mysql
+    volumes:
+    - ${db_data_location}:/var/lib/mysql
+    stdin_open: true
+    volume_driver: ${volume_driver}
+
+Concrete5App:
+    labels:
+        io.rancher.container.pull_image: always
+    tty: true
+    image: opensaas/concrete5
+    links:
+    - CMSMysql:mysql
+    volumes:
+    - ${cms_application_data}:/var/www/html/application
+    - ${cms_packages_data}:/var/www/html/packages
+    stdin_open: true
+    volume_driver: ${volume_driver}
