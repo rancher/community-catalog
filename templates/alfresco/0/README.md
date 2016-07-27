@@ -2,14 +2,14 @@
 
 ### Note:
 
-If you can read French, you can look my [blog](https://blog.webcenter.fr) to look how to upgrade container after deployement for a production usage.
+If you can read French, you can look my [blog](https://blog.webcenter.fr/alfresco-deployer-une-ged-en-production-en-quelques-minutes-docker-rancher/) to look how to upgrade container after deployement for a production usage.
 
 ### Info:
 
 This template deploys a collection of containers based upon the technologies below, once deployed you should have a
  Electronic Document Management (EDM) plateform based on Alfresco.
-* **Alfresco** - Used to manage all aspect of EDM. (https://github.com/disaster37/rancher-alfresco)
-* **Postgresql** - It's the SGBD to store metadatas of your EDM. (https://github.com/docker-library/postgres)
+* **Alfresco** - Used to manage all aspect of ECM. (https://github.com/disaster37/rancher-alfresco)
+* **Postgresql** - It's the SGBD to store metadatas of your ECM. (https://github.com/docker-library/postgres)
 
 This template is just a base to test Alfresco. If you should use in production sky, You must upgrade it after install to setting it in your context (see all parameters you can use to set Alfresco on github). You must at minimal setting that :
 * **Volume** : You must mount a database volume and alfresco volume on storage pool (convoy-gluster is a good idea).

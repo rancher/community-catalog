@@ -1,8 +1,8 @@
 .catalog:
   name: "Alfresco"
-  version: "5.1.0"
+  version: "5.1 201605-GA"
   description: "Alfresco Electronic Document Management"
-  uuid: alfresco-5.1.0-2
+  uuid: alfresco-5.1-201605-1
   minimum_rancher_version: v0.56.0
   questions:
     - variable: database_name
@@ -31,7 +31,7 @@ alfresco:
     interval: 5000
     unhealthy_threshold: 3
     strategy: recreate
-    healthy_threshold: 2
+    healthy_threshold: 3
     response_timeout: 5000
 
 postgres:
@@ -42,4 +42,10 @@ postgres:
     unhealthy_threshold: 3
     strategy: recreate
     response_timeout: 5000
-    healthy_threshold: 2
+    healthy_threshold: 3
+
+postgres-data:
+  scale: 1
+
+alfresco-data:
+  scale: 1
