@@ -15,7 +15,7 @@ dynamic-drones-mgr-0:
   - ${DRONE_SERVICE}:droneserver
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:container_labe_soft_ne: io.rancher.stack_service.name=$${stack_name}/drone-agent
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/drone-agent
   tty: true
   entrypoint:
   - /dynamic-drone-nodes
