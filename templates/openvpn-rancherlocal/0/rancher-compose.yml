@@ -1,0 +1,123 @@
+.catalog:
+  name: OpenVPN Rancher
+  version: 1.0-0
+  description: |
+    OpenVPN for Rancher with "Rancher local" authentication.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Alexis Ducastel <alexis@ducastel.net>"
+  uuid: openvpn-ldap-0
+  questions:
+      
+    - variable: "AUTH_RANCHERLOCAL_URL"
+      description: "Rancher server URL, ex: http[s]://hostname[:port]"
+      label: "Rancher URL :"
+      required: true
+      default: "http[s]://hostname[:port]"
+      type: "string"
+  
+    - variable: "REMOTE_IP"
+      description: "Ip address or hostname that will be set in client configuration, you can leave default values and replace them in client config later"
+      label: "OpenVPN server endpoint address:"
+      required: true
+      default: "IP-address-or-hostname"
+      type: "string"
+      
+    - variable: "REMOTE_PORT"
+      description: "TCP port that will be set in client configuration, you can leave default values and replace them in client config later"
+      label: "OpenVPN server endpoint port :"
+      required: true
+      default: "1194"
+      type: "string"
+      
+    - variable: "VPNPOOL_NETWORK"
+      description: "VPN subnet for OpenVPN to draw client addresses from"
+      label: "Network pool:"
+      required: true
+      default: "10.43.0.0"
+      type: "string"
+      
+    - variable: "VPNPOOL_CIDR"
+      description: "CIDR netmask for VPN subnet"
+      label: "CIDR netmask:"
+      required: true
+      default: "16"
+      type: "enum"
+      options:
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        
+
+    - variable: "CERT_COUNTRY"
+      description: "Country code part of VPN CA (2 digits only)"
+      label: "Certificate Country code :"
+      required: true
+      default: "US"
+      type: "string"
+      
+    - variable: "CERT_PROVINCE"
+      description: "Province part of VPN CA"
+      label: "Certificate Province:"
+      required: true
+      default: "AL"
+      type: "string"
+
+    
+    - variable: "CERT_CITY"
+      description: "City part of VPN CA "
+      label: "Certificate City:"
+      required: true
+      default: "Birmingham"
+      type: "string"
+
+    - variable: "CERT_ORG"
+      description: "Organization part of VPN CA "
+      label: "Certificate Organization:"
+      required: true
+      default: "ACME"
+      type: "string"
+      
+    - variable: "CERT_OU"
+      description: "Organizational Unit part of VPN CA "
+      label: "Certificate OU:"
+      required: true
+      default: "IT"
+      type: "string"
+      
+    - variable: "CERT_EMAIL"
+      description: "Email part of VPN CA "
+      label: "Certificate Email:"
+      required: true
+      default: "foo@example.com"
+      type: "string"
+      
+    - variable: "OPENVPN_EXTRACONF"
+      description: "Optional custom OpenVPN config line, for example to push your own custom route"
+      label: "OpenVPN custom config:"
+      required: false
+      default: ""
+      type: "string"
+
+openvpn-rancherlocal-data:
+  scale: 1
+openvpn-rancherlocal-server:
+  scale: 1
+  health_check:
+    port: 1194
+    interval: 30000
+    unhealthy_threshold: 5
+    strategy: none
+    healthy_threshold: 2
+    response_timeout: 2000
