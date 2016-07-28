@@ -1,0 +1,14 @@
+powerdns:
+  image: rancher/external-dns:v0.5.0
+  command: "-provider=powerdns"
+  expose:
+   - 1000
+  environment:
+    POWERDNS_API_KEY: ${POWERDNS_API_KEY}
+    POWERDNS_URL: ${POWERDNS_URL}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"
