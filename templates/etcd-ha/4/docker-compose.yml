@@ -1,0 +1,18 @@
+etcd:
+  image: rancher/etcd:v2.3.7-6
+  labels:
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.sidekicks: data
+  environment:
+    RANCHER_DEBUG: '${DEBUG}'
+  volumes_from:
+  - data
+
+data:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+  - /data
+  labels:
+    io.rancher.container.start_once: 'true'

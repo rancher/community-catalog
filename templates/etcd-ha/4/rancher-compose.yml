@@ -1,0 +1,29 @@
+.catalog:
+  version: 2.3.7
+  minimum_rancher_version: v1.1.1
+  questions:
+  - variable: SCALE
+    description: Desired cluster size. 3, 5, or 7 are good choices. You will need this many hosts to reach your desired scale.
+    label: Number of Nodes
+    required: true
+    default: 3
+    type: int
+  - variable: DEBUG
+    description: Enable or disable verbose logging
+    label: Debug
+    required: true
+    default: true
+    type: boolean
+etcd:
+  retain_ip: true
+  scale_policy:
+    min: 1
+    max: ${SCALE}
+    increment: 1
+  health_check:
+    port: 2378
+    request_line: /health
+    interval: 5000
+    response_timeout: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2

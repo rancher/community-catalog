@@ -1,5 +1,5 @@
 name: Etcd
 description: |
   A distributed key/value store that provides a reliable way to store data across a cluster of machines
-version: 2.3.6-rancher4
+version: 2.3.7
 category: Clustering
