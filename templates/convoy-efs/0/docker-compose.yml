@@ -1,0 +1,23 @@
+convoy-efs:
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.global: 'true'
+  privileged: true
+  pid: host
+  volumes:
+    - /lib/modules:/lib/modules:ro
+    - /proc:/host/proc
+    - /var/run:/host/var/run
+    - /run:/host/run
+    - /etc/docker/plugins:/etc/docker/plugins
+  image: rancher/convoy-agent:v0.10.0
+  command: volume-agent-efs
+
+convoy-efs-storagepool:
+  labels:
+    io.rancher.container.create_agent: 'true'
+  image: rancher/convoy-agent:v0.10.0
+  volumes:
+    - /var/run:/host/var/run
+    - /run:/host/run
+  command: storagepool-agent

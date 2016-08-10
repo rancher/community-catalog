@@ -1,0 +1,53 @@
+.catalog:
+    name: "Convoy EFS"
+    version: "v0.1.0"
+    description: "Convoy EFS - Docker volume plugin"
+    questions:
+     - variable: "EFS_ID"
+       description: "FS ID of AWS EFS"
+       label: "EFS ID"
+       required: true
+       type: "string"
+     - variable: "AWS_REGION"
+       description: "AWS Region"
+       label: "AWS Region"
+       required: true
+       type: enum
+       options:
+         - eu-west-1
+         - us-east-1
+         - us-west-2
+     - variable: "MOUNT_DIR"
+       label: "Mount Directory"
+       description: "The directory on the EFS server to mount"
+       type: "string"
+       required: true
+
+convoy-efs:
+    metadata:
+        efs_id: "${EFS_ID}"
+        mount_dir: "${MOUNT_DIR}"
+        mount_opts: "${MOUNT_OPTS}"
+        aws_region: "${AWS_REGION}"
+    health_check:
+        request_line: GET /healthcheck HTTP/1.0
+        port: 10241
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+
+convoy-efs-storagepool:
+    metadata:
+        efs_id: "${EFS_ID}"
+        mount_dir: "${MOUNT_DIR}"
+        mount_opts: "${MOUNT_OPTS}"
+        aws_region: "${AWS_REGION}"
+    scale: 1
+    health_check:
+        request_line: GET /healthcheck HTTP/1.0
+        port: 10241
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
