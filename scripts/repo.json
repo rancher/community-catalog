@@ -1,0 +1,8 @@
+ {
+  "catalogs": {
+    "library": {
+      "url": "/scratch",
+      "branch": "master"
+    }
+  }
+}

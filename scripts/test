@@ -5,6 +5,12 @@ cd $(dirname $0)/..
 
 trap "rm -rf /scratch/*" exit
 
+GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$GIT_BRANCH" != "master" ]; then
+  sed -i "s#master#$GIT_BRANCH#" ./scripts/repo.json
+fi
+
 if [ -d "/scratch" ]; then
     rsync -a --exclude .tox ./ /scratch
 fi
@@ -12,7 +18,7 @@ fi
 pushd /scratch/integration
 
 # Start rancher-catalog-service and wait for it to start.
-/usr/bin/rancher-catalog-service -catalogUrl ../ -refreshInterval 7200 > /dev/null 2>&1 &
+/usr/bin/rancher-catalog-service -configFile ../scripts/repo.json -refreshInterval 7200 > /dev/null 2>&1 &
 sleep 10
 tox -e flake8,py27
 popd
