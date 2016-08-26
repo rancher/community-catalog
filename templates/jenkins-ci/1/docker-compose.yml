@@ -14,7 +14,7 @@ jenkins-plugins:
 jenkins-datavolume:
   image: "busybox"
   volumes:
-    - /var/jenkins_home
+    - ${volume_work}:/var/jenkins_home
   labels:
     io.rancher.container.start_once: true
   entrypoint: ["chown", "-R", "1000:1000", "/var/jenkins_home"]

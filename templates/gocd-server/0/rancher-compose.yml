@@ -13,6 +13,12 @@
       required: true
       default: "8153"
       type: "int"
+    - variable: ssh_port
+      description: "port for remote access of go-agents"
+      label: "SSH Port"
+      required: true
+      default: "8154"
+      type: "int"
     - variable: "mem_initial"
       description: "Initial java memory in Mb"
       label: "Initial memory:"

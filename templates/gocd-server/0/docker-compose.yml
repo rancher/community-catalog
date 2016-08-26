@@ -10,6 +10,7 @@ gocd-server:
   - SERVER_MAX_MEM=${mem_max}m
   ports:
   - ${public_port}:8153
+  - ${ssh_port}:8154
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: gocd-volume

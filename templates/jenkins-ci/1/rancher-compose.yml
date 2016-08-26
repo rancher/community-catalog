@@ -10,6 +10,12 @@
     description: "Which port should Jenkins listen on?"
     default: 8080
     required: true
+  - variable: "volume_work"
+    description: "Work volume to save jenkins data"
+    label: "Work volume:"
+    required: true
+    default: "/var/lib/docker/jenkins-ci"
+    type: "string"
   - variable: "plugins"
     type: "multiline"
     label: "List of Plugins"
