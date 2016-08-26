@@ -1,0 +1,77 @@
+ranch-eye:
+  ports:
+  - 9104:9104/tcp
+  labels:
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.dns: true
+  tty: true
+  image: infinityworks/ranch-eye:03
+  stdin_open: true
+  net: "host"
+
+node-exporter:
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  image: prom/node-exporter:latest
+  stdin_open: true
+
+prom-conf:
+    tty: true
+    image: infinityworks/prom-conf:14
+    volumes:
+      - /etc/prom-conf/
+
+prometheus:
+    tty: true
+    image: prom/prometheus:v1.0.2
+    command: -alertmanager.url=http://alertmanager:9093 -config.file=/etc/prom-conf/prometheus.yml -storage.local.path=/prometheus -web.console.libraries=/etc/prometheus/console_libraries -web.console.templates=/etc/prometheus/consoles
+    ports:
+      - 9090:9090
+    labels:
+      io.rancher.sidekicks: prom-conf
+    volumes_from:
+       - prom-conf
+    links:
+      - ranch-eye:ranch-eye
+      - node-exporter:node-exporter
+      - prometheus-rancher-exporter:prometheus-rancher-exporter
+
+influxdb:
+  image: tutum/influxdb:0.10
+  ports:
+    - 8083:8083
+    - 8086:8086
+    - 8090:8090
+    - 2003:2003
+  environment:
+    - PRE_CREATE_DB=grafana;prometheus;rancher
+    - GRAPHITE_DB=rancher
+    - GRAPHITE_BINDING=:2003
+
+graf-db:
+    tty: true
+    image: infinityworks/graf-db:08
+    command: cat
+    volumes:
+      - /var/lib/grafana/
+
+grafana:
+    tty: true
+    image: grafana/grafana:3.0.1
+    ports:
+      - 3000:3000
+    labels:
+      io.rancher.sidekicks: graf-db
+    volumes_from:
+       - graf-db
+    links:
+      - prometheus:prometheus
+      - prometheus-rancher-exporter:prometheus-rancher-exporter
+
+prometheus-rancher-exporter:
+    tty: true
+    labels:
+      io.rancher.container.create_agent: true
+      io.rancher.container.agent.role: environment
+    image: infinityworks/prometheus-rancher-exporter:04
