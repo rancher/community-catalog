@@ -2,7 +2,7 @@
 
 ### Info:
 
- This template deploys traefik active load balancers on top of Rancher. The configuration is generated and updated with confd from Rancher metadata. 
+ This template deploys Traefik active load balancers on top of Rancher. The configuration is generated and updated with confd from Rancher metadata. 
  It would be deployed in hosts with label traefik_lb=true.
 
 ### Config:
@@ -21,7 +21,7 @@
 
 ### Service configuration labels:
 
-Traefik labels has to be added in your services, in order to get included in traefik dynamic config.
+Traefik labels has to be added in your services, in order to get included in Traefik dynamic config.
 
 - traefik.enable = <true | false> 
   - true: the service will be published as *service_name.stack_name.traefik_domain*
@@ -38,10 +38,9 @@ Traefik labels has to be added in your services, in order to get included in tra
 
  Click deploy.
 
- Services will be accessed throught hosts whith traefik_lb=true at: 
+ Services will be accessed through hosts with traefik_lb=true at: 
  - http://${service_name}.${stack_name}.${traefik.domain}:${http_port}
  - https://${service_name}.${stack_name}.${traefik.domain}:${https_port}
  or 
  - http://${stack_name}.${traefik.domain}:${http_port}
  - https://${stack_name}.${traefik.domain}:${https_port}
-
