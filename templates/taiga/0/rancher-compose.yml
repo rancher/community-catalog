@@ -1,10 +1,31 @@
 .catalog:
   name: "Taiga"
-  version: "v0.1-educaas1"
+  version: "v0.3"
   description: "Project management platform for agile developers"
   uuid: taiga-0
   minimum_rancher_version: v0.51.0
   questions:
-
-
-taiga:
+    - variable: "DOMAIN"
+      label: "Domain"
+      description: "your taiga domain name"
+      required: true
+      default: taiga.test.de
+      type: "string"
+    - variable: "DATA"
+      label: "Storage"
+      description: "the path for the Storage"
+      required: true
+      default: /home/taiga/data
+      type: "string"
+    - variable: "DATABASE"
+      label: "DB Storage"
+      description: "the path for the DB Storage"
+      required: true
+      default: /home/taiga/db
+      type: "string"
+    - variable: "CONF"
+      label: "Config Storage"
+      description: "the path for the Config Storage"
+      required: true
+      default: /home/taiga/conf
+      type: "string"
