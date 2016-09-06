@@ -1,0 +1,71 @@
+.catalog:
+  name: "TeamCity"
+  version: "v0.0.1"
+  description: "TeamCity Server"
+  uuid: teamcity-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: http_port
+      description: "HTTP port to access TeamCity Server UI"
+      label: "TeamCity HTTP Port"
+      required: true
+      default: "8111"
+      type: "int"
+    - variable: scale
+      description: "Number of TeamCity Agents"
+      label: "Number of TeamCity Agents"
+      required: true
+      default: "1"
+      type: "int"
+    - variable: postgress_container
+      description: "Define a linked postgress container name"
+      label: "Postgres Container"
+      required: true
+      default: "db"
+      type: "string"
+    - variable: postgress_port
+      description: "Port for Postgres"
+      label: "Postgres Port"
+      required: true
+      default: "5432"
+      type: "int"
+    - variable: postgres_data
+      description: "Postgres Data Folder"
+      label: "Postgres Data"
+      required: true
+      default: "/var/lib/postgresql/data/pgdata"
+      type: "string"
+    - variable: postgres_db
+      description: "Postgres Database"
+      label: "Postgres Database"
+      required: true
+      default: "teamcity"
+      type: "string"
+    - variable: postgres_user
+      description: "Postgres User"
+      label: "Postgres User"
+      required: true
+      default: "teamcity"
+      type: "string"
+    - variable: postgres_password
+      description: "Postgres Password"
+      label: "Postgres Password"
+      required: true
+      default: "teamcity"
+      type: "string"
+    - variable: http_proxy
+      description: "In case you are at corporate network, setup http_proxy variable if needed"
+      label: "http_proxy"
+      required: false
+      default: ""
+      type: "string"
+    - variable: https_proxy
+      description: "In case you are at corporate network, setup https_proxy variable if needed"
+      label: "https_proxy"
+      required: false
+      default: ""
+      type: "string"
+    
+teamcity-agent:
+  scale: ${scale}
+  retain_ip: true

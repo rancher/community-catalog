@@ -1,0 +1,5 @@
+name: TeamCity
+description: |
+  TeamCity — Your 24/7 Build Engineer
+version: v0.0.1
+category: CI
