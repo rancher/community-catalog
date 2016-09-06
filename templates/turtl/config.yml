@@ -1,0 +1,7 @@
+name: turtl
+description: |
+  Turtl is a notes sync server (opensource alternative to Evernote)
+version: 1.0.1
+category: Applications
+maintainer: "Frederic Leger <frederic@webofmars.com>"
+projectURL: https://github.com/webofmars/turtl-docker

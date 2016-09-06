@@ -1,0 +1,34 @@
+turtl-api-data:
+  labels:
+    io.rancher.container.start_once: 'true'
+  entrypoint:
+  - /bin/true
+  image: busybox
+  volumes:
+    - /opt/api/uploads
+    - /var/lib/rethinkdb/instance1
+
+turtl-api:
+  ports:
+    - 8181:8181/tcp
+  environment:
+    DISPLAY_ERRORS: ${DISPLAY_ERRORS}
+    FQDN: ${FQDN}
+    SITE_URL: ${SITE_URL}
+    LOCAL_UPLOAD_URL: ${LOCAL_UPLOAD_URL}
+    LOCAL_UPLOAD_PATH: ${LOCAL_UPLOAD_PATH}
+    AWS_S3_TOKEN: ${AWS_S3_TOKEN}
+    ADMIN_EMAIL: ${ADMIN_EMAIL}
+    EMAIL_FROM: ${EMAIL_FROM}
+    SMTP_USER: ${SMTP_USER}
+    SMTP_PASS: ${SMTP_PASS}
+    DEFAULT_STORAGE_LIMIT: ${DEFAULT_STORAGE_LIMIT}
+    STORAGE_INVITE_CREDIT: ${STORAGE_INVITE_CREDIT}
+  image: webofmars/turtl-docker:latest
+  stdin_open: true
+  tty: true
+  labels:
+    io.rancher.sidekicks: turtl-api-data
+  volumes_from:
+    - turtl-api-data
+

@@ -1,0 +1,108 @@
+.catalog:
+  name: "turtl"
+  version: 1.0.1
+  description: |
+    Turtl API for Rancher
+  minimum_rancher_version: 1.0.0
+  questions:
+
+    - variable: "DISPLAY_ERRORS"
+      descrition: "Display errors"
+      label: "Display errors: "
+      required: false
+      default: "t"
+      type: "string"
+
+    - variable: "FQDN"
+      description: "Fully Qualified Domain Name (ex: 'notes.example.com')."
+      label: "fqdn"
+      required: true
+      default: "turtl.local"
+      type: "string"
+
+    - variable: "SITE_URL"
+      description: "The uri used to access the turtl api"
+      label: "site url"
+      required: true
+      default: "http://turtl.local"
+      type: "string"
+
+    - variable: "LOCAL_UPLOAD_PATH"
+      description: "The local path of the uploaded content."
+      label: "uploads local path"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "LOCAL_UPLOAD_URL"
+      description: "The urls used to retrieve uploaded content. Must be set if you change LOCAL_UPLOAD_PATH. (ex: http://turtl.local)"
+      label: "local upload url"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "AWS_S3_TOKEN"
+      description: |
+        Amazon Web Services S3 token. Used only if you use S3 as a storage backend. ex : (:token ''
+          secret ''
+          bucket ''
+          endpoint 'https://s3.amazonaws.com')
+      label: "AWS S3 token"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "ADMIN_EMAIL"
+      description: "email adresse of administrator ex: admin@example.com"
+      label: "Admin e-mail"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "EMAIL_FROM"
+      description: "The e-mail adress used to send the e-mail from turtl to users."
+      label: "e-mail from"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "SMTP_USER"
+      description: "The user used to authenticate to the smtp server. Can be blank."
+      label: "smtp user"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "SMTP_PASS"
+      description: "The password used to authenticate to the smtp server. Can be blank."
+      label: "smtp password"
+      required: false
+      default: ""
+      type: "string"
+
+    - variable: "STORAGE_INVITE_CREDIT"
+      description: "The number of MB a user gain when he invites someone"
+      label: "storage invite credit"
+      required: false
+      default: ""
+      type: "int"
+
+    - variable: "DEFAULT_STORAGE_LIMIT"
+      description: "Maximum storage space (in MB) that can be used by a single user (ex: 1000)"
+      label: "Default Storage Limit"
+      required: false
+      default: ""
+      type: "int"
+
+turtl-api-data:
+  scale: 1
+turtl-api:
+  scale: 1
+  health_check:
+    port: 8181
+    interval: 2000
+    initializing_timeout: 300000
+    unhealthy_threshold: 10
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
