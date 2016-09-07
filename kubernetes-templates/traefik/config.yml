@@ -1,0 +1,6 @@
+name: Traefik
+description: |
+  Traefik active load balancer for ingress rules
+version: v1.0.2
+category: Load Balancing
+maintainer: "German Ramos <german.ramos@gmail.com>"
