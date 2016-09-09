@@ -1,0 +1,22 @@
+portworx:
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.pull_image: 'always'
+  image: portworx/px-enterprise
+  container_name: px
+  ipc: host
+  net: host
+  privileged: true
+  environment:
+    CLUSTER_TOKEN: ${cluster_token}
+  volumes:
+     - /dev:/dev
+     - /usr/src:/usr/src
+     - /run/docker/plugins:/run/docker/plugins
+     - /var/lib/osd:/var/lib/osd:shared
+     - /etc/pwx:/etc/pwx
+     - /opt/pwx/bin:/export_bin:shared
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /var/cores:/var/cores
+  command: -t ${cluster_token} -a -f

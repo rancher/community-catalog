@@ -1,0 +1,13 @@
+.catalog:
+  name: "Portworx"
+  version: "1.0.2-2016-09-07-GA"
+  description: "Container Defined Storage for Docker"
+  uuid: 352669-pwx-1.0.2
+  minimum_rancher_version: v0.56.0
+  questions:
+    - variable: cluster_token
+      description: "Cluster Token from Lighthouse"
+      label: "Cluster Token"
+      type: "string"
+      required: true
+      default: ""
