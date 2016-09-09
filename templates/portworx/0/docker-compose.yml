@@ -3,7 +3,7 @@ portworx:
     io.rancher.container.create_agent: 'true'
     io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: 'always'
-  image: portworx/px-enterprise
+  image: portworx/px-dev
   container_name: px
   ipc: host
   net: host
