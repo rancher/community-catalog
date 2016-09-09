@@ -1,7 +1,6 @@
 ---
 pipeline:
   build:
-    privileged: true
     image: rancher/dind:v0.6.0
     commands:
       - ./scripts/ci
