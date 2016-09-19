@@ -18,7 +18,7 @@ secrets-bridge:
         - ${CATTLE_ACCESS_KEY}
 secrets-bridge-lb:
     ports:
-        - "${LBPORT}:8081"
+        - "${LBPORT}:8181"
     image: rancher/load-balancer-service
     links:
         - secrets-bridge:secrets-bridge
