@@ -36,6 +36,7 @@
           description: "Path to get the permenant API key"
         - variable: LBPORT
           description: "Port for Secrets Bridge LB to listen on"
+          label: "LB Port"
           type: string
           required: true
 secrets-bridge-lb:
