@@ -15,13 +15,13 @@ that are taking up space; note that this may not be what you want if you
 are using stopped containers to hold volumes!  If this is the case, use the
 Keep List below.
 
-This cleanup will help to prevent the /var/lib/docker filesystem from filling 
+This cleanup will help to prevent the /var/lib/docker filesystem from filling
 up with old and unused container images, which is an issue on lighter-weight
 Docker hosts.
 
 ### Keep list
 
-You can specify match patterns for unused Images, and stopped Containers, 
+You can specify match patterns for unused Images, and stopped Containers,
 which should be excluded from the cleanup.
 
 The match patterns are comma-separated Left Anchored Bash Shell wildcard
@@ -40,8 +40,10 @@ However it will not match
 * bar:latest
 * foo/\*:v1
 
-By default, nothing will be matched.  If you want to match everything, 
+By default, nothing will be matched.  If you want to match everything,
 then use a pattern **\*:\***
+
+The self-descriptive values '\*\*None\*\*' and '\*\*All\*\*' can also be used.
 
 ### Warning
 

@@ -1,0 +1,36 @@
+.catalog:
+  name: "Janitor"
+  version: "v1.7"
+  description: "Docker cleanup"
+  uuid: janitor-3
+  questions:
+    - variable: "FREQUENCY"
+      label: "Frequency"
+      description: "Run the cleanup on a cycle of this many seconds"
+      default: 3600
+      required: true
+      type: "int"
+    - variable: "EXCLUDE_LABEL"
+      label: "Exclude label"
+      description: "Specify a Rancher host label here that will be used to determine on which hosts the Janitor container should not deploy."
+      default: janitor.exclude=true
+      required: true
+      type: "string"
+    - variable: "KEEP"
+      label: "Keep images"
+      description: "A comma separated list of images that should never be removed. These are left-anchored Bash Shell Wildcard patterns."
+      default: "rancher/"
+      required: false
+      type: "string"
+    - variable: "KEEPC"
+      label: "Keep containers"
+      description: "A comma separated list of images that should never have stopped containers removed. These are left-anchored Bash Shell Wildcard patterns."
+      default: "*:*"
+      required: false
+      type: "string"
+    - variable: "KEEPCN"
+      label: "Keep named containers"
+      description: "A comma separated list of names of exited or dead container that should never be removed. These are left-anchored Bash Shell Wildcard patterns."
+      default: "**None**"
+      required: false
+      type: "string"
