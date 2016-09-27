@@ -1,0 +1,15 @@
+.catalog:
+  name: Heapster Grafana InfluxDB
+  version: canary-rancher1
+  description: A cluster-wide aggregator of monitoring and event data.
+  questions:
+    - variable: "GRAFANA_PORT"
+      label: "Node port for Grafana"
+      required: true
+      default: 30804
+      type: "int"
+    - variable: "INFLUXDB_PORT"
+      label: "Node port for Influxdb"
+      required: true
+      default: 30805
+      type: "int"

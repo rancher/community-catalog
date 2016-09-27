@@ -1,0 +1,4 @@
+name: Heapster Grafana InfluxDB
+description: A cluster-wide aggregator of monitoring and event data.
+version: canary-rancher1
+category: Monitoring
