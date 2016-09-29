@@ -1,6 +1,6 @@
 zk:
   tty: true
-  image: rawmind/alpine-zk:3.4.8-4
+  image: rawmind/alpine-zk:3.4.8-16
   volumes_from:
     - zk-volume
     - zk-conf
@@ -21,7 +21,9 @@ zk-conf:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
-  image: rawmind/rancher-zk:0.3.3
+  image: rawmind/rancher-zk:3.4.8-5
+  volumes:
+    - /opt/tools
 zk-volume:
   net: none
   labels:
@@ -29,12 +31,10 @@ zk-volume:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   environment:
-    - SERVICE_USER=zookeeper
     - SERVICE_UID=10002
-    - SERVICE_GROUP=zookeeper 
     - SERVICE_GID=10002
     - SERVICE_VOLUME=${zk_data_dir}
   volumes:
     - ${zk_data_dir}
   volume_driver: local
-  image: rawmind/alpine-volume:0.0.1-1
+  image: rawmind/alpine-volume:0.0.2-1
