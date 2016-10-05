@@ -9,7 +9,8 @@ portworx:
   net: host
   privileged: true
   environment:
-    CLUSTER_TOKEN: ${cluster_token}
+    CLUSTER_ID: ${cluster_id}
+    KVDB: ${kvdb}
   volumes:
      - /dev:/dev
      - /usr/src:/usr/src
@@ -19,4 +20,4 @@ portworx:
      - /opt/pwx/bin:/export_bin:shared
      - /var/run/docker.sock:/var/run/docker.sock
      - /var/cores:/var/cores
-  command: -t ${cluster_token} -a -f
+  command: -c ${cluster_id} -k ${kvdb} -a -f

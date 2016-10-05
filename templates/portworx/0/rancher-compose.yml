@@ -5,9 +5,15 @@
   uuid: 352669-pwx-1.0.2
   minimum_rancher_version: v0.56.0
   questions:
-    - variable: cluster_token
-      description: "Cluster Token from Lighthouse"
-      label: "Cluster Token"
+    - variable: cluster_id
+      description: "Arbitrary Cluster ID, common to all nodes in PX cluster "
+      label: "Cluster ID"
+      type: "string"
+      required: true
+      default: ""
+    - variable: kvdb
+      description: "Key-value database, accessibe to all nodes in PX cluster. (Ex: "etcd://10.0.0.42:4001")
+      label: "Key-Value Database"
       type: "string"
       required: true
       default: ""
