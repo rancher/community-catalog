@@ -1,4 +1,4 @@
-# [1.0.2-GA Documentation](http://docs.portworx.com)
+# [1.0.6-GA Documentation](http://docs.portworx.com)
 
 This catalog will spin up "px-dev".
 There are 2 configuration variables required:
