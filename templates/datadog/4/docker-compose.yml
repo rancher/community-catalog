@@ -1,0 +1,41 @@
+datadog-init:
+  image: janeczku/datadog-rancher-init:v2.2.3
+  net: none
+  command: /bin/true
+  volumes:
+    - /opt/rancher
+  labels:
+    io.rancher.container.start_once: 'true'
+    io.rancher.container.pull_image: always
+datadog-agent:
+  image: datadog/docker-dd-agent:11.3.585
+  entrypoint: /opt/rancher/entrypoint-wrapper.py
+  command:
+    - supervisord
+    - -n
+    - -c
+    - /etc/dd-agent/supervisor.conf
+  restart: always
+  environment:
+    API_KEY: ${api_key}
+    SD_BACKEND_HOST: ${sd_backend_host}
+    SD_BACKEND_PORT: ${sd_backend_port}
+    SD_TEMPLATE_DIR: ${sd_template_dir}
+    STATSD_METRIC_NAMESPACE: ${statsd_namespace}
+    DD_STATSD_STANDALONE: "${statsd_standalone}"
+    DD_HOST_LABELS: ${host_labels}
+    DD_CONTAINER_LABELS: ${service_labels}
+    DD_SERVICE_DISCOVERY: ${service_discovery}
+    DD_SD_CONFIG_BACKEND: ${sd_config_backend}
+    DD_CONSUL_TOKEN: ${dd_consul_token}
+    DD_CONSUL_SCHEME: ${dd_consul_scheme}
+    DD_CONSUL_VERIFY: ${dd_consul_verify}
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+  volumes_from:
+    - datadog-init
+  labels:
+    io.rancher.scheduler.global: "${global_service}"
+    io.rancher.sidekicks: 'datadog-init'

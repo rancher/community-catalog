@@ -1,5 +1,5 @@
 secrets-bridge:
-    image: rancher/secrets-bridge:v0.0.3
+    image: rancher/secrets-bridge:v0.1.7
     environment:
         CATTLE_ACCESS_KEY: ${CATTLE_ACCESS_KEY}
         CATTLE_SECRET_KEY: ${CATTLE_SECRET_KEY}
@@ -16,3 +16,9 @@ secrets-bridge:
         - ${CATTLE_SECRET_KEY}
         - --rancher-access
         - ${CATTLE_ACCESS_KEY}
+secrets-bridge-lb:
+    ports:
+        - "${LBPORT}:8181"
+    image: rancher/load-balancer-service
+    links:
+        - secrets-bridge:secrets-bridge

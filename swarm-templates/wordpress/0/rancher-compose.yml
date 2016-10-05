@@ -1,6 +1,6 @@
 .catalog:
   name: "Wordpress"
-  version: latest-rancher1
+  version: 1.0.0-latest-rancher1
   description: "Blog tool, publishing platform and CMS"
   minimum_rancher_version: v1.0.0-rc2
   questions:

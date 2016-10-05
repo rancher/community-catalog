@@ -6,7 +6,7 @@ cd $(dirname $0)/..
 trap "rm -rf /scratch/*" exit
 
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ -n "${DRONE_BRANCH}" ]; then
+if [ -n "${DRONE_BRANCH}" ] && [ "${DRONE_BRANCH}" != "${GIT_BRANCH}" ]; then
     git checkout -b ${DRONE_BRANCH}
     GIT_BRANCH=${DRONE_BRANCH}
 fi

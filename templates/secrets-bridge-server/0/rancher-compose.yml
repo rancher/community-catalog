@@ -34,3 +34,18 @@
           label: "Vault Cubbyhole Path"
           required: true
           description: "Path to get the permenant API key"
+        - variable: LBPORT
+          description: "Port for Secrets Bridge LB to listen on"
+          label: "LB Port"
+          type: string
+          required: true
+secrets-bridge-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000

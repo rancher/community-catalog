@@ -6,6 +6,10 @@ Only works with Hashicorp Vault server in dev mode currently.
 ---
 #### Description: 
   This is the agent component for the Vault secrets bridge with Rancher. This service will be deployed in the environment running applications that need secrets. This service does not have direct access to Vault, it communicates with the Secrets Bridge server.
+ 
+#### Setup
+
+See [setup guide](https://github.com/rancher/secrets-bridge/blob/master/docs/setup.md)
   
 #### Pre-reqs:
 

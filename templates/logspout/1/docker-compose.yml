@@ -10,5 +10,5 @@ logspout:
     io.rancher.scheduler.global: 'true'
     io.rancher.container.hostname_override: container_name
   tty: true
-  image: rancher/logspout-logstash:v0.2.0
+  image: bekt/logspout-logstash:latest
   stdin_open: true
