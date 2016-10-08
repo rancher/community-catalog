@@ -20,4 +20,4 @@ portworx:
      - /opt/pwx/bin:/export_bin:shared
      - /var/run/docker.sock:/var/run/docker.sock
      - /var/cores:/var/cores
-  command: -c ${cluster_id} -k ${kvdb} -a -f
+  command: -c ${cluster_id} -k ${kvdb} -a -z -f
