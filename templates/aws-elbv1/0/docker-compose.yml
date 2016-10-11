@@ -1,0 +1,14 @@
+elbv1:
+  image: rancher/external-lb:v0.2.1
+  command: -provider=elbv1
+  expose: 
+   - 1000
+  environment:
+    ELBV1_AWS_ACCESS_KEY: ${ELBV1_AWS_ACCESS_KEY}
+    ELBV1_AWS_SECRET_KEY: ${ELBV1_AWS_SECRET_KEY}
+    ELBV1_AWS_REGION: ${ELBV1_AWS_REGION}
+    ELBV1_AWS_VPCID: ${ELBV1_AWS_VPCID}
+    ELBV1_USE_PRIVATE_IP: ${ELBV1_USE_PRIVATE_IP}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"

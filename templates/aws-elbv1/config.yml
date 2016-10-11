@@ -1,0 +1,5 @@
+name: ELB Classic Load Balancer
+description: |
+  External LB service powered by AWS Elastic Load Balancing
+version: v0.2.1-rancher1
+category: Load Balancing
