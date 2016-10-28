@@ -1,0 +1,71 @@
+qdb-ui:
+  ports:
+  - ${webport}:${webport}/tcp
+  environment:
+    DEVICE: ${device}
+    PEER: qdb1
+    PORT: '${qdbport}'
+    WEBPORT: '${webport}'
+  labels:
+    io.rancher.container.dns: 'true'
+  command:
+  - /start.sh
+  - httpd
+  image: makazi/quasardb:2.0.0-rc.8
+  net: host
+
+qdb1-data:
+  labels:
+    io.rancher.container.start_once: 'true'
+  command:
+  - /bin/true
+  image: busybox
+  volumes:
+  - /var/db/qdb
+  - /var/lib/qdb
+
+qdb2-data:
+  labels:
+    io.rancher.container.start_once: 'true'
+  command:
+  - /bin/true
+  image: busybox
+  volumes:
+  - /var/db/qdb
+  - /var/lib/qdb
+
+qdb2:
+  ports:
+  - ${qdbport}:${qdbport}/tcp
+  environment:
+    ID: 2/2
+    DEVICE: ${device}
+    PEER: qdb1
+    PORT: '${qdbport}'
+    REPLICATION: ${replication}
+  labels:
+    io.rancher.sidekicks: qdb2-data
+    io.rancher.container.dns: 'true'
+  command:
+  - /start.sh
+  image: makazi/quasardb:2.0.0-rc.8
+  volumes_from:
+  - qdb2-data
+  net: host
+qdb1:
+  ports:
+  - ${qdbport}:${qdbport}/tcp
+  environment:
+    ID: 1/2
+    DEVICE: ${device}
+    PORT: '${qdbport}'
+    REPLICATION: ${replication}
+  labels:
+    io.rancher.sidekicks: qdb1-data
+    io.rancher.container.dns: 'true'
+  command:
+  - /start.sh
+  image: makazi/quasardb:2.0.0-rc.8
+  volumes_from:
+  - qdb1-data
+  net: host

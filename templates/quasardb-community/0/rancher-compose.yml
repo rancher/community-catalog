@@ -1,0 +1,51 @@
+.catalog:
+  name: QuasarDB Community
+  version: 2.0.0-rc8
+  description: |
+    QuasarDB is a distributed key-value store with peer-to-peer replication, transactions, atomic operations, no-limit tagging and real-time search.
+  minimum_rancher_version: v1.0.0
+  maintainer: "Alexis Ducastel <alexis@ducastel.net>"
+  uuid: qdb-ce-0
+  questions:
+
+    - variable: "device"
+      description: "QuasarDB will listen on this network interface device"
+      label: "QuasarDB listening device:"
+      required: true
+      default: "eth0"
+      type: "string"
+
+    - variable: "qdbport"
+      description: "QuasarDB will listen on this TCP port"
+      label: "QuasarDB listening port:"
+      required: true
+      default: "2836"
+      type: "int"
+
+    - variable: "replication"
+      description: "QuasarDB replication factor"
+      label: "QuasarDB replication factor:"
+      required: true
+      default: "2"
+      type: "enum"
+      options:
+        - 1
+        - 2
+
+    - variable: "webport"
+      description: "QuasarDB Web UI will listen on this TCP port"
+      label: "QuasarDB Web UI port:"
+      required: true
+      default: "2880"
+      type: "int"
+
+qdb-ui:
+  scale: 1
+qdb1-data:
+  scale: 1
+qdb2-data:
+  scale: 1
+qdb2:
+  scale: 1
+qdb1:
+  scale: 1
