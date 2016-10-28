@@ -11,6 +11,8 @@ alfresco:
   stdin_open: true
   ports:
   - 8080:8080/tcp
+  volumes_from:
+    - alfresco-data
 alfresco-data:
   labels:
     io.rancher.container.start_once: 'true'
@@ -18,6 +20,7 @@ alfresco-data:
   volumes:
   - /opt/alfresco/alf_data
   net: none
+  command: /bin/true
 postgres:
   environment:
     PGDATA: /var/lib/postgresql/data/pgdata
@@ -29,6 +32,8 @@ postgres:
   tty: true
   image: postgres:9.4
   stdin_open: true
+  volumes_from:
+    - postgres-data
 postgres-data:
   labels:
     io.rancher.container.start_once: 'true'
@@ -36,3 +41,4 @@ postgres-data:
   volumes:
   - /var/lib/postgresql/data/pgdata
   net: none
+  command: /bin/true
