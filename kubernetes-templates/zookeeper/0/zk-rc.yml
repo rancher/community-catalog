@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  name: "${zk_name}"
+  namespace: "${zk_namespace}"
+  labels:
+    name: "${zk_name}"
+spec:
+  replicas: ${zk_scale}
+  selector:
+    name: "${zk_name}"
+  template:
+    metadata: 
+      labels:
+        name: "${zk_name}"
+      annotations:
+    spec:
+      containers:
+        - name: "zk-conf"
+          image: "rawmind/k8s-zk:3.4.8-10"
+          volumeMounts:
+            - mountPath: "/opt/tools"
+              name: "zk-conf"
+          ports: 
+          imagePullPolicy: "IfNotPresent"
+        - name: "zk-volume"
+          image: "rawmind/alpine-volume:0.0.2-1"
+          env:
+            - name: SERVICE_UID
+              value: "10002"
+            - name: SERVICE_GID
+              value: "10002"
+            - name: SERVICE_VOLUME
+              value: "${kafka_log_dir}"
+            - name: KEEP_ALIVE
+              value: "1"
+          volumeMounts:
+            - mountPath: "${zk_data_dir}"
+              name: "zk-data"
+          ports: 
+          imagePullPolicy: "IfNotPresent"
+        - name: "zk-service"
+          image: "rawmind/alpine-zk:3.4.8-16"
+          env:
+            - name: JVMFLAGS
+              value: "-Xmx${zk_mem}m -Xms${zk_mem}m"
+            - name: ZK_DATA_DIR
+              value: "${zk_data_dir}"
+            - name: ZK_INIT_LIMIT
+              value: "${zk_init_limit}"
+            - name: ZK_MAX_CLIENT_CXNS
+              value: "${zk_max_client_cxns}"
+            - name: ZK_SYNC_LIMIT
+              value: "${zk_sync_limit}"
+            - name: ZK_TICK_TIME
+              value: "${zk_tick_time}"
+            - name: POD_NAMESPACE
+              value: "${zk_namespace}"
+          volumeMounts:
+            - mountPath: "${zk_data_dir}"
+              name: "zk-data"
+            - mountPath: "/opt/tools"
+              name: "zk-conf"
+          ports:
+            - containerPort: 2181
+              name: "zk-client"
+              protocol: "TCP"
+            - containerPort: 2888
+              name: "zk-server"
+              protocol: "TCP"
+            - containerPort: 3888
+              name: "zk-leader"
+              protocol: "TCP"
+          imagePullPolicy: "IfNotPresent"
+      restartPolicy: "Always"
+      volumes:
+        - name: "zk-data"
+          emptyDir: {}
+        - name: "zk-conf"
+          emptyDir: {}

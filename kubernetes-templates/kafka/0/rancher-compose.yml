@@ -1,12 +1,24 @@
 .catalog:
   name: Kafka
-  version: 0.10.0.1-rancher1
+  version: 0.10.0.1-k8s
   description: |
     (Experimental) Apache Kafka cluster.
   minimum_rancher_version: v0.59.0
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   uuid: kafka-0
   questions:
+    - variable: "kafka_name"
+      description: "Name of kafka rc and service."
+      label: "K8s rc name:"
+      required: true
+      default: "kafka"
+      type: "string"
+    - variable: "kafka_namespace"
+      description: "Name of kafka namespace."
+      label: "K8s namespace:"
+      required: true
+      default: "default"
+      type: "string"
     - variable: "kafka_scale"
       description: "Number of brokers nodes. Note: Recommended an odd number"
       label: "Broker Nodes:"
@@ -67,7 +79,7 @@
         Choose the Zookeeper service to use. 
         It's really recommended a dedicated zookeeper service just for Kafka.
       label: "Zookeeper stack/service"
-      default: "kafka-zk/zk"
+      default: "default/zookeeper"
       required: true
       type: "service"
 broker:

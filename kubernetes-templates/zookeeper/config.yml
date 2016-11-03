@@ -1,8 +1,7 @@
 name: Apache Zookeeper
 description: |
   (Experimental) Zookeeper cluster
-version: 3.4.8-rancher1
+version: 3.4.8-k8s1
 category: Clustering
 maintainer: "Raul Sanchez <rawmind@gmail.com>"
 projectURL: https://github.com/rawmind0/alpine-zk
-license: 
