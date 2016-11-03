@@ -1,5 +1,5 @@
 secrets-bridge:
-    image: rancher/secrets-bridge:v0.1.7
+    image: rancher/secrets-bridge:v0.1.8
     command: agent --bridge-url ${BRIDGE_URL}
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock

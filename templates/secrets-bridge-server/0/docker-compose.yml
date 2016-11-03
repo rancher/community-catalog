@@ -1,5 +1,5 @@
 secrets-bridge:
-    image: rancher/secrets-bridge:v0.1.7
+    image: rancher/secrets-bridge:v0.1.8
     environment:
         CATTLE_ACCESS_KEY: ${CATTLE_ACCESS_KEY}
         CATTLE_SECRET_KEY: ${CATTLE_SECRET_KEY}
