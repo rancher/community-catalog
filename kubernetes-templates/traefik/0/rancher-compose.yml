@@ -1,0 +1,38 @@
+.catalog:
+  name: traefik
+  version: v1.0.2
+  description: |
+    Traefik load balancer.
+  minimum_rancher_version: v0.59.0
+  maintainer: "German Ramos <german.ramos@gmail.com>"
+  uuid: traefik-0
+  questions:
+    - variable: NAMESPACE
+      default: default
+      label: Kubernetes Namespace
+      required: true
+      type: string
+    - variable: REPLICAS
+      description: Usually match the number of nodes with label traefik_lb=true
+      default: 1
+      label: Replicas
+      required: true
+      type: int
+    - variable: "http_port"
+      description: "Traefik http public port to listen."
+      label: "Http port:"
+      required: true
+      default: 80
+      type: "int"
+    - variable: "https_port"
+      description: "Traefik https public port to listen."
+      label: "Http port:"
+      required: true
+      default: 443
+      type: "int"
+    - variable: "admin_port"
+      description: "Traefik admin public port to listen."
+      label: "Admin port:"
+      required: true
+      default: 8000
+      type: "int"
