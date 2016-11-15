@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kube-system
+  labels: null
+  name: monitoring-grafana
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    nodePort: ${GRAFANA_PORT}
+    targetPort: 3000
+  selector:
+    name: influxGrafana

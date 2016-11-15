@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kube-system
+  labels: null
+  name: monitoring-influxdb
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    nodePort: ${INFLUXDB_PORT}
+    port: 8083
+    targetPort: 8083
+  - name: api
+    port: 8086
+    targetPort: 8086
+  selector:
+    name: influxGrafana
