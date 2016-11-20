@@ -1,0 +1,69 @@
+.catalog:
+  name: "Confluence"
+  version: "6.0.1"
+  description: "Create, organize, and discuss work with your team"
+  questions:
+    - variable: "context_path"
+      label: "Context path"
+      description: |
+        The context path under which Confluence will be available
+      type: "string"
+      default: "/confluence"
+      required: true
+    - variable: "proxy_name"
+      label: "Proxy name"
+      description: |
+        When behind a proxy, specify the name through which clients will connect to Confluence. For example: confluence.mycompany.com
+      type: "string"
+      required: false
+    - variable: "proxy_port"
+      label: "Proxy port"
+      description: |
+        When behind a proxy, specify the port through which clients will connect to Confluence
+      type: "int"
+      required: false
+    - variable: "proxy_scheme"
+      label: "Proxy scheme"
+      description: |
+        When behind a proxy, specify the protocol clients will use to connect to Confluence
+      type: "enum"
+      options:
+        - http
+        - https
+      default: http
+      required: false
+    - variable: "heap_size"
+      label: "Heap size"
+      description: |
+        The size of the heap the JVM can allocate
+      type: "string"
+      default: "1024m"
+      required: true
+    - variable: "jvm_args"
+      label: "JVM arguments"
+      description: |
+        Additional arguments to pass to the JVM
+      type: "string"
+      required: false
+    - variable: "database_link"
+      label: "Database"
+      description: |
+        Service link to the database. This will be mapped to the container as 'database'
+      type: "service"
+      required: false
+    - variable: "confluence_home"
+      label: "Confluence home directory"
+      description: |
+        The location to mount the Confluence home directory on
+      type: "string"
+      required: true
+confluence:
+  scale: 1
+  health_check:
+    port: 8090
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000
