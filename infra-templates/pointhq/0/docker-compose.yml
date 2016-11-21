@@ -1,0 +1,13 @@
+pointhq:
+  image: rancher/external-dns:v0.2.0
+  command: --provider pointhq
+  expose: 
+   - 1000
+  environment:
+    POINTHQ_TOKEN: ${POINTHQ_TOKEN}
+    POINTHQ_EMAIL: ${POINTHQ_EMAIL}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"

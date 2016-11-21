@@ -1,0 +1,38 @@
+.catalog:
+  name: "PowerDNS External"
+  version: "v0.5.0-rancher1"
+  description: Rancher External DNS service for PowerDNS.
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  uuid: powerdns-external-dns:v0.5.0-rancher1
+  questions:
+    - variable: POWERDNS_URL
+      label: PowerDNS URL
+      type: string
+      description: http[s] base url to PowerDNS
+      required: true
+      default: http://powerdns:8100
+    - variable: POWERDNS_API_KEY
+      label: PowerDNS API Key
+      type: password
+      description: API Key for PowerDNS
+      required: true
+    - variable: TTL
+      label: TTL
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: int
+      default: 299
+      required: false
+    - variable: "ROOT_DOMAIN"
+      label: "Hosted zone name"
+      description: "Hosted zone name (zone has to be pre-created). DNS entries will be created for <service>.<stack>.<environment>.<hosted zone>"
+      type: "string"
+      required: true
+
+powerdns:
+  health_check:
+    port: 1000
+    interval: 30000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000

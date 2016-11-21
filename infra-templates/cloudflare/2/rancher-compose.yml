@@ -1,0 +1,36 @@
+.catalog:
+  name: "CloudFlare DNS"
+  version: "v0.4.0-rancher1"
+  description: "Rancher External DNS service powered by CloudFlare. Requires Rancher version 0.44.0"
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  questions:
+    - variable: "CLOUDFLARE_EMAIL"
+      label: "CloudFlare email address"
+      description: "Email address associated with your CloudFlare account"
+      type: "string"
+      required: true
+    - variable: "CLOUDFLARE_KEY"
+      label: "CloudFlare API key"
+      description: "API key for your CloudFlare account"
+      type: "string"
+      required: true
+    - variable: "ROOT_DOMAIN"
+      label: "Domain"
+      description: "The DNS zone (domain) managed by CloudFlare. DNS entries will be created for <service>.<stack>.<environment>.<domain>"
+      type: "string"
+      required: true
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds (minimum 120)"
+      type: "int"
+      default: 300
+      required: false
+
+cloudflare:
+  health_check:
+    port: 1000
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000

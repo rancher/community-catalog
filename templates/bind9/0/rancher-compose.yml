@@ -3,6 +3,7 @@
   version: "v1.0.0-rancher1"
   description: "Domain Name Server powered by Bind9"
   minimum_rancher_version: v0.44.0
+  maximum_rancher_version: v1.2.0-pre3
   questions:
     - variable: "BIND9_ROOTDOMAIN"
       label: "The root domain to manage in bind9"
@@ -42,4 +43,3 @@ bind9:
     strategy: recreate
     healthy_threshold: 2
     response_timeout: 2000
-

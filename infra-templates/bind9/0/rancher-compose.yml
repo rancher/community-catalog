@@ -1,0 +1,44 @@
+.catalog:
+  name: "Bind9 DNS"
+  version: "v1.0.0-rancher1"
+  description: "Domain Name Server powered by Bind9"
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  questions:
+    - variable: "BIND9_ROOTDOMAIN"
+      label: "The root domain to manage in bind9"
+      description: "This root domain will be managed by the Bind9 server. Updates and axfr requests will be made on this domain"
+      type: "string"
+      required: true
+    - variable: "BIND9_KEYNAME"
+      label: "Bind9 TSIG Keyname"
+      description: "The TSIG keyname"
+      type: "string"
+      required: true
+    - variable: "BIND9_KEY"
+      label: "Bind9 TSIG Key (base64 encoded)"
+      description: "The TSIG key. Must be base64 encoded"
+      type: "string"
+      required: true
+    - variable: "BIND9_PORT"
+      label: "Bind9 port"
+      description: "Bind9 port to expose on host. Will be used to bind both TCP and UDP"
+      type: "string"
+      default: 53
+      required: true
+    - variable: "BIND9_FORWARDERS"
+      label: "Bind9 dns forwarders"
+      description: "The DNS forwarders"
+      type: "string"
+      default: 8.8.8.8;8.8.4.4;
+      required: true
+
+bind9:
+  scale: 1
+  health_check:
+    port: ${BIND9_PORT}
+    interval: 2000
+    initializing_timeout: 20000
+    unhealthy_threshold: 3
+    strategy: recreate
+    healthy_threshold: 2
+    response_timeout: 2000

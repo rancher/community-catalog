@@ -1,0 +1,45 @@
+.catalog:
+  name: "DNSimple DNS"
+  version: "v0.6.0-rancher1"
+  description: "Rancher External DNS service powered by DNSimple. Requires Rancher version v1.1.0"
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  questions:
+    - variable: "DNSIMPLE_EMAIL"
+      label: "DNSimple Account Email Address"
+      description: "Email address associated with your DNSimple account"
+      type: "string"
+      required: true
+    - variable: "DNSIMPLE_TOKEN"
+      label: "DNSimple API Token"
+      description: "API token for your DNSimple account"
+      type: "string"
+      required: true
+    - variable: "ROOT_DOMAIN"
+      label: "Root Domain"
+      description: "The domain name managed by DNSimple."
+      type: "string"
+      required: true
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: "int"
+      default: 60
+      required: false
+    - variable: "NAME_TEMPLATE"
+      label: "DNS Name Template"
+      description: |
+        Name template used to construct the subdomain part (left of the root domain name) of the DNS record names.
+        Supported placeholders: %{{service_name}}, %{{stack_name}}, %{{environment_name}}.
+        By default DNS entries will be named '<service>.<stack>.<environment>.<domain>'.
+      type: "string"
+      default: "%{{service_name}}.%{{stack_name}}.%{{environment_name}}"
+      required: false
+
+dnsimple:
+  health_check:
+    port: 1000
+    interval: 15000
+    unhealthy_threshold: 2
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000

@@ -1,0 +1,36 @@
+.catalog:
+  name: "PointHQ DNS"
+  version: "v0.2.1-rancher1"
+  description: "Rancher External DNS service powered by PointHQ. Requires Rancher version 0.44.0"
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  questions:
+    - variable: "POINTHQ_EMAIL"
+      label: "PointHQ account email address"
+      description: "EMail address associated with your PointHQ account"
+      type: "string"
+      required: true
+    - variable: "POINTHQ_TOKEN"
+      label: "PointHQ API token"
+      description: "API token for your PointHQ account"
+      type: "string"
+      required: true
+    - variable: "ROOT_DOMAIN"
+      label: "Root domain"
+      description: "DNS entries will be created for <service>.<stack>.<environment>.<root domain>"
+      type: "string"
+      required: true
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: "int"
+      default: 300
+      required: false
+
+pointhq:
+  health_check:
+    port: 1000
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000

@@ -1,0 +1,47 @@
+.catalog:
+  name: "DNS Update (RFC2136)"
+  version: "v0.5.0-rancher1"
+  description: "Rancher External DNS service powered by any RFC2136 compatible DNS"
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  questions:
+    - variable: "RFC2136_HOST"
+      label: "Domain Name Server IP"
+      description: "Server IP or Hostname"
+      type: "string"
+      required: true
+    - variable: "RFC2136_PORT"
+      label: "Domain Name Server Port"
+      description: "Server port"
+      type: "string"
+      required: true
+      default: "53"
+    - variable: "RFC2136_TSIG_KEYNAME"
+      label: "TSIG Key Name"
+      description: "Name of the key used for TSIG"
+      type: "string"
+      required: true
+    - variable: "RFC2136_TSIG_SECRET"
+      label: "TSIG Key"
+      description: "Value of the key used for TSIG, base64 encoded"
+      type: "string"
+      required: true
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: "int"
+      default: 299
+      required: false
+    - variable: "ROOT_DOMAIN"
+      label: "Hosted zone name"
+      description: "DNS hosted zone name (zone has to be pre-created). DNS entries will be created for <service>.<stack>.<environment>.<hosted zone>"
+      type: "string"
+      required: true
+
+rfc2136dns:
+  health_check:
+    port: 1000
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000
