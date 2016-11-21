@@ -2,7 +2,7 @@
   name: "PowerDNS External"
   version: "v0.5.0-rancher1"
   description: Rancher External DNS service for PowerDNS.
-  minimum_rancher_version: v1.2.0-pre4-rc3
+  minimum_rancher_version: v1.2.0-pre4-rc1
   uuid: powerdns-external-dns:v0.5.0-rancher1
   questions:
     - variable: POWERDNS_URL

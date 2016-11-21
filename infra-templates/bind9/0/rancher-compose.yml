@@ -2,7 +2,7 @@
   name: "Bind9 DNS"
   version: "v1.0.0-rancher1"
   description: "Domain Name Server powered by Bind9"
-  minimum_rancher_version: v1.2.0-pre4-rc3
+  minimum_rancher_version: v1.2.0-pre4-rc1
   questions:
     - variable: "BIND9_ROOTDOMAIN"
       label: "The root domain to manage in bind9"
