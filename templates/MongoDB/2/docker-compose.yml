@@ -9,7 +9,7 @@ mongo-cluster:
   - "${replset_name}"
   image: mongo:3.2
   labels:
-    io.rancher.scheduler.affinity: "${host_label}"
+    io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: mongo-base, mongo-datavolume
   volumes_from:
@@ -20,7 +20,7 @@ mongo-base:
   net: none
   tty: true
   labels:
-    io.rancher.scheduler.affinity: "${host_label}"
+    io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   image: rancher/mongodb-conf:v0.1.0
@@ -29,7 +29,7 @@ mongo-base:
 mongo-datavolume:
   net: none
   labels:
-    io.rancher.scheduler.affinity: "${host_label}"
+    io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   volumes:
