@@ -1,0 +1,27 @@
+.catalog:
+  name: "MongoDB"
+  version: "3.2-rancher2"
+  description: "MongoDB Replica Set"
+  uuid: mongodb-1
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: replset_name
+      description: "Name of the MongoDB replicaSet"
+      label: "ReplicaSet Name"
+      type: "string"
+      required: true
+      default: "rs0"
+    - variable: host_label
+      label: "Host Label to MongoDB Tags"
+      description: |
+        Host label to use as MongoDB 'value' tag.
+        Example: 'database'
+      required: false
+      type: "string"
+mongo-cluster:
+  scale: 3
+  retain_ip: true
+  metadata:
+    mongo:
+      yml:
+        replset.name: "${replset_name}"
