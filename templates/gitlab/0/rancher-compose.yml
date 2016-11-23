@@ -13,6 +13,24 @@
       required: true
       default: "git.example.com"
       type: "string"
+    - variable: "http_port"
+      description: "HTTP port to expose on host. Will be used to bind TCP"
+      label: "HTTP port:"
+      required: true
+      default: 80
+      type: "string"
+    - variable: "https_port"
+      description: "HTTPS port to expose on host. Will be used to bind TCP"
+      label: "HTTPS port:"
+      required: true
+      default: 443
+      type: "string"
+    - variable: "ssh_port"
+      description: "SSH port to expose on host. Will be used to bind TCP"
+      label: "SSH port:"
+      required: true
+      default: 22
+      type: "string"
 
 gitlab-server:
   scale: 1

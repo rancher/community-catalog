@@ -1,7 +1,8 @@
 gitlab-server:
   ports:
-  - 22:22/tcp
-  - 80:80/tcp
+  - ${ssh_port}:22/tcp
+  - ${http_port}:80/tcp
+  - ${https_port}:443/tcp
   labels:
     io.rancher.sidekicks: gitlab-data
   hostname: ${gitlab_hostname}
