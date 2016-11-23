@@ -32,7 +32,7 @@
       type: "string"
       required: false
       label: "SENTRY_SERVER_EMAIL"
-      description: "The smtp server address. see https://hub.docker.com/_/sentry/ for more info"
+      description: "The email address used for 'From:'. see https://hub.docker.com/_/sentry/ for more info"
 
     - variable: "sentry_email_host"
       type: "string"
