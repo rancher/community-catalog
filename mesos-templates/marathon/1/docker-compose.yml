@@ -4,6 +4,8 @@ marathon:
     ZK_SERVICE: Mesos/zookeeper
     MESOS_SERVICE: Mesos/mesos-master
     MARATHON_HTTP_PORT: ${MARATHON_HTTP_PORT}
+  labels:
+    io.rancher.container.hostname_override: container_name
   ports:
   - "${MARATHON_HTTP_PORT}:${MARATHON_HTTP_PORT}"
   privileged: true
