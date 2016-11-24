@@ -1,0 +1,7 @@
+name: "Plone"
+description: |
+  Plone is the premier Python-based CMS
+version: "5.0-rancher1"
+maintainer: "Alin Voinea <alin.voinea@gmail.com>"
+minimum_rancher_version: v1.0
+category: CMS

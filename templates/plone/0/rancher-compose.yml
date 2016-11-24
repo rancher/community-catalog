@@ -1,0 +1,83 @@
+.catalog:
+  name: "Plone"
+  version: "5.0-rancher1"
+  description: |
+    Plone CMS
+  uuid: plone-1
+  questions:
+    - variable: "version"
+      label: "Plone version"
+      description: "Select Plone version to run"
+      required: true
+      type: "enum"
+      options:
+        - 5.0
+        - 4.3
+      default: 5.0
+    - variable: "addons"
+      type: "string"
+      label: "Plone add-ons"
+      description: |
+        List of Plone Add-ons space separated
+      default: ""
+    - variable: "http_port"
+      type: "int"
+      label: "Port"
+      description: |
+        Plone HTTP public port to listen.
+      default: 8080
+      required: true
+    - variable: "host_label"
+      description: "Host label where to run Plone service."
+      label: "Host label:"
+      default: "plone=true"
+      type: "string"
+    - variable: "scale"
+      type: "int"
+      label: "Scale"
+      description: |
+        How many Plone instances to create
+      default: 2
+      required: true
+    - variable: volume_name
+      type: "string"
+      label: "Volume name"
+      description: |
+        Specifiy volume name for Plone data (filestorage, blobstorage)
+      default: plone-data
+    - variable: volume_driver
+      type: "string"
+      label: "Volume driver"
+      description: |
+        Specifiy docker volume driver to use
+      default: local
+
+plone:
+  scale: ${scale}
+  health_check:
+    port: 8080
+    interval: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+    request_line: GET /
+
+zeoserver:
+  scale: 1
+  health_check:
+    port: 8100
+    interval: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000

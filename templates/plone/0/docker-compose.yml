@@ -1,0 +1,33 @@
+zeoserver:
+  image: plone:${version}
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.community.plone=true
+    io.rancher.community.plone: "true"
+  volumes:
+  - ${volume_name}:/data
+  volume_driver: ${volume_driver}
+  command: ["zeoserver"]
+
+plone:
+  image: plone:${version}
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.community.plone=true
+    io.rancher.community.plone: "true"
+  links:
+  - zeoserver:zeoserver
+  environment:
+    ADDONS: ${addons}
+    ZEO_ADDRESS: zeoserver:8100
+
+lb:
+  image: rancher/load-balancer-service
+  labels:
+    io.rancher.scheduler.affinity:host_label: ${host_label}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.community.plone=true
+    io.rancher.community.plone: "true"
+  links:
+  - plone:plone
+  ports:
+  - ${http_port}:8080
