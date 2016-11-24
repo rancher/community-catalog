@@ -1,0 +1,11 @@
+chronos:
+  image: rancher/chronos:latest
+  environment:
+    ZK_SERVICE: mesos/zookeeper
+    MESOS_SERVICE: mesos/mesos-master
+    CHRONOS_HTTP_PORT: ${CHRONOS_HTTP_PORT}
+  labels:
+    io.rancher.container.hostname_override: container_name
+  ports:
+  - "${CHRONOS_HTTP_PORT}:${CHRONOS_HTTP_PORT}"
+  privileged: true

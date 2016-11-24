@@ -1,0 +1,13 @@
+scheduler:
+  image: rancher/elasticsearch:latest
+  environment:
+    ZK_SERVICE: mesos/zookeeper
+    MESOS_SERVICE: mesos/mesos-master
+    SCHEDULER_PORT: ${SCHEDULER_PORT}
+    JAVA_OPTS: -Xms256M -Xmx256M
+    NODE_COUNT: ${NODE_COUNT}
+  labels:
+    io.rancher.container.hostname_override: container_name
+  ports:
+  - "${SCHEDULER_PORT}:${SCHEDULER_PORT}"
+  privileged: true

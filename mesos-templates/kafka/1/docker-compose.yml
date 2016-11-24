@@ -1,0 +1,11 @@
+scheduler:
+  image: rancher/kafka:latest
+  environment:
+    ZK_SERVICE: mesos/zookeeper
+    MESOS_SERVICE: mesos/mesos-master
+    SCHEDULER_PORT: ${SCHEDULER_PORT}
+  labels:
+    io.rancher.container.hostname_override: container_name
+  ports:
+  - "${SCHEDULER_PORT}:${SCHEDULER_PORT}"
+  privileged: true
