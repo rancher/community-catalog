@@ -1,5 +1,7 @@
 .catalog:
   version: v1.1.0
+  minimum_rancher_version: v1.0.0
+  maximum_rancher_version: v1.2.0-pre3
   questions:
   - variable: MARATHON_HTTP_PORT
     description: Port to expose Marathon on.

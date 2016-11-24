@@ -1,7 +1,6 @@
 name: Marathon
 description: |
   A production-grade container orchestration platform
-version: v1.1.1
+version: v1.1.1-cni
 category: Frameworks
-maintainer: James Oliver <joliver@rancher.com>
 minimum_rancher_version: v1.0.0

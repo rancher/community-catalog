@@ -1,0 +1,11 @@
+marathon:
+  image: rancher/marathon:v1.1.1
+  environment:
+    ZK_SERVICE: mesos/zookeeper
+    MESOS_SERVICE: mesos/mesos-master
+    MARATHON_HTTP_PORT: ${MARATHON_HTTP_PORT}
+  labels:
+    io.rancher.container.hostname_override: container_name
+  ports:
+  - "${MARATHON_HTTP_PORT}:${MARATHON_HTTP_PORT}"
+  privileged: true

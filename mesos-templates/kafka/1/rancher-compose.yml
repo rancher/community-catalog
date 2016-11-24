@@ -1,8 +1,7 @@
 .catalog:
   name: Kafka
-  version: v1
-  minimum_rancher_version: v1.0.0
-  maximum_rancher_version: v1.2.0-pre3
+  version: v2
+  minimum_rancher_version: v1.2.0-pre4-rc1
   description: |
     A high-throughput distributed messaging system
   questions:
