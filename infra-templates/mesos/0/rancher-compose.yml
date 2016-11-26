@@ -1,6 +1,6 @@
 .catalog:
   version: v0.28.0
-
+  minimum_rancher_version: 1.2.0-pre4-rc1
 zookeeper:
   scale: 3
   retain_ip: true
