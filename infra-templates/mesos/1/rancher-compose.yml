@@ -1,0 +1,57 @@
+.catalog:
+  version: v0.28.1
+  minimum_rancher_version: v1.2.0-pre4-rc1
+  questions:
+  - variable: ZOOKEEPER_SCALE
+    label: ZooKeeper Count
+    description: Number of ZooKeeper nodes to launch. Only one node is scheduled to each host.
+    required: true
+    default: 3
+    type: enum
+    options:
+    - 1
+    - 3
+    - 5
+    - 7
+  - variable: MESOS_MASTER_SCALE
+    label: Mesos Master Count
+    description: Number of Mesos Master nodes to launch. Only one node is scheduled to each host.
+    required: true
+    default: 3
+    type: enum
+    options:
+    - 3
+  - variable: ZOOKEEPER_JVM_FLAGS
+    label: ZooKeeper JVM Flags
+    description: Flags to be passed to the JVM running ZooKeeper
+    required: false
+    default: -Xmx512m -Xms512m
+    type: string
+zookeeper:
+  scale: ${ZOOKEEPER_SCALE}
+  retain_ip: true
+  health_check:
+    port: 2181
+    interval: 5000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: ''
+    response_timeout: 5000
+mesos-master:
+  scale: ${MESOS_MASTER_SCALE}
+  retain_ip: true
+  health_check:
+    port: 5050
+    interval: 5000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: '/metrics/snapshot'
+    response_timeout: 5000
+mesos-slave:
+  health_check:
+    port: 5051
+    interval: 5000
+    unhealthy_threshold: 2
+    healthy_threshold: 2
+    request_line: ''
+    response_timeout: 5000
