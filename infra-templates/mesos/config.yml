@@ -1,3 +1,4 @@
 name: Mesos
 version: v0.28.1
 category: Orchestration
+description: A distributed systems kernel

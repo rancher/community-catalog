@@ -2,7 +2,7 @@ zookeeper:
   image: rancher/zookeeper:3.4.8
   environment:
     ZK_ENSEMBLE_SIZE: ${ZOOKEEPER_SCALE}
-    JVMFLAGS: -Xmx512m -Xms512m
+    JVMFLAGS: ${ZOOKEEPER_JVM_FLAGS}
     CONFD_INTERVAL: 0
   labels:
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}

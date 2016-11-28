@@ -3,7 +3,7 @@
   minimum_rancher_version: v1.2.0-pre4-rc1
   questions:
   - variable: ZOOKEEPER_SCALE
-    label: Zookeeper Count
+    label: ZooKeeper Count
     description: Number of ZooKeeper nodes to launch. Only one node is scheduled to each host.
     required: true
     default: 3
@@ -21,6 +21,12 @@
     type: enum
     options:
     - 3
+  - variable: ZOOKEEPER_JVM_FLAGS
+    label: ZooKeeper JVM Flags
+    description: Flags to be passed to the JVM running ZooKeeper
+    required: false
+    default: -Xmx512m -Xms512m
+    type: string
 zookeeper:
   scale: ${ZOOKEEPER_SCALE}
   retain_ip: true
