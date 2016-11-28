@@ -1,0 +1,107 @@
+db:
+  image: mysql:5.7.10
+  environment:
+    MYSQL_DATABASE: portus
+    MYSQL_ROOT_PASSWORD: ${ROOTPASSWORD}
+    MYSQL_USER: portus
+    MYSQL_PASSWORD: ${DBPASSWORD}
+  tty: true
+  stdin_open: true
+  volumes:
+  - ${DIR}/db:/var/lib/mysql
+  labels:
+    registry.portus.db: 1
+sslproxy:
+  image: nginx:1.9.9
+  tty: true
+  stdin_open: true
+  links:
+  - portus:portus
+  volumes:
+  - ${DIR}/certs:/etc/nginx/certs:ro
+  - ${DIR}/proxy:/etc/nginx/conf.d:ro
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft: registry.portus.db=1
+registry:
+  image: registry:2.3.1
+  environment:
+    REGISTRY_LOG_LEVEL: warn
+    REGISTRY_STORAGE_DELETE_ENABLED: true
+    REGISTRY_AUTH: token
+    REGISTRY_AUTH_TOKEN_REALM: https://${DOMAIN}:${PPORT}/v2/token
+    REGISTRY_AUTH_TOKEN_SERVICE: ${DOMAIN}:${RPORT}
+    REGISTRY_AUTH_TOKEN_ISSUER: ${DOMAIN}
+    REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE: /certs/registry.crt
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/registry.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/registry.key
+    REGISTRY_HTTP_SECRET: httpsecret
+    REGISTRY_NOTIFICATIONS_ENDPOINTS: >
+      - name: portus
+        url: http://portus:3000/v2/webhooks/events
+        timeout: 500
+        threshold: 5
+        backoff: 1
+  tty: true
+  stdin_open: true
+  links:
+  - portus:portus
+  volumes:
+  - ${DIR}/certs:/certs
+  - ${DIR}/data:/var/lib/registry
+lb:
+  image: rancher/load-balancer-service
+  tty: true
+  stdin_open: true
+  ports:
+  - ${RPORT}:5000/tcp
+  - ${PPORT}:443/tcp
+  labels:
+    io.rancher.loadbalancer.target.sslproxy: ${PPORT}=443
+    io.rancher.loadbalancer.target.registry: ${RPORT}=5000
+    io.rancher.scheduler.global: 'true'
+    io.rancher.scheduler.affinity:not_host_label: lb=0
+    io.rancher.scheduler.affinity:not_host_label: registry.enabled=false
+  links:
+  - registry:registry
+  - sslproxy:sslproxy
+portus:
+  image: sshipway/portus:2.0.5
+  environment: 
+    PORTUS_MACHINE_FQDN: ${DOMAIN}
+    PORTUS_PRODUCTION_HOST: db
+    PORTUS_PRODUCTION_DATABASE: portus
+    PORTUS_PRODUCTION_USERNAME: portus
+    PORTUS_PRODUCTION_PASSWORD: ${DBPASSWORD}
+    PORTUS_GRAVATAR_ENABLED: true
+    PORTUS_KEY_PATH: /certs/registry.key
+    PORTUS_PASSWORD: ${DBPASSWORD}
+    PORTUS_SECRET_KEY_BASE: ${ROOTPASSWORD}
+    PORTUS_CHECK_SSL_USAGE_ENABLED: true
+    PORTUS_SMTP_ENABLED: false
+    PORTUS_LDAP_ENABLED: ${LDAP}
+    PORTUS_LDAP_HOSTNAME: ${LDAPHOST}
+    PORTUS_LDAP_PORT: ${LDAPPORT}
+    PORTUS_LDAP_METHOD: ${LDAPTLS}
+    PORTUS_LDAP_BASE: ${LDAPBASE}
+    PORTUS_LDAP_UID: ${LDAPBINDUID} 
+    PORTUS_LDAP_AUTHENTICATION_ENABLED: ${LDAPBIND}
+    PORTUS_LDAP_AUTHENTICATION_BIND_DN: ${LDAPBINDDN}
+    PORTUS_LDAP_AUTHENTICATION_PASSWORD: ${LDAPBINDPASS}
+    PORTUS_LDAP_GUESS_EMAIL_ENABLED: true
+    PORTUS_LDAP_GUESS_EMAIL_ATTR: mail
+    PORTUS_PORT: ${PPORT}
+    REGISTRY_SSL_ENABLED: true
+    REGISTRY_HOSTNAME: ${DOMAIN}
+    REGISTRY_PORT: ${RPORT}
+    REGISTRY_NAME: Registry
+  tty: true
+  stdin_open: true
+  volumes:
+  - ${DIR}/certs:/certs
+  - ${DIR}/proxy:/etc/nginx/conf.d
+  links:
+  - db:db
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:container_label_soft: registry.portus.db=1
+    registry.portus.app: 1
