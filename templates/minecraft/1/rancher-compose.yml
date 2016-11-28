@@ -1,0 +1,128 @@
+.catalog:
+  name: "Minecraft"
+  version: "v1.11"
+  description: "Minecraft server"
+  uuid: minecraft-0
+  questions:
+    - variable: "EULA"
+      label: "Accept EULA"
+      description: "Select TRUE to accept the Minecraft EULA"
+      required: true
+      type: "enum"
+      options:
+        - TRUE
+    - variable: "SCALE"
+      label: "Scale"
+      description: "How many servers to run"
+      default: 1
+      required: true
+      type: "int"
+    - variable: "PORT"
+      label: "Port number"
+      description: "On which port should the Load Balancer listen?"
+      default: 25565
+      required: true
+      type: "int"
+    - variable: "VERSION"
+      label: "Minecraft Version"
+      description: "Select the version of Minecraft server to run. Default is the latest available."
+      type: "enum"
+      default: LATEST
+      options:
+        - LATEST
+        - SNAPSHOT
+        - 1.11
+        - 1.8.9
+        - 1.7.10
+        - 1.6.4
+    - variable: "DIFFICULTY"
+      label: "Difficulty level"
+      description: "Select the Minecraft difficulty level.  Default is normal"
+      default: normal
+      required: true
+      type: "enum"
+      options:
+        - peaceful
+        - easy
+        - normal
+        - hard
+    - variable: "MODE"
+      label: "Default game mode"
+      description: "Select the game mode to connect in.  Default is survival"
+      default: survival
+      required: true
+      type: "enum"
+      options:
+        - survival
+        - creative
+        - adventure
+        - spectator
+    - variable: "LEVEL_TYPE"
+      label: "Level Type"
+      description: ""
+      default: "DEFAULT"
+      type: "enum"
+      options:
+        - DEFAULT
+        - FLAT
+        - LARGEBIOMES
+        - AMPLIFIED
+        - CUSTOMIZED
+    - variable: "GENERATOR_SETTINGS"
+      label: "Generator Settings"
+      description: "Custom generator settings. Only used for level types FLAT and CUSTOMIZED."
+      type: "string"
+    - variable: "PVP"
+      label: "PvP mode"
+      description: "Check here to enable PvP mode.  Default is no PvP."
+      default: false
+      type: "boolean"
+      required: true
+    - variable: "MOTD"
+      label: "Description"
+      description: "Description string for Minecraft server"
+      default: "A Minecraft server powered by Docker"
+      type: "string"
+      required: true
+    - variable: "WHITELIST"
+      label: "Whitelist"
+      description: "Player names to whitelist, comma separated"
+      type: "string"
+    - variable: "OPS"
+      label: "Operators"
+      description: "Player names to give operator privileges, comma separated"
+      type: "string"
+    - variable: "SEED"
+      label: "Level seed"
+      description: "Optional level seed number for world generation"
+      type: "int"
+    - variable: "WORLD"
+      label: "World URL"
+      description: "URL to download zipped world directory"
+      type: "string"
+    - variable: "DATA_VOLUME"
+      label: "Data Volume"
+      description: "Host directory or Convoy volume name, followed by a colon (':'). E.g.: '/mnt/data:'; 'minecraft-data:'"
+      type: "string"
+    - variable: "VOLUME_DRIVER"
+      description: "Name of Convoy Storage Pool, if one is used."
+      type: "string"
+Minecraft:
+  scale: ${SCALE}
+  health_check:
+    port: 25565
+    interval: 2000
+    initializing_timeout: 30000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
+MinecraftLB:
+  load_balancer_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2

@@ -1,0 +1,40 @@
+Minecraft:
+  environment:
+    - EULA
+    - VERSION
+    - DIFFICULTY
+    - MODE
+    - LEVEL_TYPE
+    - GENERATOR_SETTINGS
+    - PVP
+    - WHITELIST
+    - OPS
+    - MOTD
+    - SEED
+    - WORLD
+  tty: true
+  image: itzg/minecraft-server
+  stdin_open: true
+  labels:
+    io.rancher.sidekicks: MinecraftData
+  volumes_from:
+    - MinecraftData
+
+MinecraftData:
+  image: busybox
+  labels:
+    io.rancher.container.start_once: 'true'
+  net: none
+  entrypoint: /bin/true
+  volumes:
+    - ${DATA_VOLUME}/data
+  volume_driver: ${VOLUME_DRIVER}
+
+MinecraftLB:
+  ports:
+  - ${PORT}:25565/tcp
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - Minecraft:Minecraft
+  stdin_open: true
