@@ -9,7 +9,7 @@ sysdig-agent:
     TAGS: "${SDC_TAGS}"
     ADDITIONAL_CONF: "${SDC_ADDITIONAL_CONF}"
   log_opt:
-    max-size: 100mb
+    max-size: ${log_size}
   volumes:
     - /var/run/docker.sock:/host/var/run/docker.sock
     - /dev:/host/dev

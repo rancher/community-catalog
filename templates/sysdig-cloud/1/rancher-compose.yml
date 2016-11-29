@@ -32,3 +32,9 @@
       description: "Content must be valid yaml code, use the escape \n parameter for new lines and adhere to proper indent requirements."
       type: "string"
       required: false
+    - variable: "log_size"
+      label: "Max log size"
+      description: "Max log size"
+      type: "string"
+      default: 100mb
+      required: true
