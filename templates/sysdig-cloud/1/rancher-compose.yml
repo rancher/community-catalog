@@ -32,7 +32,7 @@
       description: "Content must be valid yaml code, use the escape \n parameter for new lines and adhere to proper indent requirements."
       type: "string"
       required: false
-    - variable: "log_size"
+    - variable: "LOG_SIZE"
       label: "Max log size"
       description: "Max log size"
       type: "string"
