@@ -1,5 +1,5 @@
-name: Sysdig Cloud
+name: Sysdig Cloud v1
 description: |
   Container-Native Application and Infrastructure Monitoring
-version: v0
-category: Monitoring
+version: v1
+category: Rancher Services

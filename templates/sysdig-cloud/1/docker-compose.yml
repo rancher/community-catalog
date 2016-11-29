@@ -1,0 +1,22 @@
+sysdig-agent:
+  container_name: sysdig-agent
+  privileged: true
+  image: sysdig/agent:${VERSION}
+  net: "host"
+  pid: "host"
+  environment:
+    ACCESS_KEY: ${SDC_ACCESS_KEY}
+    TAGS: "${SDC_TAGS}"
+    ADDITIONAL_CONF: "${SDC_ADDITIONAL_CONF}"
+  log_opt:
+    max-size: ${LOG_SIZE}
+  volumes:
+    - /var/run/docker.sock:/host/var/run/docker.sock
+    - /dev:/host/dev
+    - /proc:/host/proc:ro
+    - /boot:/host/boot:ro
+    - /lib/modules:/host/lib/modules:ro
+    - /usr:/host/usr:ro
+  labels:
+     io.rancher.scheduler.global: true
+     io.rancher.scheduler.affinity:host_label_ne: ${HOST_EXCLUDE_LABEL}
