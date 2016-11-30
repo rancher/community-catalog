@@ -1,5 +1,6 @@
-name: SwarmKit
+name: Docker SwarmKit
 description: >
   A toolkit for orchestrating distributed systems at any scale
-version: v1.12-rancher0
+version: v1.12.3
 category: Orchestration
+minimum_rancher_version: 1.1.3

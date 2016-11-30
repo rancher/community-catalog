@@ -1,7 +1,7 @@
 version: '2'
 services:
   swarmkit-mon:
-    image: llparse/swarmkit:v1.12-4
+    image: rancher/swarmkit:v1.12.3
     environment:
       MANAGER_SCALE: ${MANAGER_SCALE}
     labels:
