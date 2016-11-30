@@ -1,0 +1,67 @@
+.catalog:
+  name: Zookeeper
+  version: 3.4.9-rancher1
+  description: |
+    (Experimental) Apache Zookeeper cluster.
+  minimum_rancher_version: v0.59.0
+  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  uuid: zk-0
+  questions:
+    - variable: "zk_scale"
+      description: "Number of zk nodes. Note: Recommended an odd number"
+      label: "Zk Nodes:"
+      required: true
+      default: 3
+      type: "int"
+    - variable: "zk_mem"
+      description: "Amount of memory to config zk."
+      label: "Zk Memory (mb):"
+      required: true
+      default: 512 
+      type: "int"
+    - variable: "zk_init_limit"
+      description: "Time to allow followers to connect and sync with leader"
+      label: "Zk init limit (ticks):"
+      required: true
+      default: 10
+      type: "int"
+    - variable: "zk_data_dir"
+      description: "Directory where zookeeper store data"
+      label: "Zk data dir:"
+      required: true
+      default: "/opt/zk/data"
+      type: "string"
+    - variable: "zk_max_client_cxns"
+      description: "Max client concurrent connections"
+      label: "Zk max client cxns:"
+      required: true
+      default: 500
+      type: "int"
+    - variable: "zk_sync_limit"
+      description: "Time to allow followers to sync with leader"
+      label: "Zk sync limit (ticks):"
+      required: true
+      default: 5
+      type: "int"
+    - variable: "zk_tick_time"
+      description: "Tick time length"
+      label: "Zk tick time (ms):"
+      required: true
+      default: 2000
+      type: "int"
+    - variable: "zk_interval"
+      description: "Interval to poll/apply configuration changes. 0 to disable, reconfiguration will be done when you restart zk nodes"
+      label: "Zk Interval (s):"
+      required: true
+      default: 60
+      type: "int"
+zk:
+  scale: ${zk_scale}
+  retain_ip: true
+  health_check:
+    port: 2181
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000

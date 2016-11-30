@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "${zk_name}"
+  namespace: "${zk_namespace}"
+  labels:
+    name: "${zk_name}"
+spec:
+  ports:
+  - port: 2181
+    targetPort: 2181
+    name: "zk-client"
+    protocol: "TCP"
+  - port: 2888
+    targetPort: 2888
+    name: "zk-server"
+    protocol: "TCP"
+  - port: 3888
+    targetPort: 3888
+    name: "zk-leader"
+    protocol: "TCP"
+  selector:
+    name: "${zk_name}"
