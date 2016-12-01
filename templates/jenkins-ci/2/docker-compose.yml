@@ -1,5 +1,5 @@
 jenkins-primary:
-  image: "jenkins:1.651.3"
+  image: "jenkins:2.7.1"
   ports:
     - "${PORT}:8080"
   labels:
