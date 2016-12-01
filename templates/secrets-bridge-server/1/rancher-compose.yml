@@ -1,7 +1,7 @@
 .catalog:
     name: "Secrets Bridge Server"
-    version: 0.0.1-rancher1
-    maximum_rancher_version: v1.2.0-pre3
+    version: 0.1.0-rancher1
+    minimum_rancher_version: v1.2.0
     description: |
        Server side secrets bridge between Rancher and Vault
     questions:
