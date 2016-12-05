@@ -52,6 +52,6 @@ spec:
   volumes:
   - name: mongo-datadir
     hostPath:
-      path: /data/db
+      path: ${mongo_volume}
   - name: utility
     emptyDir: {}
