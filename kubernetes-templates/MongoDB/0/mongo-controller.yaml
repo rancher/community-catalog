@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       containers:
-      - image: husseingalal/mongo-k8s-config
+      - image: husseingalal/mongo-k8s-config:v0.2.0
         name: mongo-config
         volumeMounts:
         - mountPath: /opt/rancher/bin

@@ -20,7 +20,7 @@ metadata:
 spec:
   containers:
     - name: mongo-config
-      image: husseingalal/mongo-k8s-config
+      image: husseingalal/mongo-k8s-config:v0.2.0
       volumeMounts:
       - mountPath: /opt/rancher/bin
         name: utility
