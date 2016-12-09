@@ -1,0 +1,8 @@
+name: Apache Guacamole
+description: |
+  Apache Guacamole is a clientless remote desktop gateway. It supports standard protocols like VNC, RDP, and SSH.
+version: 0.1-rancher1
+category: Applications
+license: 
+maintainer: "Kevin Xu <accoleon@gmail.com>"
+projectURL: https://github.com/glyptodon/guacamole-docker

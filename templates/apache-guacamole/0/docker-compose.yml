@@ -1,0 +1,50 @@
+version: '2'
+volumes:
+  db:
+    driver: rancher-nfs
+services:
+  guacamole:
+    image: glyptodon/guacamole
+    environment:
+      MYSQL_HOSTNAME: database
+      MYSQL_DATABASE: ${guacamole_db}
+      MYSQL_PASSWORD: ${guacamole_password}
+      MYSQL_USER: ${guacamole_user}
+    command: 
+    - /bin/bash
+    - -c
+    - "cd /usr/local/tomcat/webapps;rm -rf ROOT/; ln -s guacamole.war ROOT.war; /opt/guacamole/bin/start.sh;"
+    ports: 
+    - ${public_port}:8080
+    links:
+    - guacd:guacd
+    depends_on: 
+    - database
+  guacd:
+    image: glyptodon/guacd
+  setup-get-db-script:
+    image: glyptodon/guacamole
+    volumes: 
+    - /docker-entrypoint-initdb.d
+    command:
+    - bash
+    - -c
+    - /opt/guacamole/bin/initdb.sh --mysql > /docker-entrypoint-initdb.d/initdb.sql
+    labels:
+      io.rancher.container.start_once: 'true'
+  database:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ${guacamole_db}
+      MYSQL_ONETIME_PASSWORD: 'true'
+      MYSQL_PASSWORD: ${guacamole_password}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+      MYSQL_USER: ${guacamole_user}
+    labels:
+      io.rancher.sidekicks: setup-get-db-script
+    depends_on: 
+    - setup-get-db-script
+    volumes_from: 
+    - setup-get-db-script
+    volumes:
+    - db:/var/lib/mysql
