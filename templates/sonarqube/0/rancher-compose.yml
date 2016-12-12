@@ -1,0 +1,55 @@
+.catalog:
+  name: "SonarQube"
+  version: "v0.0.1"
+  description: "SonarQube"
+  uuid: sonarqube-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: http_port
+      description: "HTTP port to access SonarQube UI"
+      label: "SonarQube HTTP Port"
+      required: true
+      default: "9000"
+      type: "int"
+    - variable: postgress_port
+      description: "Port for Postgres"
+      label: "Postgres Port"
+      required: true
+      default: "5432"
+      type: "int"
+    - variable: postgres_data
+      description: "Postgres Data Folder"
+      label: "Postgres Data"
+      required: true
+      default: "/var/lib/postgresql/data/pgdata"
+      type: "string"
+    - variable: postgres_db
+      description: "Postgres Database"
+      label: "Postgres Database"
+      required: true
+      default: "sonar"
+      type: "string"
+    - variable: postgres_user
+      description: "Postgres User"
+      label: "Postgres User"
+      required: true
+      default: "sonar"
+      type: "string"
+    - variable: postgres_password
+      description: "Postgres Password"
+      label: "Postgres Password"
+      required: true
+      default: "sonar"
+      type: "string"
+    - variable: http_proxy
+      description: "In case you are at corporate network, setup http_proxy variable"
+      label: "http_proxy"
+      required: false
+      default: ""
+      type: "string"
+    - variable: https_proxy
+      description: "In case you are at corporate network, setup https_proxy variable"
+      label: "https_proxy"
+      required: false
+      default: ""
+      type: "string"
