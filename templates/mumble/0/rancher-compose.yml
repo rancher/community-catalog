@@ -1,0 +1,10 @@
+.catalog:
+  name: mumble
+  version: v1.2.17
+  description: |
+    Mumble is an open source, low-latency, high quality voice chat software
+    primarily intended for use while gaming.
+  uuid: mumble-0
+
+mumble:
+  scale: 1
