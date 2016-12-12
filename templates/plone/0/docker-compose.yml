@@ -10,7 +10,7 @@ zeoserver:
   command: ["zeoserver"]
 
 plone:
-  image: plone:${version}
+  image: plone:4.3
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.community.plone=true

@@ -9,4 +9,4 @@ Just create and launch the stack.
 
 After that you can login with the regular user/password combination admin/admin.
 
-For usage see [Plone documentation site](http://docs.plone.org/4/en/). 
+For more information on how to configure and use Plone visit [Plone 4 documentation site](http://docs.plone.org/4/en/). 
