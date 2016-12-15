@@ -1,0 +1,8 @@
+name: Cloud9
+description: |
+  (Experimental) Cloud 9 SDK 
+version: 3.0-k8s1
+category: Agile
+maintainer: "Raul Sanchez <rawmind@gmail.com>"
+license: 
+projectURL: https://github.com/rawmind0/cloud9-sdk

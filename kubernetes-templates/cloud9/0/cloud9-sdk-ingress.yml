@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ${cloud9_name}
+  namespace: ${cloud9_namespace}
+spec:
+  rules:
+  - host: ${cloud9_name}.${cloud9_domain}
+    http:
+      paths:
+      - backend:
+          serviceName: ${cloud9_name}
+          servicePort: ${cloud9_port}

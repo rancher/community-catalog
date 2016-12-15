@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  name: "${cloud9_name}"
+  namespace: "${cloud9_namespace}"
+  labels:
+    name: "${cloud9_name}"
+spec:
+  replicas: 1
+  selector:
+    name: "${cloud9_name}"
+  template:
+    metadata: 
+      labels:
+        name: "${cloud9_name}"
+      annotations:
+    spec:
+      containers:
+        - name: "cloud9-sdk"
+          image: "rawmind/cloud9-sdk:0.3.0-2"
+          env:
+            - name: GIT_REPO
+              value: "${cloud9_repo}"
+          volumeMounts:
+            - mountPath: "/var/run/docker.sock"
+              name: "docker-socket"
+            - mountPath: "/bin/docker"
+              name: "docker-exec"
+            - mountPath: "/workspace"
+              name: "cloud9-data"
+          ports:
+            - containerPort: ${cloud9_port}
+              name: "cloud9-port"
+              protocol: "TCP"
+          args:
+            - --listen 0.0.0.0 
+            - --port ${cloud9_port} 
+            - -w /workspace 
+            - --collab 
+            - --auth ${cloud9_user}:${cloud9_pass}
+          imagePullPolicy: "IfNotPresent"
+      restartPolicy: "Always"
+      volumes:
+        - name: "cloud9-data"
+          emptyDir: {}
+        - name: "docker-socket"
+          hostPath:
+            path: "/var/run/docker.sock"
+        - name: "docker-exec" 
+          hostPath:
+            path: "/usr/local/bin/docker"

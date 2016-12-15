@@ -1,0 +1,14 @@
+cloud9-sdk:
+  command: "--listen 0.0.0.0 --port ${cloud9_port} -w /workspace --collab --auth ${cloud9_user}:${cloud9_pass}"
+  image: "rawmind/cloud9-sdk:0.3.0-2"
+  restart: "always"
+  volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    - "/usr/local/bin/docker:/bin/docker"
+    - "/workspace"
+  environment:
+    GIT_REPO: ${cloud9_repo}
+  labels:
+    traefik.domain: ${cloud9_domain}
+    traefik.port: ${cloud9_port}
+    traefik.enable: ${cloud9_publish}
