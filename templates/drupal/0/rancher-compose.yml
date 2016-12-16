@@ -1,6 +1,6 @@
 .catalog:
   name: "Drupal"
-  version: "v0.1.0"
+  version: "v0.1"
   description: "Drupal is an open source CMS powering millions of websites and applications."
   uuid: Drupal-0
   minimum_rancher_version: v0.51.0
