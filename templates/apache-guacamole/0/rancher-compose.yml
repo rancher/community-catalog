@@ -25,7 +25,9 @@ services:
       reinitializing_timeout: 60000
   setup-get-db-script:
     scale: 1
-  mysql:
+  db-data:
+    scale: 1
+  database:
     scale: 1
     health_check:
       healthy_threshold: 2
