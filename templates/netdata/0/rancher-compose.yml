@@ -1,0 +1,13 @@
+.catalog:
+  name: netdata
+  version: v1.4.0
+  description: Real-time performance monitoring, done right!
+  questions:
+    - variable: NETDATA_PORT
+      label: Port
+      description: Container port to access netdata
+      required: true
+      type: "int"
+      default: 19999
+netdata:
+  scale: 1

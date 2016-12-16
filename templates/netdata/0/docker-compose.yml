@@ -1,0 +1,11 @@
+netdata:
+  image: titpetric/netdata:latest
+  labels:
+    io.rancher.scheduler.global: 'true'
+  cap_add:
+  - SYS_PTRACE
+  volumes:
+  - /proc:/host/proc:ro
+  - /sys:/host/sys:ro
+  environment:
+    NETDATA_PORT: "${NETDATA_PORT}"
