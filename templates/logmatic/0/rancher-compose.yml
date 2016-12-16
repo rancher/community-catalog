@@ -1,0 +1,16 @@
+.catalog:
+  name: "Logmatic"
+  version: "1.0"
+  description: "Logging"
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: "logmatic_key"
+      label: "Logmatic Key"
+      description: "Your Logmatic Key ( example: vXwS9RzCRT-UZh4FfYtKbA )"
+      required: true
+      type: "string"
+    - variable: "opts_args"
+      label: "Optional arguments"
+      description: "See https://github.com/logmatic/logmatic-docker"
+      required: false
+      type: "string"
