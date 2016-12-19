@@ -1,0 +1,36 @@
+.catalog:
+  name: Dokuwiki
+  version: 2016-06-26a
+  description: |
+    DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Tim Kopplow <tim@arctium.io>"
+  uuid: dokuwiki-0
+  questions:
+    - variable: "dokuwiki_hostname"
+      description: "Dokuwiki hostname"
+      label: "Hostname:"
+      required: true
+      default: "dw.example.com"
+      type: "string"
+    - variable: "http_port"
+      description: "HTTP port to expose on host. Will be used to bind TCP"
+      label: "HTTP port:"
+      required: true
+      default: 80
+      type: "string"
+
+dokuwiki-server:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 80
+    interval: 30000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
+
+dokuwiki-data:
+  scale: 1
+  retain_ip: true
