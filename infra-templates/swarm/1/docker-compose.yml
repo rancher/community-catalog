@@ -1,0 +1,23 @@
+version: '2'
+services:
+  swarmkit-mon:
+    image: rancher/swarmkit:v1.12.3-2
+    environment:
+      MANAGER_SCALE: ${MANAGER_SCALE}
+    labels:
+      io.rancher.container.agent.role: environment
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.dns: 'true'
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: io.rancher.host.docker_version=1.12
+      io.rancher.scheduler.global: 'true'
+    network_mode: host
+    privileged: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/lib/rancher/state:/var/lib/rancher/state
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
