@@ -6,8 +6,6 @@ Thanks to HTML5, once Guacamole is installed on a server, all you need to access
 
 This service uses the official Apache [http://guacamole.incubator.apache.org](https://hub.docker.com/r/glyptodon/guacamole/) Guacamole image. It also uses the official MariaDB image as its backend.
 Health checks are enabled on all services.
-## Prerequisites
-You must have the Rancher-NFS storage driver set up. This is required for persistent SQL storage, otherwise all users and connection settings will be reset on every container move.
 
 ## How to use
 

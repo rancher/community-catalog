@@ -3,11 +3,11 @@ services:
   database:
     image: mariadb
     environment:
-      MYSQL_DATABASE: guacamole_db
+      MYSQL_DATABASE: ${guacamole_db}
       MYSQL_ONETIME_PASSWORD: 'true'
-      MYSQL_PASSWORD: guacamole_password
+      MYSQL_PASSWORD: ${guacamole_password}
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
-      MYSQL_USER: guacamole_user
+      MYSQL_USER: ${guacamole_user}
     volumes_from:
     - db-data
     labels:
@@ -38,14 +38,14 @@ services:
   guacamole:
     image: glyptodon/guacamole
     environment:
-      MYSQL_DATABASE: guacamole_db
+      MYSQL_DATABASE: ${guacamole_db}
       MYSQL_HOSTNAME: database
-      MYSQL_PASSWORD: guacamole_password
-      MYSQL_USER: guacamole_user
+      MYSQL_PASSWORD: ${guacamole_password}
+      MYSQL_USER: ${guacamole_user}
     links:
     - guacd:guacd
     ports:
-    - 8080:8080/tcp
+    - ${public_port}:8080/tcp
     command:
     - /bin/bash
     - -c
