@@ -3,3 +3,5 @@ description: |
   Bind9 DNS server, compatible with the "DNS Update (RFC2136)"
 version: v1.0.0-rancher1
 category: External DNS
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'
