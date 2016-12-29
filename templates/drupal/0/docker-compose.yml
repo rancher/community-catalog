@@ -1,13 +1,13 @@
 version: '2'
 services:
   web:
-    image: drupal:${drupal_tag}
+    image: drupal
     ports:
     - ${public_port}:80
     depends_on:
       - db
   db:
-    image: mysql:${mysql_tag}
+    image: mysql
     environment:
       MYSQL_DATABASE: ${database}
       MYSQL_ROOT_PASSWORD: ${mysql_root_password}
