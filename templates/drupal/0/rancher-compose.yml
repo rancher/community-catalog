@@ -5,20 +5,6 @@
   uuid: Drupal-0
   minimum_rancher_version: v0.51.0
   questions:
-    - variable: drupal_tag
-      description: "docker image tag"
-      label: "Drupal Image Tag"
-      required: false
-      default: "latest"
-      type: "string"
-
-    - variable: mysql_tag
-      description: "docker image tag"
-      label: "MYSQL Image Tag"
-      required: false
-      default: "latest"
-      type: "string"
-
     - variable: public_port
       description: "public port to access the drupal site"
       label: "Public Port"
