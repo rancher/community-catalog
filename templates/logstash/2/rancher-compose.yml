@@ -1,0 +1,73 @@
+.catalog:
+  name: "Logstash"
+  version: "2.4.1-rancher1"
+  description: "Logstash: Process Any Data, From Any Source"
+  questions:
+    - variable: "collector_inputs"
+      description: |
+        Logstash collection tier inputs. These will be added
+        directly to input { } section of logstash.conf
+      label: "Logstash inputs"
+      type: "multiline"
+      required: true
+      default: |
+        udp {
+          port => 5000
+          codec => "json"
+        }
+    - variable: "indexer_filters"
+      description: |
+        Logstash indexing tier filters. These will be added
+        directly to filter { } section of logstash.conf
+      label: "Logstash filters"
+      type: "multiline"
+      required: false
+      default: ""
+    - variable: "indexer_outputs"
+      description: |
+        Logstash indexing tier outputs. These will be added
+        directly to output { } section of logstash.conf
+      label: "Logstash outputs"
+      type: "multiline"
+      required: true
+      default: |
+        elasticsearch {
+          hosts => ["elasticsearch.rancher.internal:9200"]
+        }
+        stdout {
+          codec => rubydebug
+        }
+    - variable: "elasticsearch_link"
+      description: |
+        stack/service link or external service link to elasticsearch
+        cluster.
+      label: "Elasticsearch stack/service"
+      default: "es/elasticsearch-clients"
+      required: true
+      type: "service"
+logstash-indexer:
+  metadata:
+    logstash:
+      inputs: |
+        redis {
+          host => "redis.rancher.internal"
+          port => "6379"
+          data_type => "list"
+          key => "logstash"
+        }
+      filters: |
+        ${indexer_filters}
+      outputs: |
+        ${indexer_outputs}
+logstash-collector:
+  metadata:
+    logstash:
+      inputs: |
+        ${collector_inputs}
+      outputs: |
+        redis {
+          host => "redis.rancher.internal"
+          port => "6379"
+          data_type => "list"
+          key => "logstash"
+        }
