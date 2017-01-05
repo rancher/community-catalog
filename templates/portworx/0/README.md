@@ -1,4 +1,4 @@
-# [1.0.6-GA Documentation](http://docs.portworx.com)
+# [1.1.2-GA Documentation](http://docs.portworx.com)
 
 This catalog will spin up Portworx on your hosts.
 There are 2 configuration variables required:
