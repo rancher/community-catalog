@@ -1,5 +1,5 @@
 name: Prometheus
 description: |
   Prometheus and friends, auto-discovering monitoring solution for Rancher deployments.
-version: 2.0.0
+version: 2.1.0
 category: Monitoring
