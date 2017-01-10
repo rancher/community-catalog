@@ -1,5 +1,5 @@
 .catalog:
-  version: 2.3.7-rancher2
+  version: 2.3.7-beta.2
   minimum_rancher_version: v1.2.0
   questions:
   - variable: SCALE

@@ -1,5 +1,9 @@
 ## Etcd v2.3.7 Persistent
 
+### Upgrade WARNING
+
+Automated upgrading to this version is only supported from `2.3.7-beta.1`. If you are on a previous version, please upgrade to `2.3.7-beta.1` before upgrading to this version. It is recommended you perform a manual backup before continuing.
+
 ### Backup Configuration
 
 Backups are enabled/disabled via the `Enable Backups` radio buttons.
@@ -21,7 +25,3 @@ See [this wiki](https://github.com/rancher/rancher/wiki/Kubernetes-Management#di
 ### Restoring Backups
 
 See [this wiki](https://github.com/rancher/rancher/wiki/Kubernetes-Management#restoring-backups) for instructions.
-
-### Upgrading to this Version: WARNING
-
-Automated upgrading to this version is unsupported. Please capture a snapshot of a node's data directory and follow backup restoration process if necessary.

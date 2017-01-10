@@ -1,5 +1,7 @@
 # Etcd 
 
+** NOTE ** This template does not function with Rancher 1.2+, it is only present to enable an upgrade path for those who upgraded Rancher prior to upgrading their etcd service.
+
 A distributed key/value store that provides a reliable way to store data across a cluster of machines
 
 ### General
