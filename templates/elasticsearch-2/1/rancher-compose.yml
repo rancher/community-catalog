@@ -1,0 +1,45 @@
+.catalog:
+  name: "Elasticsearch"
+  version: "2.4.3-rancher1"
+  description: "Elasticsearch. You know, for search"
+  questions:
+    - variable: cluster_name
+      description: "Unique name to assign to your Elasticsearch cluster."
+      label: "Cluster Name"
+      type: "string"
+      required: true
+      default: "es"
+    - variable: "kopf_port"
+      label: "Public Port"
+      description: "Unique public port for kopf"
+      type: "int"
+      default: 80
+      required: true
+elasticsearch-masters:
+  metadata:
+    elasticsearch:
+      yml:
+        cluster.name: "${cluster_name}"
+        node.name: "$${HOSTNAME}"
+        node.data: "false"
+        node.master: "true"
+        network.host: "_site_"
+elasticsearch-datanodes:
+  metadata:
+    elasticsearch:
+      yml:
+        cluster.name: "${cluster_name}"
+        node.name: "$${HOSTNAME}"
+        node.data: "true"
+        node.master: "false"
+        http.enabled: "false"
+        network.host: "_site_"
+elasticsearch-clients:
+  metadata:
+    elasticsearch:
+      yml:
+       cluster.name: "${cluster_name}"
+       node.name: "$${HOSTNAME}"
+       node.data: "false"
+       node.master: "false"
+       network.host: "_site_"
