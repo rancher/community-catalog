@@ -15,10 +15,10 @@
   - false: Enable http enpoints and disable https ones.
   - true: Enable http and https endpoints.
   - only: Enable https endpoints and redirect http to https.
-- acme_enable = false 				# Enable/Disable acme traefik support.
-- acme_email = "test@traefik.io" 	# acme user email
-- acme_ondemand = true 				# acme ondemand parameter.
-- acme_onhostrule = true 			# acme onHostRule parameter.
+- acme_enable = false               # Enable/Disable acme traefik support.
+- acme_email = "test@traefik.io"    # acme user email
+- acme_ondemand = true              # acme ondemand parameter.
+- acme_onhostrule = true            # acme onHostRule parameter.
 - ssl_key # Paste your ssl key. *Required if you enable https
 - ssl_crt # Paste your ssl crt. *Required if you enable https
 - refresh_interval = 10s  # Interval to refresh traefik rules.toml from rancher-metadata.
@@ -31,12 +31,22 @@ Traefik labels has to be added in your services, in order to get included in tra
   - true: the service will be published as *service_name.stack_name.traefik_domain*
   - stack: the service will be published as *stack_name.traefik_domain*. WARNING: You could have collisions inside services within your stack
   - false: the service will not be published
-- traefik.alias = < alias >			# Alternate names to route rule. Multiple values separated by ",". WARNING: You could have collisions BE CAREFULL
-- traefik.domain = < domain >		# Domain names to route rule. Multiple values separated by "," 
-- traefik.path = < path >		    # Path to route rule. Multiple paths separated by ","
-- traefik.port = < port > 			# Port to expose throught traefik  
-- traefik.acme = < true | false >	# Enable/disable ACME traefik feature
- 
+- traefik.priority = <priority>     	  	# Override for frontend priority. 5 by default
+- traefik.protocol = < http | https	>		# Override the default http protocol
+- traefik.alias = < alias >					# Alternate names to route rule. Multiple values separated by ",". WARNING: You could have collisions BE CAREFULL
+- traefik.domain = < domain.name >			# Domain names to route rules. Multiple domains separated by ","
+- traefik.domain.regexp = < domain.regexp > # Domain name regexp rule. Multiple domains separated by ","
+- traefik.port = < port >           # Port to expose throught traefik  
+- traefik.acme = < true | false >   # Enable/disable ACME traefik feature
+- traefik.path = < path >                   # Path rule. Multiple values separated by ","
+- traefik.path.strip = < path >             # Path strip rule. Multiple values separated by ","
+- traefik.path.prefix = < path >            # Path prefix rule. Multiple values separated by ","
+- traefik.path.prefix.strip = < path >      # Path prefix strip rule. Multiple values separated by ","
+
+Details for configuring the traefik rules can be found at: https://docs.traefik.io/basics/#frontends
+
+WARNING: Only services with healthy state are added to traefik, so health checks are mandatory.
+
 ### Usage:
 
  Select Traefik from catalog. 
@@ -61,3 +71,4 @@ Traefik labels has to be added in your services, in order to get included in tra
  - https://${traefik.alias}.${traefik.domain}:${https_port}
 
 Note: To access the services, you need to create A or CNAMES dns entries for every one. 
+
