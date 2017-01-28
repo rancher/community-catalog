@@ -31,8 +31,11 @@ Traefik labels has to be added in your services, in order to get included in tra
   - true: the service will be published as *service_name.stack_name.traefik_domain*
   - stack: the service will be published as *stack_name.traefik_domain*. WARNING: You could have collisions inside services within your stack
   - false: the service will not be published
-- traefik.alias = < alias >         # Alternate names to route rule. Multiple values separated by ",". WARNING: You could have collisions BE CAREFULL
-- traefik.domain = < domain >       # Domain names to route rule. Multiple values separated by "," 
+- traefik.priority = <priority>     	  	# Override for frontend priority. 5 by default
+- traefik.protocol = < http | https	>		# Override the default http protocol
+- traefik.alias = < alias >					# Alternate names to route rule. Multiple values separated by ",". WARNING: You could have collisions BE CAREFULL
+- traefik.domain = < domain.name >			# Domain names to route rules. Multiple domains separated by ","
+- traefik.domain.regexp = < domain.regexp > # Domain name regexp rule. Multiple domains separated by ","
 - traefik.port = < port >           # Port to expose throught traefik  
 - traefik.acme = < true | false >   # Enable/disable ACME traefik feature
 - traefik.path = < path >                   # Path rule. Multiple values separated by ","
