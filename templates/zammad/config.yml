@@ -3,6 +3,6 @@ description: |
   Zammad is a web based open source helpdesk/customer support system
 version: 1.2
 category: Ticketsystems
-maintainer: Zammad <info@zammad.org>
+maintainer: "Zammad <info@zammad.org>"
 projectURL: https://github.com/zammad/zammad
 license: AGPL-3.0
