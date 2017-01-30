@@ -25,5 +25,5 @@ zammad-railsserver:
   scale: 1
   tart_on_create: true
 zammad-websocket:
-  cale: 1
+  scale: 1
   start_on_create: true
