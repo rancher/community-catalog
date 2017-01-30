@@ -1,15 +1,9 @@
 .catalog:
-  name: Zammad
-  description: |
-    Zammad is a web based open source helpdesk/customer support system
-  version: 1.2
-  category: Ticketsystems
-  maintainer: "Zammad Project <info@zammad.org>"
-  projectURL: https://github.com/zammad/zammad
-  license: AGPL-3.0
-  minimum_rancher_version: v1.2.0
-  maximum_rancher_version: v1.3.3
+  name: "Zammad"
+  version: "1.2"
+  description: "Zammad is a web based open source helpdesk/customer support system"
   uuid: zammad-0
+  minimum_rancher_version: v1.2.0
   questions:
 
 elasticsearch:
