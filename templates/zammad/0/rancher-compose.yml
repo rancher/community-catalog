@@ -1,6 +1,4 @@
-version: '2'
-
-catalog:
+.catalog:
   name: Zammad
   description: |
     Zammad is a web based open source helpdesk/customer support system
@@ -11,26 +9,26 @@ catalog:
   license: AGPL-3.0
   minimum_rancher_version: v1.2.0
   maximum_rancher_version: v1.3.3
+  questions:
 
-services:
-  elasticsearch:
-    scale: 1
-    start_on_create: true
-  nginx:
-    scale: 1
-    start_on_create: true
-  postgresql:
-    scale: 1
-    start_on_create: true
-  zammad:
-    scale: 1
-    start_on_create: true
-  zammad-scheduler:
-    scale: 1
-    start_on_create: true
-  zammad-railsserver:
-    scale: 1
-    start_on_create: true
-  zammad-websocket:
-    scale: 1
-    start_on_create: true
+elasticsearch:
+  scale: 1
+  start_on_create: true
+nginx:
+  scale: 1
+  start_on_create: true
+postgresql:
+  scale: 1
+  start_on_create: true
+zammad:
+  scale: 1
+  start_on_create: true
+zammad-scheduler:
+  scale: 1
+  start_on_create: true
+zammad-railsserver:
+  scale: 1
+  tart_on_create: true
+zammad-websocket:
+  cale: 1
+  start_on_create: true
