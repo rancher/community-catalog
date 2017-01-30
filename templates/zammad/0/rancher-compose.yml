@@ -9,6 +9,7 @@
   license: AGPL-3.0
   minimum_rancher_version: v1.2.0
   maximum_rancher_version: v1.3.3
+  uuid: zammad-0
   questions:
 
 elasticsearch:
