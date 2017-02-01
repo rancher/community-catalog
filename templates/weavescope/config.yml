@@ -1,6 +1,7 @@
 name: Weave Scope
 description: "Monitoring, visualisation and management for Docker"
-version: 1.0.0
+version: 1.1.0
 category: Monitoring
 maintainer: "Ilya Dmitrichenko <ilya@weave.works>"
 license: "Apache License v2.0"
+projectURL: https://github.com/weaveworks/scope
