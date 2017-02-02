@@ -1,0 +1,36 @@
+version: '2'
+services:
+  letsencrypt:
+    image: janeczku/rancher-letsencrypt:v0.4.0
+    environment:
+      EULA: ${EULA}
+      API_VERSION: ${API_VERSION}
+      CERT_NAME: ${CERT_NAME}
+      EMAIL: ${EMAIL}
+      DOMAINS: ${DOMAINS}
+      PUBLIC_KEY_TYPE: ${PUBLIC_KEY_TYPE}
+      RENEWAL_TIME: ${RENEWAL_TIME}
+      PROVIDER: ${PROVIDER}
+      CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
+      CLOUDFLARE_KEY: ${CLOUDFLARE_KEY}
+      DO_ACCESS_TOKEN: ${DO_ACCESS_TOKEN}
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+      AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+      DNSIMPLE_EMAIL: ${DNSIMPLE_EMAIL}
+      DNSIMPLE_KEY: ${DNSIMPLE_KEY}
+      DYN_CUSTOMER_NAME: ${DYN_CUSTOMER_NAME}
+      DYN_USER_NAME: ${DYN_USER_NAME}
+      DYN_PASSWORD: ${DYN_PASSWORD}
+      VULTR_API_KEY: ${VULTR_API_KEY}
+      OVH_APPLICATION_KEY: ${OVH_APPLICATION_KEY}
+      OVH_APPLICATION_SECRET: ${OVH_APPLICATION_SECRET}
+      OVH_CONSUMER_KEY: ${OVH_CONSUMER_KEY}
+      GANDI_API_KEY: ${GANDI_API_KEY}
+    volumes:
+      - lets-encrypt:/etc/letsencrypt
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: 'environment'
+volumes:
+  lets-encrypt:
+    driver: ${STORAGE_DRIVER}
