@@ -1,0 +1,8 @@
+name: Mesos-dns
+description: |
+  (Experimental) Mesos-dns
+version: v0.6.0-rancher1
+category: External DNS
+maintainer: "Raul Sanchez <rawmind@gmail.com>"
+license: 
+projectURL: https://github.com/rawmind0/alpine-mesos-dns
