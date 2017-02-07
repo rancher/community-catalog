@@ -1,8 +1,8 @@
 .catalog:
   name: "Rancher Backup"
-  version: "1.0.1"
+  version: "1.0.2"
   description: "It's a general purpose to solve backup matter on Rancher"
-  uuid: rancher-backup-1.0.1
+  uuid: rancher-backup-1.0.2
   minimum_rancher_version: v0.56.0
   questions:
     - variable: CRON_SCHEDULE
