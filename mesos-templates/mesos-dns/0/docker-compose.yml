@@ -18,7 +18,6 @@ services:
     - MESOS_MASTER="master.mesos:5050"
     - MESOS_DNS_DOMAIN=${mesos_domain}
     - MESOS_DNS_RESOLVERS="169.254.169.250"
-    - MESOS_DNS_LISTENER=${mesos_localip}
     - LINK_LOCAL_IP=${mesos_localip}
   mesos-dns-route:
     labels:
