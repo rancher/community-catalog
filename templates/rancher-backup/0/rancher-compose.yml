@@ -66,21 +66,6 @@
       options:
         - "false"
         - "true"
-    - variable: RANCHER_API_URL
-      description: "The Rancher API URL with project ID"
-      label: "Rancher API URL"
-      type: "string"
-      required: true
-    - variable: RANCHER_API_KEY
-      description: "The Rancher API key"
-      label: "Rancher API key"
-      type: "password"
-      required: true
-    - variable: RANCHER_API_SECRET
-      description: "The Rancher API secret key"
-      label: "Rancher API secret"
-      type: "password"
-      required: true
     - variable: FTP_PASSWORD
       label: "FTP password"
       type: "password"

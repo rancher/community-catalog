@@ -26,10 +26,6 @@ For the moment, this template permit to perform the following actions:
 
 > Note: you can read [the duplicity documentation](http://duplicity.nongnu.org/duplicity.1.html) about backup policy
 
-You must add your Rancher environment credential in environments variables to auto discover:
-- `RANCHER_API_URL`: the API URL with your project ID
-- `RANCHER_API_KEY`: the API key
-- `RANCHER_API_SECRET`: the API secret key
 
 The currents backends supported by duplicity are FTP, Azure, B2, Cloud Files, Dropbox, FISH, Google Docs, Google Cloud Storage, HSI, Hubbic, Mega cloud storage, OneDrive backend, Par2 Wrapper Backend, S3 storage, Swift and MediaFire
 
