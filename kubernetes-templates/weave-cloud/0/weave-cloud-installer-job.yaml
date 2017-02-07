@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: weave-cloud-installer
+  namespace: kube-system
+  labels:
+    app: weave-cloud-installer
+    name: weave-cloud-installer
+    weave-cloud-component: installer
+spec:
+  template:
+    spec:
+      containers:
+      - name: kubectl
+        image: gcr.io/google_containers/hyperkube:v1.5.1
+        command:
+        - /hyperkube
+        - kubectl
+        - create
+        - --namespace=kube-system
+        - --filename=https://cloud.weave.works/k8s.yaml?t=${WEAVE_CLOUD_SERVICE_TOKEN}
+      restartPolicy: OnFailure
