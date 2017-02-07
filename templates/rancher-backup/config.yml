@@ -1,0 +1,5 @@
+name: Rancher Backup
+description: |
+  It's a general purpose to solve backup matter on Rancher.
+version: 1.0.2
+category: Backup

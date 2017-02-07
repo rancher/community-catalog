@@ -1,0 +1,131 @@
+.catalog:
+  name: "Rancher Backup"
+  version: "1.0.2"
+  description: "It's a general purpose to solve backup matter on Rancher"
+  uuid: rancher-backup-1.0.2
+  minimum_rancher_version: v0.56.0
+  questions:
+    - variable: CRON_SCHEDULE
+      description: "The schedule with the Go cron syntaxe (per default, each day)"
+      label: "Schedule"
+      type: "string"
+      required: true
+      default: "0 0 0 * * *"
+    - variable: BACKEND
+      description: "The duplicity backend for remote backup"
+      label: "Backend"
+      type: "string"
+      required: true
+    - variable: TARGET_PATH
+      description: "The path on target backup (default, /backup)"
+      label: "Target path on backend"
+      type: "string"
+      required: true
+      default: "/backup"
+    - variable: BK_FULL_FREQ
+      description: "The backup full frequency (per defaut, each 7 days)"
+      label: "Backup full frequency"
+      type: "string"
+      required: true
+      default: "7D"
+    - variable: BK_KEEP_FULL
+      description: "How many keep full backup (per default, keep 3s)"
+      label: "Backup full retention"
+      type: "string"
+      required: true
+      default: "5"
+    - variable: BK_KEEP_FULL_CHAIN
+      description: "How many keep incremental backup chain (per default, keep 1)"
+      label: "Backup incremental retention"
+      type: "string"
+      required: true
+      default: "1"
+    - variable: VOLUME_SIZE
+      description: "The volume size in MB (per default, 25)"
+      label: "Volume size"
+      type: "string"
+      required: true
+      default: "25"
+    - variable: DISABLE_DUMP
+      description: "If disabled, it's doesn't perform dump before save data"
+      label: "Disable dump"
+      type: "string"
+      required: true
+      default: "false"
+      type: "enum"
+      options:
+        - "false"
+        - "true"
+    - variable: DISABLE_DUMP_RANCHER
+      description: "If disabled, it's doesn't perform the backup of stack definition"
+      label: "Disable Rancher dump"
+      type: "string"
+      required: true
+      default: "false"
+      type: "enum"
+      options:
+        - "false"
+        - "true"
+    - variable: FTP_PASSWORD
+      label: "FTP password"
+      type: "password"
+      required: false
+    - variable: AWS_ACCESS_KEY_ID
+      label: "AWS access key"
+      type: "string"
+      required: false
+    - variable: AWS_SECRET_ACCESS_KEY
+      label: "AWS secret key"
+      type: "password"
+      required: false
+    - variable: AZURE_ACCOUNT_NAME
+      label: "Azure account name"
+      type: "string"
+      required: false
+    - variable: AZURE_ACCOUNT_KEY
+      label: "Azure account key"
+      type: "password"
+      required: false
+    - variable: CLOUDFILES_USERNAME
+      label: "CloudFiles username"
+      type: "string"
+      required: false
+    - variable: CLOUDFILES_APIKEY
+      label: "Cloudfiles API key"
+      type: "password"
+      required: false
+    - variable: DPBX_ACCESS_TOKEN
+      label: "Dropbox access token"
+      type: "password"
+      required: false
+    - variable: GS_ACCESS_KEY_ID
+      label: "Google Storage key"
+      type: "string"
+      required: false
+    - variable: GS_SECRET_ACCESS_KEY
+      label: "Google Storage secret"
+      type: "password"
+      required: false
+    - variable: GOOGLE_DRIVE_ACCOUNT_KEY
+      label: "Google Drive account key"
+      type: "password"
+      required: false
+    - variable: SWIFT_USERNAME
+      label: "Swift username"
+      type: "string"
+      required: false
+    - variable: SWIFT_PASSWORD
+      label: "Swift password"
+      type: "password"
+      required: false
+    - variable: SWIFT_AUTHURL
+      label: "Swift auth URL"
+      type: "string"
+      required: false
+
+
+backup:
+  scale: 1
+
+backup-data:
+  scale: 1
