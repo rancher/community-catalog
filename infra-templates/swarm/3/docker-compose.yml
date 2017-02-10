@@ -1,7 +1,7 @@
 version: '2'
 services:
   swarmkit-mon:
-    image: rancher/swarmkit:v1.13-1
+    image: rancher/swarmkit:v1.13.0-beta.1
     environment:
       MANAGER_SCALE: ${MANAGER_SCALE}
     labels:
@@ -9,7 +9,7 @@ services:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.dns: 'true'
       io.rancher.container.pull_image: always
-      io.rancher.scheduler.affinity:host_label: io.rancher.host.docker_version=1.13
+      io.rancher.scheduler.affinity:host_label_ne: io.rancher.host.docker_version=1.12
       io.rancher.scheduler.global: 'true'
     network_mode: host
     privileged: true
