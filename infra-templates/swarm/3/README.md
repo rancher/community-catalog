@@ -1,6 +1,6 @@
 ## Prerequisites
 
-* Docker 1.13.x
+* Docker 1.13 or later
 * Port `2377` and `2378` must be open
 
 ## Features
