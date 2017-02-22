@@ -15,4 +15,3 @@
       default: "[allinone.neuvector.rancher.internal]"
       required: true
       type: "string"
-      
