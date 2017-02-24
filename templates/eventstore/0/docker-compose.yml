@@ -3,7 +3,7 @@ services:
   eventstore:
     image: eventstore/eventstore
     entrypoint: /bin/bash
-    command: ['-c', 'grep -q -F "IntIpAdvertiseAs: $$(hostname --ip-address)" /etc/eventstore/eventstore.conf  || echo "IntIpAdvertiseAs: $$(hostname --ip-address)" >> /etc/eventstore/eventstore.conf && grep -q -F "ExtIpAdvertiseAs: $$(hostname --ip-address)" /etc/eventstore/eventstore.conf  || echo "ExtIpAdvertiseAs: $$(hostname --ip-address)" >> /etc/eventstore/eventstore.conf && /entrypoint.sh']
+    command: ['-c', 'grep -q -F "IntIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  || echo "IntIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf && grep -q -F "ExtIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  || echo "ExtIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf && /entrypoint.sh']
     environment:
       - EVENTSTORE_CLUSTER_SIZE=3
       - EVENTSTORE_CLUSTER_DNS=eventstore
