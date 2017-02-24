@@ -3,6 +3,7 @@
   version: "11.0.563-rancher1"
   description: "Datadog Agent and DogStatsD"
   minimum_rancher_version: v0.46.0
+  maximum_rancher_version: v1.1.99
   questions:
     - variable: "api_key"
       label: "DataDog Api Key"
