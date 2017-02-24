@@ -35,14 +35,14 @@ services:
         priority: 1
         protocol: http
         service: eventstore
-        source_port: 2113
+        source_port: ${load_balancer_external_http_port}
         target_port: 2113
       - hostname: ''
         path: ''
         priority: 2
         protocol: tcp
         service: eventstore
-        source_port: 1113
+        source_port: ${load_balancer_external_tcp_port}
         target_port: 1113
     health_check:
       response_timeout: 2000
