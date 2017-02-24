@@ -8,7 +8,7 @@ services:
       - EVENTSTORE_CLUSTER_SIZE=3
       - EVENTSTORE_CLUSTER_DNS=eventstore
       - EVENTSTORE_CLUSTER_GOSSIP_PORT=2112
-      - EVENTSTORE_EXT_HTTP_PREFIXES=${load_balancer_external_http_port}
+      - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${load_balancer_external_http_port}/
 
   eventstore-lb:
     image: rancher/lb-service-haproxy:v0.5.9
