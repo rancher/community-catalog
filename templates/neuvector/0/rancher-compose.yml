@@ -9,9 +9,3 @@
       type: "string"
       default: "neuvector.allinone_node=true" 
       required: true
-    - variable: "ALLINONE_ADDRESS"
-      description: Input the allinone service IP address here.
-      label: "NeuVector Allinone/Controller IP address"
-      default: "[allinone.neuvector.rancher.internal]"
-      required: true
-      type: "string"
