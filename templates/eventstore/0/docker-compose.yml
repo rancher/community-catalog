@@ -14,7 +14,7 @@ services:
     image: rancher/lb-service-haproxy:v0.5.9
     ports:
       - ${load_balancer_external_http_port}:${load_balancer_external_http_port}/tcp
-      - ${load_balancer_external_tcp_port}:${load_balancer_external_http_port}/tcp
+      - ${load_balancer_external_tcp_port}:${load_balancer_external_tcp_port}/tcp
     labels:
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
