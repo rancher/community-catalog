@@ -94,7 +94,7 @@
     - variable: AWS_SECRET_KEY
       label: AWS Route53 Secret Access Key
       description: Enter the Secret Access Key for your AWS account.
-      type: string
+      type: password
       required: false
     - variable: CLOUDFLARE_EMAIL
       label: CloudFlare Email Address
@@ -104,12 +104,12 @@
     - variable: CLOUDFLARE_KEY
       label: CloudFlare API Key
       description: Enter the Global API Key for your CloudFlare account.
-      type: string
+      type: password
       required: false
     - variable: DO_ACCESS_TOKEN
       label: DigitalOcean API Access Token
       description: Enter the Personal Access Token for your DigitalOcean account.
-      type: string
+      type: password
       required: false
     - variable: DNSIMPLE_EMAIL
       label: DNSimple Email Address
@@ -119,7 +119,7 @@
     - variable: DNSIMPLE_KEY
       label: DNSimple API Key
       description: Enter your DNSimple API key.
-      type: string
+      type: password
       required: false
     - variable: DYN_CUSTOMER_NAME
       label: Dyn Customer Name
@@ -134,12 +134,12 @@
     - variable: DYN_PASSWORD
       label: Dyn Password
       description: Enter your Dyn password.
-      type: string
+      type: password
       required: false
     - variable: GANDI_API_KEY
       label: Gandi API Key
       description: Enter the API key for your Gandi account.
-      type: string
+      type: password
       required: false
     - variable: OVH_APPLICATION_KEY
       label: OVH Application Key
@@ -149,15 +149,15 @@
     - variable: OVH_APPLICATION_SECRET
       label: OVH Application Secret
       description: Enter your OVH application secret.
-      type: string
+      type: password
       required: false
     - variable: OVH_CONSUMER_KEY
       label: OVH Consumer Key
       description: Enter your OVH consumer key.
-      type: string
+      type: password
       required: false
     - variable: VULTR_API_KEY
       label: Vultr API Key
       description: Enter the API key for your Vultr account.
-      type: string
+      type: password
       required: false
