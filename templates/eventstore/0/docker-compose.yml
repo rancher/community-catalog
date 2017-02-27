@@ -5,7 +5,10 @@ services:
     entrypoint: /bin/bash
     command:
     - -c
-    - 'grep -q -F "IntIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  ||
+    - '
+      apt-get install curl &&
+      export HOST_PUBLIC_IP=$$(curl http://rancher-metadata/2015-12-19/self/host/agent_ip) &&
+      grep -q -F "IntIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  ||
       echo "IntIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf &&
       grep -q -F "ExtIpAdvertiseAs: $$HOST_PUBLIC_IP" /etc/eventstore/eventstore.conf  ||
       echo "ExtIpAdvertiseAs: $$HOST_PUBLIC_IP" >> /etc/eventstore/eventstore.conf &&
@@ -18,7 +21,7 @@ services:
     - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${external_http_port}/
     - EVENTSTORE_EXT_HTTP_PORT=${external_http_port}
     - EVENTSTORE_EXT_TCP_PORT=${external_tcp_port}
-    - HOST_PUBLIC_IP=$(scw-metadata PUBLIC_IP_ADDRESS)
+    #- HOST_PUBLIC_IP='$(scw-metadata PUBLIC_IP_ADDRESS)'
     
     ports:
     - ${external_http_port}:${external_http_port}/tcp
