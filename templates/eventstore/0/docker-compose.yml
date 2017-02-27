@@ -15,13 +15,13 @@ services:
     - EVENTSTORE_CLUSTER_SIZE=3
     - EVENTSTORE_CLUSTER_DNS=eventstore
     - EVENTSTORE_CLUSTER_GOSSIP_PORT=2112
-    - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${load_balancer_external_http_port}/
-    - EVENTSTORE_EXT_HTTP_PORT=${load_balancer_external_http_port}
-    - EVENTSTORE_EXT_TCP_PORT=${load_balancer_external_tcp_port}
+    - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${external_http_port}/
+    - EVENTSTORE_EXT_HTTP_PORT=${external_http_port}
+    - EVENTSTORE_EXT_TCP_PORT=${external_tcp_port}
     
     ports:
-    - ${load_balancer_external_http_port}:${load_balancer_external_http_port}/tcp
-    - ${load_balancer_external_tcp_port}:${load_balancer_external_tcp_port}/tcp
+    - ${external_http_port}:${external_http_port}/tcp
+    - ${external_tcp_port}:${external_tcp_port}/tcp
 
 
 #more /etc/eventstore/eventstore.conf
