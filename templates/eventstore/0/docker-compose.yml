@@ -3,28 +3,25 @@ services:
   eventstore:
     image: eventstore/eventstore
     entrypoint: /bin/bash
-    command: ['-c', 'grep -q -F "IntIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  || echo "IntIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf && grep -q -F "ExtIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  || echo "ExtIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf && /entrypoint.sh']
-    environment:
-      - EVENTSTORE_CLUSTER_SIZE=3
-      - EVENTSTORE_CLUSTER_DNS=eventstore
-      - EVENTSTORE_CLUSTER_GOSSIP_PORT=2112
-      - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${load_balancer_external_http_port}/
-      - EVENTSTORE_EXT_HTTP_PORT=${load_balancer_external_http_port}
-      - EVENTSTORE_EXT_TCP_PORT=${load_balancer_external_tcp_port}
-    
-    expose:
-      - "${load_balancer_external_http_port}"
-      - "${load_balancer_external_tcp_port}"
+    command:
+    - -c
+    - 'grep -q -F "IntIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  ||
+      echo "IntIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf &&
+      grep -q -F "ExtIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  ||
+      echo "ExtIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf &&
+      /entrypoint.sh'
 
-  eventstore-lb:
-    image: rancher/lb-service-haproxy:v0.5.9
+    environment:
+    - EVENTSTORE_CLUSTER_SIZE=3
+    - EVENTSTORE_CLUSTER_DNS=eventstore
+    - EVENTSTORE_CLUSTER_GOSSIP_PORT=2112
+    - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${load_balancer_external_http_port}/
+    - EVENTSTORE_EXT_HTTP_PORT=${load_balancer_external_http_port}
+    - EVENTSTORE_EXT_TCP_PORT=${load_balancer_external_tcp_port}
+    
     ports:
-      - ${load_balancer_external_http_port}:${load_balancer_external_http_port}/tcp
-      - ${load_balancer_external_tcp_port}:${load_balancer_external_tcp_port}/tcp
-    labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
-      io.rancher.scheduler.global: 'true'
+    - ${load_balancer_external_http_port}:${load_balancer_external_http_port}/tcp
+    - ${load_balancer_external_tcp_port}:${load_balancer_external_tcp_port}/tcp
 
 
 #more /etc/eventstore/eventstore.conf

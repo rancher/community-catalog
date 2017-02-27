@@ -8,14 +8,14 @@ version: '2'
   maintainer: "Jérôme Rx <jerome@rouaix.eu>"
   uuid: ges-0
   questions:
-    - variable: "load_balancer_external_http_port"
-      description: "External load balancer http port"
+    - variable: "external_http_port"
+      description: "External http port"
       label: "LB http port"
       required: true
       default: 2113
       type: "int"
-    - variable: "load_balancer_external_tcp_port"
-      description: "External load balancer tcp port"
+    - variable: "external_tcp_port"
+      description: "External tcp port"
       label: "LB tcp port"
       required: true
       default: 1113
@@ -25,29 +25,4 @@ services:
   eventstore:
     scale: 3
     start_on_create: true
-  eventstore-lb:
-    start_on_create: true
-    lb_config:
-      certs: []
-      port_rules:
-      - hostname: ''
-        path: ''
-        priority: 1
-        protocol: http
-        service: eventstore
-        source_port: ${load_balancer_external_http_port}
-        target_port: ${load_balancer_external_http_port}
-      - hostname: ''
-        path: ''
-        priority: 2
-        protocol: tcp
-        service: eventstore
-        source_port: ${load_balancer_external_tcp_port}
-        target_port: ${load_balancer_external_tcp_port}
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 42
-      unhealthy_threshold: 3
-      interval: 2000
 
