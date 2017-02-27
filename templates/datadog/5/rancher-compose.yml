@@ -1,36 +1,65 @@
 .catalog:
-  name: "DataDog"
-  version: "11.3.585-rancher1"
+  name: "Datadog"
+  version: "1.1.0-11.0.5110"
   description: "Real-time performance tracking and visualization of your container-based application deployment"
-  minimum_rancher_version: v0.46.0
-  maximum_rancher_version: v1.1.99
+  minimum_rancher_version: v1.2.0
   questions:
     - variable: "api_key"
-      label: "DataDog Api Key"
+      label: "Datadog API Key"
       description: |
-        Enter your DataDog API key.
+        Enter your Datadog API key.
       required: true
       type: "string"
     - variable: "global_service"
       label: "Global Service"
       description: |
-        Enable this option to run a DataDog agent container on every host in the environment.
+        Enable this option to run a Datadog agent container on every host in the environment.
       required: true
       type: "boolean"
       default: true
     - variable: "host_labels"
       label: "Export Host Labels as Tags"
       description: |
-        Comma delimited list of host labels to export as DataDog host tags, e.g. 'region,zone'.
+        Comma delimited list of host labels to export as Datadog host tags, e.g. 'region,zone'.
       required: false
       type: "string"
     - variable: "service_labels"
       label: "Export Service Labels as Tags"
       description: |
-        Comma delimited list of service labels to export as DataDog metric tags.
+        Comma delimited list of service labels to export as Datadog metric tags.
         'io.rancher.stack.name' and 'io.rancher.stack_service.name' are exported by default.
       required: false
       type: "string"
+    - variable: "host_tags"
+      label: "Global Host Tags"
+      description: |
+        Comma delimited list of host tags to apply to metrics, e.g. 'simple-tag-0,tag-key-1:tag-value-1'.
+      required: false
+      type: "string"
+    - variable: "dd_ec2_tags"
+      label: "Collect AWS EC2 Tags"
+      description: |
+        Collect AWS EC2 custom tags as agent tags (requires an IAM role associated with the instance).
+      required: true
+      type: "boolean"
+      default: false
+    - variable: cgroups_location
+      label: Cgroup directory location
+      description: |
+        Set this to '/cgroups/' if your hosts are running Amazon Linux AMIs.
+      required: true
+      type: enum
+      default: '/sys/fs/cgroup/'
+      options:
+        - '/sys/fs/cgroup/'
+        - '/cgroups/'
+    - variable: "dd_apm_enabled"
+      label: "Enable APM agent"
+      description: |
+        Enable the Datadog trace-agent along with the infrastructure agent, allowing the container to accept traces on 8126/tcp.
+      required: true
+      type: "boolean"
+      default: false
     - variable: "service_discovery"
       label: "Enable Service Discovery"
       description: |
@@ -38,7 +67,7 @@
       required: true
       type: "boolean"
       default: false
-    - variable: sd_config_backend
+    - variable: "sd_config_backend"
       label: Service Discovery Configuration Backend
       description: |
         Choose a key/value store to use for looking up application configuration templates.
@@ -92,17 +121,22 @@
         If the Consul backend uses ACL, specify a token granting read access to the configuration templates.
       required: false
       type: "string"
-    - variable: "statsd_standalone"
-      label: "Run Standalone DogStatsD"
-      description: |
-        Enable this option to run just the DogStatsD service without the full agent.
-        Should be used with the Global Service option set 'False'.
-      required: true
-      type: "boolean"
-      default: false
     - variable: "statsd_namespace"
       label: "StatsD Metric Namespace"
       description: |
         Optional namespace for aggregated StatsD metrics.
       required: false
       type: "string"
+    - variable: "dd_log_level"
+      label: "Agent log level"
+      description: |
+        Set the logging verbosity of the Datadog agent.
+      required: false
+      type: enum
+      default: INFO
+      options:
+        - CRITICAL
+        - ERROR
+        - WARNING
+        - INFO
+        - DEBUG
