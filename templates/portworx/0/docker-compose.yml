@@ -3,7 +3,7 @@ portworx:
     io.rancher.container.create_agent: 'true'
     io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: 'always'
-  image: portworx/px-dev
+  image: portworx/px-dev:edge
   container_name: px
   ipc: host
   net: host
@@ -11,13 +11,15 @@ portworx:
   environment:
     CLUSTER_ID: ${cluster_id}
     KVDB: ${kvdb}
+    HDR_DIR: ${header_dir}
+    USE_DISKS: ${use_disks}
   volumes:
      - /dev:/dev
-     - /usr/src:/usr/src
+     - ${header_dir}:${header_dir}
      - /run/docker/plugins:/run/docker/plugins
      - /var/lib/osd:/var/lib/osd:shared
      - /etc/pwx:/etc/pwx
      - /opt/pwx/bin:/export_bin:shared
      - /var/run/docker.sock:/var/run/docker.sock
      - /var/cores:/var/cores
-  command: -c ${cluster_id} -k ${kvdb} -a -z -f
+  command: -c ${cluster_id} -k ${kvdb} ${use_disks}

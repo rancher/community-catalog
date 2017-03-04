@@ -1,8 +1,8 @@
 .catalog:
   name: "Portworx"
-  version: "1.1.2-2017-01-06-GA"
+  version: "1.1.6-2017-02-08-GA"
   description: "Container Defined Storage for Docker"
-  uuid: 352669-pwx-1.1.2
+  uuid: 352669-pwx-1.1.6
   minimum_rancher_version: v0.56.0
   questions:
     - variable: cluster_id
@@ -17,3 +17,15 @@
       type: "string"
       required: true
       default: ""
+    - variable: use_disks
+      description: "Cmdline args for disks to use. Ex: '-a' for all available, or '-s /dev/sdX' for each individual disk"
+      label: "Use Disks"
+      type: "string"
+      required: true
+      default: "-s /dev/xvdb"
+    - variable: header_dir
+      description: "Directory where kernel headers can be found.  Default is '/usr/src'.  For CoreOS use '/lib/modules'"
+      label: "Headers Directory"
+      type: "string"
+      required: true
+      default: "/usr/src"
