@@ -1,0 +1,5 @@
+.catalog:
+  name: "Portainer"
+  version: "1.11.4"
+  description: Open-source lightweight management UI for a Docker host or Swarm cluster
+  minimum_rancher_version: v1.5.0-rc1

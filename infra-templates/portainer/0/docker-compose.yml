@@ -1,0 +1,15 @@
+portainer:
+  labels:
+    io.rancher.sidekicks: ui
+    io.rancher.container.create_agent: true
+    io.rancher.container.agent.role: environment
+  image: rancher/portainer-agent:v0.1.0
+  volumes:
+  - /config
+
+ui:
+  image: portainer/portainer:pr572
+  command: --no-auth --external-endpoints=/config/config.json --sync-interval=5s -p :80
+  volumes_from:
+  - portainer
+  net: container:portainer
