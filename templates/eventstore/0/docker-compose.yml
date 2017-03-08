@@ -17,11 +17,12 @@ services:
     environment:
     - EVENTSTORE_CLUSTER_SIZE=3
     - EVENTSTORE_CLUSTER_DNS=eventstore
-    - EVENTSTORE_CLUSTER_GOSSIP_PORT=2112
+    - EVENTSTORE_CLUSTER_GOSSIP_PORT=${internal_http_port}
     - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${external_http_port}/
+    - EVENTSTORE_EXT_INT_HTTP_PORT=${internal_http_port}
+    - EVENTSTORE_EXT_INT_TCP_PORT=${internal_tcp_port}
     - EVENTSTORE_EXT_HTTP_PORT=${external_http_port}
     - EVENTSTORE_EXT_TCP_PORT=${external_tcp_port}
-    #- HOST_PUBLIC_IP='$(scw-metadata PUBLIC_IP_ADDRESS)'
     
     ports:
     - ${external_http_port}:${external_http_port}/tcp

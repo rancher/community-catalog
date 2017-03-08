@@ -8,15 +8,23 @@ version: '2'
   maintainer: "Jérôme Rx <jerome@rouaix.eu>"
   uuid: ges-0
   questions:
+    - variable: "internal_http_port"
+      label: "Internal http (and gossip) port"
+      required: true
+      default: 2112
+      type: "int"
+    - variable: "internal_tcp_port"
+      label: "Internal tcp port"
+      required: true
+      default: 1112
+      type: "int"
     - variable: "external_http_port"
-      description: "External http port"
-      label: "LB http port"
+      label: "External http port"
       required: true
       default: 2113
       type: "int"
     - variable: "external_tcp_port"
-      description: "External tcp port"
-      label: "LB tcp port"
+      label: "External tcp port"
       required: true
       default: 1113
       type: "int"
