@@ -1,0 +1,81 @@
+version: '2'
+
+services:
+
+  zammad:
+    depends_on:
+      - zammad-elasticsearch
+      - zammad-postgresql
+    image: zammad/zammad-docker-compose:zammad
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+    restart: on-failure
+    volumes:
+      - data-zammad:/home/zammad
+
+  zammad-elasticsearch:
+    image: zammad/zammad-docker-compose:zammad-elasticsearch
+    labels:
+      io.rancher.container.pull_image: always
+    restart: always
+
+  zammad-nginx:
+    depends_on:
+      - zammad
+    image: zammad/zammad-docker-compose:zammad-nginx
+    labels:
+      io.rancher.container.pull_image: always
+    links:
+      - zammad-railsserver
+      - zammad-websocket
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - data-zammad:/home/zammad
+
+  zammad-postgresql:
+    image: zammad/zammad-docker-compose:zammad-postgresql
+    labels:
+      io.rancher.container.pull_image: always
+    restart: always
+
+  zammad-railsserver:
+    image: zammad/zammad-docker-compose:zammad-railsserver
+    labels:
+      io.rancher.container.pull_image: always
+    links:
+      - zammad-elasticsearch
+      - zammad-postgresql
+      - zammad
+    depends_on:
+      - zammad
+    restart: always
+
+  zammad-scheduler:
+    image: zammad/zammad-docker-compose:zammad-scheduler
+    labels:
+      io.rancher.container.pull_image: always
+    links:
+      - zammad-elasticsearch
+      - zammad-postgresql
+      - zammad
+    depends_on:
+      - zammad-railsserver
+    restart: always
+
+  zammad-websocket:
+    image: zammad/zammad-docker-compose:zammad-websocket
+    labels:
+      io.rancher.container.pull_image: always
+    links:
+      - zammad-postgresql
+      - zammad
+    depends_on:
+      - zammad-railsserver
+    restart: always
+
+volumes:
+  data-zammad:
+    driver: local
