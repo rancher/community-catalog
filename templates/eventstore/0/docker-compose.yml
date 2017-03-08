@@ -30,7 +30,9 @@ services:
     - ${external_tcp_port}:${external_tcp_port}/tcp
 
 
-#more /etc/eventstore/eventstore.conf
-#more /var/log/eventstore/20*/*.log
-#rm more /var/log/eventstore/20*/*.log
+# ==> Some debug commands :
+
+# more /etc/eventstore/eventstore.conf
+# more /var/log/eventstore/20*/*.log
+# rm more /var/log/eventstore/20*/*.log
 
