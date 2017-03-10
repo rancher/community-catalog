@@ -1,5 +1,5 @@
 grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:4.1.1
     ports:
         - ${http_port}:3000
     environment:
