@@ -1,6 +1,6 @@
 .catalog:
   name: "Grafana"
-  version: "4.1.1-rancher1"
+  version: "4.1.1-rancher0"
   description: |
       (Experimental) Grafana: Beautiful metric & analytic dashboards
   questions:
