@@ -1,6 +1,6 @@
 .catalog:
   name: "NeuVector"
-  version: "v0.9"
+  version: "v1.1.0"
   description: "Container Security Solution"
   questions:
     - variable: "NV_ALLINONE_LABEL"
