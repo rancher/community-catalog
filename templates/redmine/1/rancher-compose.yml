@@ -1,0 +1,31 @@
+version: '2'
+catalog:
+  name: Redmine
+  version: 0.1.1
+  upgrade_from: 0.1.0
+  description: |
+    Redmine
+  questions:
+  - variable: "TZ"
+    description: "Timezone to use for the server"
+    label: "Timezone"
+    required: true
+    default: "America/Chicago"
+    type: "string"
+  - variable: "DB_PASS"
+    description: "Database Password to use for the server"
+    label: "DB Password"
+    required: true
+    default: "password123"
+    type: string
+  - variable: "REDMINE_SECRET_TOKEN"
+    description: "REDMINE_SECRET_TOKEN"
+    label: "REDMINE_SECRET_TOKEN"
+    required: true
+    default: "REALLYlongrandomhashkjekkckksixci"
+    type: "string"
+
+services:
+  redmine:
+    scale: 1
+    retain_ip: true
