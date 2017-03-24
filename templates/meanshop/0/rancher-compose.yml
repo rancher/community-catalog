@@ -1,6 +1,6 @@
 .catalog:
   name: "meanshop"
-  version: "0.4.8"
+  version: "0.4.9"
   description: "Ecommerce powered by Meanshop"
   uuid: meanshop-0
   minimum_rancher_version: v0.51.0
@@ -21,7 +21,7 @@
         description: "Port to use for the MEANSHOP server"
         label: "MEANSHOP Port"
         required: true
-        default: "3547"
+        default: "8080"
         type: "int"
 
 meanshop-nginx:

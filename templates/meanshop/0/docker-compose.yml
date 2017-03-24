@@ -16,8 +16,6 @@ services:
       MEANGO_DEBUG: ${debug}
       PORT: 9000
       MONGODB_DB_URL: "mongodb://meango/meanshop"
-    ports:
-      - "9000:9000"
   meango:
     restart: always
     environment:
