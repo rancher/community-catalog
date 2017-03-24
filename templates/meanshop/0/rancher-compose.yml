@@ -23,14 +23,6 @@
         required: true
         default: "3547"
         type: "int"
-      - variable: host_label
-        label: "Host Label to Meanshop Tags"
-        description: |
-          Host label to use as Meanshop 'value' tag.
-          Example: 'meanshop=true'
-        required: false
-        default: "meanshop=true"
-        type: "string"
 
 meanshop-nginx:
   scale: 1
