@@ -1,7 +1,7 @@
 version: '2'
 services:
   meanshop-nginx:
-    image: thalhalla/meanshop:nginx
+    image: ohmydocker/meanshop:nginx
     labels:
       io.rancher.scheduler.affinity:host_label: ${host_label}
       io.rancher.container.hostname_override: container_name
@@ -9,7 +9,7 @@ services:
     ports:
       - ${PORT}:80
   meanshop-node:
-    image: thalhalla/meanshop:node
+    image: ohmydocker/meanshop:alpine
     labels:
       io.rancher.scheduler.affinity:host_label: ${host_label}
       io.rancher.container.pull_image: always
