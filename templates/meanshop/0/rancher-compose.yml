@@ -1,6 +1,6 @@
 .catalog:
   name: "meanshop"
-  version: "0.4.7"
+  version: "0.4.8"
   description: "Ecommerce powered by Meanshop"
   uuid: meanshop-0
   minimum_rancher_version: v0.51.0
@@ -23,12 +23,6 @@
         required: true
         default: "3547"
         type: "int"
-      - variable: replset_name
-        description: "Name of the MongoDB replicaSet"
-        label: "ReplicaSet Name"
-        type: "string"
-        required: true
-        default: "rs0"
       - variable: host_label
         label: "Host Label to Meanshop Tags"
         description: |
