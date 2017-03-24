@@ -44,3 +44,5 @@ services:
     - IMAP_ENABLED=false
     volumes_from:
     - redmine-datavolume
+    ports:
+    - ${PORT}:80

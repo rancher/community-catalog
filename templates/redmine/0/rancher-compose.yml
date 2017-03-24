@@ -1,10 +1,16 @@
 version: '2'
 catalog:
   name: Redmine
-  version: 0.1.0
+  version: 0.1.2
   description: |
     Redmine
   questions:
+  - variable: "PORT"
+    description: "external port to access redmine on"
+    label: "Port"
+    required: true
+    default: "11080"
+    type: "int"
   - variable: "TZ"
     description: "Timezone to use for the server"
     label: "Timezone"
@@ -15,14 +21,14 @@ catalog:
     description: "Database Password to use for the server"
     label: "DB Password"
     required: true
-    default: ""
-    type: password
+    default: "password123"
+    type: string
   - variable: "REDMINE_SECRET_TOKEN"
     description: "REDMINE_SECRET_TOKEN"
     label: "REDMINE_SECRET_TOKEN"
     required: true
-    default: ""
-    type: "password"
+    default: "REALLYlongrandomhashkjekkckksixci"
+    type: "string"
 
 services:
   redmine:
