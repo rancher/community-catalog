@@ -14,7 +14,7 @@ services:
     labels:
       io.rancher.sidekicks: setup-get-db-script
   setup-get-db-script:
-    image: glyptodon/guacamole
+    image: glyptodon/guacamole:0.9.10-incubating
     network_mode: none
     volumes:
     - dbinit:/docker-entrypoint-initdb.d
@@ -25,9 +25,9 @@ services:
     labels:
       io.rancher.container.start_once: 'true'
   guacd:
-    image: glyptodon/guacd
+    image: glyptodon/guacd:0.9.10-incubating
   guacamole:
-    image: glyptodon/guacamole
+    image: glyptodon/guacamole:0.9.10-incubating
     environment:
       MYSQL_DATABASE: ${guacamole_db}
       MYSQL_HOSTNAME: database
