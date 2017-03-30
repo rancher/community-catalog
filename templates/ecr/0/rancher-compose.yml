@@ -3,6 +3,7 @@
   version: "v1.0.0"
   description: "Updates credentials for ECR in Rancher"
   uuid: ecr-1
+  maximum_rancher_version: "v1.4.99"
   questions:
     - variable: "aws_access_key_id"
       label: "AWS Access Key ID"
