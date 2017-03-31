@@ -5,6 +5,11 @@
 This template creates one GoCD server and scale out the number of GoCD agent you need.
 
 The GoCD agent embedded Docker support, so the idea is to not create GoCD agent per language but use docker container to build and test your stuff.
+You can use on GoCD agent:
+- docker cli
+- docker-compose cli
+- rancher-compose cli
+- make
 
 
 ### Usage:

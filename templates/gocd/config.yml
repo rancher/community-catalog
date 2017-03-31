@@ -1,4 +1,4 @@
-name: gocd-server
+name: GoCD
 description: |
   GoCD Stack (server and agents)
 version: 17.3.0-rancher1
