@@ -6,23 +6,23 @@ services:
     image: webcenter/alpine-gocd-server:develop
     volumes:
     {{- if (contains .Values.VOLUME_DRIVER_SERVER "/")}}
-      - gocd-server-data:/data
-    {{- else}}
       - ${VOLUME_DRIVER_SERVER}:/data
+    {{- else}}
+      - gocd-server-data:/data
     {{- end}}
     environment:
-      - GOCD_CONFIG_memory="${GOCD_SERVER_MEMORY}"
-      - GOCD_CONFIG_agent-key="${GOCD_AGENT_KEY}"
+      - GOCD_CONFIG_memory=${GOCD_SERVER_MEMORY}
+      - GOCD_CONFIG_agent-key=${GOCD_AGENT_KEY}
       {{- if eq .Values.GOCD_AGENT_PACKAGE "true"}}
-      - GOCD_CONFIG_plugin_script-executor="https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar"
-      - GOCD_CONFIG_plugin_docker-task="https://github.com/manojlds/gocd-docker/releases/download/0.1.27/docker-task-assembly-0.1.27.jar"
-      - GOCD_CONFIG_plugin_slack="https://github.com/Vincit/gocd-slack-task/releases/download/v1.3.1/gocd-slack-task-1.3.1.jar"
-      - GOCD_CONFIG_plugin_docker-pipline="https://github.com/Haufe-Lexware/gocd-plugins/releases/download/v1.0.0-beta/gocd-docker-pipeline-plugin-1.0.0.jar"
-      - GOCD_CONFIG_plugin_github-pr="https://github.com/insano10/gocd-pr-comment-scalastyle/releases/download/1.2/github-pr-comment-scalastyle-1.2.jar"
-      - GOCD_CONFIG_plugin_email-notifier="https://github.com/gocd-contrib/email-notifier/releases/download/v0.1/email-notifier-0.1.jar"
-      - GOCD_CONFIG_plugin_slack-notifier="https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC11/gocd-slack-notifier-1.4.0-RC11.jar"
-      - GOCD_CONFIG_plugin_github-notifier="https://github.com/gocd-contrib/gocd-build-status-notifier/releases/download/1.3/github-pr-status-1.3.jar"
-      - GOCD_CONFIG_plugin_github-scm="https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.3.3/github-pr-poller-1.3.3.jar"
+      - GOCD_CONFIG_plugin_script-executor=https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar
+      - GOCD_CONFIG_plugin_docker-task=https://github.com/manojlds/gocd-docker/releases/download/0.1.27/docker-task-assembly-0.1.27.jar
+      - GOCD_CONFIG_plugin_slack=https://github.com/Vincit/gocd-slack-task/releases/download/v1.3.1/gocd-slack-task-1.3.1.jar
+      - GOCD_CONFIG_plugin_docker-pipline=https://github.com/Haufe-Lexware/gocd-plugins/releases/download/v1.0.0-beta/gocd-docker-pipeline-plugin-1.0.0.jar
+      - GOCD_CONFIG_plugin_github-pr=https://github.com/insano10/gocd-pr-comment-scalastyle/releases/download/1.2/github-pr-comment-scalastyle-1.2.jar
+      - GOCD_CONFIG_plugin_email-notifier=https://github.com/gocd-contrib/email-notifier/releases/download/v0.1/email-notifier-0.1.jar
+      - GOCD_CONFIG_plugin_slack-notifier=https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC11/gocd-slack-notifier-1.4.0-RC11.jar
+      - GOCD_CONFIG_plugin_github-notifier=https://github.com/gocd-contrib/gocd-build-status-notifier/releases/download/1.3/github-pr-status-1.3.jar
+      - GOCD_CONFIG_plugin_github-scm=https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.3.3/github-pr-poller-1.3.3.jar
       {{- end}}
     {{- if (ne .Values.DEPLOY_LB "true") and .Values.PUBLISH_PORT}}
     ports:
@@ -54,16 +54,16 @@ services:
     image: webcenter/alpine-gocd-agent:develop
     volumes:
     {{- if (contains .Values.VOLUME_DRIVER_AGENT "/")}}
-      - ${VOLUME_DRIVER_AGENT}:/data
-    {{- else}}
       - gocd-agent-data:/data
+    {{- else}}
+      - ${VOLUME_DRIVER_AGENT}:/data
     {{- end}}
       - gocd-scheduler-setting:/opt/scheduler
     environment:
-      - GOCD_CONFIG_memory="${GOCD_AGENT_MEMORY}"
-      - GOCD_CONFIG_agent_key="${GOCD_AGENT_KEY}"
-      - GOCD_CONFIG_agent_resource_docker="${GOCD_AGENT_RESOURCE}"
-      - DOCKER_HOST="tcp://docker-engine:2375"
+      - GOCD_CONFIG_memory=${GOCD_AGENT_MEMORY}
+      - GOCD_CONFIG_agent_key=${GOCD_AGENT_KEY}
+      - GOCD_CONFIG_agent_resource_docker=${GOCD_AGENT_RESOURCE}
+      - DOCKER_HOST=docker-engine:2375
     links:
       - gocd-server:gocd-server
     labels:
@@ -82,7 +82,6 @@ services:
     volumes:
       - gocd-scheduler-setting:/opt/scheduler
   docker-engine:
-    network_mode: none
     privileged: true
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
