@@ -62,8 +62,8 @@ services:
     environment:
       - GOCD_CONFIG_memory="${GOCD_AGENT_MEMORY}"
       - GOCD_CONFIG_agent_key="${GOCD_AGENT_KEY}"
-      - GOCD_CONFIG_agent_resource_docker= "${GOCD_AGENT_RESOURCE}"
-      - DOCKER_HOST: tcp://docker-engine:2375
+      - GOCD_CONFIG_agent_resource_docker="${GOCD_AGENT_RESOURCE}"
+      - DOCKER_HOST="tcp://docker-engine:2375"
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
