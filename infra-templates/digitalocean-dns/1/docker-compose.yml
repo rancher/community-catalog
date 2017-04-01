@@ -1,7 +1,7 @@
 digitalocean:
-  image: rancher/external-dns:v0.6.2
+  image: rancher/external-dns:v0.6.3
   command: -provider=digitalocean
-  expose: 
+  expose:
    - 1000
   environment:
     DO_PAT: ${DO_PAT}
