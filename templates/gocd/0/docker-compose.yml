@@ -26,7 +26,6 @@ services:
       - GOCD_PLUGIN_maven-repository=https://github.com/1and1/go-maven-poller/releases/download/v1.1.4/go-maven-poller.jar
       - GOCD_PLUGIN_maven-task=https://github.com/ruckc/gocd-maven-plugin/releases/download/0.1.1/gocd-maven-plugin-0.1.1.jar
       - GOCD_PLUGIN_s3-fetch=https://github.com/indix/gocd-s3-artifacts/releases/download/v2.0.2/s3fetch-assembly-2.0.2.jar
-      - GOCD_PLUGIN_s3-material=https://github.com/indix/gocd-s3-artifacts/releases/download/v2.0.2/s3material-assembly-2.0.2.jar
       - GOCD_PLUGIN_s3-publish=https://github.com/indix/gocd-s3-artifacts/releases/download/v2.0.2/s3publish-assembly-2.0.2.jar
       - GOCD_PLUGIN_nessus-scan=https://github.com/Haufe-Lexware/gocd-plugins/releases/download/v1.0.0-beta/gocd-nessus-scan-plugin-1.0.0.jar
       - GOCD_PLUGIN_sonar=https://github.com/Haufe-Lexware/gocd-plugins/releases/download/v1.0.0-beta/gocd-sonar-qualitygates-plugin-1.0.0.jar
