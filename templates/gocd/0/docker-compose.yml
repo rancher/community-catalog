@@ -13,6 +13,7 @@ services:
     environment:
       - GOCD_CONFIG_memory=${GOCD_SERVER_MEMORY}
       - GOCD_CONFIG_agent-key=${GOCD_AGENT_KEY}
+      - GOCD_USER_${GOCD_USER}=${GOCD_PASSWORD}
       {{- if eq .Values.GOCD_AGENT_PACKAGE "true"}}
       - GOCD_PLUGIN_script-executor=https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar
       - GOCD_PLUGIN_docker-task=https://github.com/manojlds/gocd-docker/releases/download/0.1.27/docker-task-assembly-0.1.27.jar

@@ -51,6 +51,17 @@ catalog:
       type: "string"
       required: true
       default: "docker"
+    - variable: "GOCD_USER"
+      description: "Login to connect on GoCD"
+      label: "Login"
+      type: "string"
+      required: true
+      default: "admin"
+    - variable: "GOCD_PASSWORD"
+      description: "Password to connect on GoCD"
+      label: "Password"
+      type: "password"
+      required: true
     - variable: "GOCD_AGENT_PACKAGE"
       description: "Install GoCD extra plugins"
       label: "Install extra plugins"
