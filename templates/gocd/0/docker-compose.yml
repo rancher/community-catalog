@@ -13,6 +13,7 @@ services:
     environment:
       - GOCD_CONFIG_memory=${GOCD_SERVER_MEMORY}
       - GOCD_CONFIG_agent-key=${GOCD_AGENT_KEY}
+      - GOCD_CONFIG_server-url=${GOCD_SERVER_URL}
       - GOCD_USER_${GOCD_USER}=${GOCD_PASSWORD}
       {{- if eq .Values.GOCD_AGENT_PACKAGE "true"}}
       - GOCD_PLUGIN_script-executor=https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar
@@ -72,8 +73,10 @@ services:
       - GOCD_CONFIG_agent_key=${GOCD_AGENT_KEY}
       - GOCD_CONFIG_agent_resource_docker=${GOCD_AGENT_RESOURCE}
       - DOCKER_HOST=docker-engine:2375
+    {{- if eq .Values.DEPLOY_SERVER "true"}}
     links:
       - gocd-server:gocd-server
+    {{- end}}
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name

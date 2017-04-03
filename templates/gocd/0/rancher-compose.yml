@@ -98,6 +98,12 @@ catalog:
       required: false
       type: "string"
       default: "8153"
+    - variable: "GOCD_SERVER_URL"
+      description: "The server URL use by agent to auto register. Don't touch if you deploy server and agent"
+      label: "Server URL"
+      required: true
+      type: "string"
+      default: "https://gocd-server:8154/go"
     - variable: "CONFD_BACKEND"
       description: "The confd backend to grab config"
       label: "Confd backend"
