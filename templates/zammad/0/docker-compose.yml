@@ -3,7 +3,7 @@ version: '2'
 services:
 
   elasticsearch:
-    image: zammad/zammad-docker-compose:elasticsearch
+    image: zammad/zammad-docker-compose:zammad-elasticsearch
     labels:
       io.rancher.container.pull_image: always
     restart: always
@@ -11,7 +11,7 @@ services:
   nginx:
     depends_on:
       - zammad
-    image: zammad/zammad-docker-compose:nginx
+    image: zammad/zammad-docker-compose:zammad-nginx
     labels:
       io.rancher.container.pull_image: always
     links:
@@ -24,7 +24,7 @@ services:
       - data-zammad:/home/zammad
 
   postgresql:
-    image: zammad/zammad-docker-compose:postgresql
+    image: zammad/zammad-docker-compose:zammad-postgresql
     labels:
       io.rancher.container.pull_image: always
     restart: always
