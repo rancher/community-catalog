@@ -4,7 +4,7 @@
 
 This template creates one GoCD server and scale out the number of GoCD agent you need.
 
-The GoCD agent embedded Docker support, so the idea is to not create GoCD agent per language but use docker container to build and test your stuff.
+The GoCD agent is link with docker engine container as sidekick, so the idea is to not create GoCD agent per language but use docker container to build and test your stuff.
 You can use on GoCD agent:
 - docker cli
 - docker-compose cli
@@ -16,8 +16,8 @@ You can use on GoCD agent:
 
 Select GoCD from catalog.
 
+Choose if you should deploy GoCD Server, or GoCD Agent or the two.
 Enter the number of GoCD agent you need.
-Enter extra GoCD plugins to download and install.
 Choose the key to autoregister GoCD agent.
 
 Click deploy.
