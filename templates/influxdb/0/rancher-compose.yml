@@ -1,0 +1,55 @@
+.catalog:
+  name: Influxdb
+  description: |
+    Influxdb
+  version: 1.2.2-rancher1
+  minimum_rancher_version: v1.0.0
+  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  uuid: influxdb-0
+  questions:
+    - variable: "EXPOSE_SERVICE"
+      description: "Expose Influxdb"
+      label: "Expose influxdb:"
+      required: true
+      type: enum
+      default: "true"
+      options:
+        - "true"
+        - "false"
+    - variable: "influxdb_port"
+      description: |
+        Port to expose. 
+      label: "Influxdb port:"
+      default: "8086"
+      required: true
+      type: "int"
+version: '2'
+services:
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - hostname: ''
+        priority: 1
+        protocol: http
+        service: influxdb
+        source_port: ${influxdb_port}
+        target_port: 8086
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+  influxdb:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 8086
+      unhealthy_threshold: 3
+      interval: 2000
+
