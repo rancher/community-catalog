@@ -63,9 +63,9 @@ services:
     image: webcenter/alpine-gocd-agent:develop
     volumes:
     {{- if (contains .Values.VOLUME_DRIVER_AGENT "/")}}
-      - gocd-agent-data:/data
-    {{- else}}
       - ${VOLUME_DRIVER_AGENT}:/data
+    {{- else}}
+      - gocd-agent-data:/data
     {{- end}}
       - gocd-scheduler-setting:/opt/scheduler
     environment:
@@ -108,7 +108,7 @@ services:
   
 
 volumes:
-  minio-scheduler-setting:
+  gocd-scheduler-setting:
     driver: local
     per_container: true
   {{- if not (contains .Values.VOLUME_DRIVER_AGENT "/")}}
