@@ -3,7 +3,7 @@ services:
   {{- if eq .Values.DEPLOY_SERVER "true"}}
   gocd-server:
     tty: true
-    image: webcenter/alpine-gocd-server:develop
+    image: webcenter/alpine-gocd-server:17.3.0-1
     volumes:
     {{- if (contains .Values.VOLUME_DRIVER_SERVER "/")}}
       - ${VOLUME_DRIVER_SERVER}:/data
@@ -60,7 +60,7 @@ services:
   {{- if eq .Values.DEPLOY_AGENT "true"}}
   gocd-agent:
     tty: true
-    image: webcenter/alpine-gocd-agent:develop
+    image: webcenter/alpine-gocd-agent:17.3.0-1
     volumes:
     {{- if (contains .Values.VOLUME_DRIVER_AGENT "/")}}
       - ${VOLUME_DRIVER_AGENT}:/data
