@@ -115,6 +115,23 @@ catalog:
       label: "Rancher DB password"
       type: "password"
       required: false
+    - variable: "CONFD_BACKEND"
+      description: "The confd backend to grab config"
+      label: "Confd backend"
+      required: true
+      default: "env"
+      type: "string"
+    - variable: "CONFD_NODES"
+      description: "The confd nodes"
+      label: "Confd nodes"
+      required: false
+      type: "string"
+    - variable: "CONFD_PREFIX"
+      description: "The confd prefix"
+      label: "Confd prefix"
+      required: true
+      default: "/backup"
+      type: "string"
     - variable: "FTP_PASSWORD"
       label: "FTP password"
       type: "password"

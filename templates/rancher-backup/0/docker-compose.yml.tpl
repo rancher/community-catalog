@@ -2,24 +2,24 @@ version: '2'
 services:
   backup:
     environment:
-      - BACKUP_cron_schedule=${CRON_SCHEDULE}
-      - BACKUP_duplicity_url=${BACKEND}
-      - BACKUP_duplicity_target-path=${TARGET_PATH}
-      - BACKUP_duplicity_source-path=/backup
-      - BACKUP_duplicity_full-if-older-than=${BK_FULL_FREQ}
-      - BACKUP_duplicity_remove-all-but-n-full=${BK_KEEP_FULL}
-      - BACKUP_duplicity_remove-all-inc-of-but-n-full=${BK_KEEP_FULL_CHAIN}
-      - BACKUP_duplicity_volsize=${VOLUME_SIZE}
-      - BACKUP_duplicity_options=${DUPLICITY_OPTIONS}
+      - BACKUP_CRON_schedule=${CRON_SCHEDULE}
+      - BACKUP_DUPLICITY_url=${BACKEND}
+      - BACKUP_DUPLICITY_target-path=${TARGET_PATH}
+      - BACKUP_DUPLICITY_source-path=/backup
+      - BACKUP_DUPLICITY_full-if-older-than=${BK_FULL_FREQ}
+      - BACKUP_DUPLICITY_remove-all-but-n-full=${BK_KEEP_FULL}
+      - BACKUP_DUPLICITY_remove-all-inc-of-but-n-full=${BK_KEEP_FULL_CHAIN}
+      - BACKUP_DUPLICITY_volsize=${VOLUME_SIZE}
+      - BACKUP_DUPLICITY_options=${DUPLICITY_OPTIONS}
       - DEBUG=false
-      - BACKUP_module_database=${ENABLE_DUMP_SERVICE}
-      - BACKUP_module_stack=${ENABLE_DUMP_STACK}
-      - BACKUP_module_rancher-db=${ENABLE_DUMP_RANCHER_DATABASE}
-      - BACKUP_rancher_db_host=${RANCHER_DATABASE_HOST}
-      - BACKUP_rancher_db_port=${RANCHER_DATABASE_PORT}
-      - BACKUP_rancher_db_user=${RANCHER_DATABASE_USER}
-      - BACKUP_rancher_db_password=${RANCHER_DATABASE_PASSWORD}
-      - BACKUP_rancher_db_name=${RANCHER_DATABASE_NAME}
+      - BACKUP_MODULE_database=${ENABLE_DUMP_SERVICE}
+      - BACKUP_MODULE_stack=${ENABLE_DUMP_STACK}
+      - BACKUP_MODULE_rancher-db=${ENABLE_DUMP_RANCHER_DATABASE}
+      - BACKUP_RANCHER_db_host=${RANCHER_DATABASE_HOST}
+      - BACKUP_RANCHER_db_port=${RANCHER_DATABASE_PORT}
+      - BACKUP_RANCHER_db_user=${RANCHER_DATABASE_USER}
+      - BACKUP_RANCHER_db_password=${RANCHER_DATABASE_PASSWORD}
+      - BACKUP_RANCHER_db_name=${RANCHER_DATABASE_NAME}
       - DOCKER_HOST=docker-engine:2375
       - FTP_PASSWORD=${FTP_PASSWORD}
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
@@ -35,6 +35,9 @@ services:
       - SWIFT_USERNAME=${SWIFT_USERNAME}
       - SWIFT_PASSWORD=${SWIFT_PASSWORD}
       - SWIFT_AUTHURL=${SWIFT_AUTHURL}
+      - CONFD_BACKEND=${CONFD_BACKEND}
+      - CONFD_NODES=${CONFD_NODES}
+      - CONFD_PREFIX_KEY=${CONFD_PREFIX}
     labels:
       io.rancher.sidekicks: docker-engine
       io.rancher.container.create_agent: true
