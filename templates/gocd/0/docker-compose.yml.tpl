@@ -15,6 +15,9 @@ services:
       - GOCD_CONFIG_agent-key=${GOCD_AGENT_KEY}
       - GOCD_CONFIG_server-url=${GOCD_SERVER_URL}
       - GOCD_USER_${GOCD_USER}=${GOCD_PASSWORD}
+      - CONFD_BACKEND=${CONFD_BACKEND}
+      - CONFD_NODES=${CONFD_NODES}
+      - CONFD_PREFIX_KEY=${CONFD_PREFIX}
       {{- if eq .Values.GOCD_AGENT_PACKAGE "true"}}
       - GOCD_PLUGIN_script-executor=https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar
       - GOCD_PLUGIN_docker-task=https://github.com/manojlds/gocd-docker/releases/download/0.1.27/docker-task-assembly-0.1.27.jar
