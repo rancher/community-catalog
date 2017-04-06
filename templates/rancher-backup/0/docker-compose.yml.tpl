@@ -60,7 +60,6 @@ services:
     {{- else}}
       - backup-data:/backup
     {{- end}}
-  {{- end}}
 
 {{- if not (contains .Values.VOLUME_DRIVER "/")}}
 volumes:
