@@ -43,7 +43,7 @@ services:
       io.rancher.container.create_agent: true
       io.rancher.container.agent.role: environment
     tty: true
-    image: webcenter/rancher-backup:2.0.0
+    image: webcenter/rancher-backup:2.0.0-2
     stdin_open: false
     volumes:
     {{- if (contains .Values.VOLUME_DRIVER "/")}}
