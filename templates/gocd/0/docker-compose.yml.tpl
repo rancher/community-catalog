@@ -36,7 +36,7 @@ services:
       - GOCD_PLUGIN_google-auth=https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.3/google-oauth-login-2.3.jar
       - GOCD_PLUGIN_github-auth=https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.3/github-oauth-login-2.3.jar
       {{- end}}
-    {{- if (ne .Values.DEPLOY_LB "true") and (ne .Values.PUBLISH_PORT "false")}}
+    {{- if and (ne .Values.DEPLOY_LB "true") (ne .Values.PUBLISH_PORT "false")}}
     ports:
       - ${PUBLISH_PORT}:8153
     {{- end}}
