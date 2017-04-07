@@ -93,7 +93,7 @@ catalog:
         - "true"
         - "false"
     - variable: "PUBLISH_PORT"
-      description: "Set port if you want publish external port for GoCD server or Loadbalancer"
+      description: "Set port if you want publish external port for GoCD server or Loadbalancer. Else set 'false'"
       label: "Publish port"
       required: false
       type: "string"

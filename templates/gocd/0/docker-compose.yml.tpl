@@ -36,7 +36,7 @@ services:
       - GOCD_PLUGIN_google-auth=https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.3/google-oauth-login-2.3.jar
       - GOCD_PLUGIN_github-auth=https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.3/github-oauth-login-2.3.jar
       {{- end}}
-    {{- if (ne .Values.DEPLOY_LB "true") and .Values.PUBLISH_PORT and (ne .Values.PUBLISH_PORT "")}}
+    {{- if (ne .Values.DEPLOY_LB "true") and (ne .Values.PUBLISH_PORT "false")}}
     ports:
       - ${PUBLISH_PORT}:8153
     {{- end}}
@@ -46,7 +46,7 @@ services:
     {{- if eq .Values.DEPLOY_LB "true"}}
   lb:
     image: rancher/lb-service-haproxy:v0.6.2
-      {{- if .Values.PUBLISH_PORT and (ne .Values.PUBLISH_PORT "")}}
+      {{- if (ne .Values.PUBLISH_PORT "false")}}
     ports:
       - ${PUBLISH_PORT}:8153/tcp
       {{- else}}
