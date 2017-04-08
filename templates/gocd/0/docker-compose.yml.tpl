@@ -5,7 +5,7 @@ services:
     tty: true
     image: webcenter/alpine-gocd-server:17.3.0-1
     volumes:
-    {{- if (strings.Contains .Values.VOLUME_DRIVER_SERVER "/")}}
+    {{- if (hasPrefix .Values.VOLUME_DRIVER_SERVER "/")}}
       - ${VOLUME_DRIVER_SERVER}:/data
     {{- else}}
       - gocd-server-data:/data
