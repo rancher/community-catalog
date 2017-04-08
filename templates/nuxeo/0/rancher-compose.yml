@@ -2,7 +2,7 @@
   name: "Nuxeo Platform"
   version: 8.1-rancher1
   description: |
-    Enterprise Content Management 
+    Enterprise Content Management
     Platform for Business Applications
   uuid: nuxeo-1
   questions:
@@ -16,14 +16,14 @@
       type: "string"
       label: "List of Nuxeo packages"
       description: |
-        List of Nuxeo packages 
+        List of Nuxeo packages
       default: nuxeo-web-mobile nuxeo-drive nuxeo-diff nuxeo-spreadsheet nuxeo-dam nuxeo-template-rendering nuxeo-template-rendering-samples nuxeo-showcase-content
     - variable: url
       description: "The URL that this nuxeo instance should serve"
       label: "Nuxeo URL"
       type: "string"
       required: true
-      default: "http://localhost:8080/"    
+      default: "http://localhost:8080/"
     - variable: volumedriver
       type: "string"
       label: "Volume driver"
@@ -40,14 +40,14 @@ nuxeo:
     interval: 5000
     unhealthy_threshold: 5
     # For TCP, request_line needs to be ''
-    # TCP Example: 
+    # TCP Example:
     # request_line: ''
-    request_line: GET /nuxeo/login.jsp 
+    request_line: GET /nuxeo/login.jsp
     healthy_threshold: 2
     # Response timeout is measured in milliseconds
     response_timeout: 2000
 
-elasticsearch:
+elasticsearch-masters:
   metadata:
     elasticsearch:
       yml:

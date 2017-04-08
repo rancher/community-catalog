@@ -23,7 +23,7 @@ zammad-scheduler:
   start_on_create: true
 zammad-railsserver:
   scale: 1
-  tart_on_create: true
+  start_on_create: true
 zammad-websocket:
   scale: 1
   start_on_create: true
