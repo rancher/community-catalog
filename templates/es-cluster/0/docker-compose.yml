@@ -10,7 +10,7 @@ services:
             - "bootstrap.memory_lock=true"
             - "xpack.security.enabled=false"
             - "ES_JAVA_OPTS=-Xms${heap_size} -Xmx${heap_size}"
-            - "discovery.zen.minimum_master_nodes=2"
+            - "discovery.zen.minimum_master_nodes=${minimum_master_nodes}"
             - "node.master=true"
         ulimits: 
             memlock:

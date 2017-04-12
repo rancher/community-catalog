@@ -7,34 +7,48 @@
         - variable: "cluster_name"
           type: "string"
           required: true
-          label: "Cluster Name"
+          label: "Cluster name"
           description: "Name of the Elasticsearch Cluster"
           default: "es-cluster"
         
         - variable: "heap_size"
           type: "string"
           required: true
-          label: "Heap Size"
+          label: "Heap size"
           description: "Heap size to be allocated for Java"
           default: "512m"
         
         - variable: "mem_limit"
           type: "int"
           required: true
-          label: "Memory Limit in Byte"
+          label: "Memory limit in byte"
           description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size!"
           default: 1073741824
         
         - variable: "kibana_port"
           type: "int"
           required: true
-          label: "Public Kibana Port"
+          label: "Public kibana port"
           description: "Public port where kibana will be accessible"
           default: 5601
 
+        - variable: "minimum_master_nodes"
+          type: "int"
+          required: true
+          label: "# of minimum Master Nodes"
+          description: "Set the number of required master nodes to reach quorum. Sets initial scale to this value as well"
+          default: 2
+
+        - variable: "initial_data_nodes"
+          type: "int"
+          required: true
+          label: "# of initial nodes"
+          description: "Set the initial number of nodes"
+          default: 1
+
 
 es-master:
-  scale: 2
+  scale: ${minimum_master_nodes}
 
 es-node:
-  scale: 1
+  scale: ${initial_data_nodes}
