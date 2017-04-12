@@ -41,7 +41,7 @@ https://docs.zammad.org/en/latest/api-intro.html
 https://zammad.org/participate
 
 
-Thanks! ❤️ ❤️ ❤️
+Thanks! 
 
  Your Zammad Team
 

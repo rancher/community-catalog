@@ -1,0 +1,13 @@
+digitalocean:
+  image: rancher/external-dns:v0.6.3
+  command: -provider=digitalocean
+  expose:
+   - 1000
+  environment:
+    DO_PAT: ${DO_PAT}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    NAME_TEMPLATE: ${NAME_TEMPLATE}
+    TTL: 300
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"
