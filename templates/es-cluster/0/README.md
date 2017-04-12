@@ -1,3 +1,3 @@
 # Elasticsearch Cluster
 
-A 3-Node Elasticsearch Cluster with Kibana
+A scalable Elasticsearch cluster with Kibana

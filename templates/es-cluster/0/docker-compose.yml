@@ -1,9 +1,12 @@
 version: '2'
 services:
-    es-master-01:
+    es-master:
+        labels: 
+            - io.rancher.container.hostname_override=container_name
         image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
         environment: 
             - "cluster.name=${cluster_name}"
+            - "node.name=$${HOSTNAME}"
             - "bootstrap.memory_lock=true"
             - "xpack.security.enabled=false"
             - "ES_JAVA_OPTS=-Xms${heap_size} -Xmx${heap_size}"
@@ -20,39 +23,19 @@ services:
         mem_swappiness: 0
         cap_add: 
             - IPC_LOCK
-        volumes:
-            - es-master-01-data:/usr/share/elasticsearch/data
-
-    es-master-02:
-        image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
-        environment: 
-            - "cluster.name=${cluster_name}"
-            - "bootstrap.memory_lock=true"
-            - "xpack.security.enabled=false"
-            - "ES_JAVA_OPTS=-Xms${heap_size} -Xmx${heap_size}"
-            - "discovery.zen.minimum_master_nodes=2"
-            - "node.master=true"
-        ulimits: 
-            memlock:
-                soft: -1
-                hard: -1
-            nofile:
-                soft: 65536
-                hard: 65536
-        mem_limit: ${mem_limit}
-        mem_swappiness: 0
-        cap_add: 
-            - IPC_LOCK
-        volumes:
-            - es-master-02-data:/usr/share/elasticsearch/data
+        volumes: 
+            - es-master-data:/usr/share/elasticsearch/data
 
     es-node:
+        labels: 
+            - io.rancher.container.hostname_override=container_name
         image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
         environment: 
             - "cluster.name=${cluster_name}"
+            - "node.name=$${HOSTNAME}"
             - "bootstrap.memory_lock=true"
             - "xpack.security.enabled=false"
-            - "discovery.zen.ping.unicast.hosts=es-master-01,es-master-02"
+            - "discovery.zen.ping.unicast.hosts=es-master"
             - "ES_JAVA_OPTS=-Xms${heap_size} -Xmx${heap_size}"
             - "node.master=false"
         ulimits: 
@@ -67,26 +50,30 @@ services:
         cap_add: 
             - IPC_LOCK
         volumes: 
-            - /usr/share/elasticsearch/data
+            - es-node-data:/usr/share/elasticsearch/data
+        depends_on: 
+            - es-master
 
     kibana:
+        labels: 
+            - io.rancher.container.hostname_override=container_name
         image: docker.elastic.co/kibana/kibana:5.3.0
-        container_name: kibana
         environment: 
             - "bootstrap.memory_lock=true"
             - "xpack.security.enabled=false"
-            - "ELASTICSEARCH_URL=http://es-master-01:9200"
+            - "ELASTICSEARCH_URL=http://es-master:9200"
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         mem_limit: 1073741824
         mem_swappiness: 0
         ports:
             - "${kibana_port}:5601"
         depends_on:
-            - es-master-01
+            - es-master
 
-
-volumes:
-    es-master-01-data:
+volumes: 
+    es-master-data:
         driver: local
-    es-master-02-data:
+        per_container: true
+    es-node-data:
         driver: local
+        per_container: true

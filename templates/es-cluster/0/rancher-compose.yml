@@ -33,4 +33,8 @@
           default: 5601
 
 
+es-master:
+  scale: 2
 
+es-node:
+  scale: 1
