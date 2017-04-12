@@ -1,0 +1,36 @@
+.catalog:
+    name: Elasticsearch Cluster
+    version: 5.3.0
+    description: 3-Node Elasticsearch Cluster with Kibana
+
+    questions:
+        - variable: "cluster_name"
+          type: "string"
+          required: true
+          label: "Cluster Name"
+          description: "Name of the Elasticsearch Cluster"
+          default: "es-cluster"
+        
+        - variable: "heap_size"
+          type: "string"
+          required: true
+          label: "Heap Size"
+          description: "Heap size to be allocated for Java"
+          default: "512m"
+        
+        - variable: "mem_limit"
+          type: "int"
+          required: true
+          label: "Memory Limit in Byte"
+          description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size!"
+          default: 1073741824
+        
+        - variable: "kibana_port"
+          type: "int"
+          required: true
+          label: "Public Kibana Port"
+          description: "Public port where kibana will be accessible"
+          default: 5601
+
+
+
