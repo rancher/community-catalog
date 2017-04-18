@@ -5,7 +5,7 @@ services:
     tty: true
     image: webcenter/alpine-gocd-server:17.3.0-1
     volumes:
-    {{- if hasPrefix .Values.VOLUME_DRIVER_SERVER "\/" }}
+    {{- if eq (substr .Values.VOLUME_DRIVER_SERVER 0 1) "/" }}
       - ${VOLUME_DRIVER_SERVER}:/data
     {{- else}}
       - gocd-server-data:/data
@@ -114,12 +114,12 @@ volumes:
   gocd-scheduler-setting:
     driver: local
     per_container: true
-  {{- if not (contains .Values.VOLUME_DRIVER_AGENT "/")}}
+  {{- if ne (substr .Values.VOLUME_DRIVER_AGENT 0 1) "/"}}
   gocd-agent-data:
     driver: ${VOLUME_DRIVER_AGENT}
     per_container: true
   {{- end}}
-  {{- if not (contains .Values.VOLUME_DRIVER_SERVER "/")}}
+  {{- if ne (substr .Values.VOLUME_DRIVER_SERVER 0 1) "/"}}
   gocd-server-data:
     driver: ${VOLUME_DRIVER_SERVER}
   {{- end}}
