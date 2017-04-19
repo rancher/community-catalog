@@ -1,7 +1,7 @@
 .catalog:
     name: Elasticsearch Cluster
     version: 5.3.0-rancher1
-    description: 3-Node Elasticsearch Cluster with Kibana
+    description: Scalable Elasticsearch Cluster with Kibana
 
     questions:
         - variable: "cluster_name"
@@ -11,18 +11,46 @@
           description: "Name of the Elasticsearch Cluster"
           default: "es-cluster"
         
-        - variable: "heap_size"
+        - variable: "master_heap_size"
           type: "string"
           required: true
-          label: "Heap size"
-          description: "Heap size to be allocated for Java"
+          label: "Heap size (master nodes)"
+          description: "Heap size to be allocated for Java (mater nodes)"
           default: "512m"
         
-        - variable: "mem_limit"
+        - variable: "master_mem_limit"
           type: "int"
           required: true
-          label: "Memory limit in byte"
-          description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size!"
+          label: "Memory limit in byte (master nodes)"
+          description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size! (master nodes)"
+          default: 1073741824
+        
+        - variable: "data_heap_size"
+          type: "string"
+          required: true
+          label: "Heap size (data nodes)"
+          description: "Heap size to be allocated for Java (mater nodes)"
+          default: "512m"
+        
+        - variable: "data_mem_limit"
+          type: "int"
+          required: true
+          label: "Memory limit in byte (data nodes)"
+          description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size! (data nodes)"
+          default: 1073741824
+        
+         - variable: "client_heap_size"
+          type: "string"
+          required: true
+          label: "Heap size (client nodes)"
+          description: "Heap size to be allocated for Java (mater nodes)"
+          default: "512m"
+        
+        - variable: "client_mem_limit"
+          type: "int"
+          required: true
+          label: "Memory limit in byte (client nodes)"
+          description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size! (client nodes)"
           default: 1073741824
         
         - variable: "kibana_port"
@@ -37,18 +65,28 @@
           required: true
           label: "# of minimum Master Nodes"
           description: "Set the number of required master nodes to reach quorum. Sets initial scale to this value as well"
-          default: 2
+          default: 3
 
         - variable: "initial_data_nodes"
           type: "int"
           required: true
-          label: "# of initial nodes"
-          description: "Set the initial number of nodes"
+          label: "# of initial data nodes"
+          description: "Set the initial number of data nodes"
+          default: 2
+        
+        - variable: "initial_client_nodes"
+          type: "int"
+          required: true
+          label: "# of initial client nodes"
+          description: "Set the initial number of client nodes"
           default: 1
 
 
 es-master:
   scale: ${minimum_master_nodes}
 
-es-node:
+es-data:
   scale: ${initial_data_nodes}
+
+es-client:
+  scale: ${initial_client_nodes}
