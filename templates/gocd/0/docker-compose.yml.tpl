@@ -5,8 +5,8 @@ services:
     tty: true
     image: webcenter/alpine-gocd-server:17.3.0-1
     volumes:
-    {{- if call strings.HasPrefix .Values.VOLUME_DRIVER_SERVER "/" }}
-      - /data/gocd-test:/data
+    {{- if eq (printf "%.1s" .Values.VOLUME_DRIVER_SERVER) "/" }}
+      - ${VOLUME_DRIVER_SERVER}:/data
     {{- else}}
       - gocd-server-data:/data
     {{- end}}
