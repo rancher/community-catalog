@@ -95,7 +95,7 @@ services:
         image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
         entrypoint: /bin/true
         volumes: 
-            - es-data-volume:/usr/share/elasticsearch/data
+            - es-storage-volume:/usr/share/elasticsearch/data
 
     kibana:
         labels: 
@@ -114,6 +114,6 @@ services:
             - es-master
 
 volumes:
-  es-data-volume:
+  es-storage-volume:
     driver: local
     per_container: true
