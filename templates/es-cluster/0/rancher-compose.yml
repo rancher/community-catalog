@@ -39,7 +39,7 @@
           description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size! (data nodes)"
           default: 1073741824
         
-         - variable: "client_heap_size"
+        - variable: "client_heap_size"
           type: "string"
           required: true
           label: "Heap size (client nodes)"
