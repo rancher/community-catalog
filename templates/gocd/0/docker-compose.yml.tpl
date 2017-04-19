@@ -65,7 +65,7 @@ services:
     tty: true
     image: webcenter/alpine-gocd-agent:17.3.0-1
     volumes:
-    {{- if (contains .Values.VOLUME_DRIVER_AGENT "/")}}
+    {{- if eq (printf "%.1s" .Values.VOLUME_DRIVER_AGENT) "/"}}
       - ${VOLUME_DRIVER_AGENT}:/data
     {{- else}}
       - gocd-agent-data:/data
@@ -102,7 +102,7 @@ services:
       io.rancher.container.hostname_override: container_name
     image: index.docker.io/docker:1.13-dind
     volumes:
-    {{- if (contains .Values.VOLUME_DRIVER_AGENT "/")}}
+    {{- if eq (printf "%.1s" .Values.VOLUME_DRIVER_AGENT) "/"}}
       - ${VOLUME_DRIVER_AGENT}:/data
     {{- else}}
       - gocd-agent-data:/data
@@ -114,12 +114,12 @@ volumes:
   gocd-scheduler-setting:
     driver: local
     per_container: true
-  {{- if not (contains .Values.VOLUME_DRIVER_AGENT "/")}}
+  {{- if ne (printf "%.1s" .Values.VOLUME_DRIVER_AGENT) "/"}}
   gocd-agent-data:
     driver: ${VOLUME_DRIVER_AGENT}
     per_container: true
   {{- end}}
-  {{- if not (contains .Values.VOLUME_DRIVER_SERVER "/")}}
+  {{- if ne (printf "%.1s" .Values.VOLUME_DRIVER_SERVER) "/"}}
   gocd-server-data:
     driver: ${VOLUME_DRIVER_SERVER}
   {{- end}}
