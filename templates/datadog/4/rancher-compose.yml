@@ -3,6 +3,7 @@
   version: "11.3.585-rancher1"
   description: "Real-time performance tracking and visualization of your container-based application deployment"
   minimum_rancher_version: v0.46.0
+  maximum_rancher_version: v1.1.99
   questions:
     - variable: "api_key"
       label: "DataDog Api Key"

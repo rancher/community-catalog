@@ -11,6 +11,12 @@
       type: "string"
       required: true
       default: "rs0"
+    - variable: debug
+      description: "Enable Debug log for Mongo containers"
+      label: "Debug"
+      type: "string"
+      required: false
+      default: ""
 mongo-cluster:
   scale: 3
   retain_ip: true

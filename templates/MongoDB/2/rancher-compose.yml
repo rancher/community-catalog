@@ -18,6 +18,12 @@
         Example: 'database'
       required: false
       type: "string"
+    - variable: debug
+      description: "Enable Debug log for Mongo containers"
+      label: "Debug"
+      type: "string"
+      required: false
+      default: ""
 mongo-cluster:
   scale: 3
   retain_ip: true

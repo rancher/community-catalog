@@ -1,0 +1,5 @@
+name: portainer
+description: |
+  Portainer is an open-source lightweight management UI which allows you to easily manage your Docker host or Swarm cluster
+version: 1.11.4
+category: Management

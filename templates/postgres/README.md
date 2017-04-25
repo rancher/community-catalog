@@ -4,4 +4,4 @@
 
 ## Info 
 * Easy setup with all needed data: `database_name`, `user`, `password`
-* Load Balancer used to forroward Postgress port for the external services.
+* Load Balancer used to forward Postgres port for the external services.

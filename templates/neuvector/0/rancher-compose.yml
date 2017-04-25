@@ -1,0 +1,11 @@
+.catalog:
+  name: "NeuVector"
+  version: "v1.1.0"
+  description: "Container Security Solution"
+  questions:
+    - variable: "NV_ALLINONE_LABEL"
+      label: "Allinone Host label"
+      description: "Specify a host label here that can be used to deploy the NeuVector AllInOne container, the NeuVector enforcer container will be deployed on any other hosts. Eg: neuvector.allinone_node=true (you could then add the label 'neuvector.allinone_node=true' to one host to use as management node)."
+      type: "string"
+      default: "neuvector.allinone_node=true" 
+      required: true
