@@ -15,6 +15,8 @@ mongo-cluster:
   volumes_from:
     - mongo-datavolume
     - mongo-base
+  ports:
+    - 27017:27017/tcp
 mongo-base:
   restart: always
   net: none
