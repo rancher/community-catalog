@@ -78,6 +78,12 @@
       type: "multiline"
       required: false
       default: ""
+    - variable: "insecure_skip"
+      description: "Enable InsecureSkipVerify param."
+      label: "InsecureSkipVerify:"
+      required: true
+      default: false 
+      type: "boolean"
     - variable: "refresh_interval"
       description: "Interval to poll/apply configuration changes." 
       label: "Refresh Interval (s):"

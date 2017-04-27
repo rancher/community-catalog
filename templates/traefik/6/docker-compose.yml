@@ -22,6 +22,7 @@ traefik:
   - TRAEFIK_ACME_EMAIL=${acme_email}
   - TRAEFIK_ACME_ONDEMAND=${acme_ondemand}
   - TRAEFIK_ACME_ONHOSTRULE=${acme_onhostrule}
+  - TRAEFIK_INSECURE_SKIP=${insecure_skip}
   volumes_from:
   - traefik-conf
 traefik-conf:

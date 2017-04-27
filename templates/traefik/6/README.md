@@ -21,6 +21,7 @@
 - acme_onhostrule = true            # acme onHostRule parameter.
 - ssl_key # Paste your ssl key. *Required if you enable https
 - ssl_crt # Paste your ssl crt. *Required if you enable https
+- insecure_skip = false	  # Enable InsecureSkipVerify param.
 - refresh_interval = 10s  # Interval to refresh traefik rules.toml from rancher-metadata.
 
 ### Service configuration labels:
