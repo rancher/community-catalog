@@ -1,7 +1,7 @@
 .catalog:
     name: Elasticsearch Cluster
     version: 5.3.0-rancher1
-    description: Scalable Elasticsearch Cluster with Kibana
+    description: Scalable Elasticsearch Cluster
 
     questions:
         - variable: "cluster_name"
@@ -52,13 +52,6 @@
           label: "Memory limit in byte (client nodes)"
           description: "Memory limit in Byte per elasticsearch container. AT LEAST double the heap size! (client nodes)"
           default: 1073741824
-        
-        - variable: "kibana_port"
-          type: "int"
-          required: true
-          label: "Public kibana port"
-          description: "Public port where kibana will be accessible"
-          default: 5601
 
         - variable: "minimum_master_nodes"
           type: "int"

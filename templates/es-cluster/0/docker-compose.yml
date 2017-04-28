@@ -97,22 +97,6 @@ services:
         volumes: 
             - es-storage-volume:/usr/share/elasticsearch/data
 
-    kibana:
-        labels: 
-            - io.rancher.container.hostname_override=container_name
-        image: docker.elastic.co/kibana/kibana:5.3.0
-        environment: 
-            - "bootstrap.memory_lock=true"
-            - "xpack.security.enabled=false"
-            - "ELASTICSEARCH_URL=http://es-master:9200"
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        mem_limit: 1073741824
-        mem_swappiness: 0
-        ports:
-            - "${kibana_port}:5601"
-        depends_on:
-            - es-master
-
 volumes:
   es-storage-volume:
     driver: local

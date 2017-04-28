@@ -1,3 +1,3 @@
 # Elasticsearch Cluster
 
-A scalable Elasticsearch cluster with Kibana
+A scalable Elasticsearch cluster
