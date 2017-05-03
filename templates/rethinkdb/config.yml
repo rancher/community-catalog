@@ -1,0 +1,5 @@
+name: RethinkDB Cluster
+description: |
+  (Experimental) NoSQL-Database
+version: 2.3.5
+category: Databases
