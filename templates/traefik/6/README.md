@@ -24,6 +24,8 @@
 - insecure_skip = false	  # Enable InsecureSkipVerify param.
 - refresh_interval = 10s  # Interval to refresh traefik rules.toml from rancher-metadata.
 
+NOTE: If you enable acme support, additional sidekick will be created for acme persistance.
+
 ### Service configuration labels:
 
 Traefik labels has to be added in your services, in order to get included in traefik dynamic config.
