@@ -1,6 +1,6 @@
 .catalog:
     name: Elasticsearch Cluster
-    version: 5.3.2-rancher1
+    version: 5.4.0-rancher1
     description: Scalable Elasticsearch Cluster
 
     questions:
