@@ -1,4 +1,3 @@
-# notemplating
 rfc2136dns:
   image: rancher/external-dns:v0.6.2
   command: -provider=rfc2136
