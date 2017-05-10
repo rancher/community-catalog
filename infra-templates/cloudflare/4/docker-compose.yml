@@ -1,7 +1,8 @@
+# notemplating
 cloudflare:
   image: rancher/external-dns:v0.6.0
   command: -provider=cloudflare
-  expose: 
+  expose:
    - 1000
   environment:
     CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
