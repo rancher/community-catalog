@@ -1,3 +1,4 @@
+# notemplating
 digitalocean:
   image: rancher/external-dns:v0.6.4
   command: -provider=digitalocean
