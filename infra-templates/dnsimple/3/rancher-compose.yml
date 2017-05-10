@@ -1,6 +1,7 @@
+# notemplating
 .catalog:
   name: "DNSimple DNS"
-  version: "v0.6.0-rancher1"
+  version: "v0.6.0-rancher2"
   description: "Rancher External DNS service powered by DNSimple. Requires Rancher version v1.1.0"
   minimum_rancher_version: v1.6.0-rc1
   questions:

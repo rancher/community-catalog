@@ -1,7 +1,8 @@
+# notemplating
 dnsimple:
   image: rancher/external-dns:v0.6.0
   command: -provider=dnsimple
-  expose: 
+  expose:
    - 1000
   environment:
     DNSIMPLE_TOKEN: ${DNSIMPLE_TOKEN}
