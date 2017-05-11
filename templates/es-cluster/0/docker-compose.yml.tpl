@@ -104,12 +104,12 @@ services:
     es-storage:
         labels:
             io.rancher.container.start_once: true
-		network_mode: none
+        network_mode: none
         image: rawmind/alpine-volume:0.0.2-1
         environment:
-			- SERVICE_UID=1000
-			- SERVICE_GID=1000
-			- SERVICE_VOLUME=/usr/share/elasticsearch/data
+            - SERVICE_UID=1000
+            - SERVICE_GID=1000
+            - SERVICE_VOLUME=/usr/share/elasticsearch/data
         volumes: 
             - es-storage-volume:/usr/share/elasticsearch/data
 
@@ -117,7 +117,7 @@ services:
     es-sysctl:
         labels:
             io.rancher.container.start_once: true
-		network_mode: none	
+        network_mode: none	
         image: rawmind/alpine-sysctl:0.1
         privileged: true
         environment: 
