@@ -11,6 +11,18 @@
           description: "Name of the Elasticsearch Cluster"
           default: "es-cluster"
         
+        - variable: "UPDATE_SYSCTL"
+          label: "Update host sysctl:"
+          description: |
+            Set true to avoid vm.max_map_count errors.
+            WARN: If set true, host param vm.max_map_count will be update to 262144.
+          default: false
+          required: true
+          type: enum
+          options:
+            - false
+            - true
+
         - variable: "master_heap_size"
           type: "string"
           required: true

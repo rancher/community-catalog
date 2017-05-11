@@ -2,8 +2,4 @@
 
 A scalable Elasticsearch cluster
 
-## Notes
-
-You have to set vm.max_map_count to atleast 262144 on each of the hosts that will run Elasticsearch!
-
-To do so run `sudo sysctl -w vm.max_map_count=262144`
+WARN: To avoid vm.max_map_count errors you could set "Update host sysctl" to true. Then param vm.max_map_count will be update to 262144 if it's less in your hosts.
