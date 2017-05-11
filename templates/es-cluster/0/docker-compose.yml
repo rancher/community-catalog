@@ -2,8 +2,9 @@ version: '2'
 services:
     es-master:
         labels: 
-            - io.rancher.container.hostname_override=container_name
-            - io.rancher.sidekicks=es-storage
+            - io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+            - io.rancher.container.hostname_override: container_name
+            - io.rancher.sidekicks: es-storage
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
         environment: 
             - "cluster.name=${cluster_name}"
@@ -31,8 +32,9 @@ services:
 
     es-data:
         labels:
-            - io.rancher.container.hostname_override=container_name
-            - io.rancher.sidekicks=es-storage
+            - io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+            - io.rancher.container.hostname_override: container_name
+            - io.rancher.sidekicks: es-storage
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
         environment: 
             - "cluster.name=${cluster_name}"
@@ -61,8 +63,9 @@ services:
 
     es-client:
         labels:
-            - io.rancher.container.hostname_override=container_name
-            - io.rancher.sidekicks=es-storage
+            - io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+            - io.rancher.container.hostname_override: container_name
+            - io.rancher.sidekicks: es-storage
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
         environment: 
             - "cluster.name=${cluster_name}"
@@ -91,7 +94,7 @@ services:
     
     es-storage:
         labels:
-            - io.rancher.container.start_once=true
+            - io.rancher.container.start_once: true
         image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
         entrypoint: /bin/true
         volumes: 
