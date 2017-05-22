@@ -1,0 +1,30 @@
+version: '2'
+
+catalog:
+  name: "gitlab-multi-runner"
+  version: "0.1"
+  description: "a Gitlab pipelines multi-runner, that will spawn privates runners in your infra."
+  # minimum_rancher_version: 
+  # maximum_rancher_version: 
+  # upgrade_from: # The previous versions that this template can be upgraded from
+  questions:
+    - variable: "GITLAB_URL"
+      label: "Gitlab Url"
+      description: "Url to your Gitlab CI endpoint"
+      type: "string"
+      default: "https://gitlab.com/ci"
+      required: true
+
+    - variable: "GITLAB_TOKEN"
+      label: "Gitlab Token"
+      description: "Token provided in you project settings"
+      type: "string"
+      default: "xxxxxxxxxxxxxxxxxxxx"
+      required: true
+
+services:
+  gitlab-runner-config:
+    scale: 1
+    start_on_create: true
+  gitlab-runner:
+    start_on_create: true

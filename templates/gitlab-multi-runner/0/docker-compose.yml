@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+
+  gitlab-runner-config:
+    image: gitlab/gitlab-runner:alpine
+    stdin_open: true
+    volumes:
+    - /etc/gitlab-runner/
+    tty: true
+    command:
+    - register
+    - -n
+    - --url
+    - ${GITLAB_URL}
+    - --registration-token
+    - ${GITLAB_TOKEN}
+    - --executor
+    - docker
+    - --description
+    - Rancher Docker Runner
+    - --docker-image
+    - docker:latest
+    - --docker-volumes
+    - /var/run/docker.sock:/var/run/docker.sock
+    - --docker-privileged
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+  
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    stdin_open: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    tty: true
+    volumes_from:
+    - gitlab-runner-config
+    command:
+    - run
+    labels:
+      io.rancher.sidekicks: gitlab-runner-config
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
