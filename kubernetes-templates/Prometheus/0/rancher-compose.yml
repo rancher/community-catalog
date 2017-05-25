@@ -4,6 +4,7 @@
   description: "Prometheus Monitoring Solution"
   uuid: prometheus-1
   minimum_rancher_version: v0.56.0
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "cattle_config_url"
       label: "Rancher Server URL"

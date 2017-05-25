@@ -4,6 +4,7 @@
   description: |
     Traefik load balancer.
   minimum_rancher_version: v0.59.0
+  maximum_rancher_version: v1.3.99
   maintainer: "German Ramos <german.ramos@gmail.com>"
   uuid: traefik-0
   questions:
