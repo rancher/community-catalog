@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+  openproject:
+    image: openproject/community:7
+    volumes_from:
+      - openproject-data
+    ports:
+      - ${OPENPROJECT_PORT}:80
+    labels:
+      io.rancher.sidekicks: openproject-data
+      io.rancher.container.hostname_override: container_name
+
+  openproject-data:
+    image: openproject/community:7
+    entrypoint:
+      - /bin/true
+    volumes:
+      - /var/lib/postgresql/9.4/main
+      - /var/log/supervisor
+      - /var/db/openproject
+    labels:
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.hostname_override: container_name
+
