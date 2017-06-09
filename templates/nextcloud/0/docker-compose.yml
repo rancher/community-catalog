@@ -8,6 +8,8 @@ services:
       - nextcloud-data
     ports:
       - ${NEXTCLOUD_PORT}:80
+    depends_on:
+      - mariadb
     labels:
       io.rancher.sidekicks: nextcloud-data
       io.rancher.container.hostname_override: container_name
