@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "${kafka_name}"
+  labels:
+    name: "${kafka_name}"
+spec:
+  ports:
+  - port: 9092
+    targetPort: 9092
+    name: "broker-client"
+    protocol: "TCP"
+  selector:
+    name: "${kafka_name}"
+  clusterIP: "None"
