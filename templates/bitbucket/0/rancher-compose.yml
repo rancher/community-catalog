@@ -6,7 +6,7 @@ catalog:
   version: 0.0.1
   description: Git Server
   questions:
-    - variable: Bitbucket_PORT
+    - variable: BITBUCKET_PORT
       label: Port
       default: 80
       required: true

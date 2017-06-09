@@ -7,7 +7,7 @@ services:
     volumes_from:
       - bitbucket-data
     ports:
-      - "${BITBUCKET_PORT}:7990"
+      - ${BITBUCKET_PORT}:7990
     labels:
       io.rancher.sidekicks: bitbucket-data
       io.rancher.container.hostname_override: container_name
