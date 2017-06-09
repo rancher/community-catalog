@@ -1,0 +1,7 @@
+name: nextcloud
+description: Enterprise File Sync and Share
+version: 0.0.1
+category: File Synchronisation
+maintainer: Maik Ellerbrock
+projectURL: https://github.com/ellerbrock/rancher-collection
+
