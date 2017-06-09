@@ -1,40 +1,44 @@
-zk:
+broker:
   tty: true
-  image: rawmind/alpine-zk:3.4.9-3
+  image: rawmind/alpine-kafka:0.10.2.1
   volumes_from:
-    - zk-volume
-    - zk-conf
+    - broker-volume
+    - broker-conf
   environment:
-    - JVMFLAGS=-Xmx${zk_mem}m -Xms${zk_mem}m
-    - ZK_DATA_DIR=${zk_data_dir}
-    - ZK_INIT_LIMIT=${zk_init_limit}
-    - ZK_MAX_CLIENT_CXNS=${zk_max_client_cxns}
-    - ZK_SYNC_LIMIT=${zk_sync_limit}
-    - ZK_TICK_TIME=${zk_tick_time}
+    - JVMFLAGS=-Xmx${kafka_mem}m -Xms${kafka_mem}m
+    - CONFD_INTERVAL=${kafka_interval}
+    - ZK_SERVICE=${zk_link}
+    - KAFKA_DELETE_TOPICS=${kafka_delete_topics}
+    - KAFKA_LOG_DIRS=${kafka_log_dir}
+    - KAFKA_LOG_RETENTION_HOURS=${kafka_log_retention}
+    - KAFKA_NUM_PARTITIONS=${kafka_num_partitions}
+    - ADVERTISE_PUB_IP=${kafka_pub_ip}
+  external_links:
+    - ${zk_link}:zk
   labels: 
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: zk-volume, zk-conf
-zk-conf:
+    io.rancher.sidekicks: broker-volume, broker-conf
+broker-conf:
   net: none
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
-  image: rawmind/rancher-zk:3.4.9
+  image: rawmind/rancher-kafka:0.10.2.0
   volumes:
     - /opt/tools
-zk-volume:
+broker-volume:
   net: none
   labels:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   environment:
-    - SERVICE_UID=10002
-    - SERVICE_GID=10002
-    - SERVICE_VOLUME=${zk_data_dir}
+    - SERVICE_UID=10003
+    - SERVICE_GID=10003
+    - SERVICE_VOLUME=${kafka_log_dir}
   volumes:
-    - ${zk_data_dir}
+    - ${kafka_log_dir}
   volume_driver: local
   image: rawmind/alpine-volume:0.0.2-1
