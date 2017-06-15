@@ -21,9 +21,9 @@ Minio can now be accessed over the Rancher network on port `9000` (http://IP_CON
 You can set many disks per nodes (max of 4). If you use local disk (no extra Docker driver), you need to mount them on the same `base path` and indicate this name on `Volume Driver / Path` section.
 Moreover, you need to use the same disk name with a number as suffix (from 0 to 4) and report this on `Disk base name` section.
 
-For exemple, if you should to use 4 disks per nodes:
+For example, if you should to use 4 disks per nodes:
 - Number of disks per node: 4
-- Volume drver / Path: /data/minio
+- Volume driver / Path: /data/minio
 - Disk base name: disk
 
 And you have to mount the following partition:
