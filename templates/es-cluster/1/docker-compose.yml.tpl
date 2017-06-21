@@ -8,7 +8,7 @@ services:
             {{- if eq .Values.UPDATE_SYSCTL "true" -}}
                 ,es-sysctl
             {{- end}}
-        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.1
+        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.2
         environment: 
             - "cluster.name=${cluster_name}"
             - "node.name=$${HOSTNAME}"
@@ -41,7 +41,7 @@ services:
             {{- if eq .Values.UPDATE_SYSCTL "true" -}}
                 ,es-sysctl
             {{- end}}
-        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.1
+        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.2
         environment: 
             - "cluster.name=${cluster_name}"
             - "node.name=$${HOSTNAME}"
@@ -75,7 +75,7 @@ services:
             {{- if eq .Values.UPDATE_SYSCTL "true" -}}
                 ,es-sysctl
             {{- end}}
-        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.1
+        image: docker.elastic.co/elasticsearch/elasticsearch:5.4.2
         environment: 
             - "cluster.name=${cluster_name}"
             - "node.name=$${HOSTNAME}"
