@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: Harbor
-  version: 0.5.0-singlehost-rev0
+  version: 0.5.0-rev0-singlehost
   description: |
     Enterprise Class Container Registry by VMware
   minimum_rancher_version: v0.59.0

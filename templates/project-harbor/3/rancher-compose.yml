@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: Harbor
-  version: 1.1.1-distributed-rev0
+  version: 1.1.1-rev0-distributed
   description: |
     Enterprise Class Container Registry [by VMware]
   minimum_rancher_version: v0.59.0
