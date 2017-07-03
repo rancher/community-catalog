@@ -1,6 +1,6 @@
 name: NeuVector
 description: |
-  Container Application Security
-version: v1.1.0
+  Container Security Solution
+version: rancher1.2
 category: Security
 maintainer: neuvector support <support@neuvector.com>
