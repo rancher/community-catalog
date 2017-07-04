@@ -1,0 +1,40 @@
+.catalog:
+  name: "Drupal"
+  version: "v0.1"
+  description: "Drupal is an open source CMS powering millions of websites and applications."
+  uuid: Drupal-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: public_port
+      description: "public port to access the drupal site"
+      label: "Public Port"
+      required: true
+      default: "80"
+      type: "int"
+
+    - variable: database
+      description: "database name"
+      label: "MYSQL_DATABASE"
+      required: true
+      type: "string"
+
+    - variable: mysql_root_password
+      description: "password for root user"
+      label: "MYSQL_ROOT_PASSWORD"
+      required: true
+      type: "string"
+
+    - variable: mysql_newusr
+      description: "new user name"
+      label: "MYSQL_USER"
+      required: false
+      type: "string"
+
+    - variable: mysql_newusr_password
+      description: "new user password"
+      label: "MYSQL_USER_PASSWORD"
+      required: false
+      type: "string"
+
+drupal:
+  retain_ip: true
