@@ -10,3 +10,8 @@
       type: int
       default: 2
       description: "should be even number"
+    - variable: "mongo_volume"
+      label: "hostpath volume for mongodb"
+      required: true
+      type: string
+      default: "/data/db"

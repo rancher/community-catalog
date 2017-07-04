@@ -9,23 +9,42 @@ spec:
   template:
     spec:
       containers:
+      - image: husseingalal/mongo-k8s-config:v0.2.0
+        name: mongo-config
+        volumeMounts:
+        - mountPath: /opt/rancher/bin
+          name: utility
+        stdin: true
+        tty: true
       - name: mongo-sec
-        image: husseingalal/mongo-k8s
+        image: mongo:3.4
         ports:
           - containerPort: 27017
         volumeMounts:
-          - name: mongo-ephermal-storage
+          - name: mongo-datadir
             mountPath: /data/db
+          - mountPath: /opt/rancher/bin
+            name: utility
         command:
-          - /run.sh
+          - /opt/rancher/bin/run.sh
           - mongod
           - "--replSet"
           - rs0
           - "--smallfiles"
           - "--noprealloc"
+        env:
+        - name: PRIMARY
+          value: "false"
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
       volumes:
-        - name: mongo-ephermal-storage
-          emptyDir: {}
+      - name: mongo-datadir
+        hostPath:
+          path: ${mongo_volume}
+      - name: utility
+        emptyDir: {}
     metadata:
       labels:
         secondary: "true"
