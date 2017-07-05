@@ -1,15 +1,30 @@
 sentry-postgres:
   environment:
-    POSTGRES_USER: sentry
-    POSTGRES_PASSWORD: secret
+    POSTGRES_DB: ${sentry_db_name}
+    POSTGRES_USER: ${sentry_db_user}
+    POSTGRES_PASSWORD: ${sentry_db_pass}
     PGDATA: /data/postgres/data
   log_driver: ''
   labels:
-    io.rancher.container.pull_image: always
+    io.rancher.sidekicks: sentry-postgres-datavolume
+    io.rancher.container.hostname_override: container_name
+  volumes_from:
+    - sentry-postgres-datavolume
   tty: true
   log_opt: {}
-  image: postgres:9.5.3
+  image: postgres:9.6-alpine
   stdin_open: true
+sentry-postgres-datavolume:
+  image: alpine
+  stdin_open: true
+  net: none
+  entrypoint:
+  - /bin/true
+  volumes:
+  - /data/postgres/data
+  tty: true
+  labels:
+    io.rancher.container.start_once: 'true'
 sentry-cron:
   environment:
     SENTRY_EMAIL_HOST: ${sentry_email_host}
@@ -18,15 +33,19 @@ sentry-cron:
     SENTRY_EMAIL_USER: ${sentry_email_user}
     SENTRY_SECRET_KEY: ${sentry_secret_key}
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
+    SENTRY_POSTGRES_HOST: postgres
+    SENTRY_DB_NAME: ${sentry_db_name}
+    SENTRY_DB_USER: ${sentry_db_user}
+    SENTRY_DB_PASSWORD: ${sentry_db_pass}
   log_driver: ''
   labels:
-    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
   tty: true
   command:
   - run
   - cron
   log_opt: {}
-  image: sentry:8.5.0
+  image: sentry:8.17.0
   links:
   - sentry-postgres:postgres
   - sentry-redis:redis
@@ -34,10 +53,10 @@ sentry-cron:
 sentry-redis:
   log_driver: ''
   labels:
-    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
   tty: true
   log_opt: {}
-  image: redis:3.2.0-alpine
+  image: redis:3.2-alpine
   stdin_open: true
 sentry:
   ports:
@@ -49,16 +68,20 @@ sentry:
     SENTRY_EMAIL_USER: ${sentry_email_user}
     SENTRY_SECRET_KEY: ${sentry_secret_key}
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
+    SENTRY_POSTGRES_HOST: postgres
+    SENTRY_DB_NAME: ${sentry_db_name}
+    SENTRY_DB_USER: ${sentry_db_user}
+    SENTRY_DB_PASSWORD: ${sentry_db_pass}
   log_driver: ''
   labels:
-    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
   tty: true
   command:
   - /bin/bash
   - -c
   - sentry upgrade --noinput && sentry createuser --email ${sentry_initial_user_email} --password ${sentry_initial_user_password} --superuser && /entrypoint.sh run web || /entrypoint.sh run web
   log_opt: {}
-  image: sentry:8.5.0
+  image: sentry:8.17.0
   links:
   - sentry-postgres:postgres
   - sentry-redis:redis
@@ -71,16 +94,20 @@ sentry-worker:
     SENTRY_EMAIL_USER: ${sentry_email_user}
     SENTRY_SECRET_KEY: ${sentry_secret_key}
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
+    SENTRY_POSTGRES_HOST: postgres
+    SENTRY_DB_NAME: ${sentry_db_name}
+    SENTRY_DB_USER: ${sentry_db_user}
+    SENTRY_DB_PASSWORD: ${sentry_db_pass}
   log_driver: ''
   labels:
     io.rancher.scheduler.global: 'true'
-    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
   tty: true
   command:
   - run
   - worker
   log_opt: {}
-  image: sentry:8.5.0
+  image: sentry:8.17.0
   links:
   - sentry-postgres:postgres
   - sentry-redis:redis
