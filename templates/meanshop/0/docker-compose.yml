@@ -1,0 +1,39 @@
+version: '2'
+services:
+  meanshop-nginx:
+    image: ohmydocker/meanshop:nginx
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.pull_image: always
+    ports:
+      - ${PORT}:80
+  meanshop-node:
+    image: ohmydocker/meanshop:alpine
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.pull_image: always
+    environment:
+      MEANGO_DEBUG: ${debug}
+      PORT: 9000
+      MONGODB_DB_URL: "mongodb://meango/meanshop"
+  meango:
+    restart: always
+    environment:
+      MONGO_SERVICE_NAME: meango
+      CATTLE_SCRIPT_DEBUG: ${debug}
+    tty: true
+    image: mongo:3.2
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.sidekicks: meango-datavolume
+      io.rancher.container.pull_image: always
+    volumes_from:
+      - meango-datavolume
+  meango-datavolume:
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: true
+    volumes:
+      - /data/db
+    entrypoint: /bin/true
+    image: busybox
