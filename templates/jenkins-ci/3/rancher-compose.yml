@@ -1,0 +1,42 @@
+.catalog:
+  name: Jenkins
+  version: 2.60.1-rancher1
+  description: |
+    Jenkins CI management server.
+  questions:
+  - variable: "PORT"
+    type: "int"
+    label: "Port Number"
+    description: "Which port should Jenkins listen on?"
+    default: 8080
+    required: true
+  - variable: "volume_work"
+    description: "Work volume to save jenkins data"
+    label: "Work volume:"
+    required: true
+    default: "/var/lib/docker/jenkins-ci"
+    type: "string"
+  - variable: "plugins"
+    type: "multiline"
+    label: "List of Plugins"
+    description: |
+      List of plugins in the format <plugin_name>[:<version>]
+      one entry per line.
+    default: |
+      credentials
+      git
+      git-client
+      github
+      github-api
+      github-oauth
+      greenballs
+      junit
+      plain-credentials
+      scm-api
+      ssh-credentials
+      ssh-slaves
+      swarm
+jenkins-primary:
+  metadata:
+    plugins: |
+      ${plugins}
