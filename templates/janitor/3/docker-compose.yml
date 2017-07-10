@@ -6,8 +6,8 @@ cleanup:
     KEEP_IMAGES: "${KEEP}"
     KEEP_CONTAINERS: "${KEEPC}"
     KEEP_CONTAINERS_NAMED: "${KEEPCN}"
-    LOOP: "true"
-    DEBUG: "0"
+    LOOP: "${LOOP}"
+    DEBUG: "${DEBUG}"
   labels:
      io.rancher.scheduler.global: "true"
      io.rancher.scheduler.affinity:host_label_ne: "${EXCLUDE_LABEL}"
