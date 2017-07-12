@@ -1,0 +1,6 @@
+name: Artifactory OSS
+description: |
+  Artifactory is a universal Binary Repository Manager
+version: 5.4.4
+category: Repository
+
