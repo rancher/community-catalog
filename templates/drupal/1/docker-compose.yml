@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+
+  drupal:
+    image: drupal:8.2-apache
+    labels:
+      io.rancher.sidekicks: postgres,drupal-datavolume
+      io.rancher.container.pull_image: always
+    ports:
+      - ${public_port}:80
+    links:
+      - postgres:postgres
+    volumes_from:
+      - drupal-datavolume
+    restart: always
+
+  postgres:
+    labels:
+      io.rancher.sidekicks: drupal-datavolume
+      io.rancher.container.pull_image: always
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER:  ${DB_USER}
+      POSTGRES_PASSWORD:  ${DB_PASS}
+      POSTGRES_DB:  ${DB_NAME}
+    volumes_from:
+      - drupal-datavolume
+    restart: always
+
+  drupal-datavolume:
+    image: "busybox"
+    volumes:
+      - /var/www/drupal
+      - /var/lib/postgresql
+    labels:
+      io.rancher.container.start_once: true
+    entrypoint: ["/bin/true"]
