@@ -13,7 +13,7 @@ services:
 
   db:
     restart: always
-    image: mariadb
+    image: mariadb:10.2
     volumes_from:
     - redmine-datavolume
     labels:
