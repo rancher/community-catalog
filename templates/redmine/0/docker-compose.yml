@@ -1,38 +1,17 @@
 version: '2'
-
 services:
-  redmine-datavolume:
-    image: "busybox"
-    volumes:
-      - /home/redmine/data
-      - /var/lib/mysql
-      - /var/log/redmine
-    labels:
-      io.rancher.container.start_once: true
-    entrypoint: ["/bin/true"]
-
-  db:
-    restart: always
-    image: mariadb:10.2
-    volumes_from:
-    - redmine-datavolume
-    labels:
-      io.rancher.sidekicks: redmine-datavolume
-      io.rancher.container.pull_image: always
-    environment:
-    - MYSQL_USER=redmine
-    - MYSQL_PASSWORD=${DB_PASS}
-    - MYSQL_ROOT_PASSWORD=${DB_PASS}
-    - MYSQL_DATABASE=redmine_production
-
   redmine:
     image: sameersbn/redmine:3.3.2-1
     labels:
-      io.rancher.sidekicks: db,redmine-datavolume
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
+      traefik.enable: true
+      traefik.alias: ${REDMINE_HOST}
+      traefik.domain: ${REDMINE_DOMAIN}
+      traefik.acme: true
+      traefik.port: 80
     environment:
-    - PORT=${PORT}
+    - PORT=80
     - TZ=${TZ}
     - DB_PASS=${DB_PASS}
     - DB_ADAPTER=mysql2
@@ -42,7 +21,25 @@ services:
     - REDMINE_SECRET_TOKEN=${REDMINE_SECRET_TOKEN}
     - SMTP_ENABLED=false
     - IMAP_ENABLED=false
-    volumes_from:
-    - redmine-datavolume
-    ports:
-    - ${PORT}:80
+    volumes:
+      - redminedata:/home/redmine/data
+      - redminelog:/var/log/redmine
+  db:
+    restart: always
+    image: mariadb:10.2
+    volumes:
+      - redminedbdata:/var/lib/mysql
+    labels:
+      io.rancher.container.pull_image: always
+    environment:
+    - MYSQL_USER=redmine
+    - MYSQL_PASSWORD=${DB_PASS}
+    - MYSQL_ROOT_PASSWORD=${DB_PASS}
+    - MYSQL_DATABASE=redmine_production
+volumes:
+  redminedata:
+    driver: ${VOLUME_DRIVER}
+  redminelog:
+    driver: ${VOLUME_DRIVER}
+  redminedbdata:
+    driver: ${VOLUME_DRIVER}
