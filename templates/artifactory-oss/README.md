@@ -1,4 +1,5 @@
-# Artifactory OSS
+# Artifactory 
+
 	
 Artifactory is a universal Binary Repository Manager for use by build tools (like Maven and Gradle), 
 dependency management tools (like Ivy and NuGet) and build servers (like Jenkins, Hudson, TeamCity and Bamboo).
