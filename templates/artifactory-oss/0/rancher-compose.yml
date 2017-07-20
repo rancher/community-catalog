@@ -1,0 +1,60 @@
+version: '2'
+catalog:
+  name: "Artifactory"
+  version: "5.4.5"
+  description: "Artifactory is a universal Binary Repository Manager"
+  questions:
+    - variable: "ARTIFACTORY_VERSION"
+      label: "Version"
+      description: |
+        Select the Artifactory server version. OSS or PRO
+      required: true
+      default: "OSS"
+      type: enum
+      options:
+        - OSS
+        - PRO
+    - variable: "PUBLISH_PORT"
+      label: "Publish port"
+      description: |
+        Set port if you want publish external port for Artifactory server.
+      required: true
+      type: "int"
+      default: 8081
+    - variable: "EXTRA_JAVA_OPTIONS"
+      label: "Extra Java options"
+      description: |
+      type: "string"
+      default: ""
+    - variable: "VOLUME_DRIVER"
+      type: "string"
+      label: "Volume driver for Artifactory data"
+      description: |
+        Specifiy docker volume driver to use
+      default: "local"
+      required: true
+services:
+  artifactory-lb:
+    scale: 1
+    lb_config:
+      certs: []
+      port_rules:
+      - protocol: http
+        service: artifactory
+        source_port: ${PUBLISH_PORT}
+        target_port: 8081
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+  artifactory:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 8081
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
