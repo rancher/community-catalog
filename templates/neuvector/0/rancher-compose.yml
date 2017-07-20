@@ -1,6 +1,6 @@
 .catalog:
   name: "NeuVector"
-  version: "v1.1.0"
+  version: "rancher1.2"
   description: "Container Security Solution"
   questions:
     - variable: "NV_ALLINONE_LABEL"

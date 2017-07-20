@@ -1,27 +1,26 @@
-gitlab-server:
-  ports:
-  - ${ssh_port}:22/tcp
-  - ${http_port}:80/tcp
-  - ${https_port}:443/tcp
-  labels:
-    io.rancher.sidekicks: gitlab-data
-  hostname: ${gitlab_hostname}
-  image: gitlab/gitlab-ce:latest
-  volumes_from:
-  - gitlab-data
-  environment:
-    GITLAB_OMNIBUS_CONFIG: |
-      external_url '${gitlab_omnipus_prefix}${gitlab_hostname}'
+version: '2'
+volumes:
+  gitlab-app-data:
+    driver: ${volumedriver}
+  gitlab-log-data:
+    driver: ${volumedriver}
+  gitlab-conf-files:
+    driver: ${volumedriver}
 
-gitlab-data:
-  labels:
-    io.rancher.container.start_once: 'true'
-  entrypoint:
-  - /bin/true
-  hostname: gitdata
-  image: gitlab/gitlab-ce:latest
-  volumes:
-  - /etc/gitlab
-  - /var/log/gitlab
-  - /var/opt/gitlab
-
+services:
+  gitlab-server:
+    ports:
+      - ${ssh_port}:22/tcp
+      - ${http_port}:80/tcp
+      - ${https_port}:443/tcp
+    labels:
+      io.rancher.container.hostname_override: container_name
+    image: gitlab/gitlab-ce:9.3.3-ce.0
+    volumes:
+      - gitlab-app-data:/var/opt/gitlab
+      - gitlab-log-data:/var/log/gitlab
+      - gitlab-conf-files:/etc/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${gitlab_omnipus_prefix}${gitlab_hostname}'
+        registry_external_url '${gitlab_omnipus_prefix}${registry_gitlab_hostname}'

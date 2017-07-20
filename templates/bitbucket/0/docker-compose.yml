@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+
+  bitbucket:
+    image: atlassian/bitbucket-server:5.1
+    volumes_from:
+      - bitbucket-data
+    ports:
+      - ${BITBUCKET_PORT}:7990
+    labels:
+      io.rancher.sidekicks: bitbucket-data
+      io.rancher.container.hostname_override: container_name
+
+  bitbucket-data:
+    image: atlassian/bitbucket-server:5.1
+    entrypoint:
+      - /bin/true
+    volumes:
+      - /var/atlassian/application-data/bitbucket
+    labels:
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.hostname_override: container_name
+

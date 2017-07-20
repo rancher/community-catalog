@@ -3,6 +3,7 @@
   version: "v0.6.3"
   description: "Rancher External DNS service powered by DigitalOcean"
   minimum_rancher_version: v1.5.0
+  maximum_rancher_version: v1.5.0
   questions:
     - variable: "DO_PAT"
       label: "DigitalOcean Personal Access Token"

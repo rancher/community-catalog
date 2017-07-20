@@ -5,9 +5,9 @@ services:
     image: webcenter/alpine-minio:2017-03-16_4
     volumes:
       - minio-scheduler-setting:/opt/scheduler
-    {{- if contains .Values.VOLUME_DRIVER "/" }}
+    {{- if eq (printf "%.1s" .Values.VOLUME_DRIVER) "/" }}
       {{- range $idx, $e := atoi .Values.MINIO_DISKS | until }}
-      - {{.Values.VOLUME_DRIVER}}/{{.Values.DISK_BASE_NAME}}{{$idx}}:/data/disk{{$idx}}
+      - ${VOLUME_DRIVER}/${DISK_BASE_NAME}{{$idx}}:/data/disk{{$idx}}
       {{- end}}
     {{- else}}
        {{- range $idx, $e := atoi .Values.MINIO_DISKS | until }}
@@ -61,7 +61,7 @@ volumes:
   minio-scheduler-setting:
     driver: local
     per_container: true
-  {{- if not (contains .Values.VOLUME_DRIVER "/")}}
+  {{- if ne (printf "%.1s" .Values.VOLUME_DRIVER) "/" }}
     {{- range $idx, $e := atoi .Values.MINIO_DISKS | until }}
   minio-data-{{$idx}}:
     per_container: true

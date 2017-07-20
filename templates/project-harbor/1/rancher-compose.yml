@@ -1,0 +1,56 @@
+version: '2'
+.catalog:
+  name: Harbor
+  version: 0.5.0-rev0-distributed
+  description: |
+    Enterprise Class Container Registry by VMware
+  minimum_rancher_version: v0.59.0
+  uuid: harbor-0
+  questions:
+    - variable: "harborhostname"
+      description: "Harbor IP, HOSTNAME or FQDN as used to acces it from the Docker CLI"
+      label: "IP/Hostname/FQDN:"
+      required: true
+      default: myregistry
+      type: "string"
+    - variable: "harbor_admin_password"
+      label: "Harbor password:"
+      description: |
+        Harbor admin password
+      default: Vmware123!
+      required: true
+      type: "string"
+    - variable: "traefikdomain"
+      description: "Harbor domain name (if you are using Traefik you should call out the domain here and the harbor host name should just represent the hostname)"
+      label: "(Traefik) domain:"
+      required: true
+      default: mycompany.com
+      type: "string"
+    - variable: "volumedriver"
+      description: "Volume Driver being used (default: rancher-nfs)"
+      label: "Volume Driver:"
+      required: true
+      default: rancher-nfs
+      type: "string"
+services:
+  registry:
+    scale: 1
+  proxy:
+    scale: 1
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 80
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      request_line:
+  jobservice:
+    scale: 1
+  ui:
+    scale: 1
+  mysql:
+    scale: 1
+  harbor-setupwrapper:
+    scale: 1

@@ -2,9 +2,9 @@
 
 ### Info:
 
-NeuVector provides continuous network security for application containers. 
+NeuVector provides continuous network security for application containers. Deploy the NeuVector containers to get network visibility, application layer segmentation, Docker Bench auditing, and run-time vulnerability scanning.
 
-Deploy the NeuVector containers to protect running containers from violations, threats, and vulnerabilities. NeuVector also detects host and container privilege escalations / break outs.
+NeuVector also detects host and container privilege escalations / break outs and application threats such as DDoS and DNS attacks.
 
 NeuVector can be deployed on greenfield or brownfield (already running) application environments.
 

@@ -1,0 +1,41 @@
+.catalog:
+  name: "meanshop"
+  version: "0.4.9"
+  description: "Ecommerce powered by Meanshop"
+  uuid: meanshop-0
+  minimum_rancher_version: v0.51.0
+  questions:
+      - variable: "MEANSHOP_HOST"
+        description: "Hostname to use for the MEANSHOP server"
+        label: "MEANSHOP Hostname"
+        required: true
+        default: "meanshop"
+        type: "string"
+      - variable: "MEANSHOP_DOMAIN"
+        description: "Domain to use for the MEANSHOP server"
+        label: "MEANSHOP Domain"
+        required: true
+        default: "example.com"
+        type: "string"
+      - variable: "PORT"
+        description: "Port to use for the MEANSHOP server"
+        label: "MEANSHOP Port"
+        required: true
+        default: "8080"
+        type: "int"
+
+meanshop-nginx:
+  scale: 1
+  retain_ip: true
+
+meanshop-node:
+  scale: 1
+  retain_ip: true
+
+meango:
+  scale: 1
+  retain_ip: true
+  metadata:
+    mongo:
+      yml:
+        replset.name: "${replset_name}"

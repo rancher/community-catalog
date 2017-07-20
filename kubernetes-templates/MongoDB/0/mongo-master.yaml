@@ -9,33 +9,49 @@ spec:
     - port: 27017
       targetPort: 27017
   selector:
-    name: mongo-master
+    name: mongo-primary
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   labels:
-          name: mongo-master
-  name: mongo-master
+    name: mongo-primary
+  name: mongo-primary
 spec:
   containers:
-    - name: mongo-master
-      image: "husseingalal/mongo-k8s"
+    - name: mongo-config
+      image: husseingalal/mongo-k8s-config:v0.2.0
+      volumeMounts:
+      - mountPath: /opt/rancher/bin
+        name: utility
+      stdin: true
+      tty: true
+    - name: mongo-primary
+      image: mongo:3.4
       env:
-        - name: PRIMARY
-          value: "true"
+      - name: PRIMARY
+        value: "true"
+      - name: POD_IP
+        valueFrom:
+          fieldRef:
+            fieldPath: status.podIP
       ports:
         - containerPort: 27017
       command:
-        - /run.sh
+        - /opt/rancher/bin/run.sh
         - mongod
         - "--replSet"
         - rs0
         - "--smallfiles"
         - "--noprealloc"
       volumeMounts:
+        - mountPath: /opt/rancher/bin
+          name: utility
         - mountPath: /data/db
-          name: mongo-primary-ephermal-storage
+          name: mongo-datadir
   volumes:
-    - name: mongo-primary-ephermal-storage
-      emptyDir: {}
+  - name: mongo-datadir
+    hostPath:
+      path: ${mongo_volume}
+  - name: utility
+    emptyDir: {}
