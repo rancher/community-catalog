@@ -1,0 +1,7 @@
+name: keepalived
+description: |
+  KeepaliveD, provides VRRP failover across multiple nodes
+version: v1.0.0
+category: Networking
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'

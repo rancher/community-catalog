@@ -1,0 +1,40 @@
+.catalog:
+  name: "keepalived"
+  version: v1.0.0
+  description: "Autostart Keepalived (ONLY IF YOU KNOW WHAT YOU'RE DOING)"
+  minimum_rancher_version: v0.46.0
+  uuid: keepalived:v1.0.0
+  questions:
+    - variable: host_label
+      label: "Keepalived Host Label"
+      description: "Host Label used to schedule keepalived master and backup instances"
+      type: "string"
+      default: "edge"
+      required: true
+    - variable: master_host_label
+      label: "Master Host Label"
+      description: "The value of the Keepalived Host Label to signifify the master instance"
+      type: "string"
+      default: "MASTER"
+      required: true
+    - variable: backup_host_label
+      label: "Backup Host Label"
+      description: "The value of the Keepalived Host Label to signifify the backup instance"
+      type: "string"
+      default: "BACKUP"
+      required: true
+    - variable: master_ip
+      description: "Host IP of master edge node"
+      label: "Master IP"
+      type: "string"
+      required: true
+    - variable: backup_ip
+      description: "Host IP of backup edge node"
+      label: "Backup IP"
+      type: "string"
+      required: true
+    - variable: virtual_ip
+      label: "Virtual IP"
+      description: "Virtual IP to be created."
+      type: "string"
+      required: true
