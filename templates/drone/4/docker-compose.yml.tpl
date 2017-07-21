@@ -29,7 +29,7 @@ services:
   server:
     image: ${drone_server_image}
     environment:
-      DRONE_HOST: drone
+      DRONE_HOST: ${drone_host}
       GIN_MODE: ${gin_mode}
 {{- if (.Values.drone_debug)}}
       DRONE_DEBUG: '${drone_debug}'
