@@ -66,12 +66,12 @@ catalog:
         - Bitbucket Cloud
         - Bitbucket Server
     - variable: drone_driver_client
-      label: Remote Driver client
+      label: Remote Driver Client
       description: "Client key from remote driver. Required for GitHub, Bitbucket Cloud, Bitbucket Server and GitLab."
       type: string
       required: false
     - variable: drone_driver_secret
-      label: Remote Driver secret
+      label: Remote Driver Secret
       description: "Secret key from remote driver. Required for GitHub, Bitbucket Cloud, Bitbucket Server and GitLab."
       type: multiline
       required: false
@@ -81,12 +81,12 @@ catalog:
       type: string
       required: false
     - variable: drone_driver_user
-      label: Remove Driver Username
+      label: Remote Driver Username
       description: "Remote Driver username. Required for BitBucket Server; see http://docs.drone.io/install-for-bitbucket-server/."
       type: string
       required: false
     - variable: drone_driver_password
-      label: Remove Driver Password
+      label: Remote Driver Password
       description: "Remote Driver password. Required for BitBucket Server, http://docs.drone.io/install-for-bitbucket-server/."
       type: password
       required: false
@@ -94,7 +94,7 @@ catalog:
       label: Drone Server
       description: "Drone sever identifier. Used by the agent to connect to the server (does not require change)."
       type: string
-      default: "ws://drone:8000/ws/broker"
+      default: "drone:9000"
     - variable: drone_server_image
       label: Drone Server Image
       description: "Docker image used for the Drone server container."
@@ -104,7 +104,7 @@ catalog:
       label: Drone Agent Image
       description: "Docker image used for the Drone agent container(s)."
       type: string
-      default: "drone/drone:0.8.0-rc.1"
+      default: "drone/agent:0.8.0-rc.1"
     - variable: database_driver
       label: Database Driver
       description: "Database driver. If sqlite, additional volume would be mounted at /var/lib/drone."
