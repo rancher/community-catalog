@@ -6,21 +6,25 @@ catalog:
   description: |
     Drone CI Server ref http://readme.drone.io/admin/installation-guide/
   questions:
+    - variable: drone_host
+      label: Drone Host URL
+      description: Intended URL Drone will be hosted on, e.g. http://drone.mycompany.com.
+      required: true
+      type: string
     - variable: host_port
-      label: Drone server Host Port
-      description: |
-        Port that will be exposed on service creation
+      label: Drone Server Host Port
+      description: Public port that will be exposed on service creation.
       required: true
       default: 8000
       type: int
     - variable: agent_scale
-      label: Drone agent scale
+      label: Drone Agent Scale
       description: Drone agent scale to deploy
       required: true
       default: 1
       type: int
     - variable: drone_secret
-      label: Server and agents secret.
+      label: Server and Agents Secret
       description: Server and agents secret to be communicate. http://readme.drone.io/admin/user-registration/
       type: password
       required: true
@@ -34,7 +38,7 @@ catalog:
         - "debug"
       required: true
     - variable: drone_open
-      label: Open registration
+      label: Open Registration
       description: |
         Users self register. http://readme.drone.io/admin/user-registration/
       required: true
