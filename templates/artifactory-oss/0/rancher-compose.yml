@@ -14,6 +14,22 @@ catalog:
       options:
         - OSS
         - PRO
+    - variable: "PUBLISH_SCHEMA"
+      description: "Publish schema" 
+      label: "Publish schema:"
+      required: false
+      default: "https"
+      type: "enum"
+      options:
+        - http
+        - https
+    - variable: "PUBLISH_NAME"
+      label: "Publish name"
+      description: |
+        Set publish fqdn for Artifactory server.
+      required: true
+      type: "string"
+      default: "artifactory.local"
     - variable: "PUBLISH_PORT"
       label: "Publish port"
       description: |
@@ -21,6 +37,12 @@ catalog:
       required: true
       type: "int"
       default: 8081
+    - variable: "SSL_CERT"
+      description: "SSL certificate. Mandatory if schema https." 
+      label: "SSL certificate:"
+      required: true
+      default: ""
+      type: "certificate"
     - variable: "EXTRA_JAVA_OPTIONS"
       label: "Extra Java options"
       description: |
@@ -38,16 +60,27 @@ services:
     scale: 1
     lb_config:
       certs: []
+      default_cert: ${SSL_CERT}
       port_rules:
-      - protocol: http
-        service: artifactory
+      - protocol: ${PUBLISH_SCHEMA}
+        service: artifactory-rb
         source_port: ${PUBLISH_PORT}
-        target_port: 8081
+        target_port: ${PUBLISH_PORT}
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
       port: 42
       unhealthy_threshold: 3
+  artifactory-rb:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: ${PUBLISH_PORT}
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
   artifactory:
     scale: 1
     retain_ip: true

@@ -9,14 +9,15 @@ generated artifacts.
 
 ### Usage:
 
- Select Artifactory from catalog. 
- 
+ - Select Artifactory from catalog. 
  - Select artifactory version, OSS or PRO.
- - Set the params.
+ - Set the params and select certificate.
 
  Click deploy.
 
-Note: To use the PRO version, you need to get a free trial.
+Notes: 
+- To use the PRO version, you need to get a free trial.
+- You need a certificate imported in rancher enviroment to launch the package. 
 
 
 ### More info:
