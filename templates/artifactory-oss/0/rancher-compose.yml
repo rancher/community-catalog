@@ -17,7 +17,7 @@ catalog:
     - variable: "PUBLISH_SCHEMA"
       description: "Publish schema" 
       label: "Publish schema:"
-      required: false
+      required: true
       default: "https"
       type: "enum"
       options:
@@ -38,7 +38,7 @@ catalog:
       type: "int"
       default: 8081
     - variable: "SSL_CERT"
-      description: "SSL certificate. Mandatory if schema https." 
+      description: "Select SSL certificate." 
       label: "SSL certificate:"
       required: true
       default: ""
@@ -63,7 +63,7 @@ services:
       default_cert: ${SSL_CERT}
       port_rules:
       - protocol: ${PUBLISH_SCHEMA}
-        service: artifactory-rb
+        service: artifactory-rp
         source_port: ${PUBLISH_PORT}
         target_port: ${PUBLISH_PORT}
     health_check:
@@ -71,7 +71,7 @@ services:
       healthy_threshold: 2
       port: 42
       unhealthy_threshold: 3
-  artifactory-rb:
+  artifactory-rp:
     scale: 1
     retain_ip: true
     health_check:
