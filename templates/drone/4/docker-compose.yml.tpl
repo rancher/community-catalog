@@ -93,9 +93,6 @@ services:
       io.rancher.sidekicks: server-volume
     volumes_from:
       - server-volume
-    ports:
-     - 9000/tcp
-     - 8000/tcp
   server-volume:
     image: rawmind/alpine-volume:0.0.2-1
     environment:
