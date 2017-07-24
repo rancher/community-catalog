@@ -108,9 +108,9 @@ services:
       io.rancher.container.hostname_override: container_name
 {{- end}}
   lb:
-    image: rancher/load-balancer-service
+    image: rancher/lb-service-haproxy:v0.6.4
     ports:
-      - ${host_port}:8000/tcp
+      - ${host_port}:${host_port}
     links:
       - server:server
     labels:
