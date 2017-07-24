@@ -2,10 +2,8 @@ version: '2'
 services:
   mysql-lb:
     image: rancher/lb-service-haproxy:v0.6.4
-    links:
-      - mysql
     ports:
-      - ${mysql_lb_port}:3306
+      - ${mysql_lb_port}:${mysql_lb_port}
   mysql-data:
     image: busybox
     labels:
