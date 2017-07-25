@@ -1,4 +1,5 @@
-.catalog:
+version: '2'
+catalog:
   name: "reactiondemo"
   version: 1.4.0-rancher1
   description: "E-commerce powered by reaction"
@@ -52,18 +53,19 @@
           - rancher-efs
           - rancher-ebs
 
-reaction:
-  scale: 1
-  retain_ip: true
-  health_check:
-    healthy_threshold: 2
-    response_timeout: 5000
-    port: 3000
-    unhealthy_threshold: 3
-    interval: 5000
-    strategy: recreate
-    request_line: GET / # HTTP/1.0
+services:
+  reaction:
+    scale: 1
+    retain_ip: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 3000
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+      request_line: GET / # HTTP/1.0
 
-meango:
-  scale: 1
-  retain_ip: true
+  meango:
+    scale: 1
+    retain_ip: true
