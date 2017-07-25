@@ -1,0 +1,52 @@
+version: '2'
+catalog:
+  name: "MongoDB"
+  version: "3.4-rancher1"
+  description: "MongoDB Replica Set"
+  uuid: mongodb-1
+  minimum_rancher_version: v0.46.0
+  questions:
+    - variable: replset_name
+      description: "Name of the MongoDB replicaSet"
+      label: "ReplicaSet Name"
+      type: "string"
+      required: true
+      default: "rs0"
+    - variable: host_label
+      label: "Host Label to MongoDB Tags"
+      description: |
+        Host label to use as MongoDB 'value' tag.
+        Example: 'database'
+      required: false
+      type: "string"
+    - variable: debug
+      description: "Enable Debug log for Mongo containers"
+      label: "Debug"
+      type: "string"
+      required: false
+      default: ""
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to associate with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+    - variable: mongo_scale
+      description: "How many containers the MongoDB will scale to?"
+      label: "mongo scale"
+      type: "int"
+      required: true
+      default: "3"
+services:
+  mongo-cluster:
+    scale: ${mongo_scale}
+    retain_ip: true
+    metadata:
+      mongo:
+        yml:
+          replset.name: "${replset_name}"
