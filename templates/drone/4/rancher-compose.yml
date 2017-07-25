@@ -99,16 +99,16 @@ catalog:
       description: "Drone sever identifier. Used by the agent to connect to the server (does not require change)."
       type: string
       default: "drone:9000"
-    - variable: drone_server_image
-      label: Drone Server Image
-      description: "Docker image used for the Drone server container."
-      type: string
-      default: "drone/drone:0.8.0-rc.1"
-    - variable: drone_agent_image
-      label: Drone Agent Image
-      description: "Docker image used for the Drone agent container(s)."
-      type: string
-      default: "drone/agent:0.8.0-rc.1"
+    - variable: drone_version
+      label: Drone Version
+      description: "Drone version/Docker tag used for the Drone container images."
+      type: enum
+      default: "0.8.0-rc.1"
+      options:
+        - 0.8.0-rc.1
+        - 0.8.0
+        - '0.8'
+        - latest
     - variable: database_driver
       label: Database Driver
       description: "Database driver. If sqlite, additional volume would be mounted at /var/lib/drone."
@@ -164,7 +164,6 @@ services:
       healthy_threshold: 2
       response_timeout: 2000
   lb:
-    scale: 1
     start_on_create: true
     lb_config:
       certs: []
