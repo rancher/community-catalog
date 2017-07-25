@@ -1,5 +1,3 @@
-# [ReactionCommerce](http://reactioncommerce.com/)
-
 ### Docs
 
 The Reaction Commerce official docs are
@@ -10,9 +8,8 @@ This template implements the same method as found
 
 ### MongoDB
 
-This initial version pulls up its own mongodb just like the official
-docker-compose.yml, if you have a mongo stack already running try the
-`1.4.0-rancher2` version
+You'll need a mongodb stack running, choose it in the external link
+question below
 
 ### Traefik
 
