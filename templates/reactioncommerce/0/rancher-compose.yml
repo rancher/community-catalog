@@ -66,6 +66,6 @@ services:
       strategy: recreate
       request_line: GET / # HTTP/1.0
 
-  meango:
+  mongo:
     scale: 1
     retain_ip: true
