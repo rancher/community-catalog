@@ -113,4 +113,4 @@ services:
       - ${host_port}:${host_port}
     labels:
       io.rancher.scheduler.global: 'true'
-      io.rancher.scheduler.affinity:host_label_soft: drone_lb=true
+      io.rancher.scheduler.affinity:host_label_soft: ${drone_lb_host_label}

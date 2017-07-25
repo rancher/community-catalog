@@ -148,6 +148,12 @@ catalog:
         - 'true'
         - 'false'
       default: 'false'
+    - variable: drone_lb_host_label
+      label: Drone LB Host Label
+      description: Host Label (soft affinity) for scheduling of the load balancer service.
+      required: true
+      default: "drone_lb=true"
+      type: string
 services:
   agent:
     scale: ${agent_scale}
