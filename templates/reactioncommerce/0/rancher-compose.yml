@@ -16,7 +16,7 @@ catalog:
         description: "Domain to use for the reaction server"
         label: "reaction Domain"
         required: true
-        default: ""
+        default: "local"
         type: "string"
       - variable: host_label
         label: "Host Label to reaction Tags"
@@ -29,7 +29,7 @@ catalog:
       - variable: REACTION_EMAIL
         label: "reaction Email"
         required: true
-        default: ""
+        default: "test@local"
         type: "string"
       - variable: REACTION_USER
         label: "reaction User"
@@ -41,17 +41,20 @@ catalog:
         required: true
         default: ""
         type: "password"
-      - variable: "VOLUME_DRIVER"
-        description: "The VOLUME driver to associate with this server"
-        label: "VOLUME Driver"
+      - variable: "mongo_link"
+        description: |
+          MongoDB external service link
+          cluster.
+        label: "External stack/service"
+        default: ""
+        required: false
+        type: "service"
+      - variable: "MONGO_DB"
+        default: "reaction"
+        description: "The mongodb name to associate with this server."
+        label: "mongo_db"
         required: true
-        default: "local"
-        type: enum
-        options:
-          - local
-          - rancher-nfs
-          - rancher-efs
-          - rancher-ebs
+        type: "string"
 
 services:
   reaction:
@@ -65,7 +68,6 @@ services:
       interval: 5000
       strategy: recreate
       request_line: GET / # HTTP/1.0
-
   mongo:
     scale: 1
     retain_ip: true
