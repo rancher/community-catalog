@@ -1,6 +1,6 @@
 logmatic-agent:
   image: logmatic/logmatic-docker
-  entrypoint: /usr/src/app/index.js
+  entrypoint: python /app/main.py
   command: ${logmatic_key} ${opts_args}
   restart: always
   volumes:

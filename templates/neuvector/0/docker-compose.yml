@@ -1,5 +1,5 @@
 allinone:
-    image: neuvector/allinone:1.1.0
+    image: neuvector/allinone:rancher1.2
     container_name: neuvector.allinone
     restart: always
     privileged: true
@@ -9,6 +9,7 @@ allinone:
     ports:
         - 8443:8443
     volumes:
+        - /var/neuvector:/var/neuvector
         - /var/run/docker.sock:/var/run/docker.sock
         - /proc:/host/proc:ro
         - /sys/fs/cgroup:/host/cgroup:ro
@@ -17,7 +18,7 @@ allinone:
         io.rancher.scheduler.affinity:host_label: ${NV_ALLINONE_LABEL}
         io.rancher.container.hostname_override: container_name
 enforcer:
-    image: neuvector/enforcer:1.1.0
+    image: neuvector/enforcer:rancher1.2
     container_name: neuvector.enforcer
     restart: always
     privileged: true
@@ -25,6 +26,7 @@ enforcer:
         - affinity:com.myself.name!=neuvector
         - CLUSTER_JOIN_ADDR=allinone
     volumes:
+        - /var/neuvector:/var/neuvector
         - /var/run/docker.sock:/var/run/docker.sock
         - /proc:/host/proc:ro     
         - /sys/fs/cgroup/:/host/cgroup/:ro

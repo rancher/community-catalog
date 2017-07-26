@@ -2,6 +2,7 @@
   name: RabbitMQ
   version: 3.6.0-rancher1
   description: A reliable, distributed messaging broker
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: REPLICAS
       default: 1

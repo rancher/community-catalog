@@ -1,9 +1,10 @@
 .catalog:
   name: Cloud9
   description: |
-    (Experimental) Cloud 9 SDK 
+    (Experimental) Cloud 9 SDK
   version: 3.0-k8s1
   minimum_rancher_version: v1.0.0
+  maximum_rancher_version: v1.3.99
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   uuid: cloud9-0
   questions:

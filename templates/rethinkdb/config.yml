@@ -1,0 +1,5 @@
+name: RethinkDB Cluster
+description: |
+  RethinkDB is the open-source, scalable database that makes building realtime apps dramatically easier.
+version: 2.3.5
+category: Databases

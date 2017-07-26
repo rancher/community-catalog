@@ -1,0 +1,93 @@
+version: '2'
+catalog:
+  name: "Artifactory"
+  version: "5.4.5"
+  description: "Artifactory is a universal Binary Repository Manager"
+  questions:
+    - variable: "ARTIFACTORY_VERSION"
+      label: "Version"
+      description: |
+        Select the Artifactory server version. OSS or PRO
+      required: true
+      default: "OSS"
+      type: enum
+      options:
+        - OSS
+        - PRO
+    - variable: "PUBLISH_SCHEMA"
+      description: "Publish schema" 
+      label: "Publish schema:"
+      required: true
+      default: "https"
+      type: "enum"
+      options:
+        - http
+        - https
+    - variable: "PUBLISH_NAME"
+      label: "Publish name"
+      description: |
+        Set publish fqdn for Artifactory server.
+      required: true
+      type: "string"
+      default: "artifactory.local"
+    - variable: "PUBLISH_PORT"
+      label: "Publish port"
+      description: |
+        Set port if you want publish external port for Artifactory server.
+      required: true
+      type: "int"
+      default: 8081
+    - variable: "SSL_CERT"
+      description: "Select SSL certificate." 
+      label: "SSL certificate:"
+      required: true
+      default: ""
+      type: "certificate"
+    - variable: "EXTRA_JAVA_OPTIONS"
+      label: "Extra Java options"
+      description: |
+      type: "string"
+      default: ""
+    - variable: "VOLUME_DRIVER"
+      type: "string"
+      label: "Volume driver for Artifactory data"
+      description: |
+        Specifiy docker volume driver to use
+      default: "local"
+      required: true
+services:
+  artifactory-lb:
+    scale: 1
+    lb_config:
+      certs: []
+      default_cert: ${SSL_CERT}
+      port_rules:
+      - protocol: ${PUBLISH_SCHEMA}
+        service: artifactory-rp
+        source_port: ${PUBLISH_PORT}
+        target_port: ${PUBLISH_PORT}
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+  artifactory-rp:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: ${PUBLISH_PORT}
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
+  artifactory:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 8081
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000

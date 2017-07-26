@@ -8,7 +8,7 @@ datadog-init:
     io.rancher.container.start_once: 'true'
     io.rancher.container.pull_image: always
 datadog-agent:
-  image: datadog/docker-dd-agent:11.0.5110
+  image: datadog/docker-dd-agent:11.0.5123
   entrypoint: /opt/rancher/entrypoint-wrapper.py
   command:
     - supervisord

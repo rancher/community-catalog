@@ -2,6 +2,7 @@
   name: "Sysdig Cloud"
   version: "0.1"
   description: "Container-Native Application and Infrastructure Monitoring"
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "SDC_ACCESS_KEY"
       label: "Sysdig Cloud access key"

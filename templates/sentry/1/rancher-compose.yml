@@ -1,0 +1,129 @@
+version: '2'
+catalog:
+  name: Sentry
+  version: 8.17.0
+  description: Sentry is a realtime event logging and aggregation platform
+
+  questions:
+    - variable: "sentry_secret_key"
+      type: "password"
+      required: true
+      label: "SENTRY_SECRET_KEY"
+      description: "A secret key used for cryptographic functions within Sentry. see https://hub.docker.com/_/sentry/ for more info"
+
+    - variable: "sentry_public_port"
+      type: "int"
+      required: true
+      label: "Sentry public port"
+      default: 9000
+      description: "Port that Sentry will listen on. Alternatively you could point a load balancer to the port 9000 of this container"
+
+    - variable: "sentry_db_name"
+      type: "string"
+      required: true
+      label: "Sentry db name"
+      default: "sentry"
+      description: "Sentry db name."
+
+    - variable: "sentry_db_user"
+      type: "string"
+      required: true
+      label: "Sentry db user"
+      default: "sentry"
+      description: "Sentry db user."
+
+    - variable: "sentry_db_pass"
+      type: "string"
+      required: true
+      label: "Sentry db pass"
+      default: "sentry"
+      description: "Sentry db pass."
+
+    - variable: "sentry_initial_user_email"
+      type: "string"
+      required: true
+      label: "SENTRY_INITIAL_USER_EMAIL"
+      description: "The initial superuser email"
+
+    - variable: "sentry_initial_user_password"
+      type: "password"
+      required: true
+      label: "SENTRY_INITIAL_USER_PASSWORD"
+      description: "The initial superuser password. Please use a simple initial password and change it afterwards in the Sentry interface"
+
+    - variable: "sentry_server_email"
+      type: "string"
+      required: false
+      label: "SENTRY_SERVER_EMAIL"
+      description: "The email address used for 'From:'. see https://hub.docker.com/_/sentry/ for more info"
+
+    - variable: "sentry_email_host"
+      type: "string"
+      required: false
+      label: "SENTRY_EMAIL_HOST"
+      description: "The smtp server address. see https://hub.docker.com/_/sentry/ for more info"
+
+    - variable: "sentry_email_user"
+      type: "string"
+      required: false
+      label: "SENTRY_EMAIL_USER"
+      description: "The username for the email account. see https://hub.docker.com/_/sentry/ for more info"
+
+    - variable: "sentry_email_password"
+      type: "password"
+      required: false
+      label: "SENTRY_EMAIL_PASSWORD"
+      description: "The password for the email account. see https://hub.docker.com/_/sentry/ for more info"
+
+    - variable: "sentry_email_port"
+      type: "int"
+      required: false
+      label: "SENTRY_EMAIL_PORT"
+      description: "Port of the smtp server. see https://hub.docker.com/_/sentry/ for more info"
+
+services:
+  sentry-cron:
+    scale: 1
+    start_on_create: true
+  sentry-postgres-datavolume:
+    scale: 1
+    start_on_create: true
+  sentry-worker:
+    start_on_create: true
+  sentry-redis:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 6379
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  sentry-postgres:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 5432
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  sentry:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 9000
+      unhealthy_threshold: 3
+      initializing_timeout: 600000
+      interval: 2000
+      strategy: recreate
+      request_line: GET "/auth/login/sentry" "HTTP/1.0"
+      reinitializing_timeout: 60000
