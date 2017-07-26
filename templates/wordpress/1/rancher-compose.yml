@@ -11,16 +11,4 @@
       required: true
       default: "80"
       type: "int"
-    - variable: "wordress_data"
-      description: "Data volume to save wordress data"
-      label: "Wordress data volume:"
-      required: true
-      default: "/var/lib/docker/wordress-data"
-      type: "string"
-    - variable: "mariadb_data"
-      description: "Data volume to save mariadb data"
-      label: "Mariadb data volume:"
-      required: true
-      default: "/var/lib/docker/mariadb-data"
-      type: "string"
 wordpress:
