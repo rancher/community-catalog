@@ -1,0 +1,45 @@
+version: '2'
+services:
+  mongo-cluster:
+    restart: always
+    environment:
+      MONGO_SERVICE_NAME: mongo-cluster
+      CATTLE_SCRIPT_DEBUG: ${debug}
+    entrypoint: /opt/rancher/bin/entrypoint.sh
+    command:
+    - --replSet
+    - "${replset_name}"
+    image: mongo:3.4
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.sidekicks: mongo-base, mongo-datavolume
+    volumes_from:
+      - mongo-datavolume
+      - mongo-base
+    ports:
+      - 27017:27017/tcp
+  mongo-base:
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: true
+    image: rancher/mongodb-conf:v0.1.1
+    stdin_open: true
+    entrypoint: /bin/true
+  mongo-datavolume:
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: true
+    volumes:
+      - mongodata:/data/db
+    entrypoint: /bin/true
+    image: busybox
+volumes:
+  mongodata:
+    driver: ${VOLUME_DRIVER}
