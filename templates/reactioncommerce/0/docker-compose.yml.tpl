@@ -17,7 +17,6 @@ services:
       REACTION_USER: ${REACTION_USER}
       REACTION_AUTH: ${REACTION_AUTH}
 {{- if ne .Values.mongo_link ""}}
-      REACTION_TEST: ${REACTION_AUTH}
     external_links:
       - ${mongo_link}:mongo
     tty: true
