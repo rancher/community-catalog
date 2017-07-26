@@ -68,6 +68,3 @@ services:
       interval: 5000
       strategy: recreate
       request_line: GET / # HTTP/1.0
-  mongo:
-    scale: 1
-    retain_ip: true
