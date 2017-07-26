@@ -1,29 +1,32 @@
 version: '2'
 services:
   mariadb:
-      image: 'bitnami/mariadb:latest'
+      image: 'bitnami/mariadb:10.1'
       volumes:
         - 'mariadb_data:/bitnami'
       environment:
-        - MARIADB_USER=bn_wordpress
-        - MARIADB_DATABASE=bitnami_wordpress
-        - ALLOW_EMPTY_PASSWORD=yes
+        - MARIADB_ROOT_PASSWORD=${mariadb_root_password}
+        - MARIADB_USER=${mariadb_user}
+        - MARIADB_PASSWORD=${mariadb_user_password}
+        - MARIADB_DATABASE=${mariadb_database_name}
   wordpress:
-      image: 'bitnami/wordpress:latest'
-      ports:
-        - '${public_port}:80'
+      image: 'bitnami/wordpress:4'
       volumes:
         - 'wordpress_data:/bitnami'
       depends_on:
         - mariadb
       environment:
-        - MARIADB_HOST=mariadb
-        - MARIADB_PORT_NUMBER=3306
-        - WORDPRESS_DATABASE_USER=bn_wordpress
-        - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-        - ALLOW_EMPTY_PASSWORD=yes
+        - WORDPRESS_DATABASE_NAME=${mariadb_database_name}
+        - WORDPRESS_DATABASE_USER=${mariadb_user} 
+        - WORDPRESS_DATABASE_PASSWORD=${mariadb_user_password}       
+        - WORDPRESS_USERNAME=${wordpress_username}
+        - WORDPRESS_PASSWORD=${wordpress_password}
+  wordpress-lb:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+      - ${public_port}:${public_port}
 volumes:
   mariadb_data:
-    driver: rancher-nfs
+    driver: ${volume_driver}
   wordpress_data:
-    driver: rancher-nfs
+    driver: ${volume_driver}
