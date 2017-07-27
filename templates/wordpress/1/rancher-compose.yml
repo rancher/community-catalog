@@ -30,9 +30,15 @@ catalog:
       required: true
       default: "wordpress_password"
       type: "string"
+    - variable: mariadb_database_name
+      description: "Wordpress database name"
+      label: "Wordpress database name"
+      required: true
+      default: "bitnami_wordpress"
+      type: "string"  
     - variable: wordpress_username
-      description: " WordPress application username"
-      label: "WordPress application password"
+      description: "WordPress application username"
+      label: "WordPress application username"
       required: true
       default: "admin"
       type: "string"  
@@ -72,7 +78,7 @@ services:
     scale: 1
     retain_ip: true
     health_check:
-     port: 80
+      port: 80
       interval: 5000
       unhealthy_threshold: 3
       request_line: 'GET / HTTP/1.0'
