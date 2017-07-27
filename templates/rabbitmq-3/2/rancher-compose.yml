@@ -1,0 +1,74 @@
+version: '2'
+catalog:
+  name: "Rabbit MQ"
+  version: "3.6-rancher0.2.1"
+  decription: A reliable, distributed messaging broker
+  questions:
+    - variable: "erlang_cookie"
+      description: "Erlang cookie required for auth"
+      label: "Erlang cookie:"
+      required: true
+      default:
+      type: "string"
+    - variable: "cluster_partition_handling"
+      label: "Partition Handling:"
+      description: "Cluster partition handling mode"
+      required: true
+      type: "enum"
+      default: autoheal
+      options:
+        - autoheal
+        - ignore
+        - pause_minority
+    - variable: "net_ticktime"
+      description: "Rabbitmq net ticktime setting"
+      label: "Net ticktime:"
+      required: false
+      type: "int"
+      default: 60
+    - variable: "confd_args"
+      description: "Confd additional args"
+      label: "Confd args"
+      required: false
+      type: "string"
+      default: --interval 5
+    - variable: RABBITMQ_TAG
+      default: "rabbitmq:3.6.10-management-alpine"
+      label: "rabbitMQ_version"
+      required: true
+      type: enum
+      options: # List of options if using type of `enum`
+        - "rabbitmq:3.6.10-management-alpine"
+        - "rabbitmq:3.6.10-management"
+        - "rabbitmq:3.6.9-management-alpine"
+        - "rabbitmq:3.6.9-management"
+        - "rabbitmq:3.6.8-management-alpine"
+        - "rabbitmq:3.6.8-management"
+        - "rabbitmq:3.6-management-alpine"
+        - "rabbitmq:3.6-management"
+        - "rabbitmq:management"
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to associate with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "rancher-nfs"
+      type: enum
+      options: # List of options if using type of `enum`
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+    - variable: host_label
+      label: "Host with Label to put rabbitmq on"
+      description: |
+        Host label to use as rabbitmq 'value' tag.
+        Example: 'rabbitmq=true'
+      required: true
+      default: "private=true"
+      type: "string"
+
+services:
+  rabbitmq:
+    metadata:
+      rabbitmq:
+        config:
+         node.name: "$${HOSTNAME}"
