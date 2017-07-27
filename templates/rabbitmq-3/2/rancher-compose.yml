@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: "Rabbit MQ"
-  version: "3.6-rancher0.2.1"
+  version: "0.2.1"
   decription: A reliable, distributed messaging broker
   questions:
     - variable: "erlang_cookie"
