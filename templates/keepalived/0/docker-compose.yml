@@ -2,36 +2,40 @@ version: '2'
 services:
   keepalived-master:
     restart: always
-    image: arcts/keepalived
+    image: arcts/keepalived:1.1.0
     network_mode: host
     cap_add:
       - NET_ADMIN
     environment:
       KEEPALIVED_AUTOCONF: true
       KEEPALIVED_STATE: MASTER
-      KEEPALIVED_INTERFACE: eth0
-      KEEPALIVED_VIRTUAL_ROUTER_ID: 2
+      KEEPALIVED_INTERFACE: ${interface}
+      KEEPALIVED_VIRTUAL_ROUTER_ID: ${router_id}
       KEEPALIVED_UNICAST_SRC_IP: ${master_ip}
       KEEPALIVED_UNICAST_PEER_0: ${backup_ip}
-      KEEPALIVED_TRACK_INTERFACE_1: eth0
+      KEEPALIVED_TRACK_INTERFACE_1: ${interface}
       KEEPALIVED_VIRTUAL_IPADDRESS_1: "\"${virtual_ip}\""
     labels:
-      io.rancher.scheduler.affinity:host_label: ${host_label}=${master_host_label}
+      io.rancher.scheduler.affinity:host_label: ${host_label}=${master_label}
+    sysctls:
+      - net.ipv4.ip_nonlocal_bind=1
 
   keepalived-backup:
     restart: always
-    image: arcts/keepalived
+    image: arcts/keepalived:1.1.0
     network_mode: host
     cap_add:
       - NET_ADMIN
     environment:
       KEEPALIVED_AUTOCONF: true
       KEEPALIVED_STATE: BACKUP
-      KEEPALIVED_INTERFACE: eth0
-      KEEPALIVED_VIRTUAL_ROUTER_ID: 2
+      KEEPALIVED_INTERFACE: ${interface}
+      KEEPALIVED_VIRTUAL_ROUTER_ID: ${router_id}
       KEEPALIVED_UNICAST_SRC_IP: ${backup_ip}
       KEEPALIVED_UNICAST_PEER_0: ${master_ip}
-      KEEPALIVED_TRACK_INTERFACE_1: eth0
+      KEEPALIVED_TRACK_INTERFACE_1: ${interface}
       KEEPALIVED_VIRTUAL_IPADDRESS_1: "\"${virtual_ip}\""
     labels:
-      io.rancher.scheduler.affinity:host_label: ${host_label}=${backup_host_label}
+      io.rancher.scheduler.affinity:host_label: ${host_label}=${backup_label}
+    sysctls:
+      - net.ipv4.ip_nonlocal_bind=1
