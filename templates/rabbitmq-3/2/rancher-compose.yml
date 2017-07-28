@@ -66,9 +66,16 @@ catalog:
       required: true
       default: "private=true"
       type: "string"
+    - variable: "initial_data_nodes"
+      type: "int"
+      required: true
+      label: "# of initial data nodes"
+      description: "Set the initial number of data nodes"
+      default: 1
 
 services:
   rabbitmq:
+    scale: ${initial_data_nodes}
     metadata:
       rabbitmq:
         config:
