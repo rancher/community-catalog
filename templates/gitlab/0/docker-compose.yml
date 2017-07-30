@@ -15,7 +15,7 @@ services:
       - ${https_port}:443/tcp
     labels:
       io.rancher.container.hostname_override: container_name
-    image: gitlab/gitlab-ce:9.3.3-ce.0
+    image: gitlab/gitlab-ce:9.4.2-ce.0
     volumes:
       - gitlab-app-data:/var/opt/gitlab
       - gitlab-log-data:/var/log/gitlab
