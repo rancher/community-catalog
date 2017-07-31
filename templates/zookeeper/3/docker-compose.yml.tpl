@@ -49,5 +49,7 @@ services:
 volumes:
   zkconfig:
     driver: ${VOLUME_DRIVER}
+    per_container: true
   zkdata:
     driver: ${VOLUME_DRIVER}
+    per_container: true
