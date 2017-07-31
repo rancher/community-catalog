@@ -16,13 +16,17 @@ services:
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
+{{- if ne .Values.host_label ""}}
       io.rancher.scheduler.affinity:host_label: ${host_label}
+{{- end}}
       io.rancher.sidekicks: zk-volume, zk-conf
   zk-conf:
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
+{{- if ne .Values.host_label ""}}
       io.rancher.scheduler.affinity:host_label: ${host_label}
+{{- end}}
       io.rancher.container.start_once: true
     image: rawmind/rancher-zk:3.4.9
     volumes:
@@ -31,7 +35,9 @@ services:
     labels:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
+{{- if ne .Values.host_label ""}}
       io.rancher.scheduler.affinity:host_label: ${host_label}
+{{- end}}
       io.rancher.container.start_once: true
     environment:
       - SERVICE_UID=10002
@@ -39,7 +45,6 @@ services:
       - SERVICE_VOLUME=${zk_data_dir}
     volumes:
       - zkdata:${zk_data_dir}
-    volume_driver: local
     image: rawmind/alpine-volume:0.0.2-1
 volumes:
   zkconfig:
