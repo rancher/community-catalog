@@ -68,9 +68,10 @@ catalog:
       description: "The VOLUME driver to associate with this server"
       label: "VOLUME Driver"
       required: true
-      default: "rancher-nfs"
+      default: "local"
       type: enum
       options: # List of options if using type of `enum`
+        - local
         - rancher-nfs
         - rancher-efs
         - rancher-ebs
