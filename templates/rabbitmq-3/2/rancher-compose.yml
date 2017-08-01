@@ -63,8 +63,8 @@ catalog:
       description: |
         Host label to use as rabbitmq 'value' tag.
         Example: 'rabbitmq=true'
-      required: true
-      default: "private=true"
+      required: false
+      default: ""
       type: "string"
     - variable: "initial_data_nodes"
       type: "int"
