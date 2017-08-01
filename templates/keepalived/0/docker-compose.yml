@@ -17,8 +17,6 @@ services:
       KEEPALIVED_VIRTUAL_IPADDRESS_1: "\"${virtual_ip}\""
     labels:
       io.rancher.scheduler.affinity:host_label: ${host_label}=${master_label}
-    sysctls:
-      - net.ipv4.ip_nonlocal_bind=1
 
   keepalived-backup:
     restart: always
@@ -37,5 +35,3 @@ services:
       KEEPALIVED_VIRTUAL_IPADDRESS_1: "\"${virtual_ip}\""
     labels:
       io.rancher.scheduler.affinity:host_label: ${host_label}=${backup_label}
-    sysctls:
-      - net.ipv4.ip_nonlocal_bind=1

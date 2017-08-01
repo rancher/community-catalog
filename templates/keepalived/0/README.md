@@ -4,17 +4,18 @@ This catalog recipe enables unicast VRRP based failover for one or more floating
 
 
 ### Form Fields
+* **Host Label Name** - Host label key name used to schedule keepalived master and backup instances.
+* **Master Label** - The value of the keepalived host Label to signify the master instance.
+* **Backup Label** - The value of the keepalived host Label to signify the backup instance.
+* **Interface Name** - The host interface that keepalived will monitor and use for VRRP traffic.
+* **Virtual Router ID** -  A unique number from 0 to 255 that should identify the VRRP group.
+* **Master IP** - The IP on the master host that the keepalived daemon should bind to.
+* **Backup IP** - The IP on the backup host that the keepalived daemon should bind to.
+* **Virtual IP** - Virtual IP to be created. Must be in ip notation: `<ipaddress>/<mask> dev <interface>`
 
-|        Variable       |   Default   |                                       Description                                      |
-|:---------------------:|:-----------:|:--------------------------------------------------------------------------------------:|
-|  **Host Label Name**  | `vrrp_role` |      Host label key name used to schedule keepalived master and backup instances.      |
-|    **Master Label**   |   `master`  |         The value of the keepalived host Label to signify the master instance.         |
-|    **Backup Label**   |   `backup`  |         The value of the keepalived host Label to signify the backup instance.         |
-|   **Interface Name**  |    `eth0`   |        The host interface that keepalived will monitor and use for VRRP traffic.       |
-| **Virtual Router ID** |     `2`     |           A unique number from 0 to 255 that should identify the VRRP group.           |
-|     **Master IP**     |             |          The IP on the master host that the keepalived daemon should bind to.          |
-|     **Backup IP**     |             |          The IP on the backup host that the keepalived daemon should bind to.          |
-|     **Virtual IP**    |             | Virtual IP to be created. Must be in ip notation: `<ipaddress>/<mask> dev <interface>` |
+### Requirements
+
+The host must have the sysctl setting `net.ipv4.ip_nonlocal_bind=1` configured.
 
 ### Usage
 
