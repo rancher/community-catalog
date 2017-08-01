@@ -1,0 +1,32 @@
+version: '2'
+services:
+  mariadb:
+      image: 'bitnami/mariadb:10.1'
+      volumes:
+        - 'mariadb_data:/bitnami'
+      environment:
+        - MARIADB_ROOT_PASSWORD=${mariadb_root_password}
+        - MARIADB_USER=${mariadb_user}
+        - MARIADB_PASSWORD=${mariadb_user_password}
+        - MARIADB_DATABASE=${mariadb_database_name}
+  wordpress:
+      image: 'bitnami/wordpress:4'
+      volumes:
+        - 'wordpress_data:/bitnami'
+      depends_on:
+        - mariadb
+      environment:
+        - WORDPRESS_DATABASE_NAME=${mariadb_database_name}
+        - WORDPRESS_DATABASE_USER=${mariadb_user} 
+        - WORDPRESS_DATABASE_PASSWORD=${mariadb_user_password}       
+        - WORDPRESS_USERNAME=${wordpress_username}
+        - WORDPRESS_PASSWORD=${wordpress_password}
+  wordpress-lb:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+      - ${public_port}:${public_port}
+volumes:
+  mariadb_data:
+    driver: ${volume_driver}
+  wordpress_data:
+    driver: ${volume_driver}

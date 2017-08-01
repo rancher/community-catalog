@@ -1,0 +1,86 @@
+version: '2'
+catalog:
+  name: "Wordpress"
+  version: "v0.2-bitnami"
+  description: "Blog tool, publishing platform and CMS based on bitnami images"
+  uuid: Wordpress-1
+  minimum_rancher_version: v0.51.0
+  questions:    
+    - variable: public_port
+      description: "public port to access the wordpress site"
+      label: "Public Port"
+      required: true
+      default: "80"
+      type: "int"
+    - variable: mariadb_root_password
+      description: "MariaDB root password, set on first run"
+      label: "MariaDB Root Password"
+      required: true
+      default: "mariadb_my_root"
+      type: "string"
+    - variable: mariadb_user
+      description: "MariaDB database user, created on first run"
+      label: "MariaDB Database User"
+      required: true
+      default: "wordpress_user"
+      type: "string"
+    - variable: mariadb_user_password
+      description: "MariaDB database user password, set on first run"
+      label: "MariaDB Database User Password"
+      required: true
+      default: "wordpress_password"
+      type: "string"
+    - variable: mariadb_database_name
+      description: "Wordpress database name"
+      label: "Wordpress database name"
+      required: true
+      default: "bitnami_wordpress"
+      type: "string"  
+    - variable: wordpress_username
+      description: "WordPress application username"
+      label: "WordPress application username"
+      required: true
+      default: "admin"
+      type: "string"  
+    - variable: wordpress_password
+      description: "WordPress application password"
+      label: "WordPress application password"
+      required: true
+      default: "bitnami"
+      type: "string"       
+    - variable: volume_driver
+      description: "Volume driver to use with this service"
+      label: "Volume driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+services:
+  wordpress-lb:
+    scale: 1
+    lb_config:
+      certs: []
+      port_rules:
+      - protocol: http
+        service: wordpress
+        source_port: ${public_port}
+        target_port: 80
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+  wordpress:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 80
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
