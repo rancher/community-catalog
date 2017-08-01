@@ -27,7 +27,6 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     - --docker-privileged
     labels:
-      io.rancher.container.pull_image: always
       io.rancher.container.start_once: 'true'
 
   gitlab-runner:
@@ -42,5 +41,7 @@ services:
     - run
     labels:
       io.rancher.sidekicks: gitlab-runner-config
-      io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
+    {{- if ne .Values.host_label ""}}
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+    {{- end}}

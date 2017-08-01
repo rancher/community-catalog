@@ -29,9 +29,17 @@ catalog:
       default: "dev"
       required: false
 
+    - variable: "host_label"
+      label: "Host with Label to deploy gitlab-runner on"
+      description: |
+        Host label to use as gitlab-runner 'value' tag.
+        Example: 'gitlab-runner=true'
+      type: "string"
+      default: ""
+      required: false
+
 services:
   gitlab-runner-config:
-    scale: 1
     start_on_create: true
   gitlab-runner:
     start_on_create: true
