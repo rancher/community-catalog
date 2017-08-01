@@ -9,4 +9,4 @@
 
 ## Compatibility Notes
 
-* Version v0.2-bitnami has some known [issue](https://github.com/bitnami/bitnami-docker-testlink/issues/17#issuecomment-261783035) with Docker overlayfs and overlayfs2 storage driver. Please try to switch to aufs or devicemapper.
+* Version v0.2-bitnami has some known [issue](https://github.com/bitnami/bitnami-docker-testlink/issues/17#issuecomment-261783035) with Docker overlay and overlay2 storage driver. Please try to switch to aufs or devicemapper.
