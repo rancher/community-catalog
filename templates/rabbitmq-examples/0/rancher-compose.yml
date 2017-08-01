@@ -11,6 +11,12 @@ catalog:
       default: ""
       required: false
       type: "service"
+    - variable: "host_label"
+      description: "Host label where to run this service."
+      label: "Host label:"
+      required: false
+      default: ""
+      type: "string"
 services:
   receive:
     scale: 1
