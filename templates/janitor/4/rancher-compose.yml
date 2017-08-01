@@ -1,0 +1,54 @@
+.catalog:
+  name: "Janitor"
+  version: "v1.7.1"
+  description: "Docker cleanup"
+  uuid: janitor-3
+  questions:
+    - variable: "FREQUENCY"
+      label: "Frequency"
+      description: "Run the cleanup on a cycle of this many seconds"
+      default: 3600
+      required: true
+      type: "int"
+    - variable: "EXCLUDE_LABEL"
+      label: "Exclude label"
+      description: "Specify a Rancher host label here that will be used to determine on which hosts the Janitor container should not deploy."
+      default: janitor.exclude=true
+      required: true
+      type: "string"
+    - variable: "KEEP"
+      label: "Keep images"
+      description: "A comma separated list of images that should never be removed. These are left-anchored Bash Shell Wildcard patterns."
+      default: "rancher/"
+      required: false
+      type: "string"
+    - variable: "KEEPC"
+      label: "Keep containers"
+      description: "A comma separated list of images that should never have stopped containers removed. These are left-anchored Bash Shell Wildcard patterns."
+      default: "*:*"
+      required: false
+      type: "string"
+    - variable: "KEEPCN"
+      label: "Keep named containers"
+      description: "A comma separated list of names of exited or dead container that should never be removed. These are left-anchored Bash Shell Wildcard patterns."
+      default: "*-datavolume"
+      required: false
+      type: "string"
+    - variable: "DEBUG"
+      label: "Enable more debugging output on pattern matches"
+      description: "Read https://github.com/meltwater/docker-cleanup#environment-variables"
+      required: true
+      default: 0
+      type: "enum"
+      options:
+        - 0
+        - 1
+    - variable: "LOOP"
+      label: "Ability to do non-looped cleanups, run it once and exit. Defaults to yes to run it forever in loops."
+      description: "Read https://github.com/meltwater/docker-cleanup#environment-variables"
+      required: true
+      default: true
+      type: "enum"
+      options:
+        - false
+        - true

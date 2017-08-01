@@ -1,5 +1,5 @@
 name: Elasticsearch Cluster 5.4.2
 description: |
   Elasticsearch, you know for search!
-version: 5.4.2-rancher1
+version: 5.4.2-rancher2
 category: ELK
