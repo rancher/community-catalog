@@ -1,0 +1,7 @@
+name: RabbitMQ 3.6 Tutorial Examples
+description: |
+  Robust messaging for applications Examples
+version: 3.6-rancher1
+category: Message queues
+maintainer: "Josh Cox <josh@webhosting.coop>"
+minimum_rancher_version: v0.59.0
