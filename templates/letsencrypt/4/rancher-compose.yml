@@ -1,0 +1,226 @@
+.catalog:
+  name: Let's Encrypt
+  version: 0.5.0
+  description: Trusted SSL certificates at zero cost
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: EULA
+      label: I Agree to the Let's Encrypt TOS
+      description: |
+        Read https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf
+      required: true
+      type: enum
+      options:
+        - "Yes"
+        - "No"
+    - variable: API_VERSION
+      label: Let's Encrypt API Version
+      description: |
+        Select the Let's Encrypt API endpoint used for issuing the certificate.
+        Use `Sandbox` for testing your configuration.
+      required: true
+      type: enum
+      default: Production
+      options:
+        - Production
+        - Sandbox
+    - variable: EMAIL
+      label: Your Email Address
+      description: |
+        Enter the email address to use for creating the Let's Encrypt account.
+      required: true
+      type: string
+    - variable: CERT_NAME
+      label: Certificate Name
+      description: |
+        Name for storing the certificate in the Rancher API and in volumes.
+        Any existing certificate by that name will be updated.
+      required: true
+      type: string
+    - variable: DOMAINS
+      label: Domain Names
+      description: |
+        Comma delimited list of the certificate domains starting with the Common Name.
+        E.g: `example.com, dev.example.com`.
+      required: true
+      type: string
+    - variable: PUBLIC_KEY_TYPE
+      label: Public Key Algorithm
+      description: |
+        Select one of the available key types.
+      required: true
+      type: enum
+      default: RSA-2048
+      options:
+        - RSA-2048
+        - RSA-4096
+        - RSA-8192
+        - ECDSA-256
+        - ECDSA-384
+    - variable: RENEWAL_TIME
+      label: Renewal Time of Day (00-23)
+      description: |
+        Set the time of day (UTC in hours) at which certificate renewals should be run.
+      default: 12
+      required: true
+      type: int
+    - variable: RENEWAL_PERIOD_DAYS
+      label: Renewal Grace Period
+      description: |
+        Number of days before expiration the certificate should be renewed / become eligible for renewal.
+      default: 20
+      required: true
+      type: int
+    - variable: RUN_ONCE
+      label: Run Once
+      description: |
+        Stop the service after creating or renewing the certificate instead of continously running and managing renewal.
+      required: true
+      type: boolean
+      default: false
+    - variable: DNS_RESOLVERS
+      label: DNS Resolvers
+      description: |
+        Comma delimited list of DNS resolvers used to check propagation of ACME TXT record.
+        If empty the DNS resolvers configured in your hosts /etc/resolv.conf are used.
+      required: false
+      default: "8.8.8.8:53,8.8.4.4:53"
+      type: string
+    - variable: VOLUME_NAME
+      label: Volume Name (Optional)
+      description: |
+        To store the account data, certificates and private keys in a volume, enter the volume name that should be used.
+        By default this will be a (host scoped) named Docker volume. See "Persistent Storage Driver" for other options.
+      required: false
+      type: string
+    - variable: STORAGE_DRIVER
+      label: Volume Storage Driver (Optional)
+      description: |
+        To use a stack scoped volume backed by a persistent storage service, enter the name
+        of an existing storage driver (see `Infrastructure -> Storage`). This also requires "Volume Name" to be set.
+      required: false
+      type: string
+    - variable: STORAGE_DRIVER_OPT
+      label: Storage Driver Option (Optional)
+      description: |
+        Specify a single "driver_opts" key/value pair in the format "optionName: optionValue".
+        E.g. for the `rancher-ebs` driver you should specify the required 'size' option like this: "size: 1".
+      required: false
+      type: string
+    - variable: PROVIDER
+      label: Domain Validation Method
+      description: Select a DNS provider to use for domain validation. Use 'HTTP' if your domain is hosted elsewhere.
+      required: true
+      type: enum
+      options:
+        - CloudFlare
+        - DigitalOcean
+        - DNSimple
+        - Dyn
+        - Gandi
+        - Ovh
+        - Route53
+        - Vultr
+        - HTTP
+        - Azure
+        - NS1
+    - variable: AWS_ACCESS_KEY
+      label: AWS Route53 Access Key Id
+      description: Enter the Access Key Id for your AWS account.
+      type: string
+      required: false
+    - variable: AWS_SECRET_KEY
+      label: AWS Route53 Secret Access Key
+      description: Enter the Secret Access Key for your AWS account.
+      type: password
+      required: false
+    - variable: AZURE_CLIENT_ID
+      label: Azure Client ID
+      description: Enter the Client  Id for your Azure account.
+      type: string
+      required: false
+    - variable: AZURE_CLIENT_SECRET
+      label: Azure Client Secret
+      description: Enter the Access Key Id for your Azure account.
+      type: password
+      required: false
+    - variable: AZURE_SUBSCRIPTION_ID
+      label: Azure Subscription Id
+      description: Enter the Azure Subscription Id for your Azure account.
+      type: string
+      required: false
+    - variable: AZURE_TENANT_ID
+      label: Azure Tenant Id
+      description: Enter the Azure Tenant Id for your Azure account.
+      type: string
+      required: false
+    - variable: AZURE_RESOURCE_GROUP
+      label: Azure Resource Group
+      description: Enter the Azure Resource Group for your Azure account.
+      type: string
+      required: false
+    - variable: CLOUDFLARE_EMAIL
+      label: CloudFlare Email Address
+      description: Enter the email address associated with your CloudFlare account.
+      type: string
+      required: false
+    - variable: CLOUDFLARE_KEY
+      label: CloudFlare API Key
+      description: Enter the Global API Key for your CloudFlare account.
+      type: password
+      required: false
+    - variable: DO_ACCESS_TOKEN
+      label: DigitalOcean API Access Token
+      description: Enter the Personal Access Token for your DigitalOcean account.
+      type: password
+      required: false
+    - variable: DNSIMPLE_EMAIL
+      label: DNSimple Email Address
+      description: Enter the email address associated with your DNSimple account.
+      type: string
+      required: false
+    - variable: DNSIMPLE_KEY
+      label: DNSimple API Key
+      description: Enter your DNSimple API key.
+      type: password
+      required: false
+    - variable: DYN_CUSTOMER_NAME
+      label: Dyn Customer Name
+      description: Enter your Dyn customer name.
+      type: string
+      required: false
+    - variable: DYN_USER_NAME
+      label: Dyn User Name
+      description: Enter your Dyn user name.
+      type: string
+      required: false
+    - variable: DYN_PASSWORD
+      label: Dyn Password
+      description: Enter your Dyn password.
+      type: password
+      required: false
+    - variable: GANDI_API_KEY
+      label: Gandi API Key
+      description: Enter the API key for your Gandi account.
+      type: password
+      required: false
+    - variable: OVH_APPLICATION_KEY
+      label: OVH Application Key
+      description: Enter your OVH application key.
+      type: string
+      required: false
+    - variable: OVH_APPLICATION_SECRET
+      label: OVH Application Secret
+      description: Enter your OVH application secret.
+      type: password
+      required: false
+    - variable: OVH_CONSUMER_KEY
+      label: OVH Consumer Key
+      description: Enter your OVH consumer key.
+      type: password
+      required: false
+    - variable: VULTR_API_KEY
+      label: Vultr API Key
+      description: Enter the API key for your Vultr account.
+      type: password
+      required: false
