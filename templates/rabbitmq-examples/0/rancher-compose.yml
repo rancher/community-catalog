@@ -20,25 +20,13 @@ catalog:
 services:
   receive:
     scale: 1
-  send:
-    scale: 1
-  worker:
-    scale: 1
-  newtask:
-    scale: 1
-  rpcserver:
-    scale: 1
-  rpcclient:
-    scale: 1
   receivelogs:
-    scale: 1
-  emitlog:
     scale: 1
   receivelogsdirect:
     scale: 1
-  emitlogdirect:
-    scale: 1
   receivelogstopic:
     scale: 1
-  emitlogtopic:
+  rpcserver:
+    scale: 1
+  worker:
     scale: 1
