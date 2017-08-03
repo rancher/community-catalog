@@ -5,6 +5,17 @@
   minimum_rancher_version: v0.46.0
   uuid: keepalived-1
   questions:
+    - variable: "update_sysctl"
+      description: |
+        Set true to update sysctl.
+        WARN: If set to true, sysctl key net.ipv4.ip_nonlocal_bind will be set to 1.
+      label: "Update Host Sysctl:"
+      type: "enum"
+      default: "false"
+      options:
+        - "true"
+        - "false"
+      required: true
     - variable: "host_label"
       description: "Host label key name used to schedule keepalived master and backup instances."
       label: "Host Label Name:"

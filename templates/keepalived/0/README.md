@@ -4,6 +4,7 @@ This catalog recipe enables unicast VRRP based failover for one or more floating
 
 
 ### Form Fields
+* **Update Host Sysctl** - If `true` automatically sets the needed sysctl setting on the host.
 * **Host Label Name** - Host label key name used to schedule keepalived master and backup instances.
 * **Master Label** - The value of the keepalived host Label to signify the master instance.
 * **Backup Label** - The value of the keepalived host Label to signify the backup instance.
