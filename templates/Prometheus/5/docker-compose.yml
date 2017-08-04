@@ -48,7 +48,7 @@ graf-db:
     image: infinityworks/graf-db:11
     command: cat
     volumes:
-      - prometheus-grafana:/var/lib/grafana/
+      - /var/lib/grafana/
     net: none
 
 grafana:
