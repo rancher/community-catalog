@@ -35,7 +35,7 @@ prometheus:
     volumes_from:
       - prom-conf
     volumes:
-      - /prometheus
+      - prometheus-data:/prometheus
     links:
     - cadvisor:cadvisor
     - node-exporter:node-exporter
@@ -48,7 +48,7 @@ graf-db:
     image: infinityworks/graf-db:11
     command: cat
     volumes:
-      - /var/lib/grafana/
+      - prometheus-grafana:/var/lib/grafana/
     net: none
 
 grafana:
