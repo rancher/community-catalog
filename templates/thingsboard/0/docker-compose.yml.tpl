@@ -53,4 +53,4 @@ volumes:
   {{- else }}  
   postgres_data_dir:
     driver: ${volume_driver}
-  {{ - end }}  
+  {{- end }}  
