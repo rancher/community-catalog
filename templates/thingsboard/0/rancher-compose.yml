@@ -24,17 +24,17 @@ catalog:
       default: "5683"
       type: int
     - variable: database_type
-      description: "Choose database type to use: sql or cassandra"
+      description: "Choose database type to use: postgres or cassandra"
       label: "Database type"
       required: true
-      default: "sql"
+      default: "postgres"
       type: enum
       options:
-        - sql
+        - postgres
         - cassandra
     - variable: add_schema_and_system_data
       description: "Whether to init scheme and system data"
-      label: "Add schemma and system data"
+      label: "Add schema and system data"
       required: true
       default: true
       type: boolean
@@ -51,8 +51,8 @@ catalog:
       default: "zookeeper/zk"
       type: "service"
     - variable: postgres_db
-      description: "Database name in postgresdb"
-      label: "postgres dbname"
+      description: "Database name in postgresql"
+      label: "Dbname"
       required: true
       default: "thingsboard"
       type: string
