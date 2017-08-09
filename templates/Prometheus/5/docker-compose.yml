@@ -35,7 +35,7 @@ prometheus:
     volumes_from:
       - prom-conf
     volumes:
-      - /data/
+      - prometheus-data:/prometheus
     links:
     - cadvisor:cadvisor
     - node-exporter:node-exporter
