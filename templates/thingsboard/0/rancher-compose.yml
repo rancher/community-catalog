@@ -24,13 +24,13 @@ catalog:
       default: "5683"
       type: int
     - variable: database_type
-      description: "Choose database type to use: postgres or cassandra"
+      description: "Choose database type to use: sql or cassandra"
       label: "Database type"
       required: true
-      default: "postgres"
+      default: "sql"
       type: enum
       options:
-        - postgres
+        - sql
         - cassandra
     - variable: add_schema_and_system_data
       description: "Whether to init scheme and system data"

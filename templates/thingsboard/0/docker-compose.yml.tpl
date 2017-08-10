@@ -13,44 +13,37 @@ services:
       - COAP_BIND_PORT=5683
       - ZOOKEEPER_URL=zk:2181
       - DATABASE_TYPE=${database_type}
-      - CASSANDRA_URL=cassandra:9042
-      - CASSANDRA_HOST=cassandra
+      {{- if eq .Values.database_type "cassandra" }}
+      - CASSANDRA_URL=db:9042
+      - CASSANDRA_HOST=db
       - CASSANDRA_PORT=9042
-      - POSTGRES_HOST=postgres
+      {{- else }}
+      - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
+      {{- end }}
       - ADD_SCHEMA_AND_SYSTEM_DATA=${add_schema_and_system_data}
       - ADD_DEMO_DATA=${add_demo_data}
     volumes:
       - hsqldb_data_dir:/usr/share/thingsboard/data/sql
     depends_on:
-      {{- if eq .Values.database_type "cassandra" }}
-      - cassandra
-      {{- else }}
-      - postgres
-      {{- end }} 
+      - db
     external_links:
       - ${zookeeper_service}:zk    
     entrypoint: /run-application.sh
-  {{- if eq .Values.database_type "cassandra" }}  
-  cassandra:
+  db:  
+    {{- if eq .Values.database_type "cassandra" }}  
     image: "cassandra:3"
     volumes:
-      - cassandra_data_dir:/var/lib/cassandra
-  {{- else }}   
-  postgres:
+      - db_data_dir:/var/lib/cassandra
+    {{- else }}   
     image: "postgres:9.6"
     environment:
       - POSTGRES_DB=${postgres_db}
     volumes:
-      - postgres_data_dir:/var/lib/postgresql/data
-  {{- end }}    
+      - db_data_dir:/var/lib/postgresql/data
+    {{- end }}    
 volumes:
   hsqldb_data_dir:
     driver: ${volume_driver}
-  {{- if eq .Values.database_type "cassandra" }}  
-  cassandra_data_dir:
+  db_data_dir:
     driver: ${volume_driver}
-  {{- else }}  
-  postgres_data_dir:
-    driver: ${volume_driver}
-  {{- end }}  
