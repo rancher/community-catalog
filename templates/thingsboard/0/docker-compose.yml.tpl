@@ -25,8 +25,8 @@ services:
       - ADD_DEMO_DATA=${add_demo_data}
     volumes:
       - hsqldb_data_dir:/usr/share/thingsboard/data/sql
-    depends_on:
-      - db
+    links:
+      - db:db
     external_links:
       - ${zookeeper_service}:zk    
     entrypoint: /run-application.sh
