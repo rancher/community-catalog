@@ -2,7 +2,7 @@ name: QuasarDB Community
 description: |
   QuasarDB is a distributed key-value store with peer-to-peer replication, transactions, atomic operations, no-limit tagging and real-time search.
 version: 2.0.0-rc8
-category: Database
+category: Databases
 maintainer: Alexis Ducastel <alexis@ducastel.net>
 projectURL: https://www.quasardb.net
 
