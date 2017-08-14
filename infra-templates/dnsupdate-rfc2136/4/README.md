@@ -36,6 +36,14 @@ Accepts 'always', 'never' or 'auto' (default)
 - `never`: Never create DNS records for this service
 - `auto`: Create DNS records for this service if it exposes ports on the host
      
+
+`io.rancher.service.external_dns_name_template`
+Accepts valid DNS name template
+
+By default DNS entries are named based on default template defined on dnsupdate service.
+You can customize it per service by assigning `io.rancher.service.external_dns_name_template` label to each service.
+dnsupdate will use this template instead of default one when creating dns record for related service.
+
 ##### Custom DNS name template
 
 By default DNS entries are named `<service>.<stack>.<environment>.<domain>`.    

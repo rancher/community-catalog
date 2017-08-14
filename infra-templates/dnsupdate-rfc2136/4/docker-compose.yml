@@ -1,5 +1,5 @@
 rfc2136dns:
-  image: rancher/external-dns:v0.6.2
+  image: rancher/external-dns:v0.7.2
   command: -provider=rfc2136
   expose:
    - 1000
