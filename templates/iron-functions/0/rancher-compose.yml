@@ -1,6 +1,6 @@
 .catalog:
   name: "IronFunctions"
-  version: "v0.0.1"
+  version: "v0.0.2"
   description: "Serverless platform using Docker"
   uuid: ironfunc-0
   minimum_rancher_version: v1.5.0
