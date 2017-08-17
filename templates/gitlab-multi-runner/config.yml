@@ -1,5 +1,5 @@
 name: gitlab-multi-runner
 description: |
   a Gitlab pipelines multi-runner, that will spawn privates runners in your infra.
-version: 9.4.1
+version: 9.4.2
 category: Continuous Integration
