@@ -20,7 +20,7 @@ services:
       - pgdata:/var/lib/postgresql/data/pgdata
 
   postgres:
-    image: postgres:latest
+    image: postgres:${POSTGRES_TAG}
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_DB: ${postgres_db}

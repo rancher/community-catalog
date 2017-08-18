@@ -30,6 +30,28 @@ catalog:
       required: true
       default: "postgres_password"
       type: "string"
+    - variable: "POSTGRES_TAG"
+      description: "The postgres tag to associate with this server"
+      label: "Postgres tag"
+      required: true
+      default: "9.6-alpine"
+      type: enum
+      options: # List of options if using type of `enum`
+        - latest
+        - 10-alpine
+        - 10
+        - 9-alpine
+        - 9
+        - 9.6-alpine
+        - 9.6
+        - 9.5-alpine
+        - 9.5
+        - 9.4-alpine
+        - 9.4
+        - 9.3-alpine
+        - 9.3
+        - 9.2-alpine
+        - 9.2
     - variable: "VOLUME_DRIVER"
       description: "The VOLUME driver to associate with this server"
       label: "VOLUME Driver"
