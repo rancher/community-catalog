@@ -8,7 +8,7 @@ catalog:
       label: Command
       type: "string" 
       required: true
-      default: "-t <TOKEN> -j -a host=`uname -n`"
+      default: "-t <TOKEN> -j"
       description: |
         The command used to configure the logentries container.
 services:
