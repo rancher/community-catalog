@@ -1,0 +1,11 @@
+version: '2'
+services:
+  docker-logentries:
+    image: logentries/docker-logentries:0.2.1
+    command: ${logentries_command}
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      io.rancher.scheduler.global: "true"
+      io.rancher.container.hostname_override: container_name
