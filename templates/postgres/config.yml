@@ -1,5 +1,5 @@
 name: PostgreSQL
 description: |
   PostgreSQL — an object-relational database (ORDBMS)
-version: v0.0.1
+version: v0.0.2
 category: Databases
