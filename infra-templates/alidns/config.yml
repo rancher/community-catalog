@@ -1,0 +1,7 @@
+name: Alibaba Cloud DNS
+description: |
+  Rancher External DNS service powered by Alibaba Cloud
+version:  v0.1.0
+category: External DNS
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'
