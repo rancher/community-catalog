@@ -3,7 +3,7 @@ services:
   gogs:
     image: gogs/gogs:0.11.19
     volumes:
-      - gogs-data:/data/gogs
+      - gogs-data:/data
 {{- if ne .Values.db_link ""}}
     external_links:
       - ${db_link}:db
