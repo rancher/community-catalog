@@ -113,17 +113,30 @@
       required: true
       type: enum
       options:
+        - Aurora
+        - Azure
         - CloudFlare
         - DigitalOcean
         - DNSimple
         - Dyn
         - Gandi
+        - NS1
         - Ovh
         - Route53
         - Vultr
         - HTTP
-        - Azure
-        - NS1
+    - variable: AURORA_USER_ID
+      label: Aurora User ID
+      type: string
+      required: false
+    - variable: AURORA_KEY
+      label: Aurora Key
+      type: string
+      required: false
+    - variable: AURORA_ENDPOINT
+      label: Aurora Endpoint URL (Optional)
+      type: string
+      required: false
     - variable: AWS_ACCESS_KEY
       label: AWS Route53 Access Key Id
       description: Enter the Access Key Id for your AWS account.
@@ -203,6 +216,10 @@
       label: Gandi API Key
       description: Enter the API key for your Gandi account.
       type: password
+      required: false
+    - variable: NS1_API_KEY
+      label: NS1 API Key
+      type: string
       required: false
     - variable: OVH_APPLICATION_KEY
       label: OVH Application Key
