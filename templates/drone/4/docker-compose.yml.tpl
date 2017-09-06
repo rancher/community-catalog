@@ -37,7 +37,7 @@ services:
       DRONE_SECRET: ${drone_secret}
       DRONE_OPEN: ${drone_open}
 {{- if (.Values.drone_admin)}}
-      DRONE_ADMIN: ${drone_admins}
+      DRONE_ADMIN: ${drone_admin}
 {{- end}}
 {{- if (.Values.drone_orgs)}}
       DRONE_ORGS: ${drone_orgs}
