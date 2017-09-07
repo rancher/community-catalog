@@ -1,4 +1,5 @@
-.catalog:
+version: '2'
+catalog:
   name: "zinst-repository"
   version: "7.0.5"
   description: "Infra as a code by your own packages. http://zinst.me"
