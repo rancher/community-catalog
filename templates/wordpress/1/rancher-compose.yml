@@ -1,13 +1,13 @@
 version: '2'
 catalog:
-  name: "Wordpress"
+  name: "WordPress"
   version: "v0.2-bitnami"
   description: "Blog tool, publishing platform and CMS based on bitnami images"
-  uuid: Wordpress-1
+  uuid: WordPress-1
   minimum_rancher_version: v0.51.0
-  questions:    
+  questions:
     - variable: public_port
-      description: "public port to access the wordpress site"
+      description: "public port to access the WordPress site"
       label: "Public Port"
       required: true
       default: "80"
@@ -31,23 +31,23 @@ catalog:
       default: "wordpress_password"
       type: "string"
     - variable: mariadb_database_name
-      description: "Wordpress database name"
-      label: "Wordpress database name"
+      description: "WordPress database name"
+      label: "WordPress database name"
       required: true
       default: "bitnami_wordpress"
-      type: "string"  
+      type: "string"
     - variable: wordpress_username
       description: "WordPress application username"
       label: "WordPress application username"
       required: true
       default: "admin"
-      type: "string"  
+      type: "string"
     - variable: wordpress_password
       description: "WordPress application password"
       label: "WordPress application password"
       required: true
       default: "bitnami"
-      type: "string"       
+      type: "string"
     - variable: volume_driver
       description: "Volume driver to use with this service"
       label: "Volume driver"
