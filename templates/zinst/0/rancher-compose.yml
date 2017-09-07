@@ -12,6 +12,7 @@ catalog:
       required: true
       default: "8080"
       type: "int"
+      
 services:
   zinst-repository:
     retain_ip: true
