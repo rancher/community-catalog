@@ -5,8 +5,11 @@ services:
     ports:
     - 8080:80/tcp
     volumes:
-    - /data/dist
+    - zinst-data:/data/dist
   zinst-lb:
     image: rancher/lb-service-haproxy:v0.6.4
     ports:
     - ${public_port}:${public_port}/tcp
+volumes:
+  zinst-data:
+    driver: local
