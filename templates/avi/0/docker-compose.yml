@@ -11,3 +11,6 @@ avi:
     AVI_SSL_VERIFY: ${AVI_SSL_VERIFY}
     AVI_CLOUD_NAME: ${AVI_CLOUD_NAME}
     LB_TARGET_RANCHER_SUFFIX: ${LB_TARGET_RANCHER_SUFFIX}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-lb"
