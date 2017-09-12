@@ -2,7 +2,7 @@ Avi Vantage Platform Load Balancer Provider
 ========
 
 ## About Avi Vantage Platform
-The Avi Vantage Platform is built on software-defined architectural principles to create a centrally managed pool of distributed load balancers to deliver application services close to the applications.
+The [Avi Vantage Platform](https://avinetworks.com/software-load-balancer-for-any-cloud/) is built on software-defined architectural principles to create a centrally managed pool of distributed load balancers to deliver application services close to the applications.
 
 ## About this provider
 This provider load balances Rancher services using Avi Vantage Platform Load Balancer. It uses REST API to update the Avi controller which enables the Avi Service Engines to load balance the Rancher Services.
