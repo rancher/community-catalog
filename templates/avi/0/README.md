@@ -22,8 +22,8 @@ This provider load balances Rancher services using Avi Vantage Platform Load Bal
    service or stop the service and the changes will get reflected on Avi
    Controller and Service Engine.
 
-Using Rancher Secrets for Avi Password
-----
+###### Using Rancher Secrets for Avi Password
+
 Optionally, you can use the Rancher Secrets to pass the Avi controller
 password instead of using environment variable.
 1. Run the Rancher Secrets service before deploying this provider stack.
