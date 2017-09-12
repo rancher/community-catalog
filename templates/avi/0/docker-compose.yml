@@ -1,5 +1,5 @@
 avi:
-  image: rancher/external-lb:v0.3.0
+  image: rancher/external-lb:v0.3.2
   command: -provider=Avi
   expose: 
    - 1000
