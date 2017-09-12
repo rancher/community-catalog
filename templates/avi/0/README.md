@@ -1,13 +1,13 @@
 Avi Vantage Platform Load Balancer Provider
 ========
 
-#### About Avi Vantage Platform
+## About Avi Vantage Platform
 The Avi Vantage Platform is built on software-defined architectural principles to create a centrally managed pool of distributed load balancers to deliver application services close to the applications.
 
-#### About this provider
+## About this provider
 This provider load balances Rancher services using Avi Vantage Platform Load Balancer. It uses REST API to update the Avi controller which enables the Avi Service Engines to load balance the Rancher Services.
 
-#### Usage
+## Usage
 
 1. Deploy the stack for this provider from Rancher Community Catalog.
    While deploying, you need to give the username, password (optional,
@@ -22,7 +22,7 @@ This provider load balances Rancher services using Avi Vantage Platform Load Bal
    service or stop the service and the changes will get reflected on Avi
    Controller and Service Engine.
 
-###### Using Rancher Secrets for Avi Password
+### Using Rancher Secrets for Avi Password
 
 Optionally, you can use the Rancher Secrets to pass the Avi controller
 password instead of using environment variable.
