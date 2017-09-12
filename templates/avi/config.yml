@@ -1,0 +1,5 @@
+name: Avi Vantage Platform
+description: |
+    External LB service powered by Avi Vantage Platform
+version: v0.3.2-rancher1
+category: Load Balancing
