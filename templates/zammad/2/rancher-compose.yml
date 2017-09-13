@@ -1,0 +1,39 @@
+.catalog:
+  name: "Zammad"
+  version: "1.4"
+  description: "Zammad is a web based open source helpdesk/customer support system"
+  uuid: zammad-1
+  minimum_rancher_version: v1.2.0
+  questions:
+
+  zammad:
+    scale: 1
+    start_on_create: true
+
+  zammad-backup:
+    scale: 1
+    start_on_create: true
+
+  zammad-elasticsearch:
+    scale: 1
+    start_on_create: true
+
+  zammad-nginx:
+    scale: 1
+    start_on_create: true
+
+  zammad-postgresql:
+    scale: 1
+    start_on_create: true
+
+  zammad-scheduler:
+    scale: 1
+    start_on_create: true
+
+  zammad-railsserver:
+    scale: 1
+    start_on_create: true
+
+  zammad-websocket:
+    scale: 1
+    start_on_create: true
