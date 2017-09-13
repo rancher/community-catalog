@@ -1,0 +1,16 @@
+version: '2'
+catalog:
+  name: logentries
+  version: 0.2.1
+  description: "logentries: The Fastest Way to Analyze Your Log Data"
+  questions:
+    - variable: logentries_command
+      label: Command
+      type: "string" 
+      required: true
+      default: "-t <TOKEN> -j"
+      description: |
+        The command used to configure the logentries container.
+services:
+  docker-logentries:
+    start_on_create: true

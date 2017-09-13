@@ -1,0 +1,69 @@
+.catalog:
+  name: Gitlab Community
+  version: 9.4.5-ce.0
+  description: |
+    Gitlab CE is a free GitHub alternative
+  minimum_rancher_version: v0.56.0
+  maintainer: "Alexis Ducastel <alexis@ducastel.net>"
+  uuid: gitlab-0
+  questions:
+    - variable: "gitlab_hostname"
+      description: "Gitlab hostname (without uri scheme http:// or https://)"
+      label: "Hostname:"
+      required: true
+      default: "git.example.com"
+      type: "string"
+    - variable: "registry_gitlab_hostname"
+      description: "Registry Gitlab hostname (without uri scheme http:// or https://)"
+      label: "Registry hostname:"
+      required: true
+      default: "registry.example.com"
+      type: "string"
+    - variable: "gitlab_omnipus_prefix"
+      label: "Gitlab external_url prefix:"
+      description: |
+        This is needed for the docker-compose file to set the correct external_url
+      default: 'http://'
+      required: true
+      type: "enum"
+      options:
+        - 'http://'
+        - 'https://'
+    - variable: "http_port"
+      description: "HTTP port to expose on host. Will be used to bind TCP"
+      label: "HTTP port:"
+      required: true
+      default: 80
+      type: "int"
+    - variable: "https_port"
+      description: "HTTPS port to expose on host. Will be used to bind TCP"
+      label: "HTTPS port:"
+      required: true
+      default: 443
+      type: "int"
+    - variable: "ssh_port"
+      description: "SSH port to expose on host. Will be used to bind TCP"
+      label: "SSH port:"
+      required: true
+      default: 22
+      type: "int"
+    - variable: "volumedriver"
+      description: "Choose the Volume Driver being used.(Option: local or rancher-nfs)"
+      label: "Volume Driver:"
+      required: true
+      default: local
+      type: "enum"
+      options:
+        - local
+        - rancher-nfs
+
+gitlab-server:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 80
+    interval: 30000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 3000
+    healthy_threshold: 2

@@ -3,6 +3,7 @@
     version: 0.1.0-rancher1
     description: "Spark cluster"
     maintainer: "Rancher"
+    maximum_rancher_version: v1.3.99
     questions:
         - variable: "SPARK_WORKER_REPLICAS"
           type: "string"

@@ -1,0 +1,188 @@
+version: 2
+catalog:
+  name: Drone
+  version: 0.8.0-rc.1-rancher1
+  upgrade_from: 0.5-rancher1
+  description: |
+    Drone CI Server ref http://readme.drone.io/admin/installation-guide/
+  questions:
+    - variable: drone_host
+      label: Drone Host URL
+      description: Intended URL Drone will be hosted on, e.g. http://drone.mycompany.com.
+      required: true
+      type: string
+    - variable: host_port
+      label: Drone Server Host Port
+      description: Public port that will be exposed on service creation.
+      required: true
+      default: 8000
+      type: int
+    - variable: agent_scale
+      label: Drone Agent Scale
+      description: Drone agent scale to deploy
+      required: true
+      default: 1
+      type: int
+    - variable: drone_secret
+      label: Server and Agents Secret
+      description: Server and agents secret to be communicate. http://readme.drone.io/admin/user-registration/
+      type: password
+      required: true
+    - variable: gin_mode
+      label: Run mode
+      description: "Drone run mode, GIN_MODE"
+      type: enum
+      default: "release"
+      options:
+        - "release"
+        - "debug"
+      required: true
+    - variable: drone_open
+      label: Open Registration
+      description: |
+        Users self register. http://readme.drone.io/admin/user-registration/
+      required: true
+      default: true
+      type: enum
+      options:
+        - true
+        - false
+    - variable: drone_admin
+      label: Drone Admin
+      description: List of admins for drone comma seperated. http://readme.drone.io/admin/user-admins/
+      type: string
+      required: false
+    - variable: drone_orgs
+      label: Organizations
+      description: Comman seperated list of org that can access drone. http://readme.drone.io/admin/user-registration/
+      type: string
+      required: false
+    - variable: "drone_driver"
+      type: "enum"
+      required: true
+      label: "Remote Driver"
+      default: "GitHub"
+      description: "Remote Git and Auth scheme. ref http://readme.drone.io/admin"
+      options:
+        - GitHub
+        - GitLab
+        - Gogs
+        - Bitbucket Cloud
+        - Bitbucket Server
+    - variable: drone_driver_client
+      label: Remote Driver Client
+      description: "Client key from remote driver. Required for GitHub, Bitbucket Cloud, Bitbucket Server and GitLab."
+      type: string
+      required: false
+    - variable: drone_driver_secret
+      label: Remote Driver Secret
+      description: "Secret key from remote driver. Required for GitHub, Bitbucket Cloud, Bitbucket Server and GitLab."
+      type: multiline
+      required: false
+    - variable: drone_driver_url
+      label: Remote Driver URL
+      description: "Remote Driver server url. Required for GitLab, Gogs and Bitbucket Server; see http://readme.drone.io/admin."
+      type: string
+      required: false
+    - variable: drone_driver_user
+      label: Remote Driver Username
+      description: "Remote Driver username. Required for BitBucket Server; see http://docs.drone.io/install-for-bitbucket-server/."
+      type: string
+      required: false
+    - variable: drone_driver_password
+      label: Remote Driver Password
+      description: "Remote Driver password. Required for BitBucket Server, http://docs.drone.io/install-for-bitbucket-server/."
+      type: password
+      required: false
+    - variable: drone_server
+      label: Drone Server
+      description: "Drone sever identifier. Used by the agent to connect to the server (does not require change)."
+      type: string
+      default: "drone:9000"
+    - variable: drone_version
+      label: Drone Version
+      description: "Drone version/Docker tag used for the Drone container images."
+      type: enum
+      default: "0.8.0-rc.1"
+      options:
+        - 0.8.0-rc.1
+        - 0.8.0
+        - '0.8'
+        - latest
+    - variable: database_driver
+      label: Database Driver
+      description: "Database driver. If sqlite, additional volume would be mounted at /var/lib/drone."
+      type: enum
+      default: "sqlite"
+      options:
+        - "sqlite"
+        - "mysql"
+        - "postgres"
+      required: true
+    - variable: "database_source"
+      type: "string"
+      label: "Database source"
+      description: "Database datasource. Required if database driver is mysql or postgres, http://readme.drone.io/admin/database-engines/"
+      required: false
+    - variable: "http_proxy"
+      type: string
+      label: HTTP Proxy
+      description: "Optional: HTTP forward proxy URL."
+      required: false
+    - variable: "https_proxy"
+      type: string
+      label: HTTPS Proxy
+      description: "Optional: HTTPS forward proxy URL."
+      required: false
+    - variable: "no_proxy"
+      type: string
+      label: No Proxy
+      description: "Optional: No proxy hosts (comma-separated hostnames/IPs)."
+      required: false
+      default: "drone"
+    - variable: "drone_debug"
+      label: Drone Debug
+      description: "Enable debug output with the Drone server."
+      type: enum
+      options:
+        - 'true'
+        - 'false'
+      default: 'false'
+    - variable: drone_lb_host_label
+      label: Drone LB Host Label
+      description: Host label (soft affinity) for scheduling of the load balancer service.
+      required: true
+      default: "drone_lb=true"
+      type: string
+services:
+  agent:
+    scale: ${agent_scale}
+    start_on_create: true
+  server:
+    scale: 1
+    start_on_create: true
+    health_check:
+      port: 8000
+      interval: 2000
+      unhealthy_threshold: 3
+      strategy: recreate
+      request_line: GET / HTTP/1.0
+      healthy_threshold: 2
+      response_timeout: 2000
+  lb:
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: server
+        source_port: ${host_port}
+        target_port: 8000
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+      strategy: recreate

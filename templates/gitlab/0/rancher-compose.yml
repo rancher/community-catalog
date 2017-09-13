@@ -1,6 +1,6 @@
 .catalog:
   name: Gitlab Community
-  version: latest
+  version: 9.3.3-ce.0
   description: |
     Gitlab CE is a free GitHub alternative
   minimum_rancher_version: v0.56.0
@@ -13,34 +13,49 @@
       required: true
       default: "git.example.com"
       type: "string"
+    - variable: "registry_gitlab_hostname"
+      description: "Registry Gitlab hostname (without uri scheme http:// or https://)"
+      label: "Registry hostname:"
+      required: true
+      default: "registry.example.com"
+      type: "string"
     - variable: "gitlab_omnipus_prefix"
       label: "Gitlab external_url prefix:"
       description: |
         This is needed for the docker-compose file to set the correct external_url
-      default: 'https://'
+      default: 'http://'
       required: true
-      type: "string"
+      type: "enum"
       options:
-        - 'https://'
         - 'http://'
+        - 'https://'
     - variable: "http_port"
       description: "HTTP port to expose on host. Will be used to bind TCP"
       label: "HTTP port:"
       required: true
       default: 80
-      type: "string"
+      type: "int"
     - variable: "https_port"
       description: "HTTPS port to expose on host. Will be used to bind TCP"
       label: "HTTPS port:"
       required: true
       default: 443
-      type: "string"
+      type: "int"
     - variable: "ssh_port"
       description: "SSH port to expose on host. Will be used to bind TCP"
       label: "SSH port:"
       required: true
       default: 22
-      type: "string"
+      type: "int"
+    - variable: "volumedriver"
+      description: "Choose the Volume Driver being used.(Option: local or rancher-nfs)"
+      label: "Volume Driver:"
+      required: true
+      default: local
+      type: "enum"
+      options:
+        - local
+        - rancher-nfs
 
 gitlab-server:
   scale: 1
@@ -52,8 +67,3 @@ gitlab-server:
     strategy: recreate
     response_timeout: 2000
     healthy_threshold: 2
-
-gitlab-data:
-  scale: 1
-  retain_ip: true
-

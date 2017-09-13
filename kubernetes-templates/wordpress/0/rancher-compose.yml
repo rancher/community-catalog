@@ -2,6 +2,7 @@
   name: "K8s Example Wordpress"
   version: "1.0.0"
   description: ""
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "WP_PASSWORD"
       label: "Mysql database password"

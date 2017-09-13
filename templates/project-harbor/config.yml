@@ -1,0 +1,7 @@
+name: Project Harbor
+description: |
+  (Experimental) Enterprise Class Container Registry [by VMware]
+version: 1.1.1-1-rev1
+category: Private Container Registry
+projectURL: https://github.com/vmware/harbor 
+license: Apache License 2.0 

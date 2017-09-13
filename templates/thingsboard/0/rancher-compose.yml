@@ -1,0 +1,80 @@
+version: '2'
+catalog:
+  name: "Thingsboard"
+  version: "v0.1"
+  description: "An open source IoT platform"
+  uuid: Thingsboard-1
+  questions:
+    - variable: http_public_port
+      description: "Thingsboard dashboard published port"
+      label: "Http public port"
+      required: true
+      default: "8080"
+      type: int
+    - variable: mqtt_public_port
+      description: "MQTT published port"
+      label: "MQTT public port"
+      required: true
+      default: "1883"
+      type: int
+    - variable: coap_public_port
+      description: "COAP published port"
+      label: "COAP public port"
+      required: true
+      default: "5683"
+      type: int
+    - variable: database_type
+      description: "Choose database type to use: sql or cassandra"
+      label: "Database type"
+      required: true
+      default: "sql"
+      type: enum
+      options:
+        - sql
+        - cassandra
+    - variable: add_schema_and_system_data
+      description: "Whether to init scheme and system data"
+      label: "Add schema and system data"
+      required: true
+      default: true
+      type: boolean
+    - variable: add_demo_data
+      description: "Whether to insert demo data"
+      label: "Add demo data"
+      required: true
+      default: true
+      type: boolean
+    - variable: zookeeper_service
+      description: "Zookeeper service stack"
+      label: "Zookeeper service"
+      required: true
+      default: "zookeeper/zk"
+      type: "service"
+    - variable: postgres_db
+      description: "Database name in postgresql"
+      label: "Dbname"
+      required: true
+      default: "thingsboard"
+      type: string
+    - variable: volume_driver
+      description: "Volume driver to use with this service"
+      label: "Volume driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+services:
+  tb:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 8080
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000

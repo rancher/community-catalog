@@ -1,0 +1,76 @@
+version: '2'
+catalog:
+  name: "Drupal"
+  version: "8.3.5-rancher1"
+  description: "Blog tool, publishing platform and CMS"
+  uuid: Drupal-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: "PUBLIC_PORT"
+      description: "public port to access the drupal site"
+      label: "Public Port"
+      required: true
+      default: "15080"
+      type: "int"
+
+    - variable: "DB_TYPE"
+      description: "public port to access the drupal site"
+      label: "DB type"
+      required: true
+      default: "postgres"
+      type: "enum"
+      options: 
+        - "mysql"
+        - "postgres"
+
+    - variable: "DB_NAME"
+      description: "Database Name to use for the server"
+      label: "DB Name"
+      required: true
+      default: "drupal"
+      type: "string"
+
+    - variable: "DB_USER"
+      description: "Database User to use for the server"
+      label: "DB User"
+      required: true
+      default: "drupal"
+      type: "string"
+
+    - variable: "DB_PASS"
+      description: "Database Password to use for the server"
+      label: "DB Password"
+      required: true
+      default: ""
+      type: "password"
+services:
+  drupal:
+    retain_ip: true
+    scale: 1
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 80
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+      request_line: GET / # HTTP/1.0
+  drupal-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: drupal
+        source_port: ${PUBLIC_PORT}
+        target_port: 80
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000

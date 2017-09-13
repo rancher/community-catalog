@@ -1,0 +1,129 @@
+version: 2
+catalog:
+  name: Drone
+  version: 0.7.1-rancher1
+  upgrade_from: 0.5-rancher1
+  description: |
+    Drone CI Server ref http://readme.drone.io/admin/installation-guide/
+  questions:
+    - variable: host_port
+      label: Drone server Host Port
+      description: |
+        Port that will be exposed on service creation
+      required: true
+      default: 8000
+      type: int
+    - variable: agent_scale
+      label: Drone agent scale
+      description: Drone agent scale to deploy
+      required: true
+      default: 1
+      type: int
+    - variable: drone_secret
+      label: Server and agents sercret. 
+      description: Server and agents secret to be communicate. http://readme.drone.io/admin/user-registration/
+      type: password
+      required: true
+    - variable: gin_mode
+      label: Run mode
+      description: "Drone run mode, GIN_MODE"
+      type: enum
+      default: "release"
+      options:
+        - "release"
+        - "debug"
+      required: true
+    - variable: drone_open
+      label: Open registration
+      description: |
+        Users self register. http://readme.drone.io/admin/user-registration/
+      required: true
+      default: true
+      type: enum
+      options:
+        - true
+        - false
+    - variable: drone_admin
+      label: Drone Admin
+      description: List of admins for drone coma seperated. http://readme.drone.io/admin/user-admins/
+      type: string
+      required: false
+    - variable: drone_orgs
+      label: Organizations
+      description: Comman seperated list of org that can access drone. http://readme.drone.io/admin/user-registration/
+      type: string
+      required: false
+    - variable: "drone_driver"
+      type: "enum"
+      required: true
+      label: "Remote Driver"
+      default: "github"
+      description: "Remote Git and Auth scheme. ref http://readme.drone.io/admin"
+      options:
+        - github
+        - bitbucket
+        - gitlab
+        - gogs
+    - variable: drone_driver_client
+      label: Remote Driver client
+      description: "Client key from remote driver. Required for github, bitbucket and gitlab."
+      type: string
+      required: false
+    - variable: drone_driver_secret
+      label: Remote Driver secret
+      description: "Secret key from remote driver. Required for github, bitbucket and gitlab."
+      type: string
+      required: false
+    - variable: drone_driver_url
+      label: Remote Driver url
+      description: "Remote Driver server url. Required for gitlab and gogs, http://readme.drone.io/admin"
+      type: string
+      required: false
+    - variable: database_driver
+      label: Database Driver
+      description: "Database driver. If sqlite, additional volume would be mounted at /var/lib/drone."
+      type: enum
+      default: "sqlite"
+      options:
+        - "sqlite"
+        - "mysql"
+        - "postgres"
+      required: true
+    - variable: "database_source"
+      type: "string"
+      label: "Database source"
+      description: "Database datasource. Required if database driver is mysql or postgres, http://readme.drone.io/admin/database-engines/"
+      required: false
+services:
+  agent:
+    scale: ${agent_scale}
+    start_on_create: true
+  server:
+    scale: 1
+    start_on_create: true
+    health_check:
+      port: 8000
+      interval: 2000
+      unhealthy_threshold: 3
+      strategy: recreate
+      request_line: GET / HTTP/1.0
+      healthy_threshold: 2
+      response_timeout: 2000
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: server
+        source_port: ${host_port}
+        target_port: 8000
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+      strategy: recreate

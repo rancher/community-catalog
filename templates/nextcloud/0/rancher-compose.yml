@@ -1,0 +1,50 @@
+version: '2'
+
+catalog:
+
+  name: nextcloud
+  version: 0.0.1
+  description: Nextcloud - Enterprise File Sync and Share
+  questions:
+    - variable: NEXTCLOUD_PORT
+      label: Port
+      default: 80
+      required: true
+      type: int
+    - variable: MYSQL_ROOT_PASS
+      label: MySQL root password
+      required: true
+      type: password
+    - variable: MYSQL_DATABASE
+      default: nextcloud
+      label: MySQL Database
+      required: true
+      type: string
+    - variable: MYSQL_USER
+      default: nextcloud
+      label: MySQL User
+      required: true
+      type: string
+    - variable: MYSQL_PASS
+      label: MySQL Pass
+      required: true
+      type: password
+
+services:
+
+  nextcloud:
+    scale: 1
+    start_on_create: true
+
+  nextcloud-data:
+    scale: 1
+    start_on_create: true
+
+  mariadb:
+    scale: 1
+    start_on_create: true
+
+  mariadb-data:
+    scale: 1
+    start_on_create: true
+

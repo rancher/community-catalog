@@ -1,6 +1,6 @@
 zk:
   tty: true
-  image: rawmind/alpine-zk:3.4.9
+  image: rawmind/alpine-zk:3.4.9-3
   volumes_from:
     - zk-volume
     - zk-conf
@@ -21,7 +21,7 @@ zk-conf:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
-  image: rawmind/rancher-zk:3.4.8-5
+  image: rawmind/rancher-zk:3.4.9
   volumes:
     - /opt/tools
 zk-volume:

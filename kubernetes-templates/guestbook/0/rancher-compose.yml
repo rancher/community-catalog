@@ -2,6 +2,7 @@
   name: "K8s Guestbook"
   version: "1.0.0"
   description: "It's a guestbook, I guess"
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "SERVICE_NAME"
       label: "Service Name"

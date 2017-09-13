@@ -1,0 +1,8 @@
+name: GoCD
+description: |
+  GoCD Stack (server and agents)
+version: 17.3.0-rancher1
+category: Continuous Integration
+maintainer: "Sebastien Langoureaux <linuxworkgroup@gmail.com>"
+license: Apache License
+projectURL: https://www.gocd.io/

@@ -1,0 +1,84 @@
+version: '2'
+catalog:
+  name: "SonarQube"
+  version: "v6.5"
+  description: "SonarQube"
+  uuid: sonarqube-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: docker_version
+      description: "SonarQube docker version"
+      label: "SonarQube docker version"
+      required: true
+      default: "6.5-alpine"
+      type: "enum"
+      options:
+        - 6.5-alpine
+        - 6.5
+    - variable: http_port
+      description: "SonarQube http port"
+      label: "SonarQube http Port"
+      required: true
+      default: "9000"
+      type: "int"
+    - variable: jvm_opts
+      description: "SonarQube web jvm options"
+      label: "SonarQube web jvm options"
+      required: false
+      default: ""
+      type: "string"
+    - variable: postgres_port
+      description: "Postgres Port"
+      label: "Postgres Port"
+      required: true
+      default: "5432"
+      type: "int"
+    - variable: postgres_db
+      description: "Postgres Database Name"
+      label: "Postgres Database"
+      required: true
+      default: "sonar"
+      type: "string"
+    - variable: postgres_user
+      description: "Postgres User"
+      label: "Postgres User"
+      required: true
+      default: "sonar"
+      type: "string"
+    - variable: postgres_password
+      description: "Postgres Password"
+      label: "Postgres Password"
+      required: true
+      default: "sonar"
+      type: "password"
+    - variable: "postgres_link"
+      description: |
+        Optional external postgres service to use. 
+      label: "Postgres stack/service"
+      default: ""
+      required: false
+      type: "service"
+services:
+  sonarqube-lb:
+    scale: 1
+    lb_config:
+      port_rules:
+      - protocol: http
+        service: sonarqube
+        source_port: ${http_port}
+        target_port: 9000
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+  sonarqube:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 9000
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000

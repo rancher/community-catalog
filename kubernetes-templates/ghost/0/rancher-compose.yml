@@ -2,6 +2,7 @@
   name: Ghost
   version: 0.7.8-rancher1
   description: Open source publishing platform
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "mysql_root_pass"
       label: "MySQL root password"

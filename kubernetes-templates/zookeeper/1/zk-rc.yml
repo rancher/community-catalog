@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: "zk-conf"
-          image: "rawmind/k8s-zk:3.4.8-10"
+          image: "rawmind/k8s-zk:3.4.9"
           volumeMounts:
             - mountPath: "/opt/tools"
               name: "zk-conf"
@@ -40,7 +40,7 @@ spec:
           ports: 
           imagePullPolicy: "IfNotPresent"
         - name: "zk-service"
-          image: "rawmind/alpine-zk:3.4.9"
+          image: "rawmind/alpine-zk:3.4.9-3"
           env:
             - name: JVMFLAGS
               value: "-Xmx${zk_mem}m -Xms${zk_mem}m"

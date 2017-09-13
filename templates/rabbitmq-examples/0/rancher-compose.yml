@@ -1,0 +1,32 @@
+version: '2'
+catalog:
+  name: RabbitMQ_Examples
+  version: 3.6-rancher1
+  description: |
+    tutorial storage examples
+  questions:
+    - variable: rabbitmq_link
+      description: "rabbitmq service link"
+      label: "rabbitmq stack/service"
+      default: ""
+      required: false
+      type: "service"
+    - variable: "host_label"
+      description: "Host label where to run this service."
+      label: "Host label:"
+      required: false
+      default: ""
+      type: "string"
+services:
+  receive:
+    scale: 1
+  receivelogs:
+    scale: 1
+  receivelogsdirect:
+    scale: 1
+  receivelogstopic:
+    scale: 1
+  rpcserver:
+    scale: 1
+  worker:
+    scale: 1

@@ -1,0 +1,63 @@
+.catalog:
+  name: "keepalived"
+  version: v1.0.1
+  description: "Keepalived VRRP based HA service."
+  minimum_rancher_version: v0.46.0
+  uuid: keepalived-1
+  questions:
+    - variable: "update_sysctl"
+      description: |
+        Set true to update sysctl.
+        WARN: If set to true, sysctl key net.ipv4.ip_nonlocal_bind will be set to 1.
+      label: "Update Host Sysctl:"
+      type: "enum"
+      default: "false"
+      options:
+        - "true"
+        - "false"
+      required: true
+    - variable: "host_label"
+      description: "Host label key name used to schedule keepalived master and backup instances."
+      label: "Host Label Name:"
+      type: "string"
+      default: "vrrp_role"
+      required: true
+    - variable: "master_label"
+      description: "The value of the keepalived host Label to signify the master instance."
+      label: "Master Label:"
+      type: "string"
+      default: "master"
+      required: true
+    - variable: "backup_label"
+      description: "The value of the keepalived host Label to signify the backup instance."
+      label: "Backup Label:"
+      type: "string"
+      default: "backup"
+      required: true
+    - variable: "interface"
+      description: "The name of the host interface."
+      label: "Interface Name:"
+      type: "string"
+      default: "eth0"
+      required: true
+    - variable: "router_id"
+      description: "The virtual Router ID to assign to the VRRP Pair."
+      label: "Virtual Router ID:"
+      type: "int"
+      default: "2"
+      required: true
+    - variable: "master_ip"
+      description: "Host IP of master node"
+      label: "Master IP:"
+      type: "string"
+      required: true
+    - variable: "backup_ip"
+      description: "Host IP of backup node"
+      label: "Backup IP:"
+      type: "string"
+      required: true
+    - variable: "virtual_ip"
+      description: "Virtual IP to be created. MUST be in ip notation: <IPADDRESS>/<MASK> dev <INTERFACE>"
+      label: "Virtual IP:"
+      type: "string"
+      required: true
