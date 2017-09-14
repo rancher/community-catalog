@@ -1,0 +1,7 @@
+name: OpenFaaS
+description: |
+  Functions as a Service - a serverless framework for Docker
+version: v0.0.1
+category: Platform
+license: MIT
+projectURL: https://github.com/kenfdev/rancher-cattle-openfaas
