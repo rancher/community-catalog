@@ -39,7 +39,7 @@ catalog:
 
     - variable: "PCAP_SUPPORT_ENABLED"
       label: "Enable Packet Capture Support"
-      description: "Runs openHAB as root and adds adds network capabilities e.g. for libpcap support"
+      description: "Runs openHAB as root and adds network capabilities e.g. for libpcap support"
       required: true
       default: false
       type: boolean
