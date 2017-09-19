@@ -5,6 +5,7 @@ catalog:
   description: "A painless self-hosted Git service"
   uuid: gogs-0
   minimum_rancher_version: v0.51.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: http_port
       description: "http port to access gogs webui"

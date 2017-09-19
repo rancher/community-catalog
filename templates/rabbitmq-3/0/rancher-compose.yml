@@ -2,9 +2,9 @@
   name: "Rabbit MQ"
   version: "0.1.0"
   decription: A reliable, distributed messaging broker
+  maximum_rancher_version: v1.9.99
 rabbitmq:
   metadata:
     rabbitmq:
       config:
        node.name: "$${HOSTNAME}"
-

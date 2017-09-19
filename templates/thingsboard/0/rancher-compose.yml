@@ -4,6 +4,7 @@ catalog:
   version: "v0.1"
   description: "An open source IoT platform"
   uuid: Thingsboard-1
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: http_public_port
       description: "Thingsboard dashboard published port"

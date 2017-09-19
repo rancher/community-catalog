@@ -5,6 +5,7 @@ catalog:
   upgrade_from: 0.5-rancher1
   description: |
     Drone CI Server ref http://readme.drone.io/admin/installation-guide/
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: host_port
       label: Drone server Host Port

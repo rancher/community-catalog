@@ -4,6 +4,7 @@
   description: |
     Gitlab CE is a free GitHub alternative
   minimum_rancher_version: v0.56.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Alexis Ducastel <alexis@ducastel.net>"
   uuid: gitlab-0
   questions:

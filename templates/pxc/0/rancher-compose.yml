@@ -3,6 +3,7 @@
   version: 5.6.28-rancher1
   description: |
     Percona XtraDB Cluster 5.6.28
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "mysql_root_password"
       type: string

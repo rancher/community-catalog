@@ -4,6 +4,7 @@
   description: |
     (Experimental) Apache Zookeeper cluster.
   minimum_rancher_version: v0.59.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   uuid: zk-0
   questions:
@@ -17,7 +18,7 @@
       description: "Amount of memory to config zk."
       label: "Zk Memory (mb):"
       required: true
-      default: 512 
+      default: 512
       type: "int"
     - variable: "zk_init_limit"
       description: "Time to allow followers to connect and sync with leader"

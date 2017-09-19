@@ -2,6 +2,7 @@
   name: "Elasticsearch"
   version: "1.7.1-rancher1"
   description: "Elasticsearch. You know, for search"
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: cluster_name
       description: "Unique name to assign to your Elasticsearch cluster."

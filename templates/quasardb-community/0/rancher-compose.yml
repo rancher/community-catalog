@@ -4,6 +4,7 @@
   description: |
     QuasarDB is a distributed key-value store with peer-to-peer replication, transactions, atomic operations, no-limit tagging and real-time search.
   minimum_rancher_version: v1.0.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Alexis Ducastel <alexis@ducastel.net>"
   uuid: qdb-ce-0
   questions:

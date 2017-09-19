@@ -3,6 +3,7 @@
   description: "Consul Agent with Registrator Auto Configuration"
   version: "0.6-rancher2"
   uuid: consul-registrator-1
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: consul_server
       label: "Consul Server Hostname/IP"

@@ -4,6 +4,7 @@
   description: |
     DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database.
   minimum_rancher_version: v0.56.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Tim Kopplow <tim@arctium.io>"
   uuid: dokuwiki-0
   questions:

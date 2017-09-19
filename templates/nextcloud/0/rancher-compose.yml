@@ -5,6 +5,7 @@ catalog:
   name: nextcloud
   version: 0.0.1
   description: Nextcloud - Enterprise File Sync and Share
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: NEXTCLOUD_PORT
       label: Port

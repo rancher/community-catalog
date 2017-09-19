@@ -4,6 +4,7 @@
     Influxdb
   version: 1.2.2-rancher1
   minimum_rancher_version: v1.0.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   uuid: influxdb-0
   questions:

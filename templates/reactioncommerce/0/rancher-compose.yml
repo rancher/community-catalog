@@ -5,6 +5,7 @@ catalog:
   description: "E-commerce powered by reaction"
   uuid: reaction-0
   minimum_rancher_version: v0.51.0
+  maximum_rancher_version: v1.9.99
   questions:
       - variable: "REACTION_HOST"
         description: "Hostname to use for the reaction server"

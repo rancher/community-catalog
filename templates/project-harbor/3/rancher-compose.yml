@@ -5,6 +5,7 @@ version: '2'
   description: |
     Enterprise Class Container Registry [by VMware]
   minimum_rancher_version: v0.59.0
+  maximum_rancher_version: v1.9.99
   uuid: harbor-3
   questions:
     - variable: "harborhostname"

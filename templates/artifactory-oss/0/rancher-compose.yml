@@ -3,6 +3,7 @@ catalog:
   name: "Artifactory"
   version: "5.4.5"
   description: "Artifactory is a universal Binary Repository Manager"
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "ARTIFACTORY_VERSION"
       label: "Version"

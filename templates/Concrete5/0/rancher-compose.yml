@@ -4,6 +4,7 @@
     description: "Concrete5 CMS"
     uuid: Concrete5-0
     minimum_rancher_version: v0.51.0
+    maximum_rancher_version: v1.9.99
     questions:
         - variable: root_password
           description: "MySQL root password - keep this password complex and secure"

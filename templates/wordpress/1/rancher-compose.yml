@@ -5,6 +5,7 @@ catalog:
   description: "Blog tool, publishing platform and CMS based on bitnami images"
   uuid: Wordpress-1
   minimum_rancher_version: v0.51.0
+  maximum_rancher_version: v1.9.99
   questions:    
     - variable: public_port
       description: "public port to access the wordpress site"

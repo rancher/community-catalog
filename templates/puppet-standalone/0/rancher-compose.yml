@@ -3,6 +3,7 @@
   version: 1.0.0-rancher1
   description: >
     A very basic Open Source-only Puppet 4.x master for development and testing.
+  maximum_rancher_version: v1.9.99
   questions:
 
     - variable: "CONTROL_REPO_GIT_URI"

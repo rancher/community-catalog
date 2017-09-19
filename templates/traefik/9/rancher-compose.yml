@@ -5,6 +5,7 @@ catalog:
   description: |
     (Experimental) Traefik load balancer.
   minimum_rancher_version: v0.59.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   uuid: traefik-0
   questions:

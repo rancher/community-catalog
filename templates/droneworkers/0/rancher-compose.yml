@@ -5,6 +5,7 @@
     (Experimental) Poll Rancher Metadata for Drone Agents
     and add/remove nodes accordingly.
   minimum_rancher_version: v0.56.0
+  maximum_rancher_version: v1.9.99
   maintainer: cloudnautique
   questions:
     - variable: DRONE_TOKEN

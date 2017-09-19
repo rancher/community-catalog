@@ -1,6 +1,7 @@
 .catalog:
   version: 2.3.7-beta.2
   minimum_rancher_version: v1.2.0
+  maximum_rancher_version: v1.9.99
   questions:
   - variable: SCALE
     description: Desired cluster size. 3, 5, or 7 are good choices. You will need this many hosts to reach your desired scale.

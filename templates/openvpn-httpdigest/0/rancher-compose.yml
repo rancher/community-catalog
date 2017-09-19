@@ -4,6 +4,7 @@
   description: |
     OpenVPN for Rancher with HTTP Digest authentication
   minimum_rancher_version: v0.56.0
+  maximum_rancher_version: v1.9.99
   maintainer: "Alexis Ducastel <alexis@ducastel.net>"
   uuid: openvpn-httpdigest-0
   questions:
