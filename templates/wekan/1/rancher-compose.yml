@@ -1,0 +1,66 @@
+version: '2'
+catalog:
+  name: "Wekan"
+  version: "v0.3.1"
+  description: "The open-source Trello-like kanban (build with Meteor)"
+  uuid: wekan-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: "WEKAN_HOST"
+      description: "Hostname to use for the wekan server"
+      label: "wekan Hostname"
+      required: true
+      default: "wekan"
+      type: "string"
+    - variable: "WEKAN_DOMAIN"
+      description: "Domain to use for the wekan server"
+      label: "wekan Domain"
+      required: true
+      default: "local"
+      type: "string"
+    - variable: host_label
+      label: "Host Label to wekan Tags"
+      description: |
+        Host label to use as wekan 'value' tag.
+        Example: 'wekan=true'
+      required: false
+      default: ""
+      type: "string"
+    - variable: "mongo_link"
+      description: |
+        MongoDB external service link
+        cluster.
+      label: "External stack/service"
+      default: ""
+      required: false
+      type: "service"
+    - variable: "MONGO_DB"
+      default: "wekan"
+      description: "The mongodb name to associate with this server."
+      label: "mongo_db"
+      required: true
+      type: "string"
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to associate with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "rancher-nfs"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+
+services:
+  wekan:
+    scale: 1
+    retain_ip: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 80
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+      request_line: GET / # HTTP/1.0
