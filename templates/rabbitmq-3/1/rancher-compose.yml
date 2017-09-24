@@ -2,6 +2,7 @@
   name: "Rabbit MQ"
   version: "0.2.0"
   decription: A reliable, distributed messaging broker
+  maximum_rancher_version: v1.9.99
   questions: 
     - variable: "erlang_cookie"
       description: "Erlang cookie required for auth"

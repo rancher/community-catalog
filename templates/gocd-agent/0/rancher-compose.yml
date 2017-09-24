@@ -5,6 +5,7 @@
     (Experimental) Gocd agent.
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   minimum_rancher_version: v0.59.0
+  maximum_rancher_version: v1.9.99
   uuid: goagent-0
   questions:
     - variable: "mem_initial"

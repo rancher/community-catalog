@@ -4,6 +4,7 @@
   description: "Alfresco Electronic Document Management"
   uuid: alfresco-5.1-201605-1
   minimum_rancher_version: v0.56.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: database_name
       description: "Name of the Alfresco database"

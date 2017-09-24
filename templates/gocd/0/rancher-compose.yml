@@ -3,6 +3,7 @@ catalog:
   name: GoCD
   version: 17.3.0-rancher1
   minimum_rancher_version: v1.5.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "DEPLOY_SERVER"
       description: "Deploy GoCD server"

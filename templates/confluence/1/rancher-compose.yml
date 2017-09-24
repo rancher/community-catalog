@@ -2,6 +2,7 @@
   name: "Confluence"
   version: "6.0.1"
   description: "Create, organize, and discuss work with your team"
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "context_path"
       label: "Context path"

@@ -4,6 +4,7 @@ catalog:
   version: 0.1.2
   description: |
     Redmine
+  maximum_rancher_version: v1.9.99
   questions:
   - variable: "REDMINE_HOST"
     description: "Hostname to use for the Redmine"

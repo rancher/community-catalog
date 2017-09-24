@@ -3,6 +3,7 @@
   version: "v1.8"
   description: "Minecraft server"
   uuid: minecraft-0
+  maximum_rancher_version: v1.9.99
   questions: 
     - variable: "EULA"
       label: "Accept EULA"

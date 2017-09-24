@@ -5,6 +5,7 @@
     Enterprise Content Management
     Platform for Business Applications
   uuid: nuxeo-1
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: clid
       description: "A valid CLID to be able to download packages from Nuxeo Online Services. in the form part1\npart2"

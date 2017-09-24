@@ -3,6 +3,7 @@
   version: "2.7.1-rancher1"
   description: "Hadoop + Yarn"
   minimum_rancher_version: v0.46.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "cluster"
       label: "Cluster Name"

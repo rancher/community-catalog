@@ -3,6 +3,7 @@
   version: 0.3.0
   description: Trusted SSL certificates at zero cost
   minimum_rancher_version: v0.63.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: EULA
       label: I Agree to the Let's Encrypt TOS

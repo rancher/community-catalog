@@ -5,6 +5,7 @@ catalog:
   description: "MongoDB Replica Set"
   uuid: mongodb-1
   minimum_rancher_version: v0.46.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: replset_name
       description: "Name of the MongoDB replicaSet"

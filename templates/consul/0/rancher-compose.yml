@@ -3,6 +3,7 @@
   description: "Secure Consul cluster"
   version: "0.6-rancher1"
   uuid: consul-0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: ca_crt
       label: "CA certificate"

@@ -5,6 +5,7 @@ catalog:
   description: "Blog tool, publishing platform and CMS"
   uuid: Drupal-0
   minimum_rancher_version: v0.51.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "PUBLIC_PORT"
       description: "public port to access the drupal site"

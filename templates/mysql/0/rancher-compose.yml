@@ -4,6 +4,7 @@
   description: "A recommended stack for the MySQL RDBMS."
   uuid: mysql-0
   minimum_rancher_version: v1.0.0
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: mysql_lb_port
       description: "Public port for access to MySQL through the load balancer"

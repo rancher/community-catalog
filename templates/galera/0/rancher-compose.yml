@@ -3,6 +3,7 @@
   version: 10.0.22-rancher1
   description: |
     Galera Cluster based on MariaDB 10.0.22
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "mysql_root_password"
       type: string

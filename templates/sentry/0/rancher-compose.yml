@@ -2,7 +2,7 @@
   name: Sentry
   version: 8.5.0
   description: Sentry is a realtime event logging and aggregation platform
-
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "sentry_secret_key"
       type: "password"
