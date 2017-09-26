@@ -5,7 +5,7 @@
   description: "Rancher External DNS service powered by Gandi. Requires Rancher version v1.1.0"
   maintainer: "Frederic Leger <contact@webofmars.com>"
   minimum_rancher_version: v1.6.0-rc1
-  #maximum_rancher_version:
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: "GANDI_APIKEY"
       label: "Gandi API key"

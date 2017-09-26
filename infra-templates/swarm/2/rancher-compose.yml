@@ -1,6 +1,7 @@
 .catalog:
   version: v1.12.3-3
   minimum_rancher_version: 1.2.2
+  maximum_rancher_version: v1.9.99
   questions:
   - variable: MANAGER_SCALE
     label: Number of Managers

@@ -5,6 +5,7 @@ catalog:
   name: bitbucket
   version: 0.0.1
   description: Git Server
+  maximum_rancher_version: v1.9.99
   questions:
     - variable: BITBUCKET_PORT
       label: Port
