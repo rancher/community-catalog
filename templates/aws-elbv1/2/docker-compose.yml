@@ -1,7 +1,7 @@
 elbv1:
-  image: rancher/external-lb:v0.3.0
+  image: rancher/external-lb:v0.3.3
   command: -provider=elbv1
-  expose: 
+  expose:
    - 1000
   environment:
     ELBV1_AWS_ACCESS_KEY: ${ELBV1_AWS_ACCESS_KEY}
