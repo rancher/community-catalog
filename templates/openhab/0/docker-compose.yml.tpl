@@ -23,7 +23,7 @@ services:
 {{- end}}
       OPENHAB_HTTP_PORT: "${HTTP_PORT}"
       OPENHAB_HTTPS_PORT: "${HTTPS_PORT}"
-    image: "openhab/openhab:1.8.3-${IMAGE_ARCHITECTURE}"
+    image: "openhab/openhab:1.8.3-${IMAGE_ARCHITECTURE}-${IMAGE_DISTRIBUTION}"
 {{- if ne .Values.HOST_LABEL ""}}
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}

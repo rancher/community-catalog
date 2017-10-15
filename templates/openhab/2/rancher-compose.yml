@@ -20,6 +20,16 @@ catalog:
         - armhf
         - arm64
 
+    - variable: "IMAGE_DISTRIBUTION"
+      label: "Image Distribution"
+      description: "The distribution on which the container image is based"
+      required: true
+      default: "debian"
+      type: enum
+      options:
+        - alpine
+        - debian
+
     - variable: "NETWORK_MODE"
       label: "Network Mode"
       description: "The network stack to connect the container to"
@@ -30,6 +40,13 @@ catalog:
         - host
         - bridge
         - none
+
+    - variable: "HOST_LABEL"
+      label: "Host Label"
+      description: "Schedules openHAB to run only on hosts that have a specific label. Example: 'openhab=true'"
+      default: ""
+      type: "string"
+      required: false
 
     - variable: "USE_HOST_TIME"
       label: "Use Host Time"
@@ -84,13 +101,6 @@ catalog:
         - rancher-ebs
         - rancher-efs
         - rancher-nfs
-
-    - variable: "HOST_LABEL"
-      label: "Host Label"
-      description: "Schedules openHAB to run only on hosts that have a specific label. Example: 'openhab=true'"
-      default: ""
-      type: "string"
-      required: false
 
     - variable: "EXTRA_JAVA_OPTS"
       label: "Extra Java Options"
