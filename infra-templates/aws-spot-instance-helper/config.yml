@@ -1,5 +1,5 @@
 name: AWS Spot Instance Helper
 description: |
   Automatically evacuates spot instances that are marked for termination
-version: v0.1.0
+version: v0.2.0
 category: Rancher Services

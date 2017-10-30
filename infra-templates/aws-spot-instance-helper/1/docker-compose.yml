@@ -1,0 +1,10 @@
+aws-spot-instance-helper:
+  image: chrisurwin/aws-spot-instance-helper:v0.2.0
+  tty: true
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+  environment:
+    SLACK_WEBHOOK: "${SLACK_WEBHOOK}"
