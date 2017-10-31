@@ -1,5 +1,5 @@
 wekandb:
-  image: mongo
+  image: mongo:3.2.11
 #  volumes:
 #    - ./data/runtime/db:/data/db
 #    - ./data/dump:/dump
