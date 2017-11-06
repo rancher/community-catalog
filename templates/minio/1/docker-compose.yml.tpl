@@ -42,7 +42,7 @@ services:
       - minio-scheduler-setting:/opt/scheduler
   {{- if eq .Values.DEPLOY_LB "true"}}
   lb:
-    image: rancher/lb-service-haproxy:v0.7.9
+    image: rancher/lb-service-haproxy:v0.7.15
     {{- if .Values.PUBLISH_PORT}}
     ports:
       - ${PUBLISH_PORT}:9000/tcp
