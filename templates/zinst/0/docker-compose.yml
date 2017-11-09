@@ -1,0 +1,14 @@
+version: '2'
+services:
+  zinst-repository:
+    image: zinst/zinst_repository:0.4
+    volumes:
+    - zinst-data:/data/dist
+  zinst-lb:
+    image: rancher/lb-service-haproxy:v0.6.4
+    ports:
+    - ${public_port}:${public_port}/tcp
+    
+volumes:
+  zinst-data:
+    driver: local
