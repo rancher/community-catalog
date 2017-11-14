@@ -1,7 +1,7 @@
 .catalog:
   name: "NeuVector"
-  version: "rancher1.2"
-  description: "Container Security Solution"
+  version: "rancher1.3"
+  description: "Cloud Native Container Firewall"
   questions:
     - variable: "NV_ALLINONE_LABEL"
       label: "Allinone Host label"

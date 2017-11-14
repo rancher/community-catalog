@@ -1,5 +1,5 @@
 allinone:
-    image: neuvector/allinone:rancher1.2
+    image: neuvector/allinone:rancher1.3
     container_name: neuvector.allinone
     restart: always
     privileged: true
@@ -18,7 +18,7 @@ allinone:
         io.rancher.scheduler.affinity:host_label: ${NV_ALLINONE_LABEL}
         io.rancher.container.hostname_override: container_name
 enforcer:
-    image: neuvector/enforcer:rancher1.2
+    image: neuvector/enforcer:rancher1.3
     container_name: neuvector.enforcer
     restart: always
     privileged: true
