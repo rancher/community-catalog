@@ -1,4 +1,9 @@
 version: '2'
+volumes:
+  dbdata:
+    driver: rancher-nfs
+  dbinit:
+    driver: rancher-nfs
 services:
   database:
     image: mariadb
@@ -11,7 +16,6 @@ services:
     volumes:
      - dbdata:/var/lib/mysql
      - dbinit:/docker-entrypoint-initdb.d
-    volume_driver: rancher-nfs
     labels:
       io.rancher.sidekicks: setup-get-db-script
   setup-get-db-script:
