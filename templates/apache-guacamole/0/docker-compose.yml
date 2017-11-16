@@ -21,7 +21,7 @@ database:
     io.rancher.sidekicks: setup-get-db-script
 setup-get-db-script:
   image: glyptodon/guacamole:0.9.10-incubating
-  network_mode: none
+  net: none
   volumes_from:
     - database-data
   command:
