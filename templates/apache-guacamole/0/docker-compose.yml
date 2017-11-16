@@ -43,6 +43,8 @@ services:
     - cd /usr/local/tomcat/webapps;rm -rf ROOT/; ln -s guacamole.war ROOT.war; /opt/guacamole/bin/start.sh;
 volumes:
   dbdata:
+    external: true
     driver: rancher-nfs
   dbinit:
+    external: true
     driver: rancher-nfs
