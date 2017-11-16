@@ -9,15 +9,17 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
       MYSQL_USER: ${guacamole_user}
     volumes:
-    - dbdata:/var/lib/mysql
-    - dbinit:/docker-entrypoint-initdb.d
+     - dbdata:/var/lib/mysql
+     - dbinit:/docker-entrypoint-initdb.d
+    volume-driver: rancher-nfs
     labels:
       io.rancher.sidekicks: setup-get-db-script
   setup-get-db-script:
     image: glyptodon/guacamole:0.9.10-incubating
     network_mode: none
     volumes:
-    - dbinit:/docker-entrypoint-initdb.d
+     - dbinit:/docker-entrypoint-initdb.d
+    volume-driver: rancher-nfs
     command:
     - bash
     - -c
@@ -41,10 +43,3 @@ services:
     - /bin/bash
     - -c
     - cd /usr/local/tomcat/webapps;rm -rf ROOT/; ln -s guacamole.war ROOT.war; /opt/guacamole/bin/start.sh;
-volumes:
-  dbdata:
-    external: true
-    driver: rancher-nfs
-  dbinit:
-    external: true
-    driver: rancher-nfs
