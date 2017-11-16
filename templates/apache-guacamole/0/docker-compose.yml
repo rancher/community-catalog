@@ -11,7 +11,7 @@ services:
     volumes:
      - dbdata:/var/lib/mysql
      - dbinit:/docker-entrypoint-initdb.d
-    volume-driver: rancher-nfs
+    volume_driver: rancher-nfs
     labels:
       io.rancher.sidekicks: setup-get-db-script
   setup-get-db-script:
@@ -19,7 +19,7 @@ services:
     network_mode: none
     volumes:
      - dbinit:/docker-entrypoint-initdb.d
-    volume-driver: rancher-nfs
+    volume_driver: rancher-nfs
     command:
     - bash
     - -c
