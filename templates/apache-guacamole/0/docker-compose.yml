@@ -1,5 +1,4 @@
-services:
-  database-data:
+database-data:
     image: busybox
     labels:
       io.rancher.container.start_once: 'true'
