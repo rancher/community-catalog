@@ -14,8 +14,8 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
       MYSQL_USER: ${guacamole_user}
     volumes:
-     - dbdata:/var/lib/mysql
-     - dbinit:/docker-entrypoint-initdb.d
+     - dbdata:/var/lib/mysql:nocopy
+     - dbinit:/docker-entrypoint-initdb.d:nocopy
     labels:
       io.rancher.sidekicks: setup-get-db-script
   setup-get-db-script:
