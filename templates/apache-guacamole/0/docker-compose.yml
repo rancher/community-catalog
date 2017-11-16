@@ -1,10 +1,14 @@
 version: '2'
-volumes:
-  dbdata:
-    driver: rancher-nfs
-  dbinit:
-    driver: rancher-nfs
 services:
+  database-data:
+    image: busybox
+    labels:
+      io.rancher.container.start_once: 'true'
+    net: none
+    entrypoint: /bin/true
+    volumes:
+      - /var/lib/mysql
+      - /docker-entrypoint-initdb.d
   database:
     image: mariadb
     environment:
@@ -13,17 +17,15 @@ services:
       MYSQL_PASSWORD: ${guacamole_password}
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
       MYSQL_USER: ${guacamole_user}
-    volumes:
-     - dbdata:/var/lib/mysql:nocopy
-     - dbinit:/docker-entrypoint-initdb.d:nocopy
+    volumes_from:
+      - database-data
     labels:
       io.rancher.sidekicks: setup-get-db-script
   setup-get-db-script:
     image: glyptodon/guacamole:0.9.10-incubating
     network_mode: none
-    volumes:
-     - dbinit:/docker-entrypoint-initdb.d
-    volume_driver: rancher-nfs
+    volumes_from:
+     - database-data
     command:
     - bash
     - -c
