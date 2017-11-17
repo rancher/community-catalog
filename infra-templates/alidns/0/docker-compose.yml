@@ -1,0 +1,14 @@
+alidns:
+  image: rancher/external-dns:v0.7.4
+  command: -provider=alidns
+  expose:
+   - 1000
+  environment:
+    ALICLOUD_ACCESS_KEY_ID: ${ALICLOUD_ACCESS_KEY_ID}
+    ALICLOUD_ACCESS_KEY_SECRET: ${ALICLOUD_ACCESS_KEY_SECRET}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    NAME_TEMPLATE: ${NAME_TEMPLATE}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"

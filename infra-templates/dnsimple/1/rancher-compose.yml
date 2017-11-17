@@ -3,6 +3,7 @@
   version: "v0.2.1-rancher1"
   description: "Rancher External DNS service powered by DNSimple. Requires Rancher version 0.44.0"
   minimum_rancher_version: v1.2.0-pre4-rc1
+  maximum_rancher_version: v1.2.0-pre4-rc1
   questions:
     - variable: "DNSIMPLE_EMAIL"
       label: "DNSimple account email address"

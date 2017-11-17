@@ -1,0 +1,51 @@
+.catalog:
+    name: "Autospotting"
+    version: "v0.1.0"
+    description: "Autospotting"
+    minimum_rancher_version: v1.0.0
+    questions:
+     - variable: "AWS_ACCESS_KEY_ID"
+       description: "AWS Access Key"
+       label: "AWS Access Key"
+       required: true
+       type: "string"
+     - variable: "AWS_SECRET_ACCESS_KEY"
+       description: "AWS Secret Key"
+       label: "Access Secret"
+       required: true
+       type: "string" 
+     - variable: "regions"
+       description: "Regions where it should be activated (comma or whitespace separated list, also supports globs), by default it runs on all regions. Example: 'eu-*,us-east-1"
+       label: "AWS Regions"
+       required: false
+       type: "string" 
+     - variable: "min_on_demand_number"
+       description: "On-demand capacity (as absolute number) ensured to be running in each of your groups"
+       label: "Minimum on demand number"
+       required: false
+       type: "string" 
+     - variable: "min_on_demand_percentage"
+       description: "On-demand capacity (percentage of the total number of instances in the group) ensured to be running in each of your groups. Defaults to 0"
+       label: "Minimum on demand percentage"
+       required: false
+       type: "string" 
+     - variable: "allowed_instance_types"
+       description: "If specified, the spot instances will have a specific instance type"
+       label: "Allowed instance types"
+       required: false
+       type: "string" 
+     - variable: "tag_name"
+       description: "If specified you can tag instances with a specific tag to process, default is spot-enabled"
+       label: "Tag name"
+       required: false
+       type: "string" 
+
+aws-spot-instance-helper:
+    health_check:
+        port: 9777
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        request_line: GET /ping HTTP/1.0
+        healthy_threshold: 2

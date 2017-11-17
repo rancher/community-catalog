@@ -1,0 +1,16 @@
+avi:
+  image: rancher/external-lb:v0.3.2
+  command: -provider=Avi
+  expose: 
+   - 1000
+  environment:
+    AVI_USER: ${AVI_USER}
+    AVI_PASSWORD: ${AVI_PASSWORD}
+    AVI_CONTROLLER_ADDR: ${AVI_CONTROLLER_ADDR}
+    AVI_CONTROLLER_PORT: ${AVI_CONTROLLER_PORT}
+    AVI_SSL_VERIFY: ${AVI_SSL_VERIFY}
+    AVI_CLOUD_NAME: ${AVI_CLOUD_NAME}
+    LB_TARGET_RANCHER_SUFFIX: ${LB_TARGET_RANCHER_SUFFIX}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-lb"

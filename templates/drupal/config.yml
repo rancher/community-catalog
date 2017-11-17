@@ -1,0 +1,5 @@
+name: Drupal
+description: |
+   Drupal is an open source CMS powering millions of websites and applications.
+version: "8.3.5-rancher1"
+category: CMS

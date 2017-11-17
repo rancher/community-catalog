@@ -1,0 +1,93 @@
+.catalog:
+  name: "Consul"
+  description: "Secure Consul cluster"
+  version: "0.8-rancher1"
+  upgrade_from: 0.0.0-rancher1
+  uuid: consul-0
+  questions:
+    - variable: ca_crt
+      label: "CA certificate"
+      type: "multiline"
+      required: true
+    - variable: consul1_key
+      label: "First consul key"
+      type: "multiline"
+      required: true
+    - variable: consul1_crt
+      label: "First consul certificate"
+      type: "multiline"
+      required: true
+    - variable: consul2_key
+      label: "Second consul key"
+      type: "multiline"
+      required: true
+    - variable: consul2_crt
+      label: "Second consul certificate"
+      type: "multiline"
+      required: true
+    - variable: consul3_key
+      label: "Third consul key"
+      type: "multiline"
+      required: true
+    - variable: consul3_crt
+      label: "Third consul certificate"
+      type: "multiline"
+      required: true
+    - variable: gossip_key
+      label: "Communication gossip key"
+      type: "multiline"
+      required: true
+    - variable: enable_acl
+      label: "ACL Access"
+      type: "boolean"
+      required: true
+      default: false
+    - variable: acl_default_policy
+      label: "ACL Default Policy"
+      type: "enum"
+      options:
+        - "allow"
+        - "deny"
+      default: "allow"
+      required: true
+    - variable: acl_down_policy
+      label: "ACL Down Policy"
+      type: "enum"
+      options:
+        - "allow"
+        - "deny"
+      default: "allow"
+      required: true
+    - variable: acl_master_token
+      label: "ACL Master Token"
+      type: "string"
+      default: ""
+      required: false
+    - variable: ui
+      label: "Enable UI"
+      type: "boolean"
+      default: false
+      required: true
+consul:
+  scale: 3
+  metadata:
+    ca.crt: |
+            ${ca_crt}
+    consul1.crt: |
+            ${consul1_crt}
+    consul1.key: |
+            ${consul1_key}
+    consul2.crt: |
+            ${consul2_crt}
+    consul2.key: |
+            ${consul2_key}
+    consul3.crt: |
+            ${consul3_crt}
+    consul3.key: |
+            ${consul3_key}
+    enc.key: "${gossip_key}"
+    acl.enabled: "${enable_acl}"
+    acl.default_policy: "${acl_default_policy}"
+    acl.down_policy: "${acl_down_policy}"
+    acl.master_token: "${acl_master_token}"
+    ui.enabled: ${ui}

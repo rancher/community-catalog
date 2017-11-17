@@ -1,5 +1,5 @@
 name: SonarQube
 description: |
   SonarQube - an open source quality management platform.
-version: v0.0.1
+version: v6.5
 category: Test Automation

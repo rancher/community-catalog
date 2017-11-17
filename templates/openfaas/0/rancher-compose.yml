@@ -1,0 +1,71 @@
+.catalog:
+  name: "OpenFaaS"
+  version: "v0.0.1"
+  description: "Enable Rancher as a backend for Functions as a Service (OpenFaaS)"
+  uuid: "openfaas-0"
+  minimum_rancher_version: v1.5.0
+  questions:
+     - variable: "CATTLE_URL"
+       description: "The v2-beta Rancher Server Endpoint"
+       label: "Rancher Server Endpoint URL"
+       required: true
+       type: "string"
+     - variable: "CATTLE_ACCESS_KEY"
+       description: "The Rancher API Access Key"
+       label: "API Access Key"
+       required: true
+       type: "string"
+     - variable: "CATTLE_SECRET_KEY"
+       description: "The Rancher API Secret Key"
+       label: "API Secret Key"
+       required: true
+       type: "string"
+     - variable: "FUNCTION_STACK_NAME"
+       description: "The stack name faas functions will be deployed to. Don't forget to create it!"
+       label: "Functions Stack Name"
+       required: true
+       type: "string"
+
+version: '2'
+services:
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: gateway
+        source_port: 8080
+        target_port: 8080
+      - priority: 2
+        protocol: http
+        service: prometheus
+        source_port: 9090
+        target_port: 9090
+      - priority: 3
+        protocol: http
+        service: alertmanager
+        source_port: 9093
+        target_port: 9093
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  prometheus:
+    scale: 1
+    start_on_create: true
+  faas-rancher:
+    scale: 1
+    start_on_create: true
+  gateway:
+    scale: 1
+    start_on_create: true
+  alertmanager:
+    scale: 1
+    start_on_create: true

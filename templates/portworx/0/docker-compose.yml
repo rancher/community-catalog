@@ -1,5 +1,6 @@
 portworx:
   labels:
+    io.rancher.container.dns: 'true'
     io.rancher.container.create_agent: 'true'
     io.rancher.scheduler.global: 'true'
     io.rancher.container.pull_image: 'always'

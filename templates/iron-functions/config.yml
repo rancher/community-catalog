@@ -1,0 +1,9 @@
+name: IronFunctions
+description: |
+  Serverless platform using Docker (https://github.com/iron-io/functions)
+version: v0.0.2
+category: Platform
+maintainer: "William Jimenez <wjimenez5271@gmail.com>"
+minimum_rancher_version: v1.5.0
+license: Apache License 2.0
+projectURL: https://github.com/wjimenez5271/rancher-iron-functions

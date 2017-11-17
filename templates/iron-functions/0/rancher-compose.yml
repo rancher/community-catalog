@@ -1,0 +1,52 @@
+.catalog:
+  name: "IronFunctions"
+  version: "v0.0.2"
+  description: "Serverless platform using Docker"
+  uuid: ironfunc-0
+  minimum_rancher_version: v1.5.0
+
+
+version: '2'
+services:
+  functions-ui:
+    scale: 1
+    start_on_create: true
+  api-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: functions-worker
+        source_port: 8080
+        target_port: 8080
+      - path: ''
+        priority: 2
+        protocol: tcp
+        service: functions-ui
+        source_port: 4000
+        target_port: 4000
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+      strategy: recreate
+  setup-dbuser:
+    scale: 1
+    start_on_create: true
+  functions-worker:
+    scale: 1
+    start_on_create: true
+  setup-db:
+    scale: 1
+    start_on_create: true
+  postgres:
+    scale: 1
+    start_on_create: true
+  redis:
+    scale: 1
+    start_on_create: true

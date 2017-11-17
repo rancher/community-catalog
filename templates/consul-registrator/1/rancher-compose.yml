@@ -13,3 +13,8 @@
       type: "string"
       required: true
       default: "dc1"
+    - variable: consul_bind_interface
+      label: "Consul Bind Interface"
+      type: "string"
+      required: true
+      default: "eth0"

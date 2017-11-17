@@ -16,17 +16,17 @@
       label: "Sentry public port"
       description: "Port that Sentry will listen on. Alternatively you could point a load balancer to the port 9000 of this container"
 
-    - variable: "sentry_inital_user_email"
+    - variable: "sentry_initial_user_email"
       type: "string"
       required: true
-      label: "SENTRY_INITAL_USER_EMAIL"
+      label: "SENTRY_INITIAL_USER_EMAIL"
       description: "The initial superuser email"
 
-    - variable: "sentry_inital_user_password"
+    - variable: "sentry_initial_user_password"
       type: "password"
       required: true
-      label: "SENTRY_INITAL_USER_PASSWORD"
-      description: "The initial superuser password. Please use a simple intial password and change it afterwards in the Sentry interface"
+      label: "SENTRY_INITIAL_USER_PASSWORD"
+      description: "The initial superuser password. Please use a simple initial password and change it afterwards in the Sentry interface"
 
     - variable: "sentry_server_email"
       type: "string"
@@ -48,12 +48,6 @@
 
     - variable: "sentry_email_password"
       type: "password"
-      required: false
-      label: "SENTRY_EMAIL_PASSWORD"
-      description: "The password for the email account. see https://hub.docker.com/_/sentry/ for more info"
-
-    - variable: "sentry_email_password"
-      type: "string"
       required: false
       label: "SENTRY_EMAIL_PASSWORD"
       description: "The password for the email account. see https://hub.docker.com/_/sentry/ for more info"

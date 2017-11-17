@@ -1,0 +1,43 @@
+.catalog:
+  name: "Prometheus"
+  version: "3.0.0"
+  description: "Prometheus Monitoring Solution"
+  uuid: prometheus-2
+  minimum_rancher_version: v1.5.5
+  questions:
+  - variable: "RANCHER_SERVER"
+    label: "Rancher Server"
+    description: "IP Address of the rancher server, no HTTP or slashes. This is only required for users that have enabled metrics to be exported by Rancher"
+    default: "0.0.0.0"
+    required: false
+    type: "string"
+
+prometheus:
+  scale: 1
+  health_check:
+    port: 9090
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+grafana:
+  scale: 1
+  health_check:
+    port: 3000
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+prometheus-rancher-exporter:
+  scale: 1
+  health_check:
+    port: 9173
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000

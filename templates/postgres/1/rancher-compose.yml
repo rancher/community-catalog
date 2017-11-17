@@ -1,0 +1,98 @@
+version: '2'
+catalog:
+  name: "Postgres"
+  version: "v0.0.2"
+  description: "PostgreSQL"
+  uuid: postgres-0
+  minimum_rancher_version: v0.9.0
+  questions:
+    - variable: lb_port
+      description: "Port to access PostgreSQL from external services"
+      label: "Postgres LB Port"
+      required: true
+      default: 5432
+      type: "int"
+    - variable: postgres_db
+      description: "Postgres Database"
+      label: "Postgres Database"
+      required: true
+      default: "postgres_sb"
+      type: "string"
+    - variable: postgres_user
+      description: "Postgres User"
+      label: "Postgres User"
+      required: true
+      default: "postgres_user"
+      type: "string"
+    - variable: postgres_password
+      description: "Postgres Password"
+      label: "Postgres Password"
+      required: true
+      default: "postgres_password"
+      type: "string"
+    - variable: "POSTGRES_TAG"
+      description: "The postgres tag to associate with this server"
+      label: "Postgres tag"
+      required: true
+      default: "9.6-alpine"
+      type: enum
+      options: # List of options if using type of `enum`
+        - latest
+        - 10-alpine
+        - 10
+        - 9-alpine
+        - 9
+        - 9.6-alpine
+        - 9.6
+        - 9.5-alpine
+        - 9.5
+        - 9.4-alpine
+        - 9.4
+        - 9.3-alpine
+        - 9.3
+        - 9.2-alpine
+        - 9.2
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to associate with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "local"
+      type: enum
+      options: # List of options if using type of `enum`
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+    - variable: host_label
+      label: "Host with Label to put postgres on"
+      description: |
+        Host label to use as postgres 'value' tag.
+        Example: 'postgres=true'
+      required: false
+      default: ""
+      type: "string"
+
+services:
+  postgres-lb:
+    scale: 1
+    lb_config:
+      certs: []
+      port_rules:
+      - protocol: tcp
+        service: postgres
+        source_port: ${lb_port}
+        target_port: 5432
+    health_check:
+      port: 42
+      interval: 2000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000
+  postgres:
+    scale: 1
+    health_check:
+      port: 5432
+      interval: 2000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000

@@ -1,0 +1,13 @@
+aws-spot-instance-helper:
+  image: chrisurwin/autospotting:v0.1.0
+  tty: true
+  labels:
+    io.rancher.container.pull_image: always
+  environment:
+    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+    regions: "${regions}"
+    min_on_demand_number: "${min_on_demand_number}"
+    min_on_demand_percentage: "${min_on_demand_percentage}"
+    allowed_instance_types: "${allowed_instance_types}"
+    tag_name: "${tag_name}"

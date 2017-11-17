@@ -1,0 +1,63 @@
+# notemplating
+.catalog:
+  name: "DNS Update (RFC2136)"
+  version: "v0.7.2-rancher1"
+  description: "Rancher External DNS service powered by any RFC2136 compatible DNS server. Requires Rancher version v1.1.0"
+  minimum_rancher_version: v1.6.0-rc1
+  questions:
+    - variable: "RFC2136_HOST"
+      label: "DNS Server IP"
+      description: "Server IP or Hostname"
+      type: "string"
+      required: true
+    - variable: "RFC2136_PORT"
+      label: "DNS Server Port"
+      description: "Server port"
+      type: "string"
+      required: true
+      default: "53"
+    - variable: "RFC2136_INSECURE"
+      description: "Disables TSIG authentication for DNS Update requests"
+      label: "Insecure DNS Update"
+      required: true
+      default: false 
+      type: "boolean"
+    - variable: "RFC2136_TSIG_KEYNAME"
+      label: "TSIG Key Name"
+      description: "Name of the TSIG key used for authenticating with the DNS server"
+      type: "string"
+      required: false
+    - variable: "RFC2136_TSIG_SECRET"
+      label: "TSIG Key"
+      description: "TSIG secret key used for authenticating with the DNS server (HMAC-MD5, base64 encoded)"
+      type: "string"
+      required: false
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: "int"
+      default: 60
+      required: false
+    - variable: "ROOT_DOMAIN"
+      label: "Zone name"
+      description: "The name of an existing zone in which to create the records."
+      type: "string"
+      required: true
+    - variable: "NAME_TEMPLATE"
+      label: "DNS Name Template"
+      description: |
+        Name template used to construct the subdomain part (left of the zone/domain name) of the DNS record names.
+        Supported placeholders: %{{service_name}}, %{{stack_name}}, %{{environment_name}}.
+        By default DNS entries will be named '<service>.<stack>.<environment>.<domain>'.
+      type: "string"
+      default: "%{{service_name}}.%{{stack_name}}.%{{environment_name}}"
+      required: false
+
+rfc2136dns:
+  health_check:
+    port: 1000
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000

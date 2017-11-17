@@ -7,7 +7,7 @@ sonarqube-data:
         - /opt/sonarqube/extensions/plugins
 
 sonarqube:
-    image: sonarqube
+    image: sonarqube:5.6.6
     ports:
         - ${http_port}:9000
     links:
