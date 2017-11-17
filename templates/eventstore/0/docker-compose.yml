@@ -1,7 +1,7 @@
 version: '2'
 services:
   eventstore:
-    image: eventstore/eventstore
+    image: eventstore/eventstore:4.0.3
     entrypoint: /bin/bash
     command:
     - -c
@@ -15,7 +15,7 @@ services:
       /entrypoint.sh'
 
     environment:
-    - EVENTSTORE_CLUSTER_SIZE=3
+    - EVENTSTORE_CLUSTER_SIZE=${number_of_nodes}
     - EVENTSTORE_CLUSTER_DNS=eventstore
     - EVENTSTORE_CLUSTER_GOSSIP_PORT=${internal_http_port}
     - EVENTSTORE_INT_HTTP_PREFIXES=http://*:${internal_http_port}/
