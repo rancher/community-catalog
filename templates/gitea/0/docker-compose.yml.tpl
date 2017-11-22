@@ -1,7 +1,7 @@
 version: '2'
 services:
   gitea:
-    image: gitea/gitea:1.3
+    image: gitea/gitea:1.3.0-rc1
     volumes:
       - gitea-data:/data
 {{- if ne .Values.db_link ""}}
