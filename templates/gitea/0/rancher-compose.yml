@@ -4,7 +4,8 @@ catalog:
   version: "v1.3"
   description: "A painless self-hosted Git service."
   uuid: gitea-0
-  minimum_rancher_version: v0.51.0
+  minimum_rancher_version: v0.56.0
+  maintainer: "Konrad Langenberg <k@knt.li>"
   questions:
     - variable: http_port
       description: "Public HTTP port to access Gitea's webui."
