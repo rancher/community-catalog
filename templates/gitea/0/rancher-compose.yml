@@ -1,25 +1,25 @@
 version: '2'
 catalog:
   name: "Gitea"
-  version: "v0.11.19"
-  description: "A painless self-hosted Git service"
+  version: "v1.3"
+  description: "A painless self-hosted Git service."
   uuid: gitea-0
   minimum_rancher_version: v0.51.0
   questions:
     - variable: http_port
-      description: "http port to access Gitea's webui"
-      label: "Http Port"
+      description: "Public HTTP port to access Gitea's webui."
+      label: "HTTP Port"
       required: true
-      default: "8080" 
+      default: "3000" 
       type: "int"
     - variable: ssh_port
-      description: "ssh port to clone repositories via ssh"
+      description: "Public ssh port to clone repositories via ssh."
       label: "SSH Port"
       required: true
       default: "2222"
       type: "int"
     - variable: "volume_driver"
-      description: "Volume driver to associate with this service"
+      description: "Volume driver to associate with this service."
       label: "Volume Driver"
       required: true
       default: "local"
@@ -30,27 +30,14 @@ catalog:
         - rancher-efs
         - rancher-ebs
     - variable: "db_link"
-      description: |
-        DB external service link cluster.
-      label: "External db service"
+      description: "External DB service to use with gitea instead of its own DB-Container."
+      label: "External DB service"
       default: ""
       required: false
       type: "service"
-    - variable: mysql_db
-      description: "mysql db"
-      label: "Mysql db"
-      required: true
-      default: "gitea"
-      type: "string"
-    - variable: mysql_user
-      description: "mysql user"
-      label: "Mysql User"
-      required: true
-      default: "gitea"
-      type: "string"
     - variable: mysql_password
-      description: "mysql root password"
-      label: "Mysql Password"
+      description: "MySQL root password to use for Gitea."
+      label: "MySQL Password"
       required: true
       default: "default_pass"
       type: "password"

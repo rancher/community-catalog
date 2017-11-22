@@ -11,12 +11,10 @@ services:
     links:
       - db:db
   db:
-    image: mysql:5.5
+    image: mariadb:10
     environment:
       MYSQL_ROOT_PASSWORD: ${mysql_password}
-      MYSQL_USER: ${mysql_user}
-      MYSQL_PASSWORD: ${mysql_password}
-      MYSQL_DATABASE: ${mysql_db}
+      MYSQL_DATABASE: 'gitea'
     volumes:
       - gitea-db:/var/lib/mysql
 {{- end}}
