@@ -15,4 +15,6 @@ When launching Gitea for the first time, you will greeted with an installer. You
   * Password: the previously mentioned password
   * Database: `gitea`
   * Database Host: `db:3306`
+* Change the domain name to the one you use to access Gitea
+* Change the public ssh port to the one you defined earlier if you want to enable ssh
 * Change the public URL to the one you defined previously, this is needed to access Gitea's web UI.
