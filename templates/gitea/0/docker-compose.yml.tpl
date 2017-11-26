@@ -3,12 +3,12 @@ services:
   gitea:
     image: gitea/gitea:1.3.0-rc1
     volumes:
-      - gitea-data/git:/data/git
-      - gitea-data/ssh:/data/ssh
-      - gitea-data/gitea/conf:/data/gitea/lfs
-      - gitea-data/gitea/lfs:/data/gitea/lfs
-      - gitea-data/gitea/log:/data/gitea/log
-      - gitea-data/gitea/sessions:/data/gitea/sessions
+      - gitea-data-git:/data/git
+      - gitea-data-ssh:/data/ssh
+      - gitea-data-conf:/data/gitea/lfs
+      - gitea-data-lfs:/data/gitea/lfs
+      - gitea-data-log:/data/gitea/log
+      - gitea-data-sessions:/data/gitea/sessions
 
 {{- if ne .Values.db_link ""}}
     external_links:
@@ -30,7 +30,17 @@ services:
     - ${http_port}:${http_port}/tcp
     - ${ssh_port}:${ssh_port}/tcp
 volumes:
-  gitea-data:
+  gitea-data-git:
+    driver: ${volume_driver}
+  gitea-data-ssh:
+    driver: ${volume_driver}
+  gitea-data-conf:
+    driver: ${volume_driver}
+  gitea-data-lfs:
+    driver: ${volume_driver}
+  gitea-data-log:
+    driver: ${volume_driver}
+  gitea-data-sessions:
     driver: ${volume_driver}
 {{- if eq .Values.db_link ""}}
   gitea-db:
