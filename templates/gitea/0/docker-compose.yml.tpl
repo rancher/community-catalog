@@ -3,7 +3,13 @@ services:
   gitea:
     image: gitea/gitea:1.3.0-rc1
     volumes:
-      - gitea-data:/data
+      - gitea-data/git:/data/git
+      - gitea-data/ssh:/data/ssh
+      - gitea-data/gitea/conf:/data/gitea/lfs
+      - gitea-data/gitea/lfs:/data/gitea/lfs
+      - gitea-data/gitea/log:/data/gitea/log
+      - gitea-data/gitea/sessions:/data/gitea/sessions
+
 {{- if ne .Values.db_link ""}}
     external_links:
       - ${db_link}:db
