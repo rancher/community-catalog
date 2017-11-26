@@ -5,7 +5,7 @@ services:
     volumes:
       - ${data_path}/git:/data/git
       - ${data_path}/ssh:/data/ssh
-      - ${data_path}/gitea/conf:/data/gitea/lfs
+      - ${data_path}/gitea/conf:/data/gitea/conf
       - ${data_path}/gitea/lfs:/data/gitea/lfs
       - ${data_path}/gitea/log:/data/gitea/log
       - ${data_path}/gitea/sessions:/data/gitea/sessions
