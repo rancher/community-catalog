@@ -19,12 +19,6 @@ catalog:
       required: true
       default: "2222"
       type: "int"
-#    - variable: data_path
-#      description: "Path where to store the data of the Gitea-instance."
-#      label: "Data path"
-#      required: true
-#      default: "/var/lib/gitea"
-#      type: "string"
     - variable: "volume_driver"
       description: "Volume driver to associate with this service."
       label: "Volume Driver"
