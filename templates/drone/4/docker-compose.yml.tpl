@@ -62,7 +62,7 @@ services:
 {{- end}}
 {{- if eq .Values.drone_driver "GitLab"}}
       DRONE_GITLAB: true
-      DRONE_GITLAB_CLIENT: ${drone_driver_secret}
+      DRONE_GITLAB_CLIENT: ${drone_driver_client}
       DRONE_GITLAB_SECRET: ${drone_driver_secret}
       DRONE_GITLAB_URL: ${drone_driver_url}
 {{- end}}
