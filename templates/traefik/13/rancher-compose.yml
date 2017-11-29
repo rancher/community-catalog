@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: traefik
-  version: v1.4.3-rancher1
+  version: v1.4.4-rancher1
   description: |
     Traefik load balancer.
   minimum_rancher_version: v0.59.0
@@ -27,6 +27,14 @@ catalog:
       required: true
       default: false 
       type: "boolean"
+    - variable: "constraints"
+      description: |
+        Traefik constraints for rancher provider. Eg: "tag==api"
+        Only valid for api and metadata integration.
+      label: "Traefik constraints:"
+      required: false
+      default: ""
+      type: "string"
     - variable: "host_label"
       description: "Host label where to run traefik service."
       label: "Host label:"

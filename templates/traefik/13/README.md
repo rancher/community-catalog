@@ -9,6 +9,7 @@
 
 - rancher_integration = "metadata" # Rancher integration method.
 - rancher_healthcheck = false   # Enable/Disable traefik rancher services healthcheck filter. Only valid for api and metadata integration.
+- constraints = ""  # Traefik constraints for rancher provider. Only valid for api and metadata integration.
 - host_label = "traefik_lb=true" # Host label where to run traefik service.
 - http_port = 8080  # Port exposed to get access to the published services.
 - https_port = 8443  # Port exposed to get secured access to the published services. 
