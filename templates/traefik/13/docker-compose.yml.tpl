@@ -21,7 +21,7 @@ services:
         {{- end -}}
     {{- end}}
       io.rancher.container.hostname_override: container_name
-    image: rawmind/alpine-traefik:1.4.3-0
+    image: rawmind/alpine-traefik:1.4.4-1
     environment:
     - TRAEFIK_HTTP_PORT=${http_port}
     - TRAEFIK_HTTP_COMPRESSION=${compress_enable}
@@ -46,6 +46,7 @@ services:
   {{- end}}
   {{- if ne .Values.rancher_integration "external"}}
     - TRAEFIK_RANCHER_ENABLE=true
+    - TRAEFIK_CONSTRAINTS=${constraints}
     - TRAEFIK_RANCHER_HEALTHCHECK=${rancher_healthcheck}
     - TRAEFIK_RANCHER_MODE=${rancher_integration}
     {{- if eq .Values.rancher_integration "api"}}
