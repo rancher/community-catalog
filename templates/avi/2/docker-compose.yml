@@ -1,5 +1,5 @@
 avi:
-  image: avinetworks/avi-rancher-controller
+  image: avinetworks/avi-rancher-controller:2017-12-01T194110.475015629Z
   expose: 
    - 1000
   environment:
