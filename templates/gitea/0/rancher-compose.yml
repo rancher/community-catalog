@@ -1,0 +1,82 @@
+version: '2'
+catalog:
+  name: "Gitea"
+  version: "v1.3"
+  description: "A painless self-hosted Git service."
+  uuid: gitea-0
+  minimum_rancher_version: v0.56.0
+  maintainer: "Konrad Langenberg <k@knt.li>"
+  questions:
+    - variable: http_port
+      description: "Public HTTP port to access Gitea's webui."
+      label: "HTTP Port"
+      required: true
+      default: "3000" 
+      type: "int"
+    - variable: ssh_port
+      description: "Public ssh port to clone repositories via ssh."
+      label: "SSH Port"
+      required: true
+      default: "2222"
+      type: "int"
+    - variable: "volume_driver"
+      description: "Volume driver to associate with this service."
+      label: "Volume Driver"
+      required: true
+      default: "local"
+      type: enum
+      options: # List of options if using type of `enum`
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+    - variable: "db_link"
+      description: "External DB service to use with gitea instead of its own DB-Container."
+      label: "External DB service"
+      default: ""
+      required: false
+      type: "service"
+    - variable: mysql_password
+      description: "MySQL root password to use for Gitea."
+      label: "MySQL Password"
+      required: true
+      default: "default_pass"
+      type: "password"
+services:
+  gitea:
+    scale: 1
+    retain_ip: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 3000
+      unhealthy_threshold: 3
+      initializing_timeout: 300000
+      interval: 2000
+      strategy: recreate
+      request_line: GET "/" "HTTP/1.0"
+      reinitializing_timeout: 120000
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: gitea
+        source_port: ${http_port}
+        target_port: 3000
+      - priority: 2
+        protocol: tcp
+        service: gitea
+        source_port: ${ssh_port}
+        target_port: 22
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000

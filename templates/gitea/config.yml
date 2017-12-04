@@ -1,0 +1,5 @@
+name: Gitea
+description: |
+    A painless self-hosted Git service
+version: v1.3
+category: Git
