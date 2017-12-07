@@ -1,6 +1,4 @@
 name: bitbucket
 description: Git Server
-version: 0.0.1
+version: 5.6.1
 category: Versioning
-projectURL: https://github.com/ellerbrock/rancher-collection
-
