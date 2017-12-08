@@ -1,0 +1,56 @@
+version: '2'
+services:
+  lb:
+    image: rancher/lb-service-haproxy:v0.7.9
+    ports:
+    - 8080:8080/tcp
+    - 9090:9090/tcp
+    - 9093:9093/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+  prometheus:
+    image: kenfdev/prometheus:latest-cattle
+    environment:
+      no_proxy: gateway
+    stdin_open: true
+    tty: true
+    command:
+    - -config.file=/etc/prometheus/prometheus.yml
+    - -storage.local.path=/prometheus
+    - -storage.local.memory-chunks=10000
+    - --alertmanager.url=http://alertmanager:9093
+    labels:
+      io.rancher.container.pull_image: always
+  faas-rancher:
+    image: kenfdev/faas-rancher
+    environment:
+      FUNCTION_STACK_NAME: ${FUNCTION_STACK_NAME}
+      CATTLE_URL: ${CATTLE_URL}
+      CATTLE_ACCESS_KEY: ${CATTLE_ACCESS_KEY}
+      CATTLE_SECRET_KEY: ${CATTLE_SECRET_KEY}
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  gateway:
+    image: functions/gateway:0.6.2
+    environment:
+      dnsrr: 'true'
+      functions_provider_url: http://faas-rancher:8080/
+    stdin_open: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  alertmanager:
+    image: functions/alertmanager:latest
+    environment:
+      no_proxy: gateway
+    stdin_open: true
+    tty: true
+    command:
+    - -config.file=/alertmanager.yml
+    labels:
+      io.rancher.container.pull_image: always

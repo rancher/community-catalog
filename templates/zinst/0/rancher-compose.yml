@@ -1,0 +1,44 @@
+version: '2'
+catalog:
+  name: "zinst-repository"
+  version: "7.0.5"
+  description: "Infra as a code by your own packages. http://zinst.me"
+  uuid: zinstrepo-0
+  minimum_rancher_version: v1.5.5
+  questions:    
+    - variable: public_port
+      description: "public port to access the zinst repository"
+      label: "Public Port"
+      required: true
+      default: "8080"
+      type: "int"
+      
+services:
+  zinst-repository:
+    retain_ip: true
+    scale: 1
+    start_on_create: true
+    health_check:
+      port: 80
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: ''
+      healthy_threshold: 2
+      response_timeout: 5000
+  zinst-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: zinst-repository
+        source_port: ${public_port}
+        target_port: 80
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
