@@ -21,7 +21,7 @@ services:
         {{- end -}}
     {{- end}}
       io.rancher.container.hostname_override: container_name
-    image: rawmind/alpine-traefik:1.4.4-4
+    image: rawmind/alpine-traefik:1.4.5-0
     environment:
     - TRAEFIK_HTTP_PORT=${http_port}
     - TRAEFIK_HTTP_COMPRESSION=${compress_enable}
