@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: selenium
-  version: 0
+  version: v0.0.1
   minimum_rancher_version: v1.5.0
   questions:
     - variable: DEPLOY_SELENIUM_HUB
