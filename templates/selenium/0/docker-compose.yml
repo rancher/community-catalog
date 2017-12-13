@@ -1,8 +1,0 @@
-version: '2'
-services:
-  seleniumhub:
-    image: selenium/hub:${SELENIUM_VERSION}
-    environment:
-      GRID_TIMEOUT: '300000'
-    labels:
-      io.rancher.container.pull_image: always
