@@ -5,6 +5,8 @@ services:
     image: selenium/hub:${SELENIUM_HUB_VERSION}
     environment:
       GRID_TIMEOUT: ${GRID_TIMEOUT}
+    ports:
+      - ${PUBLISH_PORT}:4444
     labels:
       io.rancher.container.pull_image: always
   {{- end}}

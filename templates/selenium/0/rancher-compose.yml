@@ -13,24 +13,6 @@ catalog:
       options:
         - true
         - false
-    - variable: DEPLOY_SELENIUM_CHROME
-      description: Deploy Selenium Chrome Node
-      label: Deploy Selenium Chrome Node
-      required: true
-      type: enum
-      default: true
-      options:
-        - true
-        - false
-    - variable: DEPLOY_SELENIUM_FIREFOX
-      description: Deploy Selenium Firefox Node
-      label: Deploy Selenium Firefox Node
-      required: true
-      type: enum
-      default: true
-      options:
-        - true
-        - false
     - variable: SELENIUM_HUB_VERSION
       label: Selenium Hub Version
       description: Selenium Hub Version
@@ -62,6 +44,20 @@ catalog:
       description: Grid Timeout (in seconds)
       type: int
       default: 30
+    - variable: PUBLISH_PORT
+      label: Publish Port
+      description: Port to expose for external access
+      type: int
+      default: 4444
+    - variable: DEPLOY_SELENIUM_CHROME
+      description: Deploy Selenium Chrome Node
+      label: Deploy Selenium Chrome Node
+      required: true
+      type: enum
+      default: true
+      options:
+        - true
+        - false
     - variable: SELENIUM_CHROME_VERSION
       label: Selenium Chrome Version
       description: Selenium Chrome Version
@@ -88,6 +84,15 @@ catalog:
         - 3.4.0-dysprosium
         - 3.4.0-chromium
         - 3.4.0-bismuth
+    - variable: DEPLOY_SELENIUM_FIREFOX
+      description: Deploy Selenium Firefox Node
+      label: Deploy Selenium Firefox Node
+      required: true
+      type: enum
+      default: true
+      options:
+        - true
+        - false
     - variable: SELENIUM_FIREFOX_VERSION
       label: Selenium Firefox Version
       description: Selenium Firefox Version
