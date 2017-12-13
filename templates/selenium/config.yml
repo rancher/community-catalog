@@ -3,6 +3,6 @@ description: |
   selenium hub and nodes
 version: 0
 category: Test Automation
-maintainer: "ramz <ramzthecoder@gmail.com>"
+maintainer: "ramz sivagurunathan <ramzthecoder@gmail.com>"
 license: "Apache License 2.0"
 projectURL: http://www.seleniumhq.org/
