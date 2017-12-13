@@ -84,6 +84,11 @@ catalog:
         - 3.4.0-dysprosium
         - 3.4.0-chromium
         - 3.4.0-bismuth
+    - variable: SELENIUM_CHROME_SCALE
+      label: Number of chrome container
+      description: Number of chrome container
+      type: int
+      default: 1
     - variable: DEPLOY_SELENIUM_FIREFOX
       description: Deploy Selenium Firefox Node
       label: Deploy Selenium Firefox Node
@@ -119,3 +124,24 @@ catalog:
         - 3.4.0-dysprosium
         - 3.4.0-chromium
         - 3.4.0-bismuth
+    - variable: SELENIUM_FIREFOX_SCALE
+      label: Number of firefox container
+      description: Number of firefox container
+      type: int
+      default: 1
+services:
+  selenium-chrome:
+    scale: ${SELENIUM_CHROME_SCALE}
+    retain_ip: true
+  selenium-firefox:
+    scale: ${SELENIUM_FIREFOX_SCALE}
+    retain_ip: true
+  seleniumhub:
+    scale: 1
+    health_check:
+      port: 4444
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: ''
+      healthy_threshold: 2
+      response_timeout: 5000
