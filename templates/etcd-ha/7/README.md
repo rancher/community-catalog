@@ -2,7 +2,7 @@
 
 ### Upgrade WARNING
 
-Automated upgrading to this version is only supported from `2.3.7-beta.11`. If you are on a previous version, please upgrade to `2.3.7-beta.11` before upgrading to this version. It is recommended you perform a manual backup before continuing.
+Automated upgrading to this version is only supported from `2.3.7-build.11`. If you are on a previous version, please upgrade to `2.3.7-build.11` before upgrading to this version. It is recommended you perform a manual backup before continuing.
 
 ### Backup Configuration
 
