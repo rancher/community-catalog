@@ -18,7 +18,7 @@ database:
   volumes_from:
     - database-data
   labels:
-    io.rancher.sidekicks: setup-get-db-script
+    io.rancher.sidekicks: setup-get-db-script, database-data
 setup-get-db-script:
   image: glyptodon/guacamole:0.9.10-incubating
   net: none
