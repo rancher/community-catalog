@@ -28,7 +28,9 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
+{{- if ne .Values.NETWORK_MODE "managed"}}
     network_mode: ${NETWORK_MODE}
+{{- end}}
     ports:
       - ${HTTP_PORT}:${HTTP_PORT}
       - ${HTTPS_PORT}:${HTTPS_PORT}

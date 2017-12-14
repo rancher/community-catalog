@@ -39,6 +39,7 @@ catalog:
       options:
         - host
         - bridge
+        - managed
         - none
 
     - variable: "HOST_LABEL"
