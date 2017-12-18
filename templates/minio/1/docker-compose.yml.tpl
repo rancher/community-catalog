@@ -2,7 +2,7 @@ version: '2'
 services:
   minio-server:
     tty: true
-    image: mschneider82/alpine-minio:2017-11-22_1
+    image: webcenter/alpine-minio:2017-10-27_1
     volumes:
       - minio-scheduler-setting:/opt/scheduler
     {{- if eq (printf "%.1s" .Values.VOLUME_DRIVER) "/" }}
