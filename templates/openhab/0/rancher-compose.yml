@@ -1,0 +1,123 @@
+version: '2'
+
+catalog:
+  name: "openHAB"
+  version: "1.8.3"
+  description: "An open source, technology agnostic home automation platform"
+  questions:
+    - variable: "IMAGE_ARCHITECTURE"
+      label: "Image Architecture"
+      description: |
+        Use "amd64" for AMD/Intel 64-bit architectures (e.g. x64, x86-64, x86_64). 
+        Use "armhf" for ARMv7 32-bit architectures (e.g. most RaspberryPi 1/2/3).
+        Use "arm64" for ARMv8 64-bit architectures (not RaspberryPi 3)
+      required: true
+      default: "amd64"
+      type: enum
+      options:
+        - amd64
+        - armhf
+        - arm64
+
+    - variable: "IMAGE_DISTRIBUTION"
+      label: "Image Distribution"
+      description: "The distribution on which the container image is based"
+      required: true
+      default: "debian"
+      type: enum
+      options:
+        - alpine
+        - debian
+
+    - variable: "NETWORK_MODE"
+      label: "Network Mode"
+      description: "The network stack to connect the container to"
+      required: true
+      default: "host"
+      type: enum
+      options:
+        - host
+        - bridge
+        - managed
+        - none
+
+    - variable: "HOST_LABEL"
+      label: "Host Label"
+      description: "Schedules openHAB to run only on hosts that have a specific label. Example: 'openhab=true'"
+      default: ""
+      type: "string"
+      required: false
+
+    - variable: "USE_HOST_TIME"
+      label: "Use Host Time"
+      description: "Adds /etc/localtime and /etc/timezone as volumes from the host for providing timezone information"
+      required: true
+      default: false
+      type: boolean
+
+    - variable: "PCAP_SUPPORT_ENABLED"
+      label: "Enable Packet Capture Support"
+      description: "Runs openHAB as root and adds network capabilities e.g. for libpcap support"
+      required: true
+      default: false
+      type: boolean
+
+    - variable: "HTTP_PORT"
+      label: "HTTP Port"
+      description: "The port used for HTTP connections"
+      default: 8080
+      required: true
+      type: "int"
+
+    - variable: "HTTPS_PORT"
+      label: "HTTPS Port"
+      description: "The port used for HTTPS connections"
+      default: 8443
+      required: true
+      type: "int"
+
+    - variable: "DEVICE_MAPPING_1"
+      label: "Device Mapping 1"
+      description: "Maps a device from the host to the container. Example: '/dev/ttyUSB0' or '/dev/ttyController:/dev/ttyS1'"
+      default: ""
+      type: "string"
+      required: false
+
+    - variable: "DEVICE_MAPPING_2"
+      label: "Device Mapping 2"
+      description: "Maps another device from the host to the container. Example: '/dev/ttyUSB1' or '/dev/ttyController:/dev/ttyS2'"
+      default: ""
+      type: "string"
+      required: false
+
+    - variable: "VOLUME_DRIVER"
+      label: "Volume Driver"
+      description: "The volume driver used for persisting data"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-ebs
+        - rancher-efs
+        - rancher-nfs
+
+    - variable: "EXTRA_JAVA_OPTS"
+      label: "Extra Java Options"
+      description: "Starts the openHAB JVM with the provided extra options. Example: '-Dgnu.io.rxtx.SerialPorts=/dev/ttyAMA0:/dev/zwave'"
+      default: ""
+      type: "string"
+      required: false
+
+
+
+services:
+  openhab:
+    scale: 1
+    health_check:
+      port: ${HTTP_PORT}
+      interval: 5000
+      response_timeout: 5000
+      healthy_threshold: 2
+      unhealthy_threshold: 3
+
