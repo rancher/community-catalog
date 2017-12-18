@@ -1,8 +1,8 @@
 name: Minio Cloud Storage
 description: |
   Store photos, videos, VMs, containers, log files, or any blob of data as objects.
-version: 2017-10-27_1
+version: 2017-11-22_1
 category: Storage
-maintainer: "Sebastien Langoureaux <linuxworkgroup@gmail.com>"
+maintainer: "Matthias Schneider <ms@wck.biz>"
 license: Apache License
 projectURL: https://minio.io/
