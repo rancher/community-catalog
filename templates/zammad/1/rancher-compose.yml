@@ -1,16 +1,37 @@
-.catalog:
+version: '2'
+catalog:
   name: "Zammad"
-  version: "1.3"
+  version: "2.2.0-12"
   description: "Zammad is a web based open source helpdesk/customer support system"
   uuid: zammad-1
   minimum_rancher_version: v1.2.0
   questions:
+    - variable: "UPDATE_SYSCTL"
+      label: "Update host sysctl:"
+      description: |
+        Set true to avoid vm.max_map_count errors.
+        WARN: If set true, host param vm.max_map_count will be update to 262144.
+      default: false
+      required: true
+      type: enum
+      options:
+        - false
+        - true
 
-  zammad:
+services:
+  zammad-backup:
     scale: 1
     start_on_create: true
 
   zammad-elasticsearch:
+    scale: 1
+    start_on_create: true
+
+  zammad-init:
+    scale: 1
+    start_on_create: true
+
+  zammad-memcached:
     scale: 1
     start_on_create: true
 
@@ -33,3 +54,18 @@
   zammad-websocket:
     scale: 1
     start_on_create: true
+
+  zammad-nginx:
+    scale: 1
+    start_on_create: true
+    drain_timeout_ms: 10000
+
+  zammad-lb:
+    scale: 1
+    lb_config:
+      port_rules:
+      - priority: 1
+        protocol: http
+        source_port: 9797
+        target_port: 80
+        service: zammad-nginx
