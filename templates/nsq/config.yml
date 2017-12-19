@@ -1,0 +1,7 @@
+name: NSQ
+description: |
+  A realtime distributed messaging platform
+version: v1.0.0-compat
+category: Message queues
+maintainer: "Matthias Schneider <ms@wck.biz>"
+projectURL: https://nsq.io/
