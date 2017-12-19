@@ -19,11 +19,23 @@ services:
     image: zammad/zammad-docker-compose:zammad-elasticsearch-2.2.0-12
     {{- if eq .Values.UPDATE_SYSCTL "true" }}
     labels:
-      io.rancher.sidekicks: zammad-es-sysctl
+      io.rancher.sidekicks: zammad-elasticsearch-sysctl
     {{- end}}
     restart: always
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
+
+  {{- if eq .Values.UPDATE_SYSCTL "true" }}
+  zammad-elasticsearch-sysctl:
+    labels:
+        io.rancher.container.start_once: true
+    network_mode: none
+    image: rawmind/alpine-sysctl:0.1
+    privileged: true
+    environment:
+        - "SYSCTL_KEY=vm.max_map_count"
+        - "SYSCTL_VALUE=262144"
+  {{- end}}
 
   zammad-init:
     command: ["zammad-init"]
@@ -38,6 +50,11 @@ services:
     restart: on-failure
     volumes:
       - zammad-data:/opt/zammad
+
+  zammad-lb:
+    image: rancher/lb-service-haproxy:v0.7.9
+    ports:
+      - ${PUBLISH_PORT}:${PUBLISH_PORT}/tcp
 
   zammad-memcached:
     command: ["zammad-memcached"]
@@ -103,22 +120,7 @@ services:
     volumes:
       - zammad-data:/opt/zammad
 
-  {{- if eq .Values.UPDATE_SYSCTL "true" }}
-  zammad-es-sysctl:
-    labels:
-        io.rancher.container.start_once: true
-    network_mode: none
-    image: rawmind/alpine-sysctl:0.1
-    privileged: true
-    environment:
-        - "SYSCTL_KEY=vm.max_map_count"
-        - "SYSCTL_VALUE=262144"
-  {{- end}}
 
-  zammad-lb:
-    image: rancher/lb-service-haproxy:v0.7.9
-    ports:
-      - ${PUBLISH_PORT}:${PUBLISH_PORT}/tcp
 
 volumes:
   elasticsearch-data:
