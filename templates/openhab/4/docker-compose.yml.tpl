@@ -23,9 +23,10 @@ services:
 {{- end}}
       OPENHAB_HTTP_PORT: "${HTTP_PORT}"
       OPENHAB_HTTPS_PORT: "${HTTPS_PORT}"
-    image: "openhab/openhab:2.2.0-${IMAGE_ARCHITECTURE}-${IMAGE_DISTRIBUTION}"
-{{- if ne .Values.HOST_LABEL ""}}
+    image: "openhab/openhab:2.3.0-snapshot-${IMAGE_ARCHITECTURE}-${IMAGE_DISTRIBUTION}"
     labels:
+      io.rancher.container.pull_image: always
+{{- if ne .Values.HOST_LABEL ""}}
       io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
 {{- end}}
 {{- if ne .Values.NETWORK_MODE "managed"}}
