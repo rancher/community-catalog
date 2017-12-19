@@ -2,7 +2,7 @@ version: '2'
 
 catalog:
   name: "openHAB"
-  version: "2.2.0"
+  version: "2.3.0-SNAPSHOT"
   description: "An open source, technology agnostic home automation platform"
   upgrade_from: "2.0.0"
   questions:
