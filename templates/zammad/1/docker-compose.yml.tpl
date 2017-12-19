@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   zammad-backup:
     command: ["zammad-backup"]
     depends_on:
@@ -119,8 +118,6 @@ services:
     restart: always
     volumes:
       - zammad-data:/opt/zammad
-
-
 
 volumes:
   elasticsearch-data:

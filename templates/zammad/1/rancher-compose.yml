@@ -19,12 +19,12 @@ catalog:
         - true
 
     - variable: "PUBLISH_PORT"
-    label: "Publish port"
-    description: |
-      Set port to publish the service.
-    required: true
-    type: "int"
-    default: 9797
+      label: "Publish port"
+      description: |
+        Set port to publish the service.
+      required: true
+      type: "int"
+      default: 9797
 
 services:
   zammad-backup:
