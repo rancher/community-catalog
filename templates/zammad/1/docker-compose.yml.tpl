@@ -17,8 +17,10 @@ services:
 
   zammad-elasticsearch:
     image: zammad/zammad-docker-compose:zammad-elasticsearch-2.2.0-12
+    {{- if eq .Values.UPDATE_SYSCTL "true" }}
     labels:
-      io.rancher.sidekicks: {{- if eq .Values.UPDATE_SYSCTL "true" -}}zammad-es-sysctl{{- end}}
+      io.rancher.sidekicks: zammad-es-sysctl
+    {{- end}}
     restart: always
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -114,13 +116,9 @@ services:
   {{- end}}
 
   zammad-lb:
-    image: rancher/lb-service-haproxy:v0.7.15
+    image: rancher/lb-service-haproxy:v0.7.9
     ports:
-      - 9797:9797/tcp
-    labels:
-      io.rancher.container.agent.role: environmentAdmin,agent
-      io.rancher.container.agent_service.drain_provider: 'true'
-      io.rancher.container.create_agent: 'true'
+      - ${PUBLISH_PORT}:${PUBLISH_PORT}/tcp
 
 volumes:
   elasticsearch-data:
