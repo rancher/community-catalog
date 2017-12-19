@@ -3,12 +3,12 @@
 ### Info:
 
 This template creates, scale in and scale out a nsqd cluster on top of Rancher. By default there are 3 static nsqlookupd provisioned.
-NSQD can be reached internally by using the nsq-lb Loadbalancer or directly.
+NSQD (TCP/4150, HTTP/4151) and the webinterface nsqadmin (HTTP/4171) can be reached by using the provisioned nsq-lb loadbalancer.
 
 ### Usage:
 
 Select NSQ from catalog.
 
-Enter the number of nodes for your NSQD cluster.
+Enter the number of nodes for your NSQD cluster and NSQ Admin instances.
 
 Click deploy.
