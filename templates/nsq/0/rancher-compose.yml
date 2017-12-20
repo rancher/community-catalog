@@ -1,0 +1,68 @@
+version: '2'
+catalog:
+  name: NSQD
+  version: v1.0.0-compat
+  questions:
+    - variable: "NSQD_SCALE"
+      description: "Number of NSQD nodes."
+      label: "Nsqd Nodes"
+      required: true
+      default: "3"
+      type: "int"
+    - variable: "NSQADMIN_SCALE"
+      description: "Number of NSQ Admin nodes."
+      label: "Nsqadmin Nodes"
+      required: true
+      default: "3"
+      type: "int"
+services:
+  nsqlookupd01:
+    retain_ip: true
+    scale: 1
+    start_on_create: true
+  nsqlookupd02:
+    retain_ip: true
+    scale: 1
+    start_on_create: true
+  nsqlookupd03:
+    retain_ip: true
+    scale: 1
+    start_on_create: true
+  nsqadmin:
+    scale: ${NSQADMIN_SCALE}
+    start_on_create: true
+  data:
+    scale: ${NSQD_SCALE}
+    start_on_create: true
+  nsq-lb:
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: nsqd
+        source_port: 4150
+        target_port: 4150
+      - priority: 2
+        protocol: http
+        service: nsqd
+        source_port: 4151
+        target_port: 4151
+      - priority: 3
+        protocol: http
+        service: nsqadmin
+        source_port: 4171
+        target_port: 4171
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  nsqd:
+    retain_ip: true
+    scale: ${NSQD_SCALE}
+    start_on_create: true
