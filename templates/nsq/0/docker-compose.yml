@@ -43,6 +43,9 @@ services:
     - 4150:4150/tcp
     - 4151:4151/tcp
     - 4171:4171/tcp
+    labels:
+      io.rancher.scheduler.global: "true"
+      io.rancher.scheduler.affinity:host_label: nsq-lb=true
   data:
     image: busybox
     command: /bin/true
