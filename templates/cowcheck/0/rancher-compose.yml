@@ -7,32 +7,32 @@ catalog:
   questions:
     - variable: POLL_INTERVAL
       label: POLL_INTERVAL
-      description: | Frequency in seconds to run checks
+      description: Frequency in seconds to run checks
       type: string
       default: 1.24
     - variable: ENABLE_STORAGE_CHECK
       label: ENABLE_STORAGE_CHECK
-      description: | Enable storage check
+      description: Enable storage check
       type: bool
       default: false
     - variable: DATA_SPACE_THRESHOLD
       label: DATA_SPACE_THRESHOLD
-      description: | Minimum amount of free Docker Data Storage space in bytes
+      description: Minimum amount of free Docker Data Storage space in bytes
       type: string
       default: 1.24
     - variable: METADATA_SPACE_THRESHOLD
       label: METADATA_SPACE_THRESHOLD
-      description: | Minimum amount of free Docker Data Storage space in bytes
+      description: Minimum amount of free Docker Data Storage space in bytes
       type: string
       default: 1.24
     - variable: DOCKER_API_VERSION
       label: DOCKER_API_VERSION
-      description: | Version of the Docker API to use (storage checks only)
+      description: Version of the Docker API to use (storage checks only)
       type: string
       default: 1.24
     - variable: PUBLISH_PORT
       label: PUBLISH_PORT
-      description: | Port to publish the service.
+      description: Port to publish the service.
       type: int
       default: 5050
 services:
