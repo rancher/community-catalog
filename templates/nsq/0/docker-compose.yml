@@ -34,7 +34,6 @@ services:
   data:
     image: busybox
     command: /bin/true
-    net: none
     volumes:
     - /data
     labels:
