@@ -9,7 +9,7 @@ catalog:
       label: POLL_INTERVAL
       description: Frequency in seconds to run checks
       type: string
-      default: 1.24
+      default: 60
     - variable: ENABLE_STORAGE_CHECK
       label: ENABLE_STORAGE_CHECK
       description: Enable storage check
@@ -19,12 +19,12 @@ catalog:
       label: DATA_SPACE_THRESHOLD
       description: Minimum amount of free Docker Data Storage space in bytes
       type: string
-      default: 1.24
+      default: 50000000
     - variable: METADATA_SPACE_THRESHOLD
       label: METADATA_SPACE_THRESHOLD
-      description: Minimum amount of free Docker Data Storage space in bytes
+      description: Minimum amount of free Docker Metadata Storage space in bytes
       type: string
-      default: 1.24
+      default: 50000000
     - variable: DOCKER_API_VERSION
       label: DOCKER_API_VERSION
       description: Version of the Docker API to use (storage checks only)
