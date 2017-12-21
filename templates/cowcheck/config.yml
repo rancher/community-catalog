@@ -1,0 +1,8 @@
+name: Cowcheck
+description: |
+  A microservice for checking the health of a Rancher node
+version: 0.2.0
+category: Monitoring
+maintainer: "William Jimenez <william@rancher.com>"
+license: Apache 2.0
+projectURL: https://github.com/wjimenez5271/cowcheck
