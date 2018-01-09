@@ -70,6 +70,14 @@ catalog:
         - false
         - true
         - only
+    - variable: "https_min_tls"
+      description: |
+        Minimal allowed tls version to accept connections from.
+        See the traefik documentation for allowed values. Default is `VersionTLS12`.
+      label: "Https min tls:"
+      required: false
+      default: "" 
+      type: "string"
     - variable: "acme_enable"
       description: "Enable acme support on traefik."
       label: "ACME enable:"

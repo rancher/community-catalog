@@ -18,6 +18,7 @@
   - false: Enable http enpoints and disable https ones.
   - true: Enable http and https endpoints.
   - only: Enable https endpoints and redirect http to https.
+- https_min_tls = "" # See the [traefik documentation](https://docs.traefik.io/configuration/entrypoints/#specify-minimum-tls-version) for allowed values. 
 - acme_enable = false               # Enable/Disable acme traefik support.
 - acme_email = "test@traefik.io"    # acme user email
 - acme_ondemand = true              # acme ondemand parameter.

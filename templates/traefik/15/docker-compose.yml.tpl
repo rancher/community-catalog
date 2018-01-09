@@ -28,6 +28,9 @@ services:
     - TRAEFIK_HTTPS_PORT=${https_port}
     - TRAEFIK_HTTPS_ENABLE=${https_enable}
     - TRAEFIK_HTTPS_COMPRESSION=${compress_enable}
+  {{- if ne .Values.https_min_tls ""}}
+    - TRAEFIK_HTTPS_MIN_TLS=${https_min_tls}
+  {{- end}}
   {{- if ne .Values.ssl_key ""}}
     - TRAEFIK_SSL_KEY=${ssl_key}
   {{- end}}
