@@ -3,6 +3,7 @@ catalog:
   name: Pipeline
   version: v0.1.0
   minimum_rancher_version: 1.6.13-rc2
+  maximum_rancher_version: 1.6.13-rc2
   description: "Rancher Pipeline"
   questions:
     - variable: SLAVES

@@ -1,8 +1,8 @@
 {{- $jenkinsMasterImage:="jenkins/jenkins:2.60.2-alpine"}}
-{{- $jenkinsBootImage:="rancher/jenkins-boot:v0.1.1"}}
-{{- $jenkinsSlaveImage:="rancher/pipeline-jenkins-slave:v0.1.0"}}
-{{- $pipelineServerImage:="rancher/pipeline:v0.1.0"}}
-{{- $pipelineUIImage:="rancher/pipeline-ui:v0.1.0"}}
+{{- $jenkinsBootImage:="rancher/pipeline-jenkins-boot:v1.0.0"}}
+{{- $jenkinsSlaveImage:="rancher/pipeline-jenkins-slave:v1.0.0"}}
+{{- $pipelineServerImage:="rancher/pipeline:v0.1.1"}}
+{{- $pipelineUIImage:="rancher/pipeline-ui:v1.0.1"}}
 
 version: '2'
 services:

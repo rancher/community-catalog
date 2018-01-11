@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: Pipeline
-  version: v0.1.0
+  version: v0.1.1
   minimum_rancher_version: 1.6.13-rc2
   description: "Rancher Pipeline"
   questions:
