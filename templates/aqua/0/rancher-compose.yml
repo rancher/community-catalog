@@ -1,6 +1,6 @@
 .catalog:
   name: "aqua"
-  version: "2.6.3"
+  version: "2.6.4"
   description: "aqua csp 2.6.4"
   minimum_rancher_version: v1.1.0
   questions:
