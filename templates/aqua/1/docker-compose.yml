@@ -1,7 +1,7 @@
 version: '2'
 services:
   aqua-csp-service:
-    image: aquasec/csp:2.6.3
+    image: aquasec/csp:2.6.4
     hostname: aqua-csp
     environment:
       BATCH_INSTALL_ENFORCE_MODE: n
