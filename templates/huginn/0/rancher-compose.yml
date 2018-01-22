@@ -1,7 +1,7 @@
 version: '2'
 catalog:
     name: Huginn
-    version: 0.1
+    version: "0.1"
     description: Web automation framework. Your agents are standing by!
     questions:
       - variable: DB_PASSWORD
