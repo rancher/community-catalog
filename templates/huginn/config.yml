@@ -1,0 +1,6 @@
+name: Huginn
+description: |
+  Web automation framework. Your agents are standing by!
+version: 0.1
+category: Automation
+maintainer: Zicklag (zicklag@katharostech.com)

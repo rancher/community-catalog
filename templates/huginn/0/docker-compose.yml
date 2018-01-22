@@ -1,0 +1,114 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9.5
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: huginn
+      POSTGRES_DB: huginn
+      http_proxy:
+      https_proxy:
+    labels:
+      io.rancher.container.pull_image: always
+
+  huginn-web:
+    image: huginn/huginn-single-process
+    restart: always
+    environment:
+      DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: postgres
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      DATABASE_ADAPTER: postgresql
+      DATABASE_NAME: huginn
+      DATABASE_USERNAME: huginn
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET_TOKEN: ${APP_SECRET_TOKEN}
+      DOMAIN: $DOMAIN
+      INVITATION_CODE: $INVITATION_CODE
+      SKIP_INVITATION_CODE: $SKIP_INVITATION_CODE
+      REQUIRE_CONFIRMED_EMAIL: true
+      SMTP_DOMAIN: $DOMAIN
+      SMTP_USER_NAME: $SMTP_USER_NAME
+      SMTP_PASSWORD: $SMTP_PASSWORD
+      SMTP_SERVER: $SMTP_SERVER
+      SMTP_PORT: $SMTP_PORT
+      SMTP_AUTHENTICATION: $SMTP_AUTHENTICATION
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      USE_EVERNOTE_SANDBOX: false
+      EMAIL_FROM_ADDRESS: $EMAIL_FROM_ADDRESS
+      ADDITIONAL_GEMS: $ADDITIONAL_GEMS
+      http_proxy:
+      https_proxy:
+    labels:
+      io.rancher.container.pull_image: always
+
+  huginn-agent-runner:
+    image: huginn/huginn-single-process
+    restart: always
+    environment:
+      DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: postgres
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      DATABASE_ADAPTER: postgresql
+      DATABASE_NAME: huginn
+      DATABASE_USERNAME: huginn
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET_TOKEN: ${APP_SECRET_TOKEN}
+      DOMAIN: $DOMAIN
+      INVITATION_CODE: $INVITATION_CODE
+      SKIP_INVITATION_CODE: $SKIP_INVITATION_CODE
+      REQUIRE_CONFIRMED_EMAIL: true
+      SMTP_DOMAIN: $DOMAIN
+      SMTP_USER_NAME: $SMTP_USER_NAME
+      SMTP_PASSWORD: $SMTP_PASSWORD
+      SMTP_SERVER: $SMTP_SERVER
+      SMTP_PORT: $SMTP_PORT
+      SMTP_AUTHENTICATION: $SMTP_AUTHENTICATION
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      USE_EVERNOTE_SANDBOX: false
+      EMAIL_FROM_ADDRESS: $EMAIL_FROM_ADDRESS
+      ADDITIONAL_GEMS: $ADDITIONAL_GEMS
+      http_proxy:
+      https_proxy:
+    labels:
+      io.rancher.container.pull_image: always
+    command: /scripts/init bin/agent_runner.rb
+
+  huginn-delayed-job:
+    image: huginn/huginn-single-process
+    restart: always
+    environment:
+      DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: postgres
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      DATABASE_ADAPTER: postgresql
+      DATABASE_NAME: huginn
+      DATABASE_USERNAME: huginn
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET_TOKEN: ${APP_SECRET_TOKEN}
+      DOMAIN: $DOMAIN
+      INVITATION_CODE: $INVITATION_CODE
+      SKIP_INVITATION_CODE: $SKIP_INVITATION_CODE
+      REQUIRE_CONFIRMED_EMAIL: true
+      SMTP_DOMAIN: $DOMAIN
+      SMTP_USER_NAME: $SMTP_USER_NAME
+      SMTP_PASSWORD: $SMTP_PASSWORD
+      SMTP_SERVER: $SMTP_SERVER
+      SMTP_PORT: $SMTP_PORT
+      SMTP_AUTHENTICATION: $SMTP_AUTHENTICATION
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      USE_EVERNOTE_SANDBOX: false
+      EMAIL_FROM_ADDRESS: $EMAIL_FROM_ADDRESS
+      ADDITIONAL_GEMS: $ADDITIONAL_GEMS
+      http_proxy:
+      https_proxy:
+    labels:
+      io.rancher.container.pull_image: always
+    command: /scripts/init script/delayed_job run
+
+volumes:
+  postgres-data:
+    driver: ${STORAGE_DRIVER}
