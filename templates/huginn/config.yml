@@ -3,4 +3,6 @@ description: |
   Web automation framework. Your agents are standing by!
 version: 0.1
 category: Automation
+license: MIT
 maintainer: Zicklag (zicklag@katharostech.com)
+projectURL: https://github.com/huginn/huginn/
