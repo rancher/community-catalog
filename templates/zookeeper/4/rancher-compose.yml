@@ -57,10 +57,9 @@ catalog:
       default: 60
       type: "int"
     - variable: host_label
-      label: "Host with Label to put zookeeper on"
+      label: "Host Label"
       description: |
-        Host label to use as zookeeper 'value' tag.
-        Example: 'zookeeper=true'
+        Host label where deploy zookeeper. E.G.: 'zookeeper=true'
       required: false
       default: ""
       type: "string"
