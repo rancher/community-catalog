@@ -10,10 +10,10 @@ catalog:
         required: true
         type: password
       - variable: DOMAIN
-        description: The domain and port that Huginn will be hosted on
+        description: The domain and port ( if necessary ) that should be used to get to Huginn
         label: Domain
         required: true
-        default: example.com:443
+        default: example.com
         type: string
       - variable: INVITATION_CODE
         description: Code that new users must use to register
