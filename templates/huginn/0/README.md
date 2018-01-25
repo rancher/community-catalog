@@ -8,6 +8,8 @@ Your agents are standing by!
 
 When huginn first starts up it will create one user named, `admin`, with the password, `password`, along with a number of example agents for that user. Each new user will start off with a set of example agents.
 
+**Warning**: The **Require Confirmed Email** option *must* be **off** when you first start up the stack because the default user has a fake email address and will not allow you to login. If desired, you can upgrade the stack and turn email verification back on after changing the admin's email address.
+
 The Huggin web interface is served in the `huginn_web` container on port `3000`. In order to get web traffic to the container you have to create a Rancher load balancer and route the traffic to the container on port `3000`.
 
 ## Scaling

@@ -15,7 +15,7 @@ services:
       io.rancher.container.pull_image: always
 
   huginn-web:
-    image: huginn/huginn-single-process
+    image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
     restart: always
     environment:
       DATABASE_ADAPTER: postgresql
@@ -46,7 +46,7 @@ services:
       io.rancher.container.pull_image: always
 
   huginn-agent-runner:
-    image: huginn/huginn-single-process
+    image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
     restart: always
     environment:
       DATABASE_ADAPTER: postgresql
@@ -78,7 +78,7 @@ services:
     command: /scripts/init bin/agent_runner.rb
 
   huginn-delayed-job:
-    image: huginn/huginn-single-process
+    image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
     restart: always
     environment:
       DATABASE_ADAPTER: postgresql

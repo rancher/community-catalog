@@ -31,7 +31,7 @@ catalog:
         description: Require newly registered users to confirm their Email address
         label: Require Confirmed Email
         required: true
-        default: true
+        default: false
         type: boolean
       - variable: SMTP_USER_NAME
         label: SMTP Username
@@ -70,6 +70,12 @@ catalog:
         description: Additional ruby gems to install. Can be used to provide additional huginn agents
         label: Additional Gems
         required: false
+        type: string
+      - variable: STORAGE_DRIVER
+        description: Rancher storage driver to use for database volume
+        label: Storage Driver
+        default: local
+        required: true
         type: string
 services:
   postgres:
