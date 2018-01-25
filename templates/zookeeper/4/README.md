@@ -19,6 +19,7 @@
 - ZK_MAX_CLIENT_CXNS="500"
 - ZK_SYNC_LIMIT="5"
 - ZK_TICK_TIME="2000"
+- host_label=""                         # Host label where to deploy zookeeper.
  
  Click deploy.
  

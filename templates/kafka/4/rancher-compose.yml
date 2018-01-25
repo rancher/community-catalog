@@ -1,8 +1,9 @@
-.catalog:
+version: '2'
+catalog:
   name: Kafka
   version: 1.0.0-rancher1
   description: |
-    (Experimental) Apache Kafka cluster.
+    Apache Kafka cluster.
   minimum_rancher_version: v0.59.0
   maintainer: "Raul Sanchez <rawmind@gmail.com>"
   uuid: kafka-0
@@ -75,6 +76,13 @@
       required: false
       default: false 
       type: "boolean"
+    - variable: host_label
+      label: "Host Label"
+      description: |
+        Host label where deploy kafka. E.G.: 'kafka=true'
+      required: false
+      default: ""
+      type: "string"
     - variable: "zk_link"
       description: |
         Choose the Zookeeper service to use. 
@@ -83,14 +91,15 @@
       default: "kafka-zk/zk"
       required: true
       type: "service"
-broker:
-  scale: ${kafka_scale}
-  retain_ip: true
-  health_check:
-    port: 9092
-    interval: 5000
-    unhealthy_threshold: 3
-    request_line: ''
-    healthy_threshold: 2
-    response_timeout: 5000
+services:
+  broker:
+    scale: ${kafka_scale}
+    retain_ip: true
+    health_check:
+      port: 9092
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: ''
+      healthy_threshold: 2
+      response_timeout: 5000
 

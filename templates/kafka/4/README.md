@@ -23,6 +23,7 @@
 - kafka_auto_create_topics="true"		# kafka auto create topics
 - kafka_replication_factor=1 			# Kafka replication factor
 - kafka_pub_ip= < true | false >		# Advertise public ip to zookeeper.
+- host_label=""                         # Host label where to deploy kafka.
 - zk_link="kafka-zk/zk" 				# zookeeper stack/service to connect to.
  
  Click deploy.
