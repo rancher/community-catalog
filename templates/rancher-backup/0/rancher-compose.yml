@@ -83,7 +83,7 @@ catalog:
         - "true"
     - variable: "VOLUME_DRIVER"
       description: "Docker driver to store volume of local dump"
-      label: "Volume drver / Path"
+      label: "Volume driver / Path"
       type: "string"
       required: true
       default: "local"
