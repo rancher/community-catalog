@@ -36,7 +36,7 @@ catalog:
       default: "disk"
     - variable: "VOLUME_DRIVER"
       description: "Docker driver to store volume or base path for each disks"
-      label: "Volume drver / Path"
+      label: "Volume driver / Path"
       type: "string"
       required: true
       default: "local"
