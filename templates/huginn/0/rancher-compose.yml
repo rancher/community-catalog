@@ -9,6 +9,23 @@ catalog:
         label: Database Password
         required: true
         type: password
+      - variable: DB_NAME
+        description: The database name
+        label: Database Name
+        required: true
+        default: "huginn"
+        type: string
+      - variable: DB_USER
+        description: The database username
+        label: Database Username
+        required: true
+        default: "huginn"
+        type: string
+      - variable: APP_SECRET_TOKEN
+        description: The secret token used by Huginn
+        label: App Secret Token
+        required: true
+        type: password
       - variable: DOMAIN
         description: The domain and port ( if necessary ) that should be used to get to Huginn
         label: Domain
