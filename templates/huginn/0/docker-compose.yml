@@ -1,0 +1,110 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9.5
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+      http_proxy:
+      https_proxy:
+
+  huginn-web:
+    image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
+    restart: always
+    external_links:
+      - postgres:postgres
+    environment:
+      DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: postgres
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      DATABASE_NAME: ${DB_NAME}
+      DATABASE_USERNAME: ${DB_USER}
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET_TOKEN: ${APP_SECRET_TOKEN}
+      DOMAIN: ${DOMAIN}
+      INVITATION_CODE: ${INVITATION_CODE}
+      SKIP_INVITATION_CODE: ${SKIP_INVITATION_CODE}
+      REQUIRE_CONFIRMED_EMAIL: ${REQUIRE_CONFIRMED_EMAIL}
+      SMTP_DOMAIN: ${DOMAIN}
+      SMTP_USER_NAME: ${SMTP_USER_NAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_SERVER: ${SMTP_SERVER}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_AUTHENTICATION: ${SMTP_AUTHENTICATION}
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      USE_EVERNOTE_SANDBOX: false
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS}
+      ADDITIONAL_GEMS: ${ADDITIONAL_GEMS}
+      http_proxy:
+      https_proxy:
+
+  huginn-agent-runner:
+    image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
+    restart: always
+    external_links:
+      - postgres:postgres
+    environment:
+      DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: postgres
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      DATABASE_NAME: ${DB_NAME}
+      DATABASE_USERNAME: ${DB_USER}
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET_TOKEN: ${APP_SECRET_TOKEN}
+      DOMAIN: ${DOMAIN}
+      INVITATION_CODE: ${INVITATION_CODE}
+      SKIP_INVITATION_CODE: ${SKIP_INVITATION_CODE}
+      REQUIRE_CONFIRMED_EMAIL: ${REQUIRE_CONFIRMED_EMAIL}
+      SMTP_DOMAIN: ${DOMAIN}
+      SMTP_USER_NAME: ${SMTP_USER_NAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_SERVER: ${SMTP_SERVER}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_AUTHENTICATION: ${SMTP_AUTHENTICATION}
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      USE_EVERNOTE_SANDBOX: false
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS}
+      ADDITIONAL_GEMS: ${ADDITIONAL_GEMS}
+      http_proxy:
+      https_proxy:
+    command: /scripts/init bin/agent_runner.rb
+
+  huginn-delayed-job:
+    image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
+    restart: always
+    external_links:
+      - postgres:postgres
+    environment:
+      DATABASE_ADAPTER: postgresql
+      POSTGRES_PORT_5432_TCP_ADDR: postgres
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      DATABASE_NAME: ${DB_NAME}
+      DATABASE_USERNAME: ${DB_USER}
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      APP_SECRET_TOKEN: ${APP_SECRET_TOKEN}
+      DOMAIN: ${DOMAIN}
+      INVITATION_CODE: ${INVITATION_CODE}
+      SKIP_INVITATION_CODE: ${SKIP_INVITATION_CODE}
+      REQUIRE_CONFIRMED_EMAIL: ${REQUIRE_CONFIRMED_EMAIL}
+      SMTP_DOMAIN: ${DOMAIN}
+      SMTP_USER_NAME: ${SMTP_USER_NAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_SERVER: ${SMTP_SERVER}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_AUTHENTICATION: ${SMTP_AUTHENTICATION}
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      USE_EVERNOTE_SANDBOX: false
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS}
+      ADDITIONAL_GEMS: ${ADDITIONAL_GEMS}
+      http_proxy:
+      https_proxy:
+    command: /scripts/init script/delayed_job run
+
+volumes:
+  postgres-data:
+    driver: ${STORAGE_DRIVER}

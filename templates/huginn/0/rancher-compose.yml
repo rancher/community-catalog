@@ -1,0 +1,109 @@
+version: '2'
+catalog:
+    name: Huginn
+    version: "0.1"
+    description: Web automation framework. Your agents are standing by!
+    questions:
+      - variable: DB_PASSWORD
+        description: The database password
+        label: Database Password
+        required: true
+        type: password
+      - variable: DB_NAME
+        description: The database name
+        label: Database Name
+        required: true
+        default: "huginn"
+        type: string
+      - variable: DB_USER
+        description: The database username
+        label: Database Username
+        required: true
+        default: "huginn"
+        type: string
+      - variable: APP_SECRET_TOKEN
+        description: The secret token used by Huginn
+        label: App Secret Token
+        required: true
+        type: password
+      - variable: DOMAIN
+        description: The domain and port ( if necessary ) that should be used to get to Huginn
+        label: Domain
+        required: true
+        default: example.com
+        type: string
+      - variable: INVITATION_CODE
+        description: Code that new users must use to register
+        label: Invitation Code
+        required: true
+        default: try-huginn
+        type: string
+      - variable: SKIP_INVITATION_CODE
+        description: Don't require users to have an invitation code to register
+        label: Skip Invitation Code
+        required: true
+        default: false
+        type: boolean
+      - variable: REQUIRE_CONFIRMED_EMAIL
+        description: Require newly registered users to confirm their Email address
+        label: Require Confirmed Email
+        required: true
+        default: false
+        type: boolean
+      - variable: SMTP_USER_NAME
+        label: SMTP Username
+        required: false
+        default: you@gmail.com
+        type: string
+      - variable: SMTP_PASSWORD
+        label: SMTP Password
+        required: false
+        default: password
+        type: password
+      - variable: SMTP_SERVER
+        label: SMTP Server
+        required: false
+        default: smtp.gmail.com
+        type: string
+      - variable: SMTP_PORT
+        label: SMTP Port
+        required: false
+        default: 587
+        type: string
+      - variable: EMAIL_FROM_ADDRESS
+        label: Email From Address
+        required: false
+        default: noreply@something.com
+        type: string
+      - variable: SMTP_AUTHENTICATION
+        label: SMTP Authentication Method
+        default: plain
+        required: false
+        type: enum
+        options:
+          - plain
+          - login
+      - variable: ADDITIONAL_GEMS
+        description: Additional ruby gems to install. Can be used to provide additional huginn agents
+        label: Additional Gems
+        required: false
+        type: string
+      - variable: STORAGE_DRIVER
+        description: Rancher storage driver to use for database volume
+        label: Storage Driver
+        default: local
+        required: true
+        type: string
+services:
+  postgres:
+    scale: 1
+    start_on_create: true
+  huginn-web:
+    scale: 1
+    start_on_create: true
+  huginn-agent-runner:
+    scale: 1
+    start_on_create: true
+  huginn-delayed-job:
+    scale: 1
+    start_on_create: true
