@@ -17,7 +17,7 @@ services:
     image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
     restart: always
     external_links:
-      - postgres: postgres
+      - postgres:postgres
     environment:
       DATABASE_ADAPTER: postgresql
       POSTGRES_PORT_5432_TCP_ADDR: postgres
@@ -47,7 +47,7 @@ services:
     image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
     restart: always
     external_links:
-      - postgres: postgres
+      - postgres:postgres
     environment:
       DATABASE_ADAPTER: postgresql
       POSTGRES_PORT_5432_TCP_ADDR: postgres
@@ -78,7 +78,7 @@ services:
     image: huginn/huginn-single-process:fc1daf8b91398929cedd72895cc95647e3ed7b6a
     restart: always
     external_links:
-      - postgres: postgres
+      - postgres:postgres
     environment:
       DATABASE_ADAPTER: postgresql
       POSTGRES_PORT_5432_TCP_ADDR: postgres
