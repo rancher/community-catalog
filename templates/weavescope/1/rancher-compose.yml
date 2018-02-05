@@ -1,0 +1,11 @@
+.catalog:
+  name: weavescope
+  version: 1.6.7
+  description: "Monitoring, visualisation and management for Docker"
+  questions:
+    - variable: PUBLISH_PORT
+      label: "Published Port"
+      description: "public port to access the web"
+      default: "4040"
+      type: "int"
+      required: true
