@@ -1,0 +1,22 @@
+version: '2'
+services:
+  filebeat:
+    image: eason02/filebeat-alpine:5.6.3
+    container_name: filebeat-alpine-5.6.3
+    restart: always
+    labels:
+      io.rancher.container.pull_image: always
+    environment:
+      - env=${ENV}
+      - logstash=${LOGSTASH}
+      - project=${PROJECT}
+    network_mode: host
+    volumes:
+      - /var/lib/filebeat/:/filebeat/data
+      - ${APPLOG_PATH}:/home/user/
+      - ${NGINXLOG_PATH}:/var/log/nginx/
+    logging:
+      driver: json-file
+      options:
+        max-file: '5'
+        max-size: 10m

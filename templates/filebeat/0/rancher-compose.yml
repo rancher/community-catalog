@@ -1,0 +1,43 @@
+version: '2'
+catalog:
+  name: "filebeat-alpine"
+  version: "5.3.1"
+  description: "Catalog's rancher-compose"
+  minimun_rancher_version: v1.0.1
+  maximun_rancher_version: v1.6.12
+  upgrade_from: "1.0.0"
+  questions:
+    - variable: "ENV"
+      label: "Environment Name"
+      description: "Environment to distinguish data source"
+      default: "QA"
+      required: true
+      type: "enum"
+      options:
+        - QA
+        - PP
+        - INT
+        - PROD
+    - variable: "PROJECT"
+      label: "Project Name"
+      description: "Indicated log of which project"
+      required: true
+      type: "string"
+    - variable: "LOGSTASH"
+      label: "Logstash Host"
+      description: "Specific Logstash Instance Running Host for log receiving"
+      required: true
+      type: "string"
+    - variable: "APPLOG_PATH"
+      label: "Application Log Path"
+      description: "For alignment, put your log into below path: ${HOME_PATH}/App1/logs/xxx.log, assume your HOME_PATH=/home/user, then set Application log Path as /home/user/."
+      required: true
+      default: "/home/user/"
+      type: "string"
+    - variable: "NGINXLOG_PATH"
+      label: "Nginx Log Path"
+      description: "Default it as /var/log/nginx/"
+      default: "/var/log/nginx/"
+      type: "string"
+      required: true
+

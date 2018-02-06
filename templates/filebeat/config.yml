@@ -1,0 +1,8 @@
+name: Filebeat-Alpine
+description: Log Shipper to logstash
+
+version: 6.1.1
+category: Shipper
+maintainer: eason.lau02@hotmail.com
+license: MIT
+projectURL: https://github.com/easonlau02/filebeat-alpine
