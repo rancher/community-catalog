@@ -4,8 +4,6 @@ services:
     image: eason02/filebeat-alpine:5.3.1
     container_name: filebeat-alpine-5.3.1
     restart: always
-    labels:
-      io.rancher.container.pull_image: always
     environment:
       - env=${ENV}
       - logstash=${LOGSTASH}

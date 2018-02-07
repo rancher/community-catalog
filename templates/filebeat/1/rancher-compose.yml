@@ -4,20 +4,15 @@ catalog:
   version: "5.6.3"
   description: "Catalog's rancher-compose"
   minimun_rancher_version: v1.0.1
-  maximun_rancher_version: v1.6.12
+  maximun_rancher_version: v1.6.14
   upgrade_from: "1.0.0"
   questions:
     - variable: "ENV"
       label: "Environment Name"
-      description: "Environment to distinguish data source"
+      description: "Environment to distinguish data source, you can set it as QA/PP/PROD or your preference."
       default: "QA"
       required: true
-      type: "enum"
-      options:
-        - QA
-        - PP
-        - INT
-        - PROD
+      type: "string"
     - variable: "PROJECT"
       label: "Project Name"
       description: "Indicated log of which project"
