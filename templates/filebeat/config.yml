@@ -4,5 +4,5 @@ description: Log Shipper to logstash
 version: 6.1.1
 category: Shipper
 maintainer: "Eason Lau <eason.lau02@hotmail.com>"
-#license: MIT
+license: MIT
 projectURL: https://github.com/easonlau02/filebeat-alpine
