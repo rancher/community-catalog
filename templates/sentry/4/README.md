@@ -13,8 +13,14 @@
 
  * Select Sentry from catalog.
 
- * Required: Enter a sentry secret
+ * Required
+   * Enter a sentry secret
+   * Specify the email and password of the initial user
 
- * Optional: Email configuration
+ * Optional
+   * Specify an external database host \*
+   * Email configuration
 
  * Click deploy.
+
+\* If you specify an external database, you will want to delete the "sentry-postgres" service after creating the Sentry stack.
