@@ -8,3 +8,4 @@ ${HOME_PATH}/app/logs/xxx.log
 ${HOME_PATH}/nginx/logs/xxx.log
 ${HOME_PATH}/others/logs/xxx.log
 ```
+And set Application Log Path as your `${HOME_PATH}`
