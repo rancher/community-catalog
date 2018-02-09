@@ -18,6 +18,14 @@ catalog:
       default: 9000
       description: "Port that Sentry will listen on. Alternatively you could point a load balancer to the port 9000 of this container"
 
+    - variable: "sentry_db_host"
+      type: "string"
+      required: true
+      label: "Sentry db host"
+      default: "postgres"
+      description: "Sentry db host."
+
+
     - variable: "sentry_db_name"
       type: "string"
       required: true

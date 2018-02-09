@@ -33,7 +33,7 @@ sentry-cron:
     SENTRY_EMAIL_USER: ${sentry_email_user}
     SENTRY_SECRET_KEY: ${sentry_secret_key}
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
-    SENTRY_POSTGRES_HOST: postgres
+    SENTRY_POSTGRES_HOST: ${sentry_db_host}
     SENTRY_DB_NAME: ${sentry_db_name}
     SENTRY_DB_USER: ${sentry_db_user}
     SENTRY_DB_PASSWORD: ${sentry_db_pass}
@@ -68,7 +68,7 @@ sentry:
     SENTRY_EMAIL_USER: ${sentry_email_user}
     SENTRY_SECRET_KEY: ${sentry_secret_key}
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
-    SENTRY_POSTGRES_HOST: postgres
+    SENTRY_POSTGRES_HOST: ${sentry_db_host}
     SENTRY_DB_NAME: ${sentry_db_name}
     SENTRY_DB_USER: ${sentry_db_user}
     SENTRY_DB_PASSWORD: ${sentry_db_pass}
@@ -94,7 +94,7 @@ sentry-worker:
     SENTRY_EMAIL_USER: ${sentry_email_user}
     SENTRY_SECRET_KEY: ${sentry_secret_key}
     SENTRY_SERVER_EMAIL: ${sentry_server_email}
-    SENTRY_POSTGRES_HOST: postgres
+    SENTRY_POSTGRES_HOST: ${sentry_db_host}
     SENTRY_DB_NAME: ${sentry_db_name}
     SENTRY_DB_USER: ${sentry_db_user}
     SENTRY_DB_PASSWORD: ${sentry_db_pass}
