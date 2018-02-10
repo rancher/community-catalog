@@ -1,7 +1,7 @@
 version: '2'
 services:
   eventstore:
-    image: eventstore/eventstore:4.0.3
+    image: eventstore/eventstore:release-4.0.3
     entrypoint: /bin/bash
     command:
     - -c
