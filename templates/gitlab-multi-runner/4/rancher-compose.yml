@@ -2,7 +2,7 @@ version: '2'
 
 catalog:
   name: "gitlab-multi-runner"
-  version: "10.3.1"
+  version: "10.4.0"
   description: "a Gitlab pipelines multi-runner, that will spawn privates runners in your infra."
   minimum_rancher_version: v1.5.0
   # maximum_rancher_version:
