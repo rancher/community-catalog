@@ -25,13 +25,13 @@ catalog:
       type: "string"
     - variable: "APPLOG_PATH"
       label: "Application Log Path"
-      description: "For alignment, put your log into below path: ${HOME_PATH}/App1/logs/xxx.log, assume your HOME_PATH=/home/user, then set Application log Path as /home/user/."
+      description: "For alignment, put your log into below path: ${HOME_PATH}/App1/logs/xxx.log, assume your HOME_PATH=/home/user, then set Application log Path as /home/user/, let it default if there is no app log."
       required: true
       default: "/home/user/"
       type: "string"
     - variable: "NGINXLOG_PATH"
       label: "Nginx Log Path"
-      description: "Default it as /var/log/nginx/"
+      description: "Default it as /var/log/nginx/, let it default if there is no nginx log."
       default: "/var/log/nginx/"
       type: "string"
       required: true
