@@ -1,0 +1,38 @@
+version: '2'
+services:
+  eventstore:
+    image: eventstore/eventstore:release-4.0.3
+    entrypoint: /bin/bash
+    command:
+    - -c
+    - '
+      apt-get install curl &&
+      export HOST_PUBLIC_IP=$$(curl http://rancher-metadata/2015-12-19/self/host/agent_ip) &&
+      grep -q -F "IntIpAdvertiseAs: $$(hostname -i)" /etc/eventstore/eventstore.conf  ||
+      echo "IntIpAdvertiseAs: $$(hostname -i)" >> /etc/eventstore/eventstore.conf &&
+      grep -q -F "ExtIpAdvertiseAs: $$HOST_PUBLIC_IP" /etc/eventstore/eventstore.conf  ||
+      echo "ExtIpAdvertiseAs: $$HOST_PUBLIC_IP" >> /etc/eventstore/eventstore.conf &&
+      /entrypoint.sh'
+
+    environment:
+    - EVENTSTORE_CLUSTER_SIZE=${number_of_nodes}
+    - EVENTSTORE_CLUSTER_DNS=eventstore
+    - EVENTSTORE_CLUSTER_GOSSIP_PORT=${internal_http_port}
+    - EVENTSTORE_INT_HTTP_PREFIXES=http://*:${internal_http_port}/
+    - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:${external_http_port}/
+    - EVENTSTORE_INT_HTTP_PORT=${internal_http_port}
+    - EVENTSTORE_INT_TCP_PORT=${internal_tcp_port}
+    - EVENTSTORE_EXT_HTTP_PORT=${external_http_port}
+    - EVENTSTORE_EXT_TCP_PORT=${external_tcp_port}
+    
+    ports:
+    - ${external_http_port}:${external_http_port}/tcp
+    - ${external_tcp_port}:${external_tcp_port}/tcp
+
+
+# ==> Some debug commands :
+
+# more /etc/eventstore/eventstore.conf
+# more /var/log/eventstore/20*/*.log
+# rm more /var/log/eventstore/20*/*.log
+
