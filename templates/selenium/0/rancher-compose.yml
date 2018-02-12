@@ -1,0 +1,87 @@
+version: '2'
+catalog:
+  name: selenium
+  version: v0.0.1
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: SELENIUM_VERSION
+      label: Selenium Version for Hub and Nodes
+      description: Selenium Hub and Node Version
+      required: true
+      type: enum
+      default: 3.8.1-bohrium
+      options:
+        - 3.8.1-bohrium
+        - 3.8.1-aluminum
+        - 3.7.1-cadmium
+        - 3.7.1-beryllium
+        - 3.7.1-argon
+        - 3.7.0-arsenic
+        - 3.6.0-darmstadtium
+        - 3.6.0-copper
+        - 3.6.0-bromine
+        - 3.6.0-americium
+        - 3.5.3-boron
+        - 3.5.3-astatine
+        - 3.5.2-antimony
+        - 3.5.1-aluminum
+        - 3.5.0-argon
+        - 3.4.0-francium
+        - 3.4.0-einsteinium
+        - 3.4.0-dysprosium
+        - 3.4.0-chromium
+        - 3.4.0-bismuth
+    - variable: GRID_TIMEOUT
+      label: Hub Configuration
+      description: Grid Timeout (in seconds)
+      type: int
+      default: 30
+    - variable: PUBLISH_PORT
+      label: Publish Port
+      description: Port to expose for external access
+      type: int
+      default: 4444
+    - variable: DEPLOY_SELENIUM_CHROME
+      description: Deploy Selenium Chrome Node
+      label: Deploy Selenium Chrome Node
+      required: true
+      type: enum
+      default: true
+      options:
+        - true
+        - false
+    - variable: SELENIUM_CHROME_SCALE
+      label: Number of chrome container
+      description: Number of chrome container
+      type: int
+      default: 1
+    - variable: DEPLOY_SELENIUM_FIREFOX
+      description: Deploy Selenium Firefox Node
+      label: Deploy Selenium Firefox Node
+      required: true
+      type: enum
+      default: true
+      options:
+        - true
+        - false
+    - variable: SELENIUM_FIREFOX_SCALE
+      label: Number of firefox container
+      description: Number of firefox container
+      type: int
+      default: 1
+services:
+  selenium-chrome:
+    scale: ${SELENIUM_CHROME_SCALE}
+    retain_ip: true
+  selenium-firefox:
+    scale: ${SELENIUM_FIREFOX_SCALE}
+    retain_ip: true
+  seleniumhub:
+    scale: 1
+    health_check:
+      port: 4444
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: ''
+      healthy_threshold: 2
+      response_timeout: 5000
