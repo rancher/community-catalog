@@ -1,0 +1,118 @@
+version: '2'
+catalog:
+  name: Minio
+  version: 2018-02-09_1
+  questions:
+    - variable: "MINIO_SCALE"
+      description: "Number of minio nodes."
+      label: "Minio Nodes"
+      required: true
+      default: 1
+      type: enum
+      options:
+        - 1
+        - 4
+        - 6
+        - 8
+        - 10
+        - 12
+        - 14
+        - 16
+    - variable: "MINIO_DISKS"
+      description: "Number of disks per node"
+      label: "Disks Per Node"
+      required: true
+      type: enum
+      default: 1
+      options:
+        - 1
+        - 2
+        - 4
+    - variable: "DISK_BASE_NAME"
+      description: "The base name for each disk"
+      label: "Disk base name"
+      type: "string"
+      required: true
+      default: "disk"
+    - variable: "VOLUME_DRIVER"
+      description: "Docker driver to store volume or base path for each disks"
+      label: "Volume drver / Path"
+      type: "string"
+      required: true
+      default: "local"
+    - variable: "MINIO_ACCESS_KEY"
+      description: "The key to connect on minio"
+      label: "Minio key"
+      required: true
+      type: "string"
+    - variable: "MINIO_SECRET_KEY"
+      description: "The secret key to connect on minio"
+      label: "Minio secret key"
+      required: true
+      type: "password"
+    - variable: "DEPLOY_LB"
+      description: "Deploy Loadbalancer"
+      label: "Deploy Loadbalancer"
+      required: true
+      type: enum
+      default: "true"
+      options:
+        - "true"
+        - "false"
+    - variable: "PUBLISH_PORT"
+      description: "Set port if you want publish external port for minio or Loadbalancer"
+      label: "Publish port"
+      required: false
+      type: "string"
+      default: "9000"
+    - variable: "TLS_FQDN"
+      description: "Set a FQDN if you want to use https instead of http. A selfsinged cert will be generated."
+      label: "TLS FQDN"
+      required: false
+      type: "string"
+    - variable: "CONFD_BACKEND"
+      description: "The confd backend to grab config"
+      label: "Confd backend"
+      required: true
+      default: "env"
+      type: "string"
+    - variable: "CONFD_NODES"
+      description: "The confd nodes"
+      label: "Confd nodes"
+      required: false
+      type: "string"
+    - variable: "CONFD_PREFIX"
+      description: "The confd prefix"
+      label: "Confd prefix"
+      required: true
+      default: "/minio"
+      type: "string"
+      
+services:
+  minio-server:
+    scale: ${MINIO_SCALE}
+    retain_ip: true
+    health_check:
+      port: 9000
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: ''
+      healthy_threshold: 2
+      response_timeout: 5000
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: minio-server
+        source_port: 9000
+        target_port: 9000
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
