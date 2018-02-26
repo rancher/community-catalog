@@ -1,0 +1,8 @@
+name: Imagesyncer
+description: |
+  Sync all images in use in your environment to all hosts
+version: 0.1.0
+category: Automation
+maintainer: "Sebastiaan van Steenis <seb@rancher.com>"
+license: Apache 2.0
+projectURL: https://github.com/superseb/imagesyncer
