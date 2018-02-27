@@ -1,0 +1,7 @@
+name: Core DNS
+description: |
+  CoreDNS is a DNS server that chains plugins and provides such DNS Services like Etcd & Kubernetes.For kubernetes, please use helm coredns's chart.
+version: 1.0.1
+category: External DNS
+labels:
+  io.rancher.orchestration.supported: 'cattle'
