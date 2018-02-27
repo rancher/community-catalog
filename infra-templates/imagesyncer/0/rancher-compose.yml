@@ -1,0 +1,58 @@
+version: '2'
+catalog:
+  name: imagesyncer
+  version: 0.1.0
+  description: Sync all images in use in your environment to all hosts
+  minimum_rancher_version: v1.6.0
+  questions:
+    - variable: CHECK_CPU_USAGE
+      label: CHECK_CPU_USAGE
+      description: Enable CPU usage check
+      type: boolean
+      default: true
+      required: true
+    - variable: CHECK_INTERVAL
+      label: CHECK_INTERVAL
+      description: Amount of seconds to sleep before checking images
+      type: int
+      default: 300
+      required: true
+    - variable: CPU_USAGE_MAX
+      label: CPU_USAGE_MAX
+      description: Maximum CPU usage in % to halt pulling images
+      type: int
+      default: 75
+      required: true
+    - variable: CPU_USAGE_SLEEP
+      label: CPU_USAGE_SLEEP
+      description: Amount of seconds to sleep when cpu usage is too high 
+      type: int
+      default: 120
+      required: true
+    - variable: MOUNT_DOCKER_CONFIG
+      label: MOUNT_DOCKER_CONFIG
+      description: Mount docker config as volume (for registries with authentication)
+      type: boolean
+      default: false
+      required: true
+    - variable: DOCKER_CONFIG_LOCATION
+      label: DOCKER_CONFIG_LOCATION
+      description: Docker config location on the host (for registries with authentication)
+      type: string
+      default: "/root/.docker/config.json"
+      required: true
+    - variable: PRIVILEGED
+      label: PRIVILEGED
+      description: Run as privileged (e.g. when SELinux is enabled)
+      type: boolean
+      default: false
+      required: true
+    - variable: RANDOM_SLEEP
+      label: RANDOM_SLEEP
+      description: Sleep a "random" amount of seconds between image pulls
+      type: boolean
+      default: false
+      required: true
+services:
+  imagesyncer:
+    start_on_create: true
