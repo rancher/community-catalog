@@ -1,6 +1,6 @@
 .catalog:
   name: "Prometheus"
-  version: "3.0.1"
+  version: "4.0.0"
   description: "Prometheus Monitoring Solution"
   uuid: prometheus-2
   minimum_rancher_version: v1.5.5
