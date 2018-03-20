@@ -12,9 +12,7 @@ catalog:
         This is the embedded JSON format config file that vault will use at startup
       type: multiline
       default: |
-        '{"backend":{"consul":{"address":"http://<listenAddress>:<listenPort>",
-        "advertise_addr":"http://<advertiseAddress>","path":"<Path>"}},
-        "listener":{"tcp":{"address":"0.0.0.0:18200","tls_disable":1}}}'
+        {"backend":{"consul":{"address":"http://<listenAddress>:<listenPort>", "advertise_addr":"http://<advertiseAddress>","path":"<Path>"}}, "listener":{"tcp":{"address":"0.0.0.0:18200","tls_disable":1}}}
     - variable: useConsul
       label: Would you like to back Vault with Consul?
       description: |
