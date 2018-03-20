@@ -1,0 +1,69 @@
+version: '2'
+catalog:
+  name: Vault
+  version: 1.0-test-rancher1
+  description: |
+    Installs a Vault container, internal (Rancher) load-balancer, and allows connection to a Consul cluster
+  uuid: vault-rac-0
+  questions:
+    - variable: VAULT_LOCAL_CONFIG
+      label: Provide a default config?
+      description: |
+        This is the embedded JSON format config file that vault will use at startup
+      type: multiline
+      default: |
+        '{"backend":{"consul":{"address":"http://<listenAddress>:<listenPort>",
+        "advertise_addr":"http://<advertiseAddress>","path":"<Path>"}},
+        "listener":{"tcp":{"address":"0.0.0.0:18200","tls_disable":1}}}'
+    - variable: useConsul
+      label: Would you like to back Vault with Consul?
+      description: |
+        Selecting yes or no allows you to back your vault repoository with a pre-installed
+        Consul cluster/server
+      default: false
+      type: boolean
+    - variable: consulService
+      label: Specify the Consul service to connect to
+      description: |
+        The pre-installed Consul server to back to
+      default: "select"
+      type: service
+    - variable: volumeDriver
+      label: Driver for volumes
+      description: |
+        How/Where to store your vault config and logs
+      default: local
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+services:
+  vault-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: vault
+        source_port: 8200
+        target_port: 8200
+      - priority: 2
+        protocol: tcp
+        service: vault
+        source_port: 8201
+        target_port: 8201
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  vault:
+    scale: 1
+    start_on_create: true
