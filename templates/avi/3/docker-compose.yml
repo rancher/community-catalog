@@ -1,6 +1,6 @@
 avi:
-  image: avinetworks/avi-rancher-controller:2017-12-01T194110.475015629Z
-  expose: 
+  image: avinetworks/avi-rancher-controller:latest
+  expose:
    - 1000
   environment:
     AVI_USER: ${AVI_USER}
