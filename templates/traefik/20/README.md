@@ -70,7 +70,6 @@ Use this labels if you choose extenal rancher integration.
 - traefik.backend.loadbalancer.method = < drr | wrr > # Override default lb algorithm `drr`
 - traefik.backend.circuitbreaker.expression = < expression > # Override default backend circuitbreaker expression `NetworkErrorRatio() > 0.5`
 - traefik.frontend.passHostHeader = < true | false > # Forward client Host header to the backend. Default `true`
-- traefik.frontend.rule = < rule > # Rule for host. Usually used to specify a host. I.e: 'Host:MySite.com'
 - traefik.weight = < weight >               # Override default backend weight `5`
 - traefik.alias = < alias >                 # Alternate names to route rule. Multiple values separated by ",". traefik.domain is appended. WARNING: You could have collisions BE CAREFULL
 - traefik.alias.fqdn = < alias fqdn >                   # Alternate names to route rule. Multiple values separated by ",". traefik.domain must be defined but is not appended here.
@@ -111,6 +110,7 @@ You must set these labels for the service your want to expose:
 - traefik.port = 8080
 - traefik.acme = true
 - traefik.frontend.rule = Host:MyCustoDomain.com
+
 - traefik.enable = true
 
 ### F.A.Q
