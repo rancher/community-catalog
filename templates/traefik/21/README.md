@@ -33,6 +33,11 @@
 - ssl_crt # Paste your ssl crt. *Required if you enable https
 - insecure_skip = false # Enable InsecureSkipVerify param.
 - compress_enable = true    # Enable traefik compression
+- timeout_read="0"          # respondingTimeouts [readTimeout](https://docs.traefik.io/configuration/commons/#responding-timeouts)
+- timeout_write="0"         # respondingTimeouts [writeTimeout](https://docs.traefik.io/configuration/commons/#responding-timeouts)
+- timeout_idle="180"        # respondingTimeouts [idleTimeout](https://docs.traefik.io/configuration/commons/#responding-timeouts)
+- timeout_dial="30"         # forwardingTimeouts [dialTimeout](https://docs.traefik.io/configuration/commons/#forwarding-timeouts)
+- timeout_header="0"        # forwardingTimeouts [responseHeaderTimeout](https://docs.traefik.io/configuration/commons/#forwarding-timeouts)
 - refresh_interval = 10s  # Interval to refresh traefik rules.toml from rancher-metadata.
 - admin_readonly = false # Set REST API to read-only mode.
 - admin_statistics = 10 # Enable more detailed statistics, extend recent errors number.
@@ -48,7 +53,7 @@
 
 Traefik labels has to be added to your services, in order to get included in traefik config.
 
-## Metadata or api
+#### Metadata or api
 
 Please use traefik defined labels if you choose metadata or api rancher integration. 
 
@@ -56,7 +61,7 @@ Please use traefik defined labels if you choose metadata or api rancher integrat
 
 Metadata is the prefered and recommended rancher integration.
 
-## External
+#### External
 
 Use this labels if you choose extenal rancher integration.
 
