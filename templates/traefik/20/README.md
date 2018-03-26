@@ -102,4 +102,25 @@ More info [rancher-traefik](https://github.com/rawmind0/rancher-traefik)
 
 Note: To access the services, you need to create A or CNAMES dns entries for every one.
 
+### Usage examples
+
+#### Setup Traefik for a custom domain
+
+You must set these labels for the service your want to expose:
+- traefik.port = 8080
+- traefik.acme = true
+- traefik.frontend.rule = Host:MyCustoDomain.com
+
+- traefik.enable = true
+
+### F.A.Q
+
+#### Q: Traefik doesn't expose my service
+
+Depending of de Traefik configuration we can diffenciate two cases:
+- If you configured Traefik with label *rancher_healthcheck=true* -> ensure your service has a healthcheck
+- If you configured Traefik without healthcheck, then check the Traefik log. Some times Traefik fails when try to load an invalid config and, before that, doesn't load new services -> restart Traefik should fix that
+
+### References
+
 [traefik rancher backend]: https://docs.traefik.io/configuration/backends/rancher/#labels-overriding-default-behaviour
