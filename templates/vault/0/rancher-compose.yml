@@ -48,7 +48,7 @@ services:
         protocol: tcp
         service: vault
         source_port: 8200
-        target_port: 8200
+        target_port: 18200
       - priority: 2
         protocol: tcp
         service: vault
