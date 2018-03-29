@@ -19,7 +19,7 @@
       label: "Infoblox password"
       description: "Infoblox password for your Infoblox service"
       type: "password"
-      required: true
+      required: false
     - variable: "SSL_VERIFY"
       label: "Ssl verify"
       description: "Infoblox Ssl verify for your Infoblox service"
