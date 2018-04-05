@@ -11,7 +11,7 @@ Rancher External DNS service powered by DigitalOcean
 #### Usage
 
 ##### DigitalOcean DNS record TTL
-The DigitalOcean API currently does not support per-record TTL setting. You should configure the global TTL setting for the domain manually and set it to a low value (e.g. 60).
+The DigitalOcean API currently supports per-record TTL setting (https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record), but it is not yet implemented in this tool. You should configure the global TTL setting for the domain manually and set it to a low value (e.g. 60).
 
 ##### Limitation when running the service on multiple Rancher servers
 
