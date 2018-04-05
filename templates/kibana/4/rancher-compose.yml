@@ -1,0 +1,24 @@
+.catalog:
+  name: "Kibana"
+  version: "6.2.3-rancher1"
+  description: "Kibana: Explore & Visualize Your Data"
+  questions:
+    - variable: "elasticsearch_source"
+      description: "Link to elasticsearch service or stack/service"
+      label: "Elasticsearch source"
+      type: "service"
+      required: true
+      default: "es/elasticsearch-clients"
+    - variable: "public_port"
+      label: "Public Port"
+      description: "Unique public port for Kibana"
+      type: "int"
+      default: 80
+      required: true
+
+nginx-proxy:
+  metadata:
+    nginx:
+      conf:
+        servername: "kibana"
+        upstream_port: 5601
