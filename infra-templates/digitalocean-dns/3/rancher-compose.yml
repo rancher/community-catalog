@@ -15,6 +15,13 @@
       description: "The domain name managed by DigitalOcean."
       type: "string"
       required: true
+    - variable: "DNS_TTL"
+      label: "TTL"
+      description: |
+        TTL used for new DNS records.
+      type: "string"
+      default: "300"
+      required: true      
     - variable: "NAME_TEMPLATE"
       label: "DNS Name Template"
       description: |
