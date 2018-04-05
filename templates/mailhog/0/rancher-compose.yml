@@ -6,9 +6,7 @@
     - variable: mh_ui_web_path
       label: Web UI Path
       type: string
-      required: true
-      default: ''
-      description: Defines the URL path for viewing MailHog.
+      description: Defines the URL path for viewing MailHog. Will use "/" if left blank.
     - variable: mh_smtp_bind_addr
       label: SMTP Bind Address
       type: string
