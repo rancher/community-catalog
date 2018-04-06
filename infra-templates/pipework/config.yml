@@ -1,0 +1,7 @@
+name: Pipework
+description: |
+  Software-Defined Networking for Linux Containers
+version: v0.1.0
+category: Network
+maintainer: community
+license:
