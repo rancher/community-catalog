@@ -4,7 +4,6 @@
     "Software-Defined Networking for Linux Containers"
   version: v0.1.0
   minimum_rancher_version: v1.6.10
-  maintainer: "Hayahito Kawamitsu <halation3@gmail.com>"
 version: '2'
 services:
   pipework:
