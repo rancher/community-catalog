@@ -1,27 +1,35 @@
 # notemplating
 .catalog:
-  name: "DigitalOcean DNS"
-  version: "v0.6.4.1"
-  description: "Rancher External DNS service powered by DigitalOcean"
+  name: "OVH DNS"
+  version: "v0.1.0"
+  description: "Rancher External DNS service powered by OVH"
   minimum_rancher_version: v1.6.0-rc1
   questions:
-    - variable: "DO_PAT"
-      label: "DigitalOcean Personal Access Token"
-      description: "Enter your personal access token"
+    - variable: "OVH_ENDPOINT"
+      label: "OVH Endpoint"
+      description: "Enter your endpoint"
+      type: "string"
+      required: true
+    - variable: "OVH_APPLICATION_KEY"
+      label: "OVH Application Key"
+      description: "Enter your application key"
+      type: "string"
+      required: true
+    - variable: "OVH_APPLICATION_SECRET"
+      label: "OVH Application Secret"
+      description: "Enter your application secret"
+      type: "string"
+      required: true
+    - variable: "OVH_CONSUMER_KEY"
+      label: "OVH Consumer Key"
+      description: "Enter your consumer key"
       type: "string"
       required: true
     - variable: "ROOT_DOMAIN"
       label: "Domain Name"
-      description: "The domain name managed by DigitalOcean."
+      description: "The domain name managed by OVH."
       type: "string"
       required: true
-    - variable: "DNS_TTL"
-      label: "TTL"
-      description: |
-        TTL used for new DNS records.
-      type: "string"
-      default: "300"
-      required: true      
     - variable: "NAME_TEMPLATE"
       label: "DNS Name Template"
       description: |
@@ -32,7 +40,7 @@
       default: "%{{service_name}}.%{{stack_name}}.%{{environment_name}}"
       required: false
 
-digitalocean:
+ovh:
   health_check:
     port: 1000
     interval: 5000

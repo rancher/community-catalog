@@ -1,0 +1,16 @@
+ovh:
+  image: rancher/external-dns:v0.7.10
+  command: -provider=ovh
+  expose:
+   - 1000
+  environment:
+    OVH_ENDPOINT: ${OVH_ENDPOINT}
+    OVH_APPLICATION_KEY: ${OVH_APPLICATION_KEY}
+    OVH_APPLICATION_SECRET: ${OVH_APPLICATION_SECRET}
+    OVH_CONSUMER_KEY: ${OVH_CONSUMER_KEY}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    NAME_TEMPLATE: ${NAME_TEMPLATE}
+    TTL: 300
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"
