@@ -1,0 +1,15 @@
+.catalog:
+  name: MailHog
+  version: 0.0.1
+  description: MailHog E-mail Capture Tools
+  questions:
+    - variable: mh_ui_web_path
+      label: Web UI Path
+      type: string
+      description: Defines the URL path for viewing MailHog. Will use "/" if left blank.
+    - variable: mh_smtp_bind_addr
+      label: SMTP Bind Address
+      type: string
+      required: true
+      default: 0.0.0.0:25
+      description: Defines the IP/Port combination for the SMTP listener.
