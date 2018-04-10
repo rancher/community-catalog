@@ -1,0 +1,10 @@
+version: '2'
+catalog:
+  name: "Pipework"
+  description: |
+    "Software-Defined Networking for Linux Containers"
+  version: v0.1.0
+  minimum_rancher_version: v1.6.10
+services:
+  pipework:
+    start_on_create: true

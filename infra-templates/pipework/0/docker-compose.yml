@@ -1,0 +1,18 @@
+version: '2'
+services:
+  pipework:
+    privileged: true
+    image: dreamcat4/pipework:1.1.6
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /var/run/docker.sock:/docker.sock
+    tty: true
+    pid: host
+    environment:
+      run_mode: batch,daemon
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
