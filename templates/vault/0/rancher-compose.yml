@@ -13,10 +13,6 @@ catalog:
       type: string
       default: myCluster
       required: true
-    - variable: VAULT_BACKEND
-      label: Backend for Vault
-      description: |
-        Provide the backend engine for Vault (i.e., Consul, File, etc.)
     - variable: VAULT_LISTEN_PORT
       label: Vault Listen Port
       description: |
@@ -45,7 +41,7 @@ catalog:
         - couchdb
         - dynamodb
         - etcd
-        - filesystem
+        - file
         - gcs
         - inmem
         - manta
@@ -59,22 +55,30 @@ catalog:
     - variable: BACKEND_SERVICE
       label: Specify the Backend service to connect to
       description: |
-        The pre-installed Backend server to back to.  To reference, you can use the memory variable "$SERVICE" in your URLs.  For example: "consul://$SERVICE:8500"
+        The pre-installed Backend server to back to.  To reference, you can use the memory variable "SERVICE" in your URLs.  For example: "consul://SERVICE:8500"
       default: "select"
       type: service
     - variable: BACKEND_CONFIGURATION
-      label: Specify the backend configuration in name=value format
-      default: "path=\"/mnt/vault/data\""
+      label: Specify the backend configuration in valid JSON format
+      default: |
+        "path":"/mnt/vault/data"
       required: true
       description: |
-        Enter the configuration block for the backend (Refer to Vault documentation for valid backend configuration elements) put each item on a separate line
-      type: multiline
+        Enter the configuration block for the backend (Refer to Vault documentation for valid backend configuration elements) in JSON format
+      type: string
     - variable: HOST_LABEL
       label: Optional Host label to bind LoadBalancer to
       description: |
         If you wish to bind your LoadBalancer to a specific host node, you can specify the label and value here in name=value pair format
       default: "lbhost=true"
       type: string
+    - variable: CLUSTER_SCALE
+      label: How many Vault servers do you want in your cluster?
+      description: |
+        Select the number of VAULT servers you want to set up in your cluster
+      default: 1
+      type: int
+      required: true
     - variable: VOLUME_DRIVER
       label: Driver for volumes
       description: |
@@ -112,5 +116,5 @@ services:
       interval: 2000
       reinitializing_timeout: 60000
   vault:
-    scale: 1
+    scale: ${CLUSTER_SCALE}
     start_on_create: true
