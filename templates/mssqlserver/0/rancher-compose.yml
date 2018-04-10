@@ -1,0 +1,41 @@
+.catalog:
+  name: MSSQLServer
+  version: 2017-CU5-rancher1
+  description: sqlserver
+  maintainer: "JagJag <kyukou@gmail.com>"
+  questions: 
+    - variable: "mssqlscale"
+      type: "int"
+      required: true
+      label: "# of mssql instance "
+      description: "# of mssql instance"
+      default: 3
+    - variable: "mssql_password"
+      type: "string"
+      required: true
+      label: "SA Password"
+      description: "require Strong Password"
+      default: <YourStrong!Passw0rd>
+    - variable: "mssql_port"
+      type: "string"
+      required: true
+      label: "mssql_port"
+      description: "connect port"
+      default: 1433
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to associate with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+
+version: '2'
+services:
+  mssql-linux:
+    scale: ${mssqlscale}
+    start_on_create: true
