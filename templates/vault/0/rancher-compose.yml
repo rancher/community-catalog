@@ -6,38 +6,75 @@ catalog:
     Installs a Vault container, internal (Rancher) load-balancer, and allows connection to a Consul cluster
   uuid: vault-rac-0
   questions:
-    - variable: VAULT_LOCAL_CONFIG
-      label: Provide a default config?
+    - variable: VAULT_CLUSTER_NAME
+      label: Vault Cluster Name
       description: |
-        This is the embedded JSON format config file that vault will use at startup
-      type: multiline
-      default: |
-        {"backend":{"consul":{"address":"consul:8500", "path":"vault"}}, "listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}}, "cluster_name": "myCluster" }
+        Provide a name for this Vault cluster
+      type: string
+      default: myCluster
+      required: true
+    - variable: VAULT_BACKEND
+      label: Backend for Vault
+      description: |
+        Provide the backend engine for Vault (i.e., Consul, File, etc.)
     - variable: VAULT_LISTEN_PORT
       label: Vault Listen Port
-      description:
+      description: |
         This is the port number you want Vault to listen on.  Actually, Vault ALWAYS listens on port 8200, but it isn't exposed, so you can set the port you want the LoadBalancer to listen on.
       default: 8200
       type: int
+      required: true
     - variable: VAULT_CLUSTER_PORT
       label: Vault Cluster Port
-      description:
+      description: |
         Similar to the Vault Listen Port, this is the VAULT CLUSTER listen port to use.
       default: 8201
       type: int
-    - variable: USE_CONSUL
-      label: Would you like to back Vault with Consul?
+      required: true
+    - variable: VAULT_BACKEND
+      label: Select a backend for Vault
       description: |
-        Selecting yes or no allows you to back your vault repoository with a pre-installed
-        Consul cluster/server
-      default: false
-      type: boolean
-    - variable: CONSUL_SERVICE
-      label: Specify the Consul service to connect to
+        Vault supports several different backend storage engines.  Please select the one you are interested in using. (NOTE: Must be pre-installed or added to a different stack)
+      default: Filesystem
+      type: enum
+      required: true
+      options:
+        - azure
+        - cockroachdb
+        - consul
+        - couchdb
+        - dynamodb
+        - etcd
+        - filesystem
+        - gcs
+        - inmem
+        - manta
+        - mysql
+        - postgresql
+        - spanner
+        - cassandra
+        - s3
+        - swift
+        - zookeeper
+    - variable: BACKEND_SERVICE
+      label: Specify the Backend service to connect to
       description: |
-        The pre-installed Consul server to back to
+        The pre-installed Backend server to back to.  To reference, you can use the memory variable "$SERVICE" in your URLs.  For example: "consul://$SERVICE:8500"
       default: "select"
       type: service
+    - variable: BACKEND_CONFIGURATION
+      label: Specify the backend configuration in name=value format
+      default: "path=\"/mnt/vault/data\""
+      required: true
+      description: |
+        Enter the configuration block for the backend (Refer to Vault documentation for valid backend configuration elements) put each item on a separate line
+      type: multiline
+    - variable: HOST_LABEL
+      label: Optional Host label to bind LoadBalancer to
+      description: |
+        If you wish to bind your LoadBalancer to a specific host node, you can specify the label and value here in name=value pair format
+      default: "lbhost=true"
+      type: string
     - variable: VOLUME_DRIVER
       label: Driver for volumes
       description: |

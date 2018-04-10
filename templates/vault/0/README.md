@@ -19,3 +19,17 @@ This catalog item uses these two main containers:
 4. Specify the Volume Driver for pesistent mounting of Vault's FILE backing store, and CONFIGURATION
 5. Finally, once the stack is up, you can use your normal Vault process to init, unseal, and more.
 6. Enjoy!
+
+## Backend Configuration
+This field is for specifying your backend configuration values.  You enter them in a name=value pair format with each separate element being on its own line.  For example:
+```
+address = "http://locahost:2379"
+etcd_api = "v3"
+```
+would be a valid configuration for Etcd and
+```
+access_key = "abcd1234"
+secret_key = "defg5678"
+bucket     = "my-bucket"
+```
+would be valid for Amazon S3 buckets.

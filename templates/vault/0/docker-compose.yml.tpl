@@ -11,7 +11,9 @@ services:
     - ${VAULT_LISTEN_PORT}:8200/tcp
     - ${VAULT_CLUSTER_PORT}:8201/tcp
     labels:
-      io.rancher.scheduler.affinity:host_label: lbhost=true
+{{- if .Values.HOST_LABEL }}
+      io.rancher.scheduler.affinity:host_label: ${HOST_LABEL}
+{{- end }}
       io.rancher.container.agent.role: environmentAdmin,agent
       io.rancher.container.agent_service.drain_provider: 'true'
       io.rancher.container.create_agent: 'true'
@@ -20,13 +22,14 @@ services:
     - IPC_LOCK
     image: vault:0.9.6
     environment:
-      VAULT_LOCAL_CONFIG: ${VAULT_LOCAL_CONFIG}
       VAULT_REDIRECT_INTERFACE: "eth0"
       VAULT_CLUSTER_INTERFACE: "eth0"
-{{- if eq .Values.USE_CONSUL "true"}}
+      VAULT_LOCAL_CONFIG: |
+        { "backend": "{{.Values.VAULT_BACKEND}}": { {{.Values.BACKEND_CONFIGURATION}} },"listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}}, "cluster_name":"{{.Values.VAULT_CLUSTER_NAME}}" }
+{{- if .Values.VAULT_BACKEND }}
     external_links:
-    - ${CONSUL_SERVICE}:consul
-{{- end}}
+    - ${VAULT_BACKEND}:SERVICE
+{{- end }}
     volumes:
     - vault-file:/vault/file
     - vault-config:/vault/config
