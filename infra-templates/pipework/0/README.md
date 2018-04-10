@@ -8,7 +8,7 @@
 * Docker Hub: [dreamcat4/pipework](https://hub.docker.com/r/dreamcat4/pipework/)
 
 By this catalog, to configure more flexible container network is available.  
-Good example of this, there is multiple container networks.
+A good example of this, there is multiple container networks.
 
 ## Deployment
 
