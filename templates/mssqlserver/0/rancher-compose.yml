@@ -1,0 +1,47 @@
+version: '2'
+.catalog:
+  name: MSSQLServer
+  version: 2017-CU5-rancher1
+  description: sqlserver
+  maintainer: "Jiang Jiang <kyukou@gmail.com>"
+  questions: 
+    - variable: "mssql_pid"
+      label: "Mssql edition:"
+      description: |
+        Choose mssql edition to be run.
+      default: Developer
+      required: true
+      type: enum
+      options:
+        - Developer
+        - Express
+        - Standard
+        - Enterprise
+        - EnterpriseCore
+    - variable: "mssql_password"
+      type: "string"
+      required: true
+      label: "SA Password"
+      description: " At least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols."
+      default: <YourStrong!Passw0rd>
+    - variable: "mssql_port"
+      type: "string"
+      required: true
+      label: "mssql_port"
+      description: "connect to mssql by this port"
+      default: 1433
+    - variable: "VOLUME_DRIVER"
+      description: "The VOLUME driver to associate with this server"
+      label: "VOLUME Driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+
+services:
+  mssql-linux:
+    start_on_create: true

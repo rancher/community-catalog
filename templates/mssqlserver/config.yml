@@ -1,0 +1,6 @@
+name: Microsoft Sqlserver
+description: |
+ Microsoft sqlserver 2017 docker edition
+version: 2017-CU5-rancher1
+maintainer: "Jiang Jiang <kyukou@gmail.com>"
+category: Databases
