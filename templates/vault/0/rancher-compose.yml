@@ -56,7 +56,6 @@ catalog:
       label: Specify the Backend service to connect to
       description: |
         The pre-installed Backend server to back to.  To reference, you can use the memory variable "SERVICE" in your URLs.  For example: "consul://SERVICE:8500"
-      default: "select"
       type: service
     - variable: BACKEND_CONFIGURATION
       label: Specify the backend configuration in valid JSON format

@@ -21,7 +21,7 @@ services:
     image: vault:0.9.6
     cap_add:
     - IPC_LOCK
-{{- if .Values.VAULT_BACKEND }}
+{{- if .Values.BACKEND_SERVICE }}
     external_links:
     - ${BACKEND_SERVICE}:SERVICE
 {{- end }}
@@ -29,7 +29,11 @@ services:
       VAULT_REDIRECT_INTERFACE: "eth0"
       VAULT_CLUSTER_INTERFACE: "eth0"
       VAULT_LOCAL_CONFIG: |
-        { "storage":{"{{.Values.VAULT_BACKEND}}":{ {{.Values.BACKEND_CONFIGURATION}} }},"listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}},"cluster_name":"{{.Values.VAULT_CLUSTER_NAME}}"}
+        {
+          "storage":{"${VAULT_BACKEND}":{ ${BACKEND_CONFIGURATION} }},
+          "listener":{"tcp":{"address":"0.0.0.0:8200","tls_disable":1}},
+          "cluster_name":"${VAULT_CLUSTER_NAME}"
+        }
     volumes:
     - vault-file:/vault/file
     - vault-config:/vault/config
