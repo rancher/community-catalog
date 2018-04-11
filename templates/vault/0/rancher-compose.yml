@@ -59,8 +59,7 @@ catalog:
       type: service
     - variable: BACKEND_CONFIGURATION
       label: Specify the backend configuration in valid JSON format
-      default: |
-        "path":"/vault/file"
+      default: '"path":"/vault/file"'
       required: true
       description: |
         Enter the configuration block for the backend (Refer to Vault documentation for valid backend configuration elements) in JSON format
