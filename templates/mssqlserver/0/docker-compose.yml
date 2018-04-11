@@ -5,16 +5,14 @@ services:
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: ${mssql_password}
+      MSSQL_PID: ${mssql_pid}
     stdin_open: true
     volumes:
     - mssqlvolume:/var/opt/mssql
     tty: true
     ports:
     - ${mssql_port}:1433/tcp
-    labels:
-      io.rancher.container.pull_image: always
 
 volumes:
   mssqlvolume:
     driver: ${VOLUME_DRIVER}
-    per_container: true
