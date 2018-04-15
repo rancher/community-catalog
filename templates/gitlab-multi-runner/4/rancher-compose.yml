@@ -38,6 +38,13 @@ catalog:
       default: ""
       required: false
 
+    - variable: "CONCURRENT"
+      label: "Concurrent"
+      description: "Limits how many jobs globally can be run concurrently"
+      type: "string"
+      default: "1"
+      required: true
+
 services:
   gitlab-runner-config:
     start_on_create: true
