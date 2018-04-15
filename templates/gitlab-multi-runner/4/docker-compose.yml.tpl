@@ -47,7 +47,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     tty: true
     volumes_from:
-    - gitlab-runner-config
+    - gitlab-runner-config-edit
     command:
     - run
     labels:
