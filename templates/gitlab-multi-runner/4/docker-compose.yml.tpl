@@ -37,8 +37,6 @@ services:
     command: sed -i -e "s|concurrent = 1|concurrent = ${CONCURRENT}|g" /etc/gitlab-runner/config.toml
     labels:
       io.rancher.container.start_once: 'true'
-      io.rancher.sidekicks: gitlab-runner-config
-
 
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine-v10.4.0
@@ -51,7 +49,7 @@ services:
     command:
     - run
     labels:
-      io.rancher.sidekicks: gitlab-runner-config-edit
+      io.rancher.sidekicks: gitlab-runner-config, gitlab-runner-config-edit
       io.rancher.scheduler.global: 'true'
     {{- if ne .Values.host_label ""}}
       io.rancher.scheduler.affinity:host_label: ${host_label}
