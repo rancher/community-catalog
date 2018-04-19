@@ -38,6 +38,8 @@ logstash-collector:
   tty: true
   links:
   - redis:redis
+  external_links:
+  - ${elasticsearch_link}:elasticsearch
   ports:
   - "5000/udp"
   - "6000/tcp"
