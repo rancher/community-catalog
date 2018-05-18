@@ -2,6 +2,7 @@
     name: Elasticsearch Cluster
     version: 5.4.0-rancher1
     description: Scalable Elasticsearch Cluster
+    maximum_rancher_version: v1.6.14
 
     questions:
         - variable: "cluster_name"
