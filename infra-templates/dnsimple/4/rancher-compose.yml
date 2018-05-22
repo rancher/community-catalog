@@ -1,18 +1,13 @@
 # notemplating
 .catalog:
   name: "DNSimple DNS"
-  version: "v0.6.0-rancher2"
-  description: "Rancher External DNS service powered by DNSimple. Requires Rancher version v1.1.0"
-  minimum_rancher_version: v1.6.0-rc1
+  version: "v0.7.11"
+  description: "Rancher External DNS service powered by DNSimple"
+  minimum_rancher_version: v1.6.0
   questions:
-    - variable: "DNSIMPLE_EMAIL"
-      label: "DNSimple Account Email Address"
-      description: "Email address associated with your DNSimple account"
-      type: "string"
-      required: true
-    - variable: "DNSIMPLE_TOKEN"
-      label: "DNSimple API Token"
-      description: "API token for your DNSimple account"
+    - variable: "DNSIMPLE_ACCOUNT_TOKEN"
+      label: "DNSimple Account Access Token"
+      description: "OAuth account access token for your DNSimple account."
       type: "string"
       required: true
     - variable: "ROOT_DOMAIN"
@@ -35,11 +30,21 @@
       type: "string"
       default: "%{{service_name}}.%{{stack_name}}.%{{environment_name}}"
       required: false
+    - variable: "HEALTH_CHECK"
+      label: "Health Check Interval"
+      description: |
+        The health check interval for this service, in milliseconds.
+        Raise this value if the global requests for your account are exceeding the DNSimple API rate limits.
+      type: "int"
+      min: 5000
+      max: 60000
+      default: 15000
+      required: true
 
 dnsimple:
   health_check:
     port: 1000
-    interval: 15000
+    interval: ${HEALTH_CHECK}
     unhealthy_threshold: 2
     request_line: GET / HTTP/1.0
     healthy_threshold: 2
