@@ -47,7 +47,7 @@ services:
     image: mreferre/harbor-setupwrapper:1.1.1-1
     container_name: harbor-setupwrapper
     environment:
-      - HARBORHOSTNAME=${harborhostname}.${traefikdomain}
+      - HARBORHOSTNAME=${harborhostname}
       - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
     volumes:
       - data:/data
