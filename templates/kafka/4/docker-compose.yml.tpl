@@ -17,6 +17,7 @@ services:
       - ADVERTISE_PUB_IP=${kafka_pub_ip}
       - KAFKA_AUTO_CREATE_TOPICS=${kafka_auto_create_topics}
       - KAFKA_REPLICATION_FACTOR=${kafka_replication_factor}
+      - KAFKA_OFFSET_RETENTION_MINUTES=${kafka_offset_retention_minutes}
     external_links:
       - ${zk_link}:zk
     labels: 
@@ -35,7 +36,7 @@ services:
     {{- if ne .Values.host_label ""}}
       io.rancher.scheduler.affinity:host_label: ${host_label}
     {{- end}}
-    image: rawmind/rancher-kafka:0.11.0.0-1
+    image: rawmind/rancher-kafka:0.11.0.0-2
     volumes:
       - brokerconfig:/opt/tools
   broker-volume:

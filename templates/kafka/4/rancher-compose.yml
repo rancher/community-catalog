@@ -64,6 +64,12 @@ catalog:
       required: true
       default: 1 
       type: "int"
+    - variable: "kafka_offset_retention_minutes"
+      description: "Offset retention minutes" 
+      label: "Offset retention:"
+      required: true
+      default: 1440 
+      type: "int"
     - variable: "kafka_interval"
       description: "Interval to poll/apply configuration changes. 0 to disable" 
       label: "Broker Interval (s):"
