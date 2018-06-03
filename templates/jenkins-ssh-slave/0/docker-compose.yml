@@ -1,0 +1,17 @@
+version: '2'
+volumes:
+  jenkins-home:
+    driver: ${VOLUME_DRIVER}
+
+services:
+  jenkins-ssh-slave:
+    image: "jenkinsci/ssh-slave"
+    ports:
+      - ${PORT}:22/tcp
+    labels:
+      io.rancher.container.hostname_override: container_name
+    volumes:
+      - jenkins-home:/home/jenkins
+    environment:
+      - JENKINS_SLAVE_SSH_PUBKEY=${JENKINS_SLAVE_SSH_PUBKEY}
+      
