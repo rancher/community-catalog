@@ -23,4 +23,6 @@
 
  * Click deploy.
 
-\* If you specify an external database, you will want to delete the "sentry-postgres" service after creating the Sentry stack.
+### WARNING
+
+Upgrading from a version prior to `8.21.0-2` **requires manual volume migration**.

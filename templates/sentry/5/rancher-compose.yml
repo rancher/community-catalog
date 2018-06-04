@@ -1,7 +1,8 @@
 version: '2'
 catalog:
   name: Sentry
-  version: 8.21.0-1
+  version: 8.21.0-2
+  uuid: sentry-5
   description: Sentry is a realtime event logging and aggregation platform
 
   questions:
@@ -13,9 +14,8 @@ catalog:
 
     - variable: "sentry_public_port"
       type: "int"
-      required: true
+      required: false
       label: "Sentry public port"
-      default: 9000
       description: "Port that Sentry will listen on. Alternatively you could point a load balancer to the port 9000 of this container"
 
     - variable: "sentry_db_host"
@@ -24,7 +24,6 @@ catalog:
       label: "Sentry db host"
       default: "postgres"
       description: "Sentry db host."
-
 
     - variable: "sentry_db_name"
       type: "string"
@@ -89,18 +88,25 @@ catalog:
       label: "SENTRY_EMAIL_PORT"
       description: "Port of the smtp server. see https://hub.docker.com/_/sentry/ for more info"
 
+    - variable: sentry_storage_driver
+      label: Volume Storage Driver (Optional)
+      description: |
+        To use a stack scoped volume backed by a persistent storage service, enter the name
+        of an existing storage driver (see `Infrastructure -> Storage`).
+      required: false
+      type: string
+
+    - variable: sentry_storage_driver_opt
+      label: Storage Driver Option (Optional)
+      description: |
+        Specify a single "driver_opts" key/value pair in the format "optionName: optionValue".
+        E.g. for the `rancher-ebs` driver you should specify the required 'size' option like this: "size: 1".
+      required: false
+      type: string
+
 services:
-  sentry-cron:
-    scale: 1
-    start_on_create: true
-  sentry-postgres-datavolume:
-    scale: 1
-    start_on_create: true
-  sentry-worker:
-    start_on_create: true
   sentry-redis:
     scale: 1
-    start_on_create: true
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
@@ -112,7 +118,6 @@ services:
       reinitializing_timeout: 60000
   sentry-postgres:
     scale: 1
-    start_on_create: true
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
@@ -124,7 +129,6 @@ services:
       reinitializing_timeout: 60000
   sentry:
     scale: 1
-    start_on_create: true
     health_check:
       response_timeout: 2000
       healthy_threshold: 2
