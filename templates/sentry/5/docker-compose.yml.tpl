@@ -1,6 +1,5 @@
 version: "2"
 services:
-  {{- if eq .Values.sentry_db_host "postgres"}}
   sentry-postgres:
     environment:
       POSTGRES_DB: ${sentry_db_name}
@@ -12,7 +11,6 @@ services:
     volumes:
       - sentry-postgres:/data/postgres/data
     image: postgres:9.6-alpine
-  {{- end}}
   sentry-cron:
     environment:
       SENTRY_EMAIL_HOST: ${sentry_email_host}
@@ -32,9 +30,7 @@ services:
     - cron
     image: sentry:8.21.0
     links:
-    {{- if eq .Values.sentry_db_host "postgres"}}
     - sentry-postgres:postgres
-    {{- end}}
     - sentry-redis:redis
   sentry-redis:
     labels:
@@ -64,9 +60,7 @@ services:
     - sentry upgrade --noinput && sentry createuser --email ${sentry_initial_user_email} --password ${sentry_initial_user_password} --superuser && /entrypoint.sh run web || /entrypoint.sh run web
     image: sentry:8.21.0
     links:
-    {{- if eq .Values.sentry_db_host "postgres"}}
     - sentry-postgres:postgres
-    {{- end}}
     - sentry-redis:redis
   sentry-worker:
     environment:
@@ -88,15 +82,11 @@ services:
     - worker
     image: sentry:8.21.0
     links:
-    {{- if eq .Values.sentry_db_host "postgres"}}
     - sentry-postgres:postgres
-    {{- end}}
     - sentry-redis:redis
 
-{{- if eq .Values.sentry_db_host "postgres"}}
 volumes:
   sentry-postgres:
     driver: ${sentry_storage_driver}
     driver_opts:
       {{.Values.sentry_storage_driver_opt}}
-{{- end}}
