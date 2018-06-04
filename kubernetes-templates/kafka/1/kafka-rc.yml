@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  name: "${kafka_name}"
+  namespace: "${kafka_namespace}"
+  labels:
+    name: "${kafka_name}"
+spec:
+  replicas: ${kafka_scale}
+  selector:
+    name: "${kafka_name}"
+  template:
+    metadata: 
+      labels:
+        name: "${kafka_name}"
+    spec:
+      containers:
+        - name: "broker-conf"
+          image: "rawmind/k8s-kafka:0.10.2.0-1"
+          volumeMounts:
+            - mountPath: "/opt/tools"
+              name: "broker-conf"
+          ports: 
+          imagePullPolicy: "IfNotPresent"
+        - name: "broker-volume"
+          image: "rawmind/alpine-volume:0.0.2-1"
+          env:
+            - name: SERVICE_UID
+              value: "10003"
+            - name: SERVICE_GID
+              value: "10003"
+            - name: SERVICE_VOLUME
+              value: "${kafka_log_dir}"
+            - name: KEEP_ALIVE
+              value: "1"
+          volumeMounts:
+            - mountPath: "${kafka_log_dir}"
+              name: "broker-data"
+          ports: 
+          imagePullPolicy: "IfNotPresent"
+        - name: "broker-service"
+          image: "rawmind/alpine-kafka:0.10.2.0-2"
+          env:
+            - name: JVMFLAGS
+              value: "-Xmx${kafka_mem}m -Xms${kafka_mem}m"
+            - name: CONFD_INTERVAL
+              value: "${kafka_interval}"
+            - name: KAFKA_ZK_SERVICE
+              value: "${zk_link}"
+            - name: KAFKA_DELETE_TOPICS
+              value: "${kafka_delete_topics}"
+            - name: KAFKA_LOG_DIRS
+              value: "${kafka_log_dir}"
+            - name: KAFKA_LOG_RETENTION_HOURS
+              value: "${kafka_log_retention}"
+            - name: KAFKA_NUM_PARTITIONS
+              value: "${kafka_num_partitions}"
+            - name: ADVERTISE_PUB_IP
+              value: "${kafka_pub_ip}"
+            - name: POD_NAMESPACE
+              value: "${kafka_namespace}"
+          volumeMounts:
+            - mountPath: "${kafka_log_dir}"
+              name: "broker-data"
+            - mountPath: "/opt/tools"
+              name: "broker-conf"
+          ports:
+            - containerPort: 9092
+              name: "broker-client"
+              protocol: "TCP"
+          imagePullPolicy: "IfNotPresent"
+      restartPolicy: "Always"
+      volumes:
+        - name: "broker-data"
+          emptyDir: {}
+        - name: "broker-conf"
+          emptyDir: {}

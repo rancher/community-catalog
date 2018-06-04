@@ -1,0 +1,12 @@
+.catalog:
+  name: "Weave Cloud Agents"
+  description: |
+      Weave Cloud is a add-on to Kubernetes which provides Continuous Delivery, along with hosted Prometheus Monitoring and a visual dashboard for exploring & debugging microservices
+  version: "latest"
+  maximum_rancher_version: v1.3.99
+  questions:
+    - variable: "WEAVE_CLOUD_SERVICE_TOKEN"
+      description: "Service token for your Weave Cloud instance, get one at https://cloud.weave.works"
+      label: "Weave Cloud service token"
+      required: true
+      type: "string"

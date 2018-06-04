@@ -1,0 +1,45 @@
+version: '2'
+services:
+  coredns:
+    image: coredns/coredns:1.0.1
+    labels:
+      io.rancher.sidekicks: data
+      io.rancher.container.hostname_override: container_name
+    command: [ "-conf", "/etc/coredns/Corefile" ]
+    ports:
+      - ${PUBLISH_PORT}:${PUBLISH_PORT}/tcp
+      - ${PUBLISH_PORT}:${PUBLISH_PORT}/udp
+    volumes_from:
+      - data
+  data:
+    image: zhenyangzhao/coredns-file:v0.8.0
+    labels:
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.pull_image: always
+    network_mode: none
+    entrypoint:
+      - confd
+      - -backend
+      - env
+      - -onetime
+    environment:
+      PLUGIN_ZONES: ${ZONES}
+      PLUGIN_ROOT_PATH: ${ROOT_PATH}
+      PLUGIN_ETCD_ENDPOINTS: ${ETCD_ENDPOINTS}
+      PLUGIN_UPSTREAM: ${UPSTREAM}
+      PLUGIN_PROM: ${PLUGIN_PROM}
+      PLUGIN_ERRORS: ${PLUGIN_ERRORS}
+      PLUGIN_LOG: ${PLUGIN_LOG}
+      PLUGIN_HEALTH: true
+      PLUGIN_PROXY: ${PLUGIN_PROXY}
+      PLUGIN_CACHE: ${PLUGIN_CACHE}
+      PLUGIN_LOADBALANCE: ${PLUGIN_LOADBALANCE}
+      PLUGIN_FORWARDS: ${FORWARDS}
+      PUBLISH_PORT: ${PUBLISH_PORT}
+    volumes:
+      - coredns_data:/etc/coredns
+volumes:
+  coredns_data:
+    driver: local
+    per_container: true
+

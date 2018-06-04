@@ -1,0 +1,49 @@
+database-data:
+  image: busybox
+  labels:
+    io.rancher.container.start_once: 'true'
+  net: none
+  entrypoint: /bin/true
+  volumes:
+    - /var/lib/mysql
+    - /docker-entrypoint-initdb.d
+database:
+  image: mariadb
+  environment:
+    MYSQL_DATABASE: ${guacamole_db}
+    MYSQL_ONETIME_PASSWORD: 'true'
+    MYSQL_PASSWORD: ${guacamole_password}
+    MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+    MYSQL_USER: ${guacamole_user}
+  volumes_from:
+    - database-data
+  labels:
+    io.rancher.sidekicks: setup-get-db-script, database-data
+setup-get-db-script:
+  image: glyptodon/guacamole:0.9.10-incubating
+  net: none
+  volumes_from:
+    - database-data
+  command:
+  - bash
+  - -c
+  - /opt/guacamole/bin/initdb.sh --mysql > /docker-entrypoint-initdb.d/initdb.sql
+  labels:
+    io.rancher.container.start_once: 'true'
+guacd:
+  image: glyptodon/guacd:0.9.10-incubating
+guacamole:
+  image: glyptodon/guacamole:0.9.10-incubating
+  environment:
+    MYSQL_DATABASE: ${guacamole_db}
+    MYSQL_HOSTNAME: database
+    MYSQL_PASSWORD: ${guacamole_password}
+    MYSQL_USER: ${guacamole_user}
+  links:
+   - guacd:guacd
+  ports:
+    - ${public_port}:8080/tcp
+  command:
+    - /bin/bash
+    - -c
+    - cd /usr/local/tomcat/webapps;rm -rf ROOT/; ln -s guacamole.war ROOT.war; /opt/guacamole/bin/start.sh;

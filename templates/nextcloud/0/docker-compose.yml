@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+
+  nextcloud:
+    image: nextcloud:12-apache
+    volumes_from:
+      - nextcloud-data
+    ports:
+      - ${NEXTCLOUD_PORT}:80
+    depends_on:
+      - mariadb
+    labels:
+      io.rancher.sidekicks: nextcloud-data
+      io.rancher.container.hostname_override: container_name
+
+  nextcloud-data:
+    image: nextcloud:12-apache
+    entrypoint:
+      - /bin/true
+    volumes:
+      - /var/www/html
+    labels:
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.hostname_override: container_name
+
+  mariadb:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+    labels:
+      io.rancher.sidekicks: mariadb-data
+      io.rancher.container.hostname_override: container_name
+
+  mariadb-data:
+    image: mariadb:10
+    entrypoint:
+      - /bin/true
+    volumes:
+      - /var/lib/mysql
+    tty: true
+    labels:
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.hostname_override: container_name
+

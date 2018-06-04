@@ -1,0 +1,44 @@
+broker:
+  tty: true
+  image: rawmind/alpine-kafka:0.10.2.1
+  volumes_from:
+    - broker-volume
+    - broker-conf
+  environment:
+    - JVMFLAGS=-Xmx${kafka_mem}m -Xms${kafka_mem}m
+    - CONFD_INTERVAL=${kafka_interval}
+    - ZK_SERVICE=${zk_link}
+    - KAFKA_DELETE_TOPICS=${kafka_delete_topics}
+    - KAFKA_LOG_DIRS=${kafka_log_dir}
+    - KAFKA_LOG_RETENTION_HOURS=${kafka_log_retention}
+    - KAFKA_NUM_PARTITIONS=${kafka_num_partitions}
+    - ADVERTISE_PUB_IP=${kafka_pub_ip}
+  external_links:
+    - ${zk_link}:zk
+  labels: 
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.sidekicks: broker-volume, broker-conf
+broker-conf:
+  net: none
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  image: rawmind/rancher-kafka:0.10.2.0
+  volumes:
+    - /opt/tools
+broker-volume:
+  net: none
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.start_once: true
+  environment:
+    - SERVICE_UID=10003
+    - SERVICE_GID=10003
+    - SERVICE_VOLUME=${kafka_log_dir}
+  volumes:
+    - ${kafka_log_dir}
+  volume_driver: local
+  image: rawmind/alpine-volume:0.0.2-1

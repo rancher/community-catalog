@@ -1,12 +1,12 @@
 .catalog:
-  name: "Wordpress"
+  name: "WordPress"
   version: "v0.1-educaas1"
   description: "Blog tool, publishing platform and CMS"
-  uuid: Wordpress-0
+  uuid: WordPress-0
   minimum_rancher_version: v0.51.0
-  questions:    
+  questions:
     - variable: public_port
-      description: "public port to access the wordpress site"
+      description: "public port to access the WordPress site"
       label: "Public Port"
       required: true
       default: "80"

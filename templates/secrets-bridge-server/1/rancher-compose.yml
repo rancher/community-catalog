@@ -1,0 +1,52 @@
+.catalog:
+    name: "Secrets Bridge Server"
+    version: 0.1.0-rancher1
+    minimum_rancher_version: v1.2.0
+    description: |
+       Server side secrets bridge between Rancher and Vault
+    questions:
+        - variable: CATTLE_URL
+          type: string
+          label: "Cattle URL"
+          required: true
+          description: "URL to the Cattle Project this service is managing"
+        - variable: CATTLE_ACCESS_KEY
+          type: string
+          label: "Cattle Access Key"
+          required: true
+          description: "Cattle Access API Key"
+        - variable: CATTLE_SECRET_KEY
+          type: password
+          label: "Cattle Secret Key"
+          required: true
+          description: "Cattle Secret API Key"
+        - variable: VAULT_TOKEN
+          type: password
+          label: "Vault Temp Token"
+          required: true
+          description: "Temporary Token to Access Vault Cubbyhole"
+        - variable: VAULT_URL
+          type: string
+          label: "URL to Vault server"
+          required: true
+          description: "URL to the Vault server"
+        - variable: VAULT_CUBBYPATH
+          type: string
+          label: "Vault Cubbyhole Path"
+          required: true
+          description: "Path to get the permenant API key"
+        - variable: LBPORT
+          description: "Port for Secrets Bridge LB to listen on"
+          label: "LB Port"
+          type: string
+          required: true
+secrets-bridge-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000

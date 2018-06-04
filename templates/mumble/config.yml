@@ -1,0 +1,6 @@
+name: Mumble
+description: |
+  Mumble is an open source, low-latency, high quality voice chat software
+  primarily intended for use while gaming.
+version: v1.2.17
+category: Entertainment

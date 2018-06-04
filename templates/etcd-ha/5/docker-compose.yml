@@ -1,0 +1,24 @@
+etcd:
+    image: rancher/etcd:v2.3.7-11
+    labels:
+        io.rancher.scheduler.affinity:host_label_soft: etcd=true
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+        io.rancher.sidekicks: data
+    environment:
+        RANCHER_DEBUG: '${RANCHER_DEBUG}'
+        EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
+        BACKUP_PERIOD: '${BACKUP_PERIOD}'
+        BACKUP_RETENTION: '${BACKUP_RETENTION}'
+    volumes:
+    - etcd:/pdata
+    - ${BACKUP_LOCATION}:/data-backup
+    volumes_from:
+    - data
+data:
+  image: busybox
+  command: /bin/true
+  net: none
+  volumes:
+  - /data
+  labels:
+    io.rancher.container.start_once: 'true'

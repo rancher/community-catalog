@@ -1,0 +1,92 @@
+version: '2'
+catalog:
+  name: "CoreDNS"
+  version: "1.0.1"
+  minimum_rancher_version: v1.6.14
+  description: "CoreDNS is a DNS server that chains plugins and provides such DNS Services like Etcd & Kubernetes. For kubernetes, please use helm coredns's chart."
+  questions:
+    - variable: "PUBLISH_PORT"
+      description: "Port to publish coredns service."
+      label: "Publish port"
+      required: true
+      default: "53"
+      type: "int"
+    - variable: "ZONES"
+      label: "DNS zone names"
+      description: "The name of an existing zone in which to create the records."
+      type: "string"
+      default: "rancher.io"
+      required: true
+    - variable: "ROOT_PATH"
+      label: "Etcd root path"
+      description: "Etcd root path which is used to save records."
+      default: "/skydns"
+      type: "string"
+      required: true
+    - variable: "ETCD_ENDPOINTS"
+      label: "Etcd endpoints"
+      description: "Etcd service endpoints which support multiple parameters separated by comma."
+      type: "string"
+      default: ""
+      required: true
+    - variable: "UPSTREAM"
+      label: "Upstream for dns"
+      description: "The DNS server upstream."
+      type: "string"
+      default: "/etc/resolv.conf"
+      required: false
+    - variable: "FORWARDS"
+      label: "Forward addresses"
+      description: "The address which to be forwarded DNS query."
+      type: "string"
+      default: "8.8.8.8:53,8.8.4.4:53"
+    - variable: "PLUGIN_PROM"
+      label: "Prometheus plugin support"
+      description: "Whether to enable prometheus plugin."
+      type: "boolean"
+      default: true
+      required: true
+    - variable: "PLUGIN_ERRORS"
+      label: "Errors plugin support"
+      description: "Whether to enable errors plugin."
+      type: "boolean"
+      default: true
+      required: true
+    - variable: "PLUGIN_LOG"
+      label: "Log plugin support"
+      description: "Whether to enable log plugin."
+      type: "boolean"
+      default: true
+      required: true
+    - variable: "PLUGIN_PROXY"
+      label: "Proxy plugin support"
+      description: "Whether to enable proxy plugin."
+      type: "boolean"
+      default: true
+      required: true
+    - variable: "PLUGIN_CACHE"
+      label: "Cache plugin support"
+      description: "Whether to enable cache plugin."
+      type: "boolean"
+      default: true
+      required: true
+    - variable: "PLUGIN_LOADBALANCE"
+      label: "Loadbalance plugin support"
+      description: "Whether to enable loadbalance plugin."
+      type: "boolean"
+      default: true
+      required: true
+services:
+  coredns:
+    scale: 1
+    health_check:
+      response_timeout: 4000
+      healthy_threshold: 2
+      port: 8080
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      request_line: GET "/health" "HTTP/1.0"
+      reinitializing_timeout: 60000
+

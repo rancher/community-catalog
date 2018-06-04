@@ -1,0 +1,16 @@
+.catalog:
+    name: "AWS Spot Instance Helper"
+    version: "v0.1.0"
+    description: "AWS Spot Instance Helper"
+    minimum_rancher_version: v1.5.5
+
+ 
+aws-spot-instance-helper:
+    health_check:
+        port: 9777
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        request_line: GET /ping HTTP/1.0
+        healthy_threshold: 2

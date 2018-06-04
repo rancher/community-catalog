@@ -1,0 +1,37 @@
+allinone:
+    image: neuvector/allinone:rancher1.3
+    container_name: neuvector.allinone
+    restart: always
+    privileged: true
+    environment:
+        - affinity:com.myself.name!=neuvector
+        - CLUSTER_JOIN_ADDR=allinone
+    ports:
+        - 8443:8443
+    volumes:
+        - /var/neuvector:/var/neuvector
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /proc:/host/proc:ro
+        - /sys/fs/cgroup:/host/cgroup:ro
+    labels:
+        com.myself.name: "neuvector"
+        io.rancher.scheduler.affinity:host_label: ${NV_ALLINONE_LABEL}
+        io.rancher.container.hostname_override: container_name
+enforcer:
+    image: neuvector/enforcer:rancher1.3
+    container_name: neuvector.enforcer
+    restart: always
+    privileged: true
+    environment:
+        - affinity:com.myself.name!=neuvector
+        - CLUSTER_JOIN_ADDR=allinone
+    volumes:
+        - /var/neuvector:/var/neuvector
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /proc:/host/proc:ro     
+        - /sys/fs/cgroup/:/host/cgroup/:ro
+    labels:
+        com.myself.name: "neuvector"
+        io.rancher.scheduler.global: true
+        io.rancher.scheduler.affinity:host_label_ne: ${NV_ALLINONE_LABEL}
+        io.rancher.container.hostname_override: container_name

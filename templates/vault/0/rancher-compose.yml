@@ -1,0 +1,118 @@
+version: '2'
+catalog:
+  name: Vault
+  version: 1.0-rancher1
+  description: |
+    Installs a Vault container, internal (Rancher) load-balancer, and allows connection to a Consul cluster
+  uuid: vault-rac-0
+  questions:
+    - variable: VAULT_CLUSTER_NAME
+      label: Vault Cluster Name
+      description: |
+        Provide a name for this Vault cluster
+      type: string
+      default: myCluster
+      required: true
+    - variable: VAULT_LISTEN_PORT
+      label: Vault Listen Port
+      description: |
+        This is the port number you want Vault to listen on.  Actually, Vault ALWAYS listens on port 8200, but it isn't exposed, so you can set the port you want the LoadBalancer to listen on.
+      default: 8200
+      type: int
+      required: true
+    - variable: VAULT_CLUSTER_PORT
+      label: Vault Cluster Port
+      description: |
+        Similar to the Vault Listen Port, this is the VAULT CLUSTER listen port to use.
+      default: 8201
+      type: int
+      required: true
+    - variable: VAULT_BACKEND
+      label: Select a backend for Vault
+      description: |
+        Vault supports several different backend storage engines.  Please select the one you are interested in using. (NOTE: Must be pre-installed or added to a different stack)
+      default: file
+      type: enum
+      required: true
+      options:
+        - azure
+        - cockroachdb
+        - consul
+        - couchdb
+        - dynamodb
+        - etcd
+        - file
+        - gcs
+        - inmem
+        - manta
+        - mysql
+        - postgresql
+        - spanner
+        - cassandra
+        - s3
+        - swift
+        - zookeeper
+    - variable: BACKEND_SERVICE
+      label: Specify the Backend service to connect to
+      description: |
+        The pre-installed Backend server to back to.  To reference, you can use the memory variable "SERVICE" in your URLs.  For example: "consul://SERVICE:8500"
+      type: service
+    - variable: BACKEND_CONFIGURATION
+      label: Specify the backend configuration in valid JSON format
+      default: '"path":"/vault/file"'
+      required: true
+      description: |
+        Enter the configuration block for the backend (Refer to Vault documentation for valid backend configuration elements) in JSON format
+      type: string
+    - variable: HOST_LABEL
+      label: Optional Host label to bind LoadBalancer to
+      description: |
+        If you wish to bind your LoadBalancer to a specific host node, you can specify the label and value here in name=value pair format
+      default: "lbhost=true"
+      type: string
+    - variable: CLUSTER_SCALE
+      label: How many Vault servers do you want in your cluster?
+      description: |
+        Select the number of VAULT servers you want to set up in your cluster
+      default: 1
+      type: int
+      required: true
+    - variable: VOLUME_DRIVER
+      label: Driver for volumes
+      description: |
+        How/Where to store your vault config and logs
+      default: local
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+services:
+  vault-lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: vault
+        source_port: ${VAULT_LISTEN_PORT}
+        target_port: 8200
+      - priority: 2
+        protocol: tcp
+        service: vault
+        source_port: ${VAULT_CLUSTER_PORT}
+        target_port: 8201
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
+  vault:
+    scale: ${CLUSTER_SCALE}
+    start_on_create: true

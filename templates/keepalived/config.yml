@@ -1,0 +1,5 @@
+name: keepalived
+description: |
+  Keepalived enables services to be deployed in HA  with VRRP based failover across multiple hosts.
+version: v1.0.1
+category: Networking

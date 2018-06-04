@@ -1,0 +1,12 @@
+.catalog:
+  name: "aqua"
+  version: "2.6.4"
+  description: "aqua csp 2.6.4"
+  minimum_rancher_version: v1.1.0
+  questions:
+    - variable: console_port
+      description: "Port of the management console"
+      label: "Console Port"
+      type: "int"
+      required: true
+      default: "9090"

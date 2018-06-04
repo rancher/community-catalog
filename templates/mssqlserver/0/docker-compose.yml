@@ -1,0 +1,18 @@
+version: '2'
+services:
+  mssql-linux:
+    image: microsoft/mssql-server-linux:2017-CU5
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: ${mssql_password}
+      MSSQL_PID: ${mssql_pid}
+    stdin_open: true
+    volumes:
+    - mssqlvolume:/var/opt/mssql
+    tty: true
+    ports:
+    - ${mssql_port}:1433/tcp
+
+volumes:
+  mssqlvolume:
+    driver: ${VOLUME_DRIVER}

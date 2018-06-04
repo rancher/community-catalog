@@ -1,0 +1,195 @@
+version: '2'
+catalog:
+  name: "Rancher Backup"
+  version: "2.0.1"
+  description: "It's a general purpose to solve backup matter on Rancher"
+  minimum_rancher_version: v1.5.0
+  questions:
+    - variable: "CRON_SCHEDULE"
+      description: "The schedule with the Go cron syntaxe (per default, each day)"
+      label: "Schedule"
+      type: "string"
+      required: true
+      default: "0 0 0 * * *"
+    - variable: "BACKEND"
+      description: "The duplicity backend for remote backup"
+      label: "Backend"
+      type: "string"
+      required: true
+    - variable: "TARGET_PATH"
+      description: "The path on target backup"
+      label: "Target path on backend"
+      type: "string"
+      required: true
+      default: "/"
+    - variable: "BK_FULL_FREQ"
+      description: "The backup full frequency (per defaut, each 7 days)"
+      label: "Backup full frequency"
+      type: "string"
+      required: true
+      default: "7D"
+    - variable: "BK_KEEP_FULL"
+      description: "How many keep full backup (per default, keep 3s)"
+      label: "Backup full retention"
+      type: "string"
+      required: true
+      default: "5"
+    - variable: "BK_KEEP_FULL_CHAIN"
+      description: "How many keep incremental backup chain (per default, keep 1)"
+      label: "Backup incremental retention"
+      type: "string"
+      required: true
+      default: "1"
+    - variable: "VOLUME_SIZE"
+      description: "The volume size in MB"
+      label: "Volume size"
+      type: "string"
+      required: true
+      default: "200"
+    - variable: "DUPLICITY_OPTIONS"
+      description: "Pass options when invoke Duplicity command backup"
+      label: "Duplicity options"
+      type: "string"
+      required: false
+    - variable: "ENABLE_DUMP_SERVICE"
+      description: "If disabled, it's doesn't perform dump before save data"
+      label: "Enable dump service"
+      type: "string"
+      required: true
+      default: "true"
+      type: "enum"
+      options:
+        - "false"
+        - "true"
+    - variable: "ENABLE_DUMP_STACK"
+      description: "If disabled, it's doesn't perform the backup of stack definition"
+      label: "Enable Rancher dump stack"
+      type: "string"
+      required: true
+      default: "true"
+      type: "enum"
+      options:
+        - "false"
+        - "true"
+    - variable: "ENABLE_DUMP_RANCHER_DATABASE"
+      description: "If disabled, it's doesn't perform the dump of Rancher database"
+      label: "Enable Rancher database dump"
+      type: "string"
+      required: true
+      default: "true"
+      type: "enum"
+      options:
+        - "false"
+        - "true"
+    - variable: "VOLUME_DRIVER"
+      description: "Docker driver to store volume of local dump"
+      label: "Volume driver / Path"
+      type: "string"
+      required: true
+      default: "local"
+    - variable: "RANCHER_DATABASE_HOST"
+      description: "The rancher database host"
+      label: "Rancher DB host"
+      type: "string"
+      required: false
+    - variable: "RANCHER_DATABASE_PORT"
+      description: "The rancher database port"
+      label: "Rancher DB port"
+      type: "string"
+      required: false
+      default: "3306"
+    - variable: "RANCHER_DATABASE_NAME"
+      description: "The rancher database name"
+      label: "Rancher DB name"
+      type: "string"
+      required: false
+      default: "rancher"
+    - variable: "RANCHER_DATABASE_USER"
+      description: "The rancher database user"
+      label: "Rancher DB user"
+      type: "string"
+      required: false
+      default: "rancher"
+    - variable: "RANCHER_DATABASE_PASSWORD"
+      description: "The rancher database password"
+      label: "Rancher DB password"
+      type: "password"
+      required: false
+    - variable: "CONFD_BACKEND"
+      description: "The confd backend to grab config"
+      label: "Confd backend"
+      required: true
+      default: "env"
+      type: "string"
+    - variable: "CONFD_NODES"
+      description: "The confd nodes"
+      label: "Confd nodes"
+      required: false
+      type: "string"
+    - variable: "CONFD_PREFIX"
+      description: "The confd prefix"
+      label: "Confd prefix"
+      required: true
+      default: "/backup"
+      type: "string"
+    - variable: "FTP_PASSWORD"
+      label: "FTP password"
+      type: "password"
+      required: false
+    - variable: "AWS_ACCESS_KEY_ID"
+      label: "AWS access key"
+      type: "string"
+      required: false
+    - variable: "AWS_SECRET_ACCESS_KEY"
+      label: "AWS secret key"
+      type: "password"
+      required: false
+    - variable: "AZURE_ACCOUNT_NAME"
+      label: "Azure account name"
+      type: "string"
+      required: false
+    - variable: "AZURE_ACCOUNT_KEY"
+      label: "Azure account key"
+      type: "password"
+      required: false
+    - variable: "CLOUDFILES_USERNAME"
+      label: "CloudFiles username"
+      type: "string"
+      required: false
+    - variable: "CLOUDFILES_APIKEY"
+      label: "Cloudfiles API key"
+      type: "password"
+      required: false
+    - variable: "DPBX_ACCESS_TOKEN"
+      label: "Dropbox access token"
+      type: "password"
+      required: false
+    - variable: "GS_ACCESS_KEY_ID"
+      label: "Google Storage key"
+      type: "string"
+      required: false
+    - variable: "GS_SECRET_ACCESS_KEY"
+      label: "Google Storage secret"
+      type: "password"
+      required: false
+    - variable: "GOOGLE_DRIVE_ACCOUNT_KEY"
+      label: "Google Drive account key"
+      type: "password"
+      required: false
+    - variable: "SWIFT_USERNAME"
+      label: "Swift username"
+      type: "string"
+      required: false
+    - variable: "SWIFT_PASSWORD"
+      label: "Swift password"
+      type: "password"
+      required: false
+    - variable: "SWIFT_AUTHURL"
+      label: "Swift auth URL"
+      type: "string"
+      required: false
+
+
+backup:
+  scale: 1
+

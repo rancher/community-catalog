@@ -1,0 +1,80 @@
+.catalog:
+  name: Kafka
+  version: 0.10.2.1-rancher1
+  description: |
+    (Experimental) Apache Kafka cluster.
+  minimum_rancher_version: v0.59.0
+  maintainer: "Raul Sanchez <rawmind@gmail.com>"
+  uuid: kafka-0
+  questions:
+    - variable: "kafka_scale"
+      description: "Number of brokers nodes. Note: Recommended an odd number"
+      label: "Broker Nodes:"
+      required: true
+      default: 3
+      type: "int"
+    - variable: "kafka_mem"
+      description: "Amount of memory to config brokers."
+      label: "Broker Memory (mb):"
+      required: true
+      default: 1024 
+      type: "string"
+    - variable: "kafka_log_dir"
+      description: "Broker volume to log data"
+      label: "Broker log volume:"
+      required: true
+      default: "/opt/kafka/logs"
+      type: "string"
+    - variable: "kafka_log_retention"
+      description: "Broker log retention in hours"
+      label: "Broker log retention (h):"
+      required: true
+      default: "168"
+      type: "int"
+    - variable: "kafka_num_partitions"
+      description: "Number of broker partitions"
+      label: "Broker partitions:"
+      required: true
+      default: "1"
+      type: "int"
+    - variable: "kafka_delete_topics"
+      label: "Kafka delete topics:"
+      description: |
+        Enable delete topics in kafka.
+      default: false
+      required: true
+      type: enum
+      options:
+        - false
+        - true
+    - variable: "kafka_interval"
+      description: "Interval to poll/apply configuration changes. 0 to disable" 
+      label: "Broker Interval (s):"
+      required: true
+      default: 60 
+      type: "int"
+    - variable: "kafka_pub_ip"
+      description: "Advertise local and host public ip" 
+      label: "Broker public ip:"
+      required: false
+      default: false 
+      type: "boolean"
+    - variable: "zk_link"
+      description: |
+        Choose the Zookeeper service to use. 
+        It's really recommended a dedicated zookeeper service just for Kafka.
+      label: "Zookeeper stack/service"
+      default: "kafka-zk/zk"
+      required: true
+      type: "service"
+broker:
+  scale: ${kafka_scale}
+  retain_ip: true
+  health_check:
+    port: 9092
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+

@@ -1,0 +1,7 @@
+name: openHAB
+description: An open source, technology agnostic home automation platform
+version: 2.2.0
+category: Automation
+license: Eclipse Public License 1.0
+projectURL: https://www.openhab.org
+

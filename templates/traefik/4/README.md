@@ -18,6 +18,7 @@
 - acme_enable = false 				# Enable/Disable acme traefik support.
 - acme_email = "test@traefik.io" 	# acme user email
 - acme_ondemand = true 				# acme ondemand parameter.
+- acme_onhostrule = true 			# acme onHostRule parameter.
 - ssl_key # Paste your ssl key. *Required if you enable https
 - ssl_crt # Paste your ssl crt. *Required if you enable https
 - refresh_interval = 10s  # Interval to refresh traefik rules.toml from rancher-metadata.
@@ -30,6 +31,7 @@ Traefik labels has to be added in your services, in order to get included in tra
   - true: the service will be published as *service_name.stack_name.traefik_domain*
   - stack: the service will be published as *stack_name.traefik_domain*. WARNING: You could have collisions inside services within your stack
   - false: the service will not be published
+- traefik.alias = < alias >			# Alternate names to route rule. Multiple values separated by ",". WARNING: You could have collisions BE CAREFULL
 - traefik.domain = < domain >		# Domain names to route rule. Multiple values separated by "," 
 - traefik.path = < path >		    # Path to route rule. Multiple paths separated by ","
 - traefik.port = < port > 			# Port to expose throught traefik  
@@ -52,5 +54,10 @@ Traefik labels has to be added in your services, in order to get included in tra
  
  - http://${stack_name}.${traefik.domain}:${http_port}
  - https://${stack_name}.${traefik.domain}:${https_port}
+
+ If you set traefik.alias you service could also be acceses through
+
+ - http://${traefik.alias}.${traefik.domain}:${http_port}
+ - https://${traefik.alias}.${traefik.domain}:${https_port}
 
 Note: To access the services, you need to create A or CNAMES dns entries for every one. 

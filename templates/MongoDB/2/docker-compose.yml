@@ -2,7 +2,7 @@ mongo-cluster:
   restart: always
   environment:
     MONGO_SERVICE_NAME: mongo-cluster
-  tty: true
+    CATTLE_SCRIPT_DEBUG: ${debug}
   entrypoint: /opt/rancher/bin/entrypoint.sh
   command:
   - --replSet
@@ -15,15 +15,16 @@ mongo-cluster:
   volumes_from:
     - mongo-datavolume
     - mongo-base
+  ports:
+    - 27017:27017/tcp
 mongo-base:
   restart: always
   net: none
-  tty: true
   labels:
     io.rancher.scheduler.affinity:host_label: ${host_label}
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
-  image: rancher/mongodb-conf:v0.1.0
+  image: rancher/mongodb-conf:v0.1.1
   stdin_open: true
   entrypoint: /bin/true
 mongo-datavolume:

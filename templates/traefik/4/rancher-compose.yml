@@ -60,6 +60,12 @@
       required: true
       default: true 
       type: "boolean"
+    - variable: "acme_onhostrule"
+      description: "Enable acme onHostRule."
+      label: "ACME onHostRule:"
+      required: true
+      default: true 
+      type: "boolean"
     - variable: "ssl_key"
       description: "SSL key to secure the service. *Required if you enable https"
       label: "SSL key"

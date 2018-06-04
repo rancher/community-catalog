@@ -1,0 +1,7 @@
+name: Vault
+description: |
+  An OFFICIAL Vault server with optional configuration items, including backing store
+version: 1.0-rancher1
+category: Platform
+maintainer: Randal Cobb <randy.cobb@nordstrom.com>
+

@@ -1,5 +1,5 @@
 weavescope-probe:
-  image: weaveworks/scope:1.0.0
+  image: weaveworks/scope:1.1.0
   privileged: true
   net: host
   pid: host
@@ -17,7 +17,7 @@ weavescope-probe:
   - "--no-app"
   - "weavescope-app"
 weavescope-app:
-  image: weaveworks/scope:1.0.0
+  image: weaveworks/scope:1.1.0
   ports:
   - "4040:4040"
   command:

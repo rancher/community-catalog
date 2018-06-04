@@ -1,0 +1,142 @@
+.catalog:
+  name: "Datadog"
+  version: "1.1.0-11.0.5123"
+  description: "Real-time performance tracking and visualization of your container-based application deployment"
+  minimum_rancher_version: v1.2.0
+  questions:
+    - variable: "api_key"
+      label: "Datadog API Key"
+      description: |
+        Enter your Datadog API key.
+      required: true
+      type: "string"
+    - variable: "global_service"
+      label: "Global Service"
+      description: |
+        Enable this option to run a Datadog agent container on every host in the environment.
+      required: true
+      type: "boolean"
+      default: true
+    - variable: "host_labels"
+      label: "Export Host Labels as Tags"
+      description: |
+        Comma delimited list of host labels to export as Datadog host tags, e.g. 'region,zone'.
+      required: false
+      type: "string"
+    - variable: "service_labels"
+      label: "Export Service Labels as Tags"
+      description: |
+        Comma delimited list of service labels to export as Datadog metric tags.
+        'io.rancher.stack.name' and 'io.rancher.stack_service.name' are exported by default.
+      required: false
+      type: "string"
+    - variable: "host_tags"
+      label: "Global Host Tags"
+      description: |
+        Comma delimited list of host tags to apply to metrics, e.g. 'simple-tag-0,tag-key-1:tag-value-1'.
+      required: false
+      type: "string"
+    - variable: "dd_ec2_tags"
+      label: "Collect AWS EC2 Tags"
+      description: |
+        Collect AWS EC2 custom tags as agent tags (requires an IAM role associated with the instance).
+      required: true
+      type: "boolean"
+      default: false
+    - variable: cgroups_location
+      label: Cgroup directory location
+      description: |
+        Set this to '/cgroups/' if your hosts are running Amazon Linux AMIs.
+      required: true
+      type: enum
+      default: '/sys/fs/cgroup/'
+      options:
+        - '/sys/fs/cgroup/'
+        - '/cgroups/'
+    - variable: "dd_apm_enabled"
+      label: "Enable APM agent"
+      description: |
+        Enable the Datadog trace-agent along with the infrastructure agent, allowing the container to accept traces on 8126/tcp.
+      required: true
+      type: "boolean"
+      default: false
+    - variable: "service_discovery"
+      label: "Enable Service Discovery"
+      description: |
+        Collect metrics from supported applications running in Docker containers.
+      required: true
+      type: "boolean"
+      default: false
+    - variable: "sd_config_backend"
+      label: Service Discovery Configuration Backend
+      description: |
+        Choose a key/value store to use for looking up application configuration templates.
+        If none is provided only auto config templates will be used.
+      required: true
+      type: enum
+      default: none
+      options:
+        - none
+        - etcd
+        - consul
+    - variable: "sd_backend_host"
+      label: "Configuration Backend Host"
+      description: |
+        IP address or DNS name to use to connect to the configuration backend.
+      required: false
+      type: "string"
+    - variable: "sd_backend_port"
+      label: "Configuration Backend Port"
+      description: |
+        Port to use to connect to the configuration backend.
+      required: false
+      type: "int"
+    - variable: "sd_template_dir"
+      label: "Configuration Backend Template Path"
+      description: |
+        Specify a custom path where the agent should look for configuration templates in the backend.
+        The default is '/datadog/check_configs'.
+      required: false
+      type: "string"
+    - variable: "dd_consul_scheme"
+      label: "Consul Connection Scheme"
+      description: |
+        Scheme to use for requests to a Consul backend.
+      required: false
+      type: enum
+      default: http
+      options:
+        - http
+        - https
+    - variable: "dd_consul_verify"
+      label: "Verify Consul SSL Certificate"
+      description: |
+        Whether to verify the SSL certificate for HTTPS requests to a Consul backend.
+      required: false
+      type: "boolean"
+      default: true
+    - variable: "dd_consul_token"
+      label: "Consul ACL Token"
+      description: |
+        If the Consul backend uses ACL, specify a token granting read access to the configuration templates.
+      required: false
+      type: "string"
+    - variable: "statsd_namespace"
+      label: "StatsD Metric Namespace"
+      description: |
+        Optional namespace for aggregated StatsD metrics.
+      required: false
+      type: "string"
+    - variable: "dd_log_level"
+      label: "Agent log level"
+      description: |
+        Set the logging verbosity of the Datadog agent.
+      required: false
+      type: enum
+      default: INFO
+      options:
+        - CRITICAL
+        - ERROR
+        - WARNING
+        - INFO
+        - DEBUG

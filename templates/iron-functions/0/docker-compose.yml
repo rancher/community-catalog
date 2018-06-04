@@ -1,0 +1,75 @@
+version: '2'
+services:
+  functions-ui:
+    image: iron/functions-ui:latest
+    environment:
+      API_URL: http://api:8080
+    stdin_open: true
+    tty: true
+    links:
+    - functions-worker:api
+    labels:
+      io.rancher.container.pull_image: always
+  api-lb:
+    image: rancher/lb-service-haproxy:v0.6.4
+    ports:
+    - 8080:8080/tcp
+    - 4000:4000/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+  setup-dbuser:
+    image: wjimenez5271/postgres_client:v2
+    environment:
+      PGPASSWORD: ironfunctions
+      PGUSER: postgres
+      PGHOST: postgres
+      PGQUERY: GRANT ALL PRIVILEGES ON DATABASE funcs TO postgres;
+      SLEEP_BEFORE_EXEC: '5'
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+  functions-worker:
+    image: iron/functions:0.2.59
+    environment:
+      MQ_URL: redis://redis:6379/
+      DB_URL: postgres://postgres:ironfunctions@postgres/funcs?sslmode=disable
+    stdin_open: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /opt/ironfunc/:/app/data
+    tty: true
+    links:
+    - postgres:postgres
+    - redis:redis
+    labels:
+      io.rancher.container.pull_image: always
+  setup-db:
+    image: wjimenez5271/postgres_client:v2
+    environment:
+      PGPASSWORD: ironfunctions
+      PGUSER: postgres
+      PGHOST: postgres
+      PGQUERY: CREATE DATABASE funcs;
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+  postgres:
+    image: postgres:9.6.3
+    environment:
+      POSTGRES_PASSWORD: ironfunctions
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: setup-db,setup-dbuser
+  redis:
+    image: redis:4.0.1
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always

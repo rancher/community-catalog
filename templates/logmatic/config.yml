@@ -1,0 +1,8 @@
+name: Logmatic
+description: |
+  Funnel all logs, metrics and machine events into a single hub. Get a clear overview of what is happening 
+  across your distributed environments, and spot the needle in the haystack in no time.
+version: "1.0"
+category: Logging
+maintainer: "Remi Cattiau <remi@cattiau.com>"
+license: The MIT License

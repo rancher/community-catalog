@@ -1,0 +1,50 @@
+.catalog:
+  version: 2.3.7-beta.2
+  minimum_rancher_version: v1.2.0
+  questions:
+  - variable: SCALE
+    description: Desired cluster size. 3, 5, or 7 are good choices. You will need this many hosts to reach your desired scale.
+    label: Number of Nodes
+    required: true
+    default: 3
+    type: int
+  - variable: EMBEDDED_BACKUPS
+    label: Enable Backups
+    description: "Periodically backup state to the host filesystem."
+    required: true
+    default: true
+    type: boolean
+  - variable: BACKUP_LOCATION
+    label: Backup Host Location
+    description: "Location for state to be backed up to on the host. Mount network storage here on all hosts before continuing"
+    required: true
+    default: /var/etcd/backups
+    type: string
+  - variable: BACKUP_PERIOD
+    label: Backup Creation Period
+    description: Create a backup after this amount of time passes. Must conform to duration format
+    required: true
+    default: 15m0s
+    type: string
+  - variable: BACKUP_RETENTION
+    label: Backup Retention Period
+    description: Expire a backup after this amount of time passes. Must conform to duration format
+    required: true
+    default: 24h
+    type: string
+  - variable: RANCHER_DEBUG
+    description: Enable or disable verbose logging
+    label: Debug
+    required: true
+    default: true
+    type: boolean
+etcd:
+  scale: ${SCALE}
+  retain_ip: true
+  health_check:
+    port: 2378
+    request_line: /health
+    interval: 5000
+    response_timeout: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 2

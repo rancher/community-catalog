@@ -1,6 +1,6 @@
 .catalog:
   name: "Grafana"
-  version: "3.0.2-rancher1"
+  version: "4.1.1-rancher0"
   description: |
       (Experimental) Grafana: Beautiful metric & analytic dashboards
   questions:
@@ -28,5 +28,11 @@
       required: true
       default: "su2Tong2zoocie"
       type: "string"
-
+    - variable: install_plugins
+      description: "Include/Install Grafana Plugins (comma-separated plugin-ids)"
+      label: "Install Plugins"
+      required: false
+      default: "grafana-clock-panel"
+      type: "string"
+      
 grafana:

@@ -56,7 +56,7 @@ sentry:
   command:
   - /bin/bash
   - -c
-  - sentry upgrade --noinput && sentry createuser --email ${sentry_inital_user_email} --password ${sentry_inital_user_password} --superuser && /entrypoint.sh run web || /entrypoint.sh run web
+  - sentry upgrade --noinput && sentry createuser --email ${sentry_initial_user_email} --password ${sentry_initial_user_password} --superuser && /entrypoint.sh run web || /entrypoint.sh run web
   log_opt: {}
   image: sentry:8.5.0
   links:

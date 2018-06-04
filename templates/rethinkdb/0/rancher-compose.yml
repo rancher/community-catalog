@@ -1,0 +1,34 @@
+.catalog:
+  name: "RethinkDB"
+  version: "2.3.5"
+  description: "(Experimental) NoSQL-Database"
+  uuid: rethinkdb-0
+  questions:
+    - variable: "rethinkdb_proxy_webport"
+      description: ""
+      label: "Proxy Web Port (Admin Panel):"
+      required: true
+      type: "int"
+      default: 8080
+    - variable: "rethinkdb_proxy_queryport"
+      description: ""
+      label: "Proxy Query Port:"
+      required: true
+      type: "int"
+      default: 28015
+    - variable: "rethinkdb_volume_driver"
+      description: ""
+      label: "Volume Driver:"
+      required: true
+      type: "string"
+      default: "local"
+
+
+version: '2'
+services:
+  rethinkdb:
+    scale: 1
+    start_on_create: true
+  rethinkdb-proxy:
+    scale: 1
+    start_on_create: true

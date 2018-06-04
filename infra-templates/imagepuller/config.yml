@@ -1,0 +1,8 @@
+name: Imagepuller
+description: |
+  A script to pull images for a specific Rancher version to speed up upgrades
+version: 0.1.7
+category: Automation
+maintainer: "Sebastiaan van Steenis <seb@rancher.com>"
+license: Apache 2.0
+projectURL: https://github.com/superseb/imagepuller

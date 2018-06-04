@@ -1,0 +1,83 @@
+version: '2'
+catalog:
+  name: "Zammad"
+  version: "2.2.0-12"
+  description: "Zammad is a web based open source helpdesk/customer support system"
+  uuid: zammad-1
+  minimum_rancher_version: v1.2.0
+  questions:
+    - variable: "UPDATE_SYSCTL"
+      label: "Update host sysctl:"
+      description: |
+        Set true to avoid vm.max_map_count errors.
+        WARN: If set true, host param vm.max_map_count will be update to 262144.
+      default: false
+      required: true
+      type: enum
+      options:
+        - false
+        - true
+
+    - variable: "PUBLISH_PORT"
+      label: "Publish port"
+      description: |
+        Set port to publish the service.
+      required: true
+      type: "int"
+      default: 9797
+
+services:
+  zammad-backup:
+    scale: 1
+    start_on_create: true
+
+  zammad-elasticsearch:
+    scale: 1
+    start_on_create: true
+
+  zammad-init:
+    scale: 1
+    start_on_create: true
+
+  zammad-lb:
+    scale: 1
+    lb_config:
+      port_rules:
+      - priority: 1
+        protocol: http
+        source_port: ${PUBLISH_PORT}
+        target_port: 80
+        service: zammad-nginx
+
+  zammad-memcached:
+    scale: 1
+    start_on_create: true
+
+  zammad-nginx:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 80
+      unhealthy_threshold: 3
+      initializing_timeout: 300000
+      interval: 2000
+      strategy: recreate
+      request_line: GET "/" "HTTP/1.0"
+
+  zammad-postgresql:
+    scale: 1
+    start_on_create: true
+
+  zammad-scheduler:
+    scale: 1
+    start_on_create: true
+
+  zammad-railsserver:
+    scale: 1
+    start_on_create: true
+
+  zammad-websocket:
+    scale: 1
+    start_on_create: true

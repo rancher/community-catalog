@@ -1,0 +1,70 @@
+version: '2'
+catalog:
+  name: "reactiondemo"
+  version: 1.4.0-rancher1
+  description: "E-commerce powered by reaction"
+  uuid: reaction-0
+  minimum_rancher_version: v0.51.0
+  questions:
+      - variable: "REACTION_HOST"
+        description: "Hostname to use for the reaction server"
+        label: "reaction Hostname"
+        required: true
+        default: "reaction"
+        type: "string"
+      - variable: "REACTION_DOMAIN"
+        description: "Domain to use for the reaction server"
+        label: "reaction Domain"
+        required: true
+        default: "local"
+        type: "string"
+      - variable: host_label
+        label: "Host Label to reaction Tags"
+        description: |
+          Host label to use as reaction 'value' tag.
+          Example: 'reaction=true'
+        required: false
+        default: "private=true"
+        type: "string"
+      - variable: REACTION_EMAIL
+        label: "reaction Email"
+        required: true
+        default: "test@local"
+        type: "string"
+      - variable: REACTION_USER
+        label: "reaction User"
+        required: true
+        default: ""
+        type: "string"
+      - variable: REACTION_AUTH
+        label: "reaction Auth"
+        required: true
+        default: ""
+        type: "password"
+      - variable: "mongo_link"
+        description: |
+          MongoDB external service link
+          cluster.
+        label: "External stack/service"
+        default: ""
+        required: false
+        type: "service"
+      - variable: "MONGO_DB"
+        default: "reaction"
+        description: "The mongodb name to associate with this server."
+        label: "mongo_db"
+        required: true
+        type: "string"
+
+services:
+  reaction:
+    scale: 1
+    retain_ip: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 3000
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+      request_line: GET / # HTTP/1.0

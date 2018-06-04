@@ -1,0 +1,53 @@
+.catalog:
+  name: "Prometheus"
+  version: "2.0.0"
+  description: "Prometheus Monitoring Solution"
+  uuid: prometheus-2
+  minimum_rancher_version: v1.1.99
+  questions:
+
+node-exporter:
+  upgrade_strategy:
+    start_first: true
+
+prometheus:
+  scale: 1
+  health_check:
+    port: 9090
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+influxdb:
+  scale: 1
+  health_check:
+    port: 8086
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+grafana:
+  scale: 1
+  health_check:
+    port: 3000
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+
+prometheus-rancher-exporter:
+  scale: 1
+  upgrade_strategy:
+    start_first: true
+  health_check:
+    port: 9010
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000

@@ -1,0 +1,8 @@
+name: Minio Cloud Storage
+description: |
+  Store photos, videos, VMs, containers, log files, or any blob of data as objects.
+version: 2018-02-09_1
+category: Storage
+maintainer: "Matthias Schneider <ms@wck.biz>"
+license: Apache License
+projectURL: https://minio.io/

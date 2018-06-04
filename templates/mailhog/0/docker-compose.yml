@@ -1,0 +1,12 @@
+version: '2'
+services:
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    environment:
+      MH_UI_WEB_PATH: ${mh_ui_web_path}
+      MH_SMTP_BIND_ADDR: ${mh_smtp_bind_addr}
+    stdin_open: true
+    tty: true
+    user: root
+    labels:
+      io.rancher.container.pull_image: always

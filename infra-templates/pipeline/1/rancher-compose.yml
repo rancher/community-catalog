@@ -1,0 +1,28 @@
+version: '2'
+catalog:
+  name: Pipeline
+  version: v0.1.1
+  minimum_rancher_version: 1.6.13-rc2
+  description: "Rancher Pipeline"
+  questions:
+    - variable: SLAVES
+      type: "int"
+      default: "1"
+      label: "# of slaves"
+      description: "How many jenkins slaves to run ci tasks. At least 1."
+    - variable: EXECUTORS
+      type: "int"
+      default: "2"
+      label: "# of executors"
+      description: "How many executors on a jenkins slave"
+    - variable: HOST_LABEL
+      label: "Host with Label to put pipeline components on"
+      description: |
+        Run pipeline components on Host with specific labels. 
+        Example: 'pipeline=true'
+      required: false
+      default: ""
+      type: "string"
+services:
+  jenkins-slave:
+    scale: ${SLAVES}

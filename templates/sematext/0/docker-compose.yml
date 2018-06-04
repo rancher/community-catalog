@@ -8,8 +8,8 @@ sematext-agent:
     - HTTP_PROXY=${http_proxy}
     - MATCH_BY_IMAGE=${match_by_image}
     - MATCH_BY_NAME=${match_by_name}
-    - SKIP_BY_IMAGE=${match_by_image}
-    - SKIP_BY_NAME=${match_by_name}
+    - SKIP_BY_IMAGE=${skip_by_image}
+    - SKIP_BY_NAME=${skip_by_name}
     - LOGAGENT_PATTERNS=${logagent_patterns}
     - KUBERNETES=${kubernetes}
   restart: always

@@ -44,7 +44,7 @@ consul:
     - -client=0.0.0.0
   environment:
     CONSUL_LOCAL_CONFIG: "{\"leave_on_terminate\": true, \"datacenter\": \"${consul_datacenter}\"}"
-    CONSUL_BIND_INTERFACE: eth0
+    CONSUL_BIND_INTERFACE: ${consul_bind_interface}
   volumes_from:
     - consul-data
   log_opt: {}

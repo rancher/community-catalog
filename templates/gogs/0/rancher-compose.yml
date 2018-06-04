@@ -1,33 +1,94 @@
-.catalog:
+version: '2'
+catalog:
   name: "Gogs"
-  version: "v0.8.43"
+  version: "v0.11.19"
   description: "A painless self-hosted Git service"
   uuid: gogs-0
   minimum_rancher_version: v0.51.0
   questions:
-    - variable: public_port
-      description: "public port to access the mysql server"
-      label: "Public Port"
-      required: true
-      default: "3306"
-      type: "int"
     - variable: http_port
       description: "http port to access gogs webui"
       label: "Http Port"
       required: true
-      default: "10080" 
+      default: "8080" 
       type: "int"
     - variable: ssh_port
       description: "ssh port to access gogs cli"
-      label: "Ssh Port"
+      label: "SSH Port"
       required: true
-      default: "222"
+      default: "2222"
       type: "int"
+    - variable: "volume_driver"
+      description: "Volume driver to associate with this service"
+      label: "Volume Driver"
+      required: true
+      default: "local"
+      type: enum
+      options: # List of options if using type of `enum`
+        - local
+        - rancher-nfs
+        - rancher-efs
+        - rancher-ebs
+    - variable: "db_link"
+      description: |
+        DB external service link cluster.
+      label: "External db service"
+      default: ""
+      required: false
+      type: "service"
+    - variable: mysql_db
+      description: "mysql db"
+      label: "Mysql db"
+      required: true
+      default: "gogs"
+      type: "string"
+    - variable: mysql_user
+      description: "mysql user"
+      label: "Mysql User"
+      required: true
+      default: "gogs"
+      type: "string"
     - variable: mysql_password
       description: "mysql root password"
       label: "Mysql Password"
       required: true
-      default: "password"
-      type: "string"
-
-gogs:
+      default: "default_pass"
+      type: "password"
+services:
+  gogs:
+    scale: 1
+    retain_ip: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 3000
+      unhealthy_threshold: 3
+      initializing_timeout: 300000
+      interval: 2000
+      strategy: recreate
+      request_line: GET "/" "HTTP/1.0"
+      reinitializing_timeout: 120000
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: gogs
+        source_port: ${http_port}
+        target_port: 3000
+      - priority: 2
+        protocol: tcp
+        service: gogs
+        source_port: ${ssh_port}
+        target_port: 22
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000

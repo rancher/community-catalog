@@ -1,0 +1,48 @@
+sonarqube-data:
+    image: busybox
+    net: none
+    labels:
+      io.rancher.container.start_once: true
+    volumes:
+        - /opt/sonarqube/extensions/plugins
+
+sonarqube:
+    image: sonarqube:5.6.6
+    ports:
+        - ${http_port}:9000
+    links:
+        - postgres
+    environment:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+        SONARQUBE_JDBC_USERNAME: ${postgres_user}
+        SONARQUBE_JDBC_PASSWORD: ${postgres_password}
+        SONARQUBE_JDBC_URL: jdbc:postgresql://postgres/sonar
+    labels:
+        io.rancher.sidekicks: sonarqube-data
+    volumes_from:
+        - sonarqube-data        
+
+postgres-data:
+    image: busybox
+    net: none
+    labels:
+      io.rancher.container.start_once: true
+    volumes:
+        - ${postgres_data}
+
+postgres:
+    image: postgres:latest
+    ports:
+        - ${postgress_port}:5432
+    environment:
+        PGDATA: ${postgres_data}
+        POSTGRES_DB: ${postgres_db}
+        POSTGRES_USER: ${postgres_user}
+        POSTGRES_PASSWORD: ${postgres_password}
+    tty: true
+    stdin_open: true
+    labels:
+        io.rancher.sidekicks: postgres-data
+    volumes_from:
+        - postgres-data

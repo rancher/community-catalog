@@ -1,0 +1,1 @@
+The mailhog catalog configuration provides SMTP access on the internal network by default. External SMTP access can be exposed through a TCP Rancher load balancer routing to internal port 25. The Mailhog UI can be exposed through an HTTP(S) Rancher Load Balancer routing to internal port 8025. 

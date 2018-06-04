@@ -1,0 +1,27 @@
+version: '2'
+services:
+  postgres-lb:
+    image: rancher/lb-service-haproxy
+    ports:
+      - ${lb_port}
+
+  postgres-data:
+    image: busybox
+    labels:
+      io.rancher.container.start_once: true
+    volumes:
+      - /var/lib/postgresql/data/pgdata
+
+  postgres:
+    image: postgres:latest
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: ${postgres_db}
+      POSTGRES_USER: ${postgres_user}
+      POSTGRES_PASSWORD: ${postgres_password}
+    tty: true
+    stdin_open: true
+    labels:
+      io.rancher.sidekicks: postgres-data
+    volumes_from:
+      - postgres-data

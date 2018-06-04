@@ -1,0 +1,12 @@
+.catalog:
+    name: "Secrets Bridge Agent"
+    minimum_rancher_version: v1.2.0
+    version: 0.1.0-rancher1
+    description: |
+       Agent side of secrets bridge between Rancher and Vault
+    questions:
+        - variable: BRIDGE_URL
+          type: string
+          label: "Secrets Bridge URL"
+          required: true
+          description: "Should be the http(s)://address:port version of the url"

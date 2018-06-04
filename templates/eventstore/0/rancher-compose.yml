@@ -1,0 +1,51 @@
+version: '2'
+.catalog:
+  name: GES
+  version: 0.0.2.0-ges
+  description: |
+    (Experimental) GES
+  minimum_rancher_version: v0.59.0
+  maintainer: "Jérôme Rx <jerome@rouaix.eu>"
+  uuid: ges-0
+  questions:
+    - variable: "internal_http_port"
+      label: "Internal http (and gossip) port"
+      required: true
+      default: 2112
+      type: "int"
+    - variable: "internal_tcp_port"
+      label: "Internal tcp port"
+      required: true
+      default: 1112
+      type: "int"
+    - variable: "external_http_port"
+      label: "External http port"
+      required: true
+      default: 2113
+      type: "int"
+    - variable: "external_tcp_port"
+      label: "External tcp port"
+      required: true
+      default: 1113
+      type: "int"
+    - variable: "number_of_nodes"
+      label: "Number of nodes"
+      required: true
+      default: 1
+      type: "int"
+
+services:
+  eventstore:
+    scale: ${number_of_nodes}
+    start_on_create: true
+    health_check:      
+      port: ${external_http_port}      
+      request_line: OPTIONS /gossip HTTP/1.0      
+      interval: 2000
+      initializing_timeout: 60000
+      reinitializing_timeout: 60000
+      unhealthy_threshold: 3      
+      strategy: none
+      healthy_threshold: 2      
+      response_timeout: 2000
+

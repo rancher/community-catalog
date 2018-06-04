@@ -6,6 +6,7 @@
     re-assembling of raw materials. It may be an elaborate parody of the
     Australian economy.
   maintainer: "Rancher"
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: REPLICAS
       default: 1

@@ -1,0 +1,23 @@
+version: '2'
+volumes:
+  rethinkdb-data:
+    driver: '${rethinkdb_volume_driver}'
+    per_container: true
+services:
+  rethinkdb:
+    image: xkodiak/rancher-rethinkdb:2.3.5
+    volumes:
+      - rethinkdb-data:/data
+    labels:
+      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.container.hostname_override: container_name
+  rethinkdb-proxy:
+    image: xkodiak/rancher-rethinkdb:2.3.5
+    entrypoint: /proxy.sh
+    links:
+      - rethinkdb:db
+    ports:
+      - ${rethinkdb_proxy_webport}:8080/tcp
+      - ${rethinkdb_proxy_queryport}:28015/tcp
+    depends_on:
+      - rethinkdb

@@ -1,0 +1,7 @@
+name: Infoblox DNS
+description: |
+  Rancher External DNS service powered by Infoblox
+version:  v0.2.1
+category: External DNS
+labels:
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'

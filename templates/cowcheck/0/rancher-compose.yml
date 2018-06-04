@@ -1,0 +1,40 @@
+version: '2'
+catalog:
+  name: cowcheck
+  version: 0.2.0
+  description: A microservice for checking the health of a Rancher node
+  minimum_rancher_version: v.1.6.0
+  questions:
+    - variable: POLL_INTERVAL
+      label: POLL_INTERVAL
+      description: Frequency in seconds to run checks
+      type: string
+      default: 60
+    - variable: ENABLE_STORAGE_CHECK
+      label: ENABLE_STORAGE_CHECK
+      description: Enable storage check
+      type: boolean
+      default: false
+    - variable: DATA_SPACE_THRESHOLD
+      label: DATA_SPACE_THRESHOLD
+      description: Minimum amount of free Docker Data Storage space in bytes
+      type: string
+      default: 50000000
+    - variable: METADATA_SPACE_THRESHOLD
+      label: METADATA_SPACE_THRESHOLD
+      description: Minimum amount of free Docker Metadata Storage space in bytes
+      type: string
+      default: 50000000
+    - variable: DOCKER_API_VERSION
+      label: DOCKER_API_VERSION
+      description: Version of the Docker API to use (storage checks only)
+      type: string
+      default: 1.24
+    - variable: PUBLISH_PORT
+      label: PUBLISH_PORT
+      description: Port to publish the service.
+      type: int
+      default: 5050
+services:
+  cowcheck:
+    start_on_create: true

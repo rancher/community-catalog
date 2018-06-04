@@ -1,0 +1,16 @@
+# notemplating
+dnsimple:
+  image: rancher/external-dns:v0.7.11
+  command: -provider=dnsimple
+  expose:
+   - 1000
+  environment:
+    DNSIMPLE_TOKEN: ${DNSIMPLE_ACCOUNT_TOKEN}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    NAME_TEMPLATE: ${NAME_TEMPLATE}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"
+  volumes:
+    - /var/lib/rancher:/var/lib/rancher

@@ -1,0 +1,34 @@
+version: '2'
+services:
+  mesos-dns:
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.sidekicks: mesos-dns-route
+    tty: true
+    image: rawmind/alpine-mesos-dns:0.6.0-3
+    cap_add:
+    - NET_ADMIN
+    external_links:
+    - mesos/zookeeper:zookeeper
+    - mesos/mesos-master:master
+    environment:
+    - MESOS_ZK=zk://zookeeper.mesos:2181/mesos
+    - MESOS_MASTER="master.mesos:5050"
+    - MESOS_DNS_DOMAIN=${mesos_domain}
+    - MESOS_DNS_RESOLVERS="169.254.169.250"
+    - LINK_LOCAL_IP=${mesos_localip}
+  mesos-dns-route:
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: 'true'
+    tty: true
+    network_mode: host
+    image: rawmind/alpine-link-local:0.1-2
+    cap_add:
+    - NET_ADMIN
+    environment:
+    - DESTINATION_IP=${mesos_localip}
+    - BRIDGE=${mesos_bridge}
