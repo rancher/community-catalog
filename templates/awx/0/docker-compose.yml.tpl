@@ -35,7 +35,7 @@ services:
       io.rancher.container.start_once: 'true'
 {{- end }}
   awx-web:
-    image: ansible/awx_web:latest
+    image: ansible/awx_web:1.0.6.15
     hostname: awxweb
     environment:
       SECRET_KEY: ${SECRET_KEY}
@@ -101,7 +101,7 @@ services:
     tty: true
 {{- end }}
   awx-task:
-    image: ansible/awx_task:latest
+    image: ansible/awx_task:1.0.6.15
     hostname: awx
     environment:
       SECRET_KEY: ${SECRET_KEY}
