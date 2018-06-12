@@ -1,0 +1,5 @@
+name: Jenkins SSH Slave
+description: |
+  Add additional SSH slaves to enhance a Jenkins CI server.
+version: 0.0.1
+category: Continuous Integration
