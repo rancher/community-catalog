@@ -2,7 +2,7 @@ version: '2'
 services:
   broker:
     tty: true
-    image: rawmind/alpine-kafka:1.0.0-2
+    image: rawmind/alpine-kafka:1.1.0-0
     volumes_from:
       - broker-volume
       - broker-conf
@@ -15,6 +15,7 @@ services:
       - KAFKA_LOG_RETENTION_HOURS=${kafka_log_retention}
       - KAFKA_NUM_PARTITIONS=${kafka_num_partitions}
       - ADVERTISE_PUB_IP=${kafka_pub_ip}
+      - KAFKA_ADVERTISE_PORT=${kafka_adv_port}
       - KAFKA_AUTO_CREATE_TOPICS=${kafka_auto_create_topics}
       - KAFKA_REPLICATION_FACTOR=${kafka_replication_factor}
       - KAFKA_OFFSET_RETENTION_MINUTES=${kafka_offset_retention_minutes}
@@ -22,7 +23,7 @@ services:
       - ${zk_link}:zk
   {{- if eq .Values.kafka_pub_ip "true"}}
     ports:
-      - 9092:9092/tcp
+      - ${kafka_adv_port}:${kafka_adv_port}/tcp
   {{- end}}
     labels: 
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}

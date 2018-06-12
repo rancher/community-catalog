@@ -1,7 +1,7 @@
 name: Apache Kafka
 description: |
   Kafka cluster
-version: 1.0.0-rancher1
+version: 1.1.0-rancher1
 category: Clustering
 maintainer: "Raul Sanchez <rawmind@gmail.com>"
 minimum_rancher_version: v0.59.0
