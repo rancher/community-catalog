@@ -35,6 +35,7 @@ services:
     - gitlab-runner-config
     tty: true
     command: sed -i -e "s|concurrent = 1|concurrent = ${CONCURRENT}|g" /etc/gitlab-runner/config.toml
+    network_mode: none
     labels:
       io.rancher.container.start_once: 'true'
 
