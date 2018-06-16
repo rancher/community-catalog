@@ -18,6 +18,7 @@ services:
      - "${DEVICE_MAPPING_2}"
 {{- end}}
     environment:
+      CRYPTO_POLICY: "${CRYPTO_POLICY}"
 {{- if ne .Values.EXTRA_JAVA_OPTS ""}}
       EXTRA_JAVA_OPTS: "${EXTRA_JAVA_OPTS}"
 {{- end}}

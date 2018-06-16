@@ -2,7 +2,7 @@ version: '2'
 
 catalog:
   name: "openHAB"
-  version: "2.3.0-SNAPSHOT"
+  version: "2.3.0"
   description: "An open source, technology agnostic home automation platform"
   upgrade_from: "2.0.0"
   questions:
@@ -90,6 +90,16 @@ catalog:
       default: ""
       type: "string"
       required: false
+
+    - variable: "CRYPTO_POLICY"
+      label: "Java Cryptographic Strength Policy"
+      description: "Due to local laws and export restrictions the container uses Java with a limited cryptographic strength policy by default. Some openHAB functionality (e.g. KM200 binding) may depend on unlimited strength. Before enabling this make sure this is allowed by local laws and you agree with the applicable license and terms"
+      required: true
+      default: "limited"
+      type: enum
+      options:
+        - limited
+        - unlimited
 
     - variable: "VOLUME_DRIVER"
       label: "Volume Driver"

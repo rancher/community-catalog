@@ -18,12 +18,13 @@ services:
      - "${DEVICE_MAPPING_2}"
 {{- end}}
     environment:
+      CRYPTO_POLICY: "${CRYPTO_POLICY}"
 {{- if ne .Values.EXTRA_JAVA_OPTS ""}}
       EXTRA_JAVA_OPTS: "${EXTRA_JAVA_OPTS}"
 {{- end}}
       OPENHAB_HTTP_PORT: "${HTTP_PORT}"
       OPENHAB_HTTPS_PORT: "${HTTPS_PORT}"
-    image: "openhab/openhab:2.3.0-snapshot-${IMAGE_ARCHITECTURE}-${IMAGE_DISTRIBUTION}"
+    image: "openhab/openhab:2.3.0-${IMAGE_ARCHITECTURE}-${IMAGE_DISTRIBUTION}"
     labels:
       io.rancher.container.pull_image: always
 {{- if ne .Values.HOST_LABEL ""}}
