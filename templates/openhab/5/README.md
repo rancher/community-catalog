@@ -8,13 +8,9 @@ For further Information please refer to [www.openhab.org](https://www.openhab.or
 
 ## Getting Started
 
-Refer to the [wiki](https://github.com/openhab/openhab1-addons/wiki) on how to get started with openHAB.
+Refer to the [tutorials](https://www.openhab.org/docs/tutorial/) on how to get started with openHAB.
 
 ## Community: How to Get Involved
 
 In case of problems or questions, please join the [openHAB community](https://community.openhab.org).
-
-## Release Notes
-
-The [official release notes](https://github.com/openhab/openhab1-addons/wiki/Release-Notes-1.8) contain an overview of all new features, enhancements and bug fixes.
 
