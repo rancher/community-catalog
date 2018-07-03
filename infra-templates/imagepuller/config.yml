@@ -1,6 +1,6 @@
 name: Imagepuller
 description: |
-  A script to pull images for a specific Rancher version to speed up upgrades
+  DEPRECATED: This catalog item is deprecated and moved to rancher-catalog under pre-pull-images
 version: 0.1.7
 category: Automation
 maintainer: "Sebastiaan van Steenis <seb@rancher.com>"

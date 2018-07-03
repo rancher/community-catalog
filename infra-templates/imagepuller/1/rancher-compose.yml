@@ -2,7 +2,7 @@ version: '2'
 catalog:
   name: imagepuller
   version: 0.1.7
-  description: A script to pull images for a specific Rancher version to speed up upgrades
+  description: Deprecated. Moved to rancher-catalog under pre-pull-images.
   minimum_rancher_version: v1.6.0
   questions:
     - variable: CHECK_CPU_USAGE
