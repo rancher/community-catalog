@@ -4,11 +4,9 @@ Rancher External DNS service powered by any RFC2136 compatible DNS server
 
 #### Changelog
 
-##### v0.6.2
+##### v0.7.12
 
-* Adds support for disabling/enforcing external DNS on the host and service level using labels
-* Adds support for insecure DNS Updates
-* Fixes an issue with lingering TCP keep-alive connections to the Rancher Metadata service
+* Fixes an issue where RFC2136 would log FORMER if the record is too large
 
 #### Usage
 
@@ -23,7 +21,7 @@ When running multiple instances of the External DNS service configured to use th
 
 `io.rancher.host.external_dns_ip`     
 Override the IP address used in DNS records for containers running on the host. Defaults to the IP address the host is registered with in Rancher.
-      
+
 `io.rancher.host.external_dns`    
 Accepts 'true' (default) or 'false'    
 When this is set to 'false' no DNS records will ever be created for containers running on this host.
@@ -35,7 +33,7 @@ Accepts 'always', 'never' or 'auto' (default)
 - `always`: Always create DNS records for this service
 - `never`: Never create DNS records for this service
 - `auto`: Create DNS records for this service if it exposes ports on the host
-     
+
 
 `io.rancher.service.external_dns_name_template`
 Accepts valid DNS name template
