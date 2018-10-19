@@ -1,7 +1,7 @@
 name: Traefik
 description: |
   Traefik active load balancer
-version: v1.6.6-rancher1
+version: v1.7.3-rancher1
 category: Load Balancing
 maintainer: "Raul Sanchez <rawmind@gmail.com>"
 license:
