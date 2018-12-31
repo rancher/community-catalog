@@ -1,6 +1,6 @@
 .catalog:
   name: "F5 LB"
-  version: "v0.1.1-rancher1"
+  version: "v0.3.6-rancher1"
   description: "Rancher External LB service powered by F5 BIG-IP."
   questions:
     - variable: "F5_BIGIP_HOST"
