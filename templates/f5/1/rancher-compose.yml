@@ -1,0 +1,34 @@
+.catalog:
+  name: "F5 LB"
+  version: "v0.3.6-rancher1"
+  description: "Rancher External LB service powered by F5 BIG-IP."
+  questions:
+    - variable: "F5_BIGIP_HOST"
+      label: "Host Address"
+      description: "IP Address of the F5 BIG-IP Device"
+      type: "string"
+      required: true
+    - variable: "F5_BIGIP_USER"
+      label: "Username"
+      description: "Username of the F5 admin"
+      type: "string"
+      required: true
+    - variable: "F5_BIGIP_PWD"
+      label: "Password"
+      description: "Password of the F5 admin"
+      type: "string"
+      required: true
+    - variable: "LB_TARGET_RANCHER_SUFFIX"
+      label: "Suffix for F5 pool names"
+      description: "A suffix added to the Pool names on F5 BIG-IP to identify the pools added by Rancher"
+      type: "string"
+      required: true
+      default: rancher.internal
+external-lb:
+  health_check:
+    port: 1000
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000

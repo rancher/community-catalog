@@ -1,0 +1,13 @@
+external-lb:
+  image: rancher/external-lb:v0.3.6
+  command: -provider=f5_BigIP
+  expose: 
+   - 1000
+  environment:
+    F5_BIGIP_HOST: ${F5_BIGIP_HOST}
+    F5_BIGIP_USER: ${F5_BIGIP_USER}
+    F5_BIGIP_PWD: ${F5_BIGIP_PWD}
+    LB_TARGET_RANCHER_SUFFIX: ${LB_TARGET_RANCHER_SUFFIX}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-lb"
