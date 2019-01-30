@@ -1,5 +1,5 @@
 name: F5 BIG-IP Balancer
 description: |
   Rancher External LB service powered by F5 BIG-IP
-version: v0.3.6-rancher1
+version: v0.3.7-rancher1
 category: Load Balancing
