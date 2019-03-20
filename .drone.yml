@@ -1,6 +1,14 @@
 ---
-pipeline:
-  build:
-    image: rancher/dind:v0.6.0
-    commands:
-      - ./scripts/ci
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: build
+  pull: default
+  image: rancher/dind:v0.6.0
+  commands:
+  - ./scripts/ci
