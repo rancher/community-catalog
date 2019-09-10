@@ -1,7 +1,8 @@
 #!/bin/bash
 
 apt-get update && apt-get install -y curl jq python python-pip
-pip install -U pip tox
+pip install -U pip
+sudo pip install -U tox
 
 ## Get latest rancher-catalog
 download_url=$(curl https://api.github.com/repos/rancher/rancher-catalog-service/releases/latest | jq -r '.assets[]| select(.name == "rancher-catalog-service.tar.xz")| .browser_download_url')
