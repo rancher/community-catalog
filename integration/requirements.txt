@@ -1,5 +1,5 @@
 cattle==0.5.3
-pyyaml==3.11
+pyyaml==5.1
 
 flake8
 pytest==2.8.7
